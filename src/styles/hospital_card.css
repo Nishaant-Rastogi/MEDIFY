@@ -1,0 +1,107 @@
+.CUSTOMCARDA{
+    text-decoration: none;
+    background-color: #e3f7e3;
+    border-radius: 10px;
+}
+.CUSTOMCARDA .CARD{
+    background-color: rgb(0, 28, 80);
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px #000000;
+}
+
+.CUSTOMCARDA:hover{
+    box-shadow:  0 0 0 0;
+}
+.CUSTOMCARDA .COL{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.CUSTOMCARDA .COL .BUTTON{
+    background-color: rgb(3, 37, 101);
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#OKAY{
+    color: green
+}
+
+#NULL{
+    color: blue
+}
+
+#DEFAULTER{
+    color: red;
+}
+
+.CUSTOMCARDA .DATA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.CUSTOMCARDA .ACCOUNT{
+    flex: 4;
+    width: 1vh;
+    justify-content: flex-start;
+}
+
+.CUSTOMCARDA .BALANCE{
+    flex: 5;
+    justify-content: center;
+}
+
+.CUSTOMCARDA .STATUS{
+    flex: 3;
+    justify-content: flex-end;
+}
+
+
+.CUSTOMCARDA .FROM{
+    justify-content: flex-start;
+    position: relative;
+    left: 2vw;
+}
+
+
+.CUSTOMCARDA .TO{
+    justify-content: center;
+}
+
+.CUSTOMCARDA .DATE{
+    justify-content: flex-end;
+}
+
+.CUSTOMCARDA .CBODY{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+}
+
+.CUSTOMCARDA .DATA .HEAD1{
+    width: 15vw;
+}
+
+.CUSTOMCARDA .DATA .VALUE{
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+
+.TABLE{
+    background-color: rgb(3, 37, 101);
+    color: white;
+}
+
+.WHITE{
+    color: white;
+}

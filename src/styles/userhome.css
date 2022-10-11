@@ -1,0 +1,394 @@
+.GRADIENT{
+    background-image: linear-gradient(to right,#00ed94, #00a3fe);
+}
+
+.UHOME{
+    background-color: #e3f7e3;
+    width: 100%;
+    position: absolute;
+}
+
+.CAROUSEL{
+    position: relative;
+    top: 13vh;
+    left: 5vw;
+    height: 78vh;
+    display: block;
+    align-items: center;
+    width: 90vw;
+}
+
+.CAROUSEL .carousel-control-prev-icon{
+    position: relative;
+    top: -10vh;
+    right: 10vh;
+}
+.CAROUSEL .carousel-control-next-icon{
+    position: relative;
+    top: -10vh;
+    left: 10vh;
+}
+
+.CAROUSELIMG{
+    width: 40vw;
+    height: 80vh;
+    position: relative;
+    border: 1px solid #e3f7e3;
+}
+
+.UHCONTAINER1{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top:-15vh;
+    z-index: 1;
+}
+
+/*--------------------------------------*/
+
+.UHCONTAINER1 .UHFLEX1{
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding-left: 3vw;
+    margin-left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;   
+}
+
+.UHCONTAINER1 .UHFLEX1 .ROW{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.UHCONTAINER1 .UHFLEX1 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+}
+
+.UHCONTAINER1 .UHFLEX1 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+.UHCONTAINER1 .UHFLEX1 .COL:hover{
+    opacity:0.8; 
+}
+
+.UHCONTAINER1 .UHFLEX1 .ROW .IMG{
+    border-radius: 15vh;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.UHCONTAINER1 .UHFLEX1 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+    flex: 6;
+}
+
+.UHCONTAINER1 .UHFLEX5{
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding-left: 3vw;
+    margin-left: 18vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;   
+}
+
+.UHCONTAINER1 .UHFLEX5 .ROW{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.UHCONTAINER1 .UHFLEX5 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+}
+
+.UHCONTAINER1 .UHFLEX5 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+.UHCONTAINER1 .UHFLEX5 .COL:hover{
+    opacity:0.8; 
+}
+
+.UHCONTAINER1 .UHFLEX5 .ROW .IMG{
+    border-radius: 15vh;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.UHCONTAINER1 .UHFLEX5 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+    flex: 6;
+}
+
+.UHCONTAINER1 .UHFLEX4{
+    flex: 0.89;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding-left: 6vw;
+    margin-left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;   
+}
+
+.UHCONTAINER1 .UHFLEX4 .ROW{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.UHCONTAINER1 .UHFLEX4 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+}
+
+.UHCONTAINER1 .UHFLEX4 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+.UHCONTAINER1 .UHFLEX4 .COL:hover{
+    opacity:0.8; 
+}
+
+.UHCONTAINER1 .UHFLEX4 .ROW .IMG{
+    border-radius: 15vh;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.UHCONTAINER1 .UHFLEX4 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+    flex: 6;
+}
+
+/*--------------------------------*/
+
+.UHCONTAINER1 .UHFLEX2{
+    flex: 2;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.UHCONTAINER1 .UHFLEX2 .ROW{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1vw;
+}
+
+.UHCONTAINER1 .UHFLEX2 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.UHCONTAINER1 .UHFLEX2 .ROW .COL1{
+    margin-bottom: 2vh;
+}
+
+.UHCONTAINER1 .UHFLEX2 .COL:hover{
+    cursor: pointer;
+    opacity:0.8; 
+}
+
+.UHCONTAINER1 .UHFLEX2 .ROW .IMG{
+    border-radius: 15vh;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.UHCONTAINER1 .UHFLEX2 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+}
+/*--------------------------------*/
+.ROW .SUBHEADING{
+    display: inline;
+    margin-top: 0.4vh;
+    margin-bottom: 0.8vh;
+    font-size: small;
+    color: grey;
+    opacity: 0.9;
+}
+
+/*--------------------------------*/
+
+
+.UHCONTAINER1 .UHFLEX3{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    margin-right: 10vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;
+}
+
+.UHCONTAINER1 .UHFLEX3 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    font-size: x-large;
+    align-items: center;
+}
+
+.UHCONTAINER1 .UHFLEX3 .ROW{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.UHCONTAINER1 .UHFLEX3 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.UHCONTAINER1 .UHFLEX3 .COL:hover{
+    cursor: pointer;
+    opacity:0.8; 
+}
+
+.UHCONTAINER1 .UHFLEX3 .ROW .IMG{
+    border-radius: 15vh;
+    height: 15vh;
+    width: 15vh;
+    margin: 1vh;
+}
+/*--------------------------------*/
+ .UNEW{
+    position: absolute;
+    top : 0;
+    left : 0;
+    z-index: 200;
+}
+.UNEW .BLUR{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.6;
+}
+
+.UNEW .ACCONTAINER{
+    position: relative;
+    top : 15vh;
+    left: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    border: 1px solid #888888;
+    box-shadow: 2px 5px 10px #888888;
+}
+
+.UNEW .CLOSEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+    opacity: 0.75;
+}
+
+.UNEW .FORM{
+    margin: 30px;
+}
+
+
+/*--------------------------------*/
+
+.NEWLOAN{
+    position: absolute;
+    top : 0;
+    left : 0;
+    z-index: 200;
+}
+.NEWLOAN .BLUR{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.6;
+}
+
+.NEWLOAN .LOANCONTAINER{
+    position: relative;
+    top : 12vh;
+    left: 90%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    border: 1px solid #888888;
+    box-shadow: 2px 5px 10px #888888;
+}
+
+.NEWLOAN .CLOSEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+    opacity: 0.75;
+}
+
+.NEWLOAN .FORM{
+    margin: 30px;
+}
+
+

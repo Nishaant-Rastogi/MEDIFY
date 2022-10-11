@@ -1,0 +1,189 @@
+.COLOR1{
+    background-color: #131a27;
+    
+}
+
+.COLOR2{
+    background-color: #232f4a;
+}
+
+.USERBAR{
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    z-index: 10;
+    height: 10vh;
+}
+.USERBAR .PROFILEIMAGE {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+
+.USERBAR .USERNAME{
+    color: white;
+    position: relative;
+    margin-left: 10px;
+    top: 10px;
+}
+
+.USERBAR .USERDROPDOWN{
+    position: relative;
+    left: 72vw;
+    display: flex;
+    position: relative;
+    /* justify-content: right; */
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+.USERBAR #navbarDropdown{
+    /* justify-content: right; */
+    color: white;
+}
+
+.USERBAR .dropdown-item{
+    color: white;
+}
+
+.USERBAR .DROPDOWN{
+    background-color: #232f4a;
+    cursor: pointer;
+    position: absolute;
+    left: 5vw;
+    
+}
+
+.USERBAR  .dropdown-item:hover{
+    background-color: #131a27;
+    color: white;
+}
+
+.UPROFILE{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 100;
+}
+.UPROFILE .BLUR{
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.6;
+}
+
+.UPROFILE .PROFILECONTAINER{
+    background-color: white;
+    position: absolute;
+    top : 5vh;
+    left: 40%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;;
+}
+
+.UPROFILE .PROFILEHEADER{
+    color: #131a27;
+    font-size: 2.5vh;
+}
+
+.UPROFILE .PROFILEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+    opacity: 0.75;
+}
+
+.UPROFILE .USER_DETAILS{
+    width: 20vw;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.UPROFILE .USER_DETAILS .USER_DETAILS_PHONE{
+    color: #131a27;
+    font-size: 2vh;
+    position: relative;
+    top: -1.5vh;
+}
+
+.UPROFILE .BORDER{
+    margin-left: 35px;
+    border-top: 1px solid #131a27;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.UPROFILE .BORDER .ADDRESS{
+    margin-top: 10px;
+    color: #131a27;
+    font-size: 3vh;
+    padding-left: 1.5vw;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA{
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+    font-size: 2.5vh;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA .ADDRESS{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_2{
+    position: relative;
+    top: -5vh;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_3{
+    position: relative;
+    top: -5vh;
+    left: 1vw;
+}
+
+.UPROFILE .USER_DETAILS_ADDRESS_DATA .HEADERS{
+    font-size: 3vh;
+    margin-right: 10px;
+}
+
+.UPROFILE .USER_DETAILS .USER_DETAILS_DATA{
+    position: relative;
+    top: -2vh;
+    color: #131a27;
+    font-size: 3vh;
+}
+
+.UPROFILE .USER_DETAILS .img{ 
+    width: 20vh;
+    height: 20vh;
+}
+
+
+
+
+.HEADING{
+    color: white;
+    text-decoration: none;
+}
