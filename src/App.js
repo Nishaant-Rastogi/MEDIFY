@@ -40,7 +40,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<Login />} />
-
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/users" element={<AdminCheckUser />} />
           <Route path="/admin/organisations" element={<AdminCheckOrganisation />} />

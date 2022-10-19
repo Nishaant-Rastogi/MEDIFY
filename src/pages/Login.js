@@ -45,7 +45,7 @@ const Login = () => {
                                 <label htmlhtml="exampleInputPassword1">Password</label>
                                 <input type="password" className="form-control" id="Password" placeholder="Password" />
                             </div>
-                            <button type="submit" className="btn COLOR LOGINB">Login as User</button>
+                            <button type="submit" className="btn COLOR LOGINB">Login as Organisation</button>
                         </form> : null}
                     {loginasuser ? null :
                         <form onSubmit={"handleLoginUser"}>
@@ -60,6 +60,7 @@ const Login = () => {
                             </div>
                             <button type="submit" className="btn COLOR LOGINB">Login as User</button>
                         </form>}
+                    <div style={{ marginTop: '20px' }}>New User ?</div>
                 </div>
             </div>
         </div>
