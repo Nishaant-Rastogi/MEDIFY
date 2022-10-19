@@ -8,51 +8,48 @@ const Verification = (props) => {
         otp: ""
     });
 
-    const handleChange = (otp) => setState({ otp });
-    const handleSubmit = (event) => {
-        const data = new FormData(event.target);
-        event.preventDefault();
+    const digitValidate = (e) => {
+        console.log(e.target.value);
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
     }
+
+
+    const tabChange = (val) => {
+        let curr = document.getElementById(val);
+        let prev = document.getElementById(val - 1);
+        let prevPrev = document.getElementById(val - 2);
+        if (prev.value !== '') {
+            curr.focus()
+        } else if (prev.value === '') {
+            prevPrev.focus()
+        }
+    }
+
+
     return (
         <div className='VERIFICATION'>
-            <div className='CONTAINER'>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <div className="my-4">
-                            <h1
-                                className="block text-gray-700 text-sm font-medium mb-2  text-lg text-center"
-                                htmlFor="username"
-                            >
-                                Enter Your OTP here
-                            </h1>
-                            <OtpInput
-                                value={state.otp}
-                                className="otp-input bg-white mx-2 text-lg focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg  block w-full appearance-none leading-normal"
-                                onChange={handleChange}
-                                numInputs={6}
-                                separator={<span></span>}
-                            />
-                        </div>
-                        <div className="m-6">
-                            <label
-                                className="block text-gray-700 text-sm font-bold mb-2   text-center"
-                                htmlFor="username"
-                            >
-                                <span>
-                                    Click here ?&nbsp;
-                                    <a href="!#" className="text-blue-600">
-                                        Resend OTP
-                                    </a>
-                                </span>
-                            </label>
-                        </div>
+            <div className="container">
+                <div className="row justify-content-md-center">
+                    <div className="col-md-4 text-center">
+                        <div className="row">
+                            <div className="col-sm-12 mt-5 bgWhite">
+                                <div className="title">
+                                    Verify OTP
+                                </div>
 
-                        <button className="btn COLOR LOGINB">
-                            SUBMIT
-                        </button>
+                                <form action="" className="mt-5">
+                                    <input className="otp" id='1' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(2)} maxLength={1} />
+                                    <input className="otp" id='2' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(3)} maxLength={1} />
+                                    <input className="otp" id='3' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(4)} maxLength={1} />
+                                    <input className="otp" id='4' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(5)} maxLength={1} />
+                                </form>
+                                <hr className="mt-4" />
+                                <button className='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
+                            </div>
+                        </div>
                     </div>
-                </form >
-            </div >
+                </div>
+            </div>
         </div>
     )
 }
