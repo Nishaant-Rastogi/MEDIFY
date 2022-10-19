@@ -33,6 +33,8 @@ import PharmacyOrders from "./components/PharmacyOrders";
 import PharmacyBills from "./components/PharmacyBills";
 import PatientsClaim from "./components/PatientsClaim";
 import PharmacyInventory from "./components/PharmacyInventory";
+import SignUp from "./pages/SignUp";
+import Verification from './pages/Verification';
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/verification" element={<Verification />} />
+
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/users" element={<AdminCheckUser />} />
           <Route path="/admin/organisations" element={<AdminCheckOrganisation />} />
