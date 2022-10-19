@@ -1,6 +1,5 @@
 import React, { useState, ReactDOM } from 'react';
 import '../styles/verification.css';
-import OtpInput from "react-otp-input";
 
 const Verification = (props) => {
     const [state, setState] = useState({
