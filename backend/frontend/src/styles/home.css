@@ -1,0 +1,66 @@
+.LOGIN{
+    background-color:#e3f7e3;
+    height: 100vh;
+    width: 100vw;
+}
+
+.LOGIN .LOGINIMG{
+    float: left;
+    height: 100vh;
+    position: absolute;
+}
+
+
+.LOGIN .LOGINS{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.LOGIN .LOGINCONTAINER{
+    width: 25vw;
+    height: 56vh;
+    background-color: #131a27;
+    position: absolute;
+    left: 70vw;
+    top: 20vh;
+    color: white;
+    border-radius: 10px;
+}
+
+.LOGIN .USER{
+    margin-top:20px;
+}
+
+.LOGIN .ADMIN{
+    margin-top:20px;
+    padding-left: 10px;
+    padding-right: 10px ;
+}
+.LOGIN .ORGANISATION{
+    margin-top:20px;
+    padding-left: 10px;
+}
+
+
+.LOGIN .FORMCONTAINER{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+    margin-top: 20px;   
+}
+
+.LOGIN .FORMCONTAINER .LOGINB :hover{
+    background-color:white;
+}
+
+.LOGIN .LOGINCONTAINER .COLOR{
+    background-color: #232f4a;
+    color: white;
+}
+
+.HOME{
+    height: 100vh;
+    background-color: #e3f7e3;
+}

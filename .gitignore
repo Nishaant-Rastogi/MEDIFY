@@ -21,3 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+/backend/frontend/node_modules
+/backend/api/migrations/__pycache__
+/backend/frontend/migrations/__pycache__
+/backend/backend/__pycache__/
+/backend/api/__pycache__
+/backend/frontend/__pycache__
