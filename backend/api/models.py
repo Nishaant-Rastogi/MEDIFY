@@ -16,3 +16,14 @@ class User(models.Model):
     password = models.CharField(max_length=200)
     def __str__(self):
         return self.name
+
+class Organization(models.Model):
+    name = models.CharField(max_length=200)
+    orgType = models.CharField(max_length=200)
+    licenseNo = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    phoneNo = models.CharField(max_length=10)
+    email = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name

@@ -4,8 +4,8 @@ import '../styles/signup.css'
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
 
-    const handleSignUpAsUser = (e) => {
-        console.log("called")
+    let handleSignUpAsUser = async (e) => {
+        e.preventDefault()
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -21,14 +21,11 @@ const SignUp = () => {
                 password: e.target.password.value,
             }),
         };
-        fetch('/api/create-user', requestOptions)
+        fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-            });
-
+            .then((data) => console.log(data));
     }
-    const handleSignUpAsOrganization = () => {
+    let handleSignUpAsOrganization = () => {
 
     }
     return (
@@ -59,8 +56,8 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-group" aria-label="Default select example">
                                     <label html="exampleInputid1">Gender</label><br></br>
-                                    <select className="form-control" name='gender'>
-                                        <option selected>Select Gender</option>
+                                    <select defaultValue={'DEFAULT'} className="form-control" name='gender'>
+                                        <option value="DEFAULT" disabled>Select Gender</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                         <option value="O">Other</option>
@@ -87,9 +84,9 @@ const SignUp = () => {
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
-                                <select className="form-control" name="userType">
-                                    <option selected>Select Type of User</option>
-                                    <option value="U">Patient</option>
+                                <select defaultValue={"DEFAULT"} className="form-control" name="userType">
+                                    <option value="DEFAULT" disabled>Select Type of User</option>
+                                    <option value="P">Patient</option>
                                     <option value="D">Doctor</option>
                                 </select>
                             </div>
@@ -117,8 +114,8 @@ const SignUp = () => {
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">Type Of Organisation</label><br></br>
-                                <select className="form-control">
-                                    <option selected>Select Organisation Type</option>
+                                <select defualtValue={"DEFUALT"} className="form-control">
+                                    <option value="DEFAULT" disabled>Select Organisation Type</option>
                                     <option value="H">Hospital</option>
                                     <option value="I">Insurance</option>
                                     <option value="P">Pharmacy</option>

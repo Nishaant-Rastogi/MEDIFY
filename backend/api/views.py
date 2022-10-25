@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import UserSerializer, CreateUserSerializer
+from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizationSerializer
 from .models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -28,11 +28,34 @@ class CreateUserView(APIView):
             userType = serializer.data.get('userType')
             email = serializer.data.get('email')
             password = serializer.data.get('password')
-            querySet = User.objects.filter(email=email)
-            if querySet.exists():
-                return Response({'email': 'Email is already in use'}, status=status.HTTP_400_BAD_REQUEST)
+            print(name, dob, gender, address, phoneNo, aadharNo, userType, email, password)
+            
             user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType=userType, email=email, password=password)
             user.save()
 
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateOrganizationView(APIView):
+    serializer_class = CreateOrganizationSerializer
+
+    def post(self, request, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            name = serializer.data.get('name')
+            orgType = serializer.data.get('orgType')
+            licenseNo = serializer.data.get('licenseNo')
+            address = serializer.data.get('address')
+            phoneNo = serializer.data.get('phoneNo')
+            email = serializer.data.get('email')
+            password = serializer.data.get('password')
+            print(name, orgType, licenseNo, address, phoneNo, email, password)
+            
+            organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password)
+            organization.save()
+
+            return Response(OrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
