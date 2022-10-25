@@ -27,7 +27,7 @@ const SignUp = () => {
             .then((data) => {
                 console.log(data)
                 if (data.status === 200) {
-                    navigate('/verification')
+                    navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
                 }
             })
     }
@@ -51,7 +51,7 @@ const SignUp = () => {
             .then((data) => {
                 console.log(data)
                 if (data.status === 200) {
-                    navigate('/verification')
+                    navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
                 }
             });
     }

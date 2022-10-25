@@ -28,4 +28,5 @@ yarn-error.log*
 /backend/frontend/migrations/__pycache__
 /backend/backend/__pycache__/
 /backend/api/__pycache__
+/backend/.env
 /backend/frontend/__pycache__
