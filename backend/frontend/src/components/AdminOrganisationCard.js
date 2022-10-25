@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
 function customcard({ UserData }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -11,7 +10,7 @@ function customcard({ UserData }) {
             {UserData == null ? null : UserData.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
-                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
+                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
                                     Name:
@@ -22,28 +21,28 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Aadhar No:
+                                    License No:
                                 </div>
                                 <div className="VALUE">
-                                    {data.aadharNo}
+                                    {data.licenseNo}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Type:
+                                    Type :
                                 </div>
                                 <div className="VALUE">
-                                    {data.userType}
+                                    {data.orgType}
                                 </div>
 
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Address :
+                                    Address:
                                 </div>
                                 <div className="VALUE">
                                     {data.address}
@@ -51,18 +50,10 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA TO">
                                 <div className="HEAD">
-                                    Phone No :
+                                    Contact No:
                                 </div>
                                 <div className="VALUE">
                                     {data.phoneNo}
-                                </div>
-                            </div>
-                            <div className="DATA DATE">
-                                <div className="HEAD">
-                                    Email :
-                                </div>
-                                <div className="VALUE">
-                                    {data.email}
                                 </div>
                             </div>
                         </div>
@@ -78,21 +69,17 @@ function customcard({ UserData }) {
 
 
 
-function HospitalTestsCard({ UserData }) {
-    const handler = (i) => { console.log(i); }
-    const hashtag = "#H";
-    const heading = "H";
-    let id = 0;
+function AdminCheckOrganisationCard({ UserData }) {
     return (
         <>
-            {UserData == null ?
+            {UserData === null ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
-                        <div className="card-header COL" id="headingOne"> No Tests</div>
+                        <div className="card-header COL" id="headingOne"> No Organisation</div>
                     </div>
                 </div> : customcard({ UserData })}
         </>
     );
 }
 
-export default HospitalTestsCard;
+export default AdminCheckOrganisationCard;

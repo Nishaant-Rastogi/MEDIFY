@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Table from "./Table";
 import '../styles/hospital_card.css';
 
 function customcard({ UserData }) {
@@ -7,48 +6,88 @@ function customcard({ UserData }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
+    let handleApprove = (e) => {
+        e.preventDefault();
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: UserData[e.target.id]
+        }
+        console.log(UserData[e.target.id]);
+        fetch('/api/approve-user', requiredOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }
+    let handleReject = (e) => {
+        e.preventDefault();
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: UserData[e.target.id]
+        }
+        fetch('/api/reject-user', requiredOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }
     return (
-        <div className="CUSTOMCARDA" id="accordion">
+        <div className="CUSTOMCARDE" id="accordion">
             {UserData == null ? null : UserData.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name :
+                                    Name:
                                 </div>
-                                <div className="VALUE">
+                                <div className="VALUE NAME">
                                     {data.name}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    License No:
+                                    Aadhar No:
                                 </div>
                                 <div className="VALUE">
-                                    {data.licenseNo}
+                                    {data.aadharNo}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Address:
+                                    Type:
                                 </div>
                                 <div className="VALUE">
-                                    {data.address}
+                                    {data.userType}
                                 </div>
 
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
-                            <Table />
+                            <div className="DATA FROM">
+                                <div className="HEAD">
+                                    Address :
+                                </div>
+                                <div className="VALUE">
+                                    {data.address}
+                                </div>
+                            </div>
+                            <div className="DATA TO">
+                                <div className="HEAD">
+                                    Phone No :
+                                </div>
+                                <div className="VALUE">
+                                    {data.phoneNo}
+                                </div>
+                            </div>
+
+                            <button id={id} onClick={handleApprove}>Approve</button>
+                            <button id={id++} onClick={handleReject}>Reject</button>
                         </div>
                     </div>
-                </div >
-            ))
-            }
-        </div >
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -57,19 +96,19 @@ function customcard({ UserData }) {
 
 
 
-function AdminCheckUserCard({ AccountData }) {
+function AdminCheckUserCard({ UserData }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
-    let id = 0;
     return (
         <>
-            {AccountData == null ?
+            {console.log(UserData)}
+            {UserData === null ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No User</div>
                     </div>
-                </div> : customcard({ AccountData })}
+                </div> : customcard({ UserData })}
         </>
     );
 }

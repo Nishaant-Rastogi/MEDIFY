@@ -35,6 +35,8 @@ import PatientsClaim from "./components/PatientsClaim";
 import PharmacyInventory from "./components/PharmacyInventory";
 import SignUp from "./pages/SignUp";
 import Verification from './pages/Verification';
+import AdminUserList from './components/AdminUserList';
+import AdminOrganisationList from './components/AdminOrganisationList';
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
           <Route path="/admin_user/home" element={<AdminHome />} />
           <Route path="/admin_user/users" element={<AdminCheckUser />} />
           <Route path="/admin_user/organisations" element={<AdminCheckOrganisation />} />
+          <Route path="/admin_user/users_list" element={<AdminUserList />} />
+          <Route path="/admin_user/organisations_list" element={<AdminOrganisationList />} />
 
           <Route path="/user/patients/home" element={<PatientsHome />} />
           <Route path="/user/patients/hospital" element={<PatientsHospitalsList />} />

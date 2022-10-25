@@ -9,7 +9,9 @@ urlpatterns = [
     path('admin_user/home', index),
     path('admin_user/users', index),
     path('admin_user/organisations', index),
-
+    path('admin_user/users_list', index ),
+    path('admin_user/organisations_list', index ),
+    
     path('user/patients/home', index),
     path('user/patients/hospital', index),
     path('user/patients/doctor', index),

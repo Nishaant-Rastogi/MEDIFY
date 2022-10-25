@@ -17,7 +17,7 @@ function AdminHome({ User }) {
                         <Link to='/admin_user/users' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/imagesuser.png" />
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/user.png" />
                                 </div>
                                 <div className='DATA'>
                                     <div className='HEADING'>UNAPPROVED USERS</div>
@@ -28,7 +28,7 @@ function AdminHome({ User }) {
                         <Link to='/admin_user/organisations' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/imagesbuilding.png" />
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/building.png" />
                                 </div>
                                 <div className='DATA'>
                                     <div className='HEADING'>UNAPPROVED ORGANISATIONS</div>
@@ -38,10 +38,10 @@ function AdminHome({ User }) {
                         </Link>
                     </div>
                     <div className='ROW ROW2'>
-                        <Link to='/admin_user/users' className='UHBOX1'>
+                        <Link to='/admin_user/users_list' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/imagesuser.png" />
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/user.png" />
                                 </div>
                                 <div className='DATA'>
                                     <div className='HEADING'>APPROVED USERS</div>
@@ -49,10 +49,10 @@ function AdminHome({ User }) {
                                 </div>
                             </div>
                         </Link>
-                        <Link to='/admin_user/organisations' className='UHBOX1'>
+                        <Link to='/admin_user/organisations_list' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/imagesbuilding.png" />
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/building.png" />
                                 </div>
                                 <div className='DATA'>
                                     <div className='HEADING'>APPROVED ORGANISATIONS</div>
