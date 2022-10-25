@@ -4,6 +4,11 @@ from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizatio
 from .models import User, Organization
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from pymongo import MongoClient
+import urllib
+
+client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
+db = client['db_name']
 
 # Create your views here.
 class UserView(generics.CreateAPIView):
