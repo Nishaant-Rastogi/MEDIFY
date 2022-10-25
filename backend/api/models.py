@@ -1,5 +1,8 @@
 from django.db import models
 
+def generate_user_id():
+    return 'U'+str(User.objects.count()+1)
+
 # Create your models here.
 class User(models.Model):
     name = models.CharField(max_length=200)
