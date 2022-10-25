@@ -45,9 +45,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/verification" element={<Verification />} />
 
-          <Route path="/admin/home" element={<AdminHome />} />
-          <Route path="/admin/users" element={<AdminCheckUser />} />
-          <Route path="/admin/organisations" element={<AdminCheckOrganisation />} />
+          <Route path="/admin_user/home" element={<AdminHome />} />
+          <Route path="/admin_user/users" element={<AdminCheckUser />} />
+          <Route path="/admin_user/organisations" element={<AdminCheckOrganisation />} />
 
           <Route path="/user/patients/home" element={<PatientsHome />} />
           <Route path="/user/patients/hospital" element={<PatientsHospitalsList />} />

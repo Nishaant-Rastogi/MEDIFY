@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
 
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
-
+    let navigate = useNavigate()
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
         const requestOptions = {
@@ -23,7 +24,12 @@ const SignUp = () => {
         };
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                console.log(data)
+                if (data.status === 200) {
+                    navigate('/verification')
+                }
+            })
     }
     let handleSignUpAsOrganization = async (e) => {
         e.preventDefault()
@@ -42,7 +48,12 @@ const SignUp = () => {
         };
         fetch('/api/create-organization/', requestOptions)
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                console.log(data)
+                if (data.status === 200) {
+                    navigate('/verification')
+                }
+            });
     }
 
     return (

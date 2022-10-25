@@ -6,9 +6,9 @@ urlpatterns = [
     path('signup', index),  
     path('verification', index),
 
-    path('/admin/home', index),
-    path('/admin/users', index),
-    path('/admin/organisations', index),
+    path('admin_user/home', index),
+    path('admin_user/users', index),
+    path('admin_user/organisations', index),
 
     path('user/patients/home', index),
     path('user/patients/hospital', index),

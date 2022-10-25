@@ -14,24 +14,48 @@ function AdminHome({ User }) {
                 {/*...............................................................................................................*/}
                 <div className='UHFLEX5'>
                     <div className='ROW ROW2'>
-                        <Link to='/admin/users' className='UHBOX1'>
+                        <Link to='/admin_user/users' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
                                     <img className='IMG ACIMG' alt="/" src="/static/imagesuser.png" />
                                 </div>
                                 <div className='DATA'>
-                                    <div className='HEADING'>USERS</div>
+                                    <div className='HEADING'>UNAPPROVED USERS</div>
                                     <div className='SUBHEADING'>View All Users</div>
                                 </div>
                             </div>
                         </Link>
-                        <Link to='/admin/organisations' className='UHBOX1'>
+                        <Link to='/admin_user/organisations' className='UHBOX1'>
                             <div className='COL'>
                                 <div className='IMGCONTAINER'>
                                     <img className='IMG ACIMG' alt="/" src="/static/imagesbuilding.png" />
                                 </div>
                                 <div className='DATA'>
-                                    <div className='HEADING'>ORGANISATIONS</div>
+                                    <div className='HEADING'>UNAPPROVED ORGANISATIONS</div>
+                                    <div className='SUBHEADING'>View All Organisations</div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className='ROW ROW2'>
+                        <Link to='/admin_user/users' className='UHBOX1'>
+                            <div className='COL'>
+                                <div className='IMGCONTAINER'>
+                                    <img className='IMG ACIMG' alt="/" src="/static/imagesuser.png" />
+                                </div>
+                                <div className='DATA'>
+                                    <div className='HEADING'>APPROVED USERS</div>
+                                    <div className='SUBHEADING'>View All Users</div>
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to='/admin_user/organisations' className='UHBOX1'>
+                            <div className='COL'>
+                                <div className='IMGCONTAINER'>
+                                    <img className='IMG ACIMG' alt="/" src="/static/imagesbuilding.png" />
+                                </div>
+                                <div className='DATA'>
+                                    <div className='HEADING'>APPROVED ORGANISATIONS</div>
                                     <div className='SUBHEADING'>View All Organisations</div>
                                 </div>
                             </div>
