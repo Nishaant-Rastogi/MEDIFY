@@ -18,16 +18,33 @@ const SignUp = () => {
                 aadharNo: e.target.aadharNo.value,
                 userType: e.target.userType.value,
                 email: e.target.email.value,
-                password: e.target.password.value,
+                password: e.target.user_password.value,
             }),
         };
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => console.log(data));
     }
-    let handleSignUpAsOrganization = () => {
-
+    let handleSignUpAsOrganization = async (e) => {
+        e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: e.target.name.value,
+                licenseNo: e.target.licenseNo.value,
+                address: e.target.address.value,
+                phoneNo: e.target.phoneNo.value,
+                orgType: e.target.orgType.value,
+                email: e.target.email.value,
+                password: e.target.org_password.value,
+            }),
+        };
+        fetch('/api/create-organization/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
     }
+
     return (
         <div className='SIGNUP'>
             <img className="SIGNUPIMG" src="/static/images/Healthcare-portal.jpg" />
@@ -98,11 +115,11 @@ const SignUp = () => {
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" name="password" placeholder="Password" />
+                                    <input type="password" className="form-control" name="user_password" placeholder="Password" />
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" id="Password" placeholder="Confirm Password" />
+                                    <input type="password" className="form-control" name="confirm_user_password" placeholder="Confirm Password" />
                                 </div>
                             </div>
                             <button type="submit" className="btn COLOR SIGNUPB">Sign Up User</button>
@@ -114,8 +131,8 @@ const SignUp = () => {
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">Type Of Organisation</label><br></br>
-                                <select defualtValue={"DEFUALT"} className="form-control">
-                                    <option value="DEFAULT" disabled>Select Organisation Type</option>
+                                <select defaultValue={"DEFAULT"} className="form-control" name='orgType'>
+                                    <option value="DEFAULT" disabled>Select Organization Type</option>
                                     <option value="H">Hospital</option>
                                     <option value="I">Insurance</option>
                                     <option value="P">Pharmacy</option>
@@ -123,7 +140,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">License No</label>
-                                <input type="id" className="form-control" name="license" aria-describedby="idHelp" placeholder="Enter License No" />
+                                <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" />
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Contact No</label>
@@ -132,7 +149,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>
-                                <input type="text" className="form-control" name="Address" aria-describedby="idHelp" placeholder="Enter Address" />
+                                <input type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div className="form-group">
@@ -143,11 +160,11 @@ const SignUp = () => {
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" name="password" placeholder="Password" />
+                                    <input type="password" className="form-control" name="org_password" placeholder="Password" />
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" name="password" placeholder="Confirm Password" />
+                                    <input type="password" className="form-control" name="confirm_org_password" placeholder="Confirm Password" />
                                 </div>
                             </div>
                             <button type="submit" className="btn COLOR SIGNUPB">Sign Up Organisation</button>
