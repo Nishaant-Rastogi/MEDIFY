@@ -1,6 +1,7 @@
+from ast import Or
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizationSerializer
+from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizationSerializer, OrganizationSerializer
 from .models import User, Organization
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -104,3 +105,18 @@ class LoginOrganizationView(APIView):
             return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetCheckUsersView(APIView):
+    serializer_class = UserSerializer
+    checkUser = user_collection.find({})
+    print(checkUser)
+    def get(self, request, format=None):
+        users = User.objects.all()
+        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
+
+class GetCheckOrganizationsView(APIView):
+    serializer_class = OrganizationSerializer
+    checkOrg = org_collection.find({})
+    print(checkOrg)
+    def get(self, request, format=None):
+        users = User.objects.all()
+        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)

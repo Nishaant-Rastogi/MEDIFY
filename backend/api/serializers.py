@@ -5,7 +5,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-
+class OrganizationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organization
+        fields = '__all__'
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

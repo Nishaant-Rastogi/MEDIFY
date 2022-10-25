@@ -2,11 +2,11 @@ import React, { useState, ReactDOM } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/verification.css';
 
-const accountSid = REACT_APP_ACCOUNT_SID;
-const authToken = REACT_APP_AUTH_TOKEN;
+// const accountSid = 'ACf118c042529876e027f078083bc9d83a';
+// const authToken = 'c86f6a73a5ddcbb25dbf44c3cf8b3a01';
 
-console.log(accountSid, authToken);
-const client = require('twilio')(accountSid, authToken);
+// console.log(accountSid, authToken);
+// const client = require('twilio')(accountSid, authToken);
 
 const Verification = (props) => {
     const location = useLocation();
@@ -17,13 +17,13 @@ const Verification = (props) => {
 
     let handleOTP = (e) => {
         e.preventDefault();
-        client.messages
-            .create({
-                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-                from: '+13237161729',
-                to: location.state.phone
-            })
-            .then(message => console.log(message.sid));
+        // client.messages
+        //     .create({
+        //         body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+        //         from: '+13237161729',
+        //         to: location.state.phone
+        //     })
+        //     .then(message => console.log(message.sid));
     }
 
     const digitValidate = (e) => {

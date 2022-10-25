@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import Table from "./Table";
 import '../styles/hospital_card.css';
 
-function customcard({ AccountData }) {
+function customcard({ UserData }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <div className="CUSTOMCARDA" id="accordion">
-            {AccountData[0][0] == null ? null : AccountData[0][0].map((accoundata) => (
+            {UserData == null ? null : UserData.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Hospital Name :
+                                    Name :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.doctorName}
+                                    {data.name}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
@@ -26,15 +26,15 @@ function customcard({ AccountData }) {
                                     License No:
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.licenseNo}
+                                    {data.licenseNo}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
                                     Address:
                                 </div>
-                                <div id={accoundata.LoanStatus} className="VALUE">
-                                    {accoundata.address}
+                                <div className="VALUE">
+                                    {data.address}
                                 </div>
 
                             </div>
@@ -45,9 +45,10 @@ function customcard({ AccountData }) {
                             <Table />
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                </div >
+            ))
+            }
+        </div >
     )
 }
 
