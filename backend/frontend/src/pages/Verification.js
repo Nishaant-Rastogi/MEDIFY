@@ -17,13 +17,21 @@ const Verification = (props) => {
 
     let handleOTP = (e) => {
         e.preventDefault();
-        // client.messages
-        //     .create({
-        //         body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-        //         from: '+13237161729',
-        //         to: location.state.phone
-        //     })
-        //     .then(message => console.log(message.sid));
+        const requiredOptions = {
+            method: 'GET',
+            header: { 'Content-Type': 'application/json' },
+            body: 
+        }
+        fetch('get-otp/', requiredOptions)
+            .then(res => res.json())
+            .then(data => clg)
+        client.messages
+            .create({
+                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+                from: '+13237161729',
+                to: location.state.phone
+            })
+            .then(message => console.log(message.sid));
     }
 
     const digitValidate = (e) => {

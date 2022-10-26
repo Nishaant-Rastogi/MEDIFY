@@ -14,4 +14,5 @@ urlpatterns = [
     path('login-organization/', LoginOrganizationView.as_view(), name="login-organization"),
     path('reject-user/', RejectUserView.as_view(), name="reject-user"),
     path('reject-organization/', RejectOrganizationView.as_view(), name="reject-organization"),
+    path('get-otp/', GetOTPView.as_view(), name="get-otp"),
 ]
