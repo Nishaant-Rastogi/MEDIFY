@@ -53,6 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+APPEND_SLASH = False
 
 TEMPLATES = [
     {

@@ -11,10 +11,10 @@ function customcard({ UserData }) {
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: UserData[e.target.id]
+            body: JSON.stringify(UserData[e.target.id])
         }
-        console.log(UserData[e.target.id]);
-        fetch('/api/approve-user', requiredOptions)
+        console.log(JSON.stringify(UserData[e.target.id]));
+        fetch('/api/approve-user/', requiredOptions)
             .then(response => response.json())
             .then(data => console.log(data))
     }
@@ -22,10 +22,10 @@ function customcard({ UserData }) {
         e.preventDefault();
         const requiredOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: UserData[e.target.id]
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(UserData[e.target.id])
         }
-        fetch('/api/reject-user', requiredOptions)
+        fetch('/api/reject-user/', requiredOptions)
             .then(response => response.json())
             .then(data => console.log(data))
     }

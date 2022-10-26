@@ -42,8 +42,8 @@ class CreateUserView(APIView):
             
             user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType=userType, email=email, password=password)
             user.save()
-            print(user)
-            check_user_collection.insert_one(user.data)
+            print(UserSerializer(user).data)
+            check_user_collection.insert_one(UserSerializer(user).data)
             return Response(CreateUserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -65,9 +65,9 @@ class CreateOrganizationView(APIView):
             password = serializer.data.get('password')
             
             organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password)
-            print(organization)
+            print(OrganizationSerializer(organization).data)
             organization.save()
-            check_org_collection.insert_one(organization.data)
+            check_org_collection.insert_one(OrganizationSerializer(organization).data)
             return Response(CreateOrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 

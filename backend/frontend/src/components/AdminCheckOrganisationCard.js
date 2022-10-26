@@ -6,25 +6,25 @@ function customcard({ UserData }) {
     const heading = "H";
     let id = 0;
 
-    let handleApprove = (e, id) => {
+    let handleApprove = (e) => {
         e.preventDefault();
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: UserData[id]
+            body: JSON.stringify(UserData[e.target.id])
         }
-        fetch('/api/approve-organization', requiredOptions)
+        fetch('/api/approve-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => console.log(data))
     }
-    let handleReject = (e, id) => {
+    let handleReject = (e) => {
         e.preventDefault();
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: UserData[id]
+            body: JSON.stringify(UserData[e.target.id])
         }
-        fetch('/api/reject-organization', requiredOptions)
+        fetch('/api/reject-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => console.log(data))
     }
@@ -61,7 +61,7 @@ function customcard({ UserData }) {
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
@@ -80,8 +80,8 @@ function customcard({ UserData }) {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={(e) => handleApprove(e, id)}>Approve</button>
-                        <button onClick={(e) => handleReject(e, id)}>Reject</button>
+                        <button id={id} onClick={handleApprove}>Approve</button>
+                        <button id={id++} onClick={handleReject}>Reject</button>
                     </div>
                 </div>
             ))}

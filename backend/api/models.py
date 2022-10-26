@@ -1,10 +1,13 @@
 from django.db import models
+import string
+import random
 
-def generate_user_id():
-    return 'U'+str(User.objects.count()+1)
+def generate_user_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'U'+''.join(random.choice(chars) for _ in range(size))
 
-def generate_org_id():
-    return 'O'+str(Organization.objects.count()+1)
+def generate_org_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'O'+''.join(random.choice(chars) for _ in range(size))
+
 
 class phoneModel(models.Model):
     Mobile = models.IntegerField(blank=False)
