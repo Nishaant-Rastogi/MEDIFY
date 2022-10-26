@@ -41,5 +41,6 @@ class Organization(models.Model):
     orgType = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+    balance = models.IntegerField(default=1000000)
     def __str__(self):
         return self.name

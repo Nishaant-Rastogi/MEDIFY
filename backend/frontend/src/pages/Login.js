@@ -22,9 +22,15 @@ const Login = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                if (data.status === 200) {
-                    if (data.userType === 'P') navigate('/user/patients/home');
-                    else if (data.userType === 'D') navigate('/user/doctors/home');
+                localStorage.setItem('user', JSON.stringify({ id: data.id }));
+                console.log(localStorage.getItem('user'));
+                if (data.userType === 'P') {
+                    console.log("patient");
+                    navigate('/user/patients/home');
+                }
+                else if (data.userType === 'D') {
+                    console.log("doctor");
+                    navigate('/user/doctors/home');
                 }
             })
     }
@@ -42,11 +48,11 @@ const Login = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                if (data.status === 200) {
-                    if (data.userType === 'H') navigate('/organisation/hospitals/home');
-                    else if (data.userType === 'I') navigate('/organisation/insurance/home');
-                    else if (data.userType === 'P') navigate('/organisation/pharmacy/home');
-                }
+                localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
+                console.log(localStorage.getItem('organisation'));
+                if (data.userType === 'H') navigate('/organisation/hospitals/home');
+                else if (data.userType === 'I') navigate('/organisation/insurance/home');
+                else if (data.userType === 'P') navigate('/organisation/pharmacy/home');
             })
     }
 

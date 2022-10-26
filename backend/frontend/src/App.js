@@ -37,6 +37,7 @@ import SignUp from "./pages/SignUp";
 import Verification from './pages/Verification';
 import AdminUserList from './components/AdminUserList';
 import AdminOrganisationList from './components/AdminOrganisationList';
+import ProfileInformation from './components/ProfileInformation';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/admin_user/users_list" element={<AdminUserList />} />
           <Route path="/admin_user/organisations_list" element={<AdminOrganisationList />} />
 
+          <Route path="/user/profile" element={<ProfileInformation />} />
           <Route path="/user/patients/home" element={<PatientsHome />} />
           <Route path="/user/patients/hospital" element={<PatientsHospitalsList />} />
           <Route path="/user/patients/doctor" element={<PatientsDoctorsList />} />

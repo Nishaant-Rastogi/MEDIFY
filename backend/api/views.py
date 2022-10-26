@@ -123,11 +123,81 @@ class GetUsersView(APIView):
         users = user_collection.find({})
         return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
 
+class GetUserView(APIView):
+    serializer_class = UserSerializer
+    def post(self, request, format=None):
+        id = request.data['id']
+        user = user_collection.find({'id': id})
+        print(user)
+        return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+
+class UpdateUserView(APIView):
+    serializer_class = CreateUserSerializer
+    def post(self, request, format=None):
+        dob = request.data['dob']
+        gender = request.data['gender']
+        address = request.data['address']
+        phoneNo = request.data['phoneNo']
+        balance = request.data['balance']
+        id = request.data['id']
+        user_collection.update_one({'id': id}, {'$set': {'dob': dob, 'gender': gender, 'address': address, 'phoneNo': phoneNo, 'balance': balance}})
+        user = user_collection.find({'id': id})
+        print(user)
+        return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+
+class UpdateOrganizationView(APIView):
+    serializer_class = CreateOrganizationSerializer
+    def post(self, request, format=None):
+        address = request.data['address']
+        phoneNo = request.data['phoneNo']
+        balance = request.data['balance']
+        id = request.data['id']
+        org_collection.update_one({'id': id}, {'$set': { 'address': address, 'phoneNo': phoneNo, 'balance': balance}})
+        org = org_collection.find({'id': id})
+        return Response(OrganizationSerializer(org[0]).data, status=status.HTTP_200_OK)
+
+class GetOrganizationView(APIView):
+    serializer_class = OrganizationSerializer
+    def post(self, request, format=None):
+        id = request.data['id']
+        org = org_collection.find({'id': id})
+        return Response(OrganizationSerializer(org[0]).data, status=status.HTTP_200_OK)
+
 class GetOrganizationsView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({})
         print(orgs)
+        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+
+class GetHospitalsView(APIView):
+    serializer_class = OrganizationSerializer
+    def get(self, request, format=None):
+        orgs = org_collection.find({'orgType': 'H'})
+        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+
+class GetDoctorsView(APIView):
+    serializer_class = UserSerializer
+    def get(self, request, format=None):
+        users = user_collection.find({'userType': 'D'})
+        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
+
+class GetPatientsView(APIView):
+    serializer_class = UserSerializer
+    def get(self, request, format=None):
+        users = user_collection.find({'userType': 'P'})
+        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
+
+class GetPharmaciesView(APIView):
+    serializer_class = OrganizationSerializer
+    def get(self, request, format=None):
+        orgs = org_collection.find({'orgType': 'P'})
+        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+
+class GetInsuranceView(APIView):
+    serializer_class = OrganizationSerializer
+    def get(self, request, format=None):
+        orgs = org_collection.find({'orgType': 'I'})
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class ApproveUserView(APIView):

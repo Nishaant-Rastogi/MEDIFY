@@ -6,7 +6,12 @@
 .COLOR2{
     background-color: #232f4a;
 }
-
+.PROFILE{
+    margin:10px;
+}
+.LOGOUT{
+    margin-top: 10px;
+}
 .USERBAR{
     width: 100%;
     border-bottom: 1px solid black;
@@ -31,12 +36,12 @@
 
 .USERBAR .USERDROPDOWN{
     position: relative;
-    left: 72vw;
+    left: 1200px;
     display: flex;
     position: relative;
-    /* justify-content: right; */
-    flex-direction: row;
-    margin-right: 10px;
+    justify-content: right;
+    /* flex-direction: row;
+    margin-right: 10px; */
 }
 
 .USERBAR #navbarDropdown{
@@ -62,12 +67,10 @@
 }
 
 .UPROFILE{
+    background-color: #e3f7e3;
     width: 100%;
     height: 100%;
     position: absolute;
-    top:0;
-    left: 0;
-    z-index: 100;
 }
 .UPROFILE .BLUR{
     width: 100%;
@@ -80,10 +83,11 @@
     background-color: white;
     position: absolute;
     top : 5vh;
-    left: 40%;
+    left: 30%;
     display: flex;
     flex-direction: row;
-    border-radius: 40px;;
+    width: 650px;
+    padding: 20px;
 }
 
 .UPROFILE .PROFILEHEADER{
@@ -110,9 +114,8 @@
 
 .UPROFILE .USER_DETAILS .USER_DETAILS_PHONE{
     color: #131a27;
-    font-size: 2vh;
+    font-size: 15px;
     position: relative;
-    top: -1.5vh;
 }
 
 .UPROFILE .BORDER{
@@ -176,12 +179,14 @@
 }
 
 .UPROFILE .USER_DETAILS .img{ 
-    width: 20vh;
-    height: 20vh;
+    width: 90px;
+    height: 90px;
 }
 
-
-
+.USER_DETAILS_NAME{
+    font-size: 30px;
+    font-weight: 500;
+}
 
 .HEADING{
     color: white;
