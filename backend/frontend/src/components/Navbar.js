@@ -10,7 +10,7 @@ function Navbar({ userData }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark USERBAR COLOR1">
-        <Link href="/User/user"><b>MEDIFY</b></Link>
+        <b style={{ color: 'white' }}>MEDIFY</b>
         <div>
           <div className='nav-item dropdown USERDROPDOWN'>
             <img className="PROFILEIMAGE" src="/static/images/user.png" alt='/' />

@@ -30,7 +30,7 @@ function customcard({ hospitals }) {
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
@@ -76,7 +76,7 @@ function PatientsHospitalCard({ hospitals }) {
     let id = 0;
     return (
         <>
-            {hospitals == null ?
+            {hospitals === [] ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Hospitals</div>

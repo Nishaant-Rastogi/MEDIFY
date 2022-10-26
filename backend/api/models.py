@@ -78,8 +78,8 @@ class Prescription(models.Model):
     patient_id = models.CharField(max_length=11)
     doctor_name = models.CharField(max_length=200)
     patient_name = models.CharField(max_length=200)
-    medicines_list = models.JSONField()
-    tests_list = models.JSONField()
+    medicine = models.CharField(max_length=20)
+    test = models.CharField(max_length=20)
     docType = models.CharField(default='P', max_length=1)
     def __str__(self):
         return self.consultation_id
@@ -104,8 +104,8 @@ class Bill(models.Model):
     pharmacy_name = models.CharField(max_length=200)
     patient_id = models.CharField(max_length=11)
     patient_name = models.CharField(max_length=200)
-    medicines_list = models.JSONField()
-    tests_list = models.JSONField()
+    medicine = models.CharField(max_length=20)
+    test = models.CharField(max_length=20)
     docType = models.CharField(default='B', max_length=1)
     def __str__(self):
         return self.consultation_id

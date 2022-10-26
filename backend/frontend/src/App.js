@@ -39,6 +39,7 @@ import AdminUserList from './components/AdminUserList';
 import AdminOrganisationList from './components/AdminOrganisationList';
 import ProfileInformation from './components/ProfileInformation';
 import ConsultationCard from './components/ConsultationCard';
+import PatientsPharmacyBuyMedicine from './components/PatientsPharmacyBuyMedicine';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
           <Route path="/user/patients/doctor/consultation" element={<ConsultationCard />} />
           <Route path="/user/patients/insurance" element={<PatientsInsuranceList />} />
           <Route path="/user/patients/pharmacy" element={<PatientsPharmacyList />} />
+          <Route path="/user/patients/pharmacy/buy" element={<PatientsPharmacyBuyMedicine />} />
           <Route path="/user/patients/upload" element={<PatientsUpload />} />
           <Route path="/user/patients/consultation" element={<PatientsConsultation />} />
           <Route path="/user/patients/prescription" element={<PatientsPrescription />} />

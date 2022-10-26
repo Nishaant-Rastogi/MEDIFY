@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import '../styles/hospital_card.css';
 
 function customcard({ UserData }) {
@@ -22,24 +23,16 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Aadhar No:
+                                    License No:
                                 </div>
                                 <div className="VALUE">
-                                    {data.aadharNo}
+                                    {data.licenseNo}
                                 </div>
                             </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Type:
-                                </div>
-                                <div className="VALUE">
-                                    {data.userType}
-                                </div>
-
-                            </div>
+                            <Link to='/user/patients/pharmacy/buy'><button>Buy Medicines</button></Link>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
@@ -78,19 +71,19 @@ function customcard({ UserData }) {
 
 
 
-function PatientsPharmacyCard({ UserData }) {
+function PatientsPharmacyCard({ pharmacies }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <>
-            {UserData == null ?
+            {pharmacies === [] ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Pharmacies</div>
                     </div>
-                </div> : customcard({ UserData })}
+                </div> : customcard({ pharmacies })}
         </>
     );
 }

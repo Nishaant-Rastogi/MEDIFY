@@ -272,6 +272,7 @@ class CreateConsultationView(APIView):
         print(serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+# Document Types Discussion
 class GetDocumentsView(APIView):
     serializer_class = CreateConsultationSerializer
     def get(self, request, format=None):
