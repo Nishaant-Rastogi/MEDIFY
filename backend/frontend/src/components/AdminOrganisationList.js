@@ -13,7 +13,7 @@ const AdminOrganisationList = () => {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch('/api/get-organizations', requestOptions)
+        fetch('/api/get-organizations/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

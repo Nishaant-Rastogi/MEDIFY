@@ -5,6 +5,22 @@ function customcard({ UserData }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
+
+    let handleDelete = (e) => {
+        e.preventDefault();
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(UserData[e.target.id])
+        }
+        console.log(JSON.stringify(UserData[e.target.id]));
+        fetch('/api/delete-organization/', requiredOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
+    }
     return (
         <div className="CUSTOMCARDE" id="accordion">
             {UserData == null ? null : UserData.map((data) => (
@@ -38,7 +54,7 @@ function customcard({ UserData }) {
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
@@ -56,6 +72,8 @@ function customcard({ UserData }) {
                                     {data.phoneNo}
                                 </div>
                             </div>
+
+                            <button id={id++} onClick={handleDelete}>Delete</button>
                         </div>
                     </div>
                 </div>

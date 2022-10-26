@@ -1,13 +1,18 @@
 from ast import Or
+import re
 from tabnanny import check
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizationSerializer, OrganizationSerializer
-from .models import User, Organization
+from .models import User, Organization, phoneModel
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from pymongo import MongoClient
 import urllib
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
+import base64
+import pyotp
 
 client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
 db = client['FCS_Project']
@@ -78,15 +83,12 @@ class LoginUserView(APIView):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
         print(request.data)
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            id = serializer.data.get('id')
-            password = serializer.data.get('password')
-            user = user_collection.find({'id': id, 'password': password})
-            if user:
-                return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
-            return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        id = request.data['id']
+        password = request.data['password']
+        user = user_collection.find({'id': id, 'password': password})
+        if user:
+            return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginOrganizationView(APIView):
     serializer_class = OrganizationSerializer
@@ -95,16 +97,13 @@ class LoginOrganizationView(APIView):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
         print(request.data)
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            id = serializer.data.get('id')
-            password = serializer.data.get('password')
-            print(id, password)
-            organization = org_collection.find({'id': id, 'password': password})
-            if organization:
-                return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
-            return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        id = request.data['id']
+        password = request.data['password']
+        print(id, password)
+        organization = org_collection.find({'id': id, 'password': password})
+        if organization:
+            return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetCheckUsersView(APIView):
     serializer_class = UserSerializer
@@ -128,51 +127,80 @@ class GetOrganizationsView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({})
+        print(orgs)
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class ApproveUserView(APIView):
-    serializer_class = UserSerializer
+    serializer_class = CreateUserSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            user_collection.insert_one(serializer.data)
-            return Response(UserSerializer(serializer).data, status=status.HTTP_200_OK)
+            user = User(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'])
+            user_collection.insert_one(UserSerializer(user).data)
+            check_user_collection.delete_one({'id': request.data['id']})
+            return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+        print(serializer.errors)   
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class ApproveOrganizationView(APIView):
-    serializer_class = OrganizationSerializer
+    serializer_class = CreateOrganizationSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            org_collection.insert_one(serializer.data)
-            return Response(OrganizationSerializer(serializer).data, status=status.HTTP_200_OK)
+            org = Organization(id=request.data['id'],name=request.data['name'], orgType=request.data['orgType'], licenseNo=request.data['licenseNo'], address=request.data['address'], phoneNo=request.data['phoneNo'], email=request.data['email'], password=request.data['password'])
+            org_collection.insert_one(OrganizationSerializer(org).data)
+            check_org_collection.delete_one({'id': request.data['id']})
+            return Response(OrganizationSerializer(org).data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class RejectUserView(APIView):
-    serializer_class = UserSerializer
+    serializer_class = CreateUserSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            check_user_collection.delete_one(serializer.data)
-            return Response(UserSerializer(serializer).data, status=status.HTTP_200_OK)
+            check_user_collection.delete_one({'id': request.data['id']})
+            return Response(request.data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class RejectOrganizationView(APIView):
-    serializer_class = OrganizationSerializer
+    serializer_class = CreateOrganizationSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            check_org_collection.delete_one(serializer.data)
-            return Response(OrganizationSerializer(serializer).data, status=status.HTTP_200_OK)
+            check_org_collection.delete_one({'id': request.data['id']})
+            return Response(request.data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class DeleteUserView(APIView):
+    serializer_class = CreateUserSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user_collection.delete_one({'id': request.data['id']})
+            return Response(request.data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteOrganizationView(APIView):
+    serializer_class = CreateOrganizationSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            org_collection.delete_one({'id': request.data['id']})
+            return Response(request.data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 EXPIRY_TIME = 60 # seconds
+# This class returns the string needed to generate the key
+class generateKey:
+
+    def returnValue(phone):
+        return str(phone) + str(datetime.date(datetime.now())) + "Some Random Secret Key"
 
 class GetOTPView(APIView):
     # Get to Create a call for OTP
-    @staticmethod
-    def get(request, phone):
+    def get(self, request):
+        phone = request.GET.get('phone')
+        print(phone)
         try:
             Mobile = phoneModel.objects.get(Mobile=phone)  # if Mobile already exists the take this else create New One
         except ObjectDoesNotExist:
@@ -189,8 +217,8 @@ class GetOTPView(APIView):
         return Response({"OTP": OTP.now()}, status=200)  # Just for demonstration
 
     # This Method verifies the OTP
-    @staticmethod
-    def post(request, phone):
+    def post(self, request):
+        phone = request.data.get('phone')
         try:
             Mobile = phoneModel.objects.get(Mobile=phone)
         except ObjectDoesNotExist:

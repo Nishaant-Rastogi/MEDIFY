@@ -15,7 +15,10 @@ function customcard({ UserData }) {
         }
         fetch('/api/approve-organization/', requiredOptions)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
     }
     let handleReject = (e) => {
         e.preventDefault();
@@ -26,7 +29,10 @@ function customcard({ UserData }) {
         }
         fetch('/api/reject-organization/', requiredOptions)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
     }
     return (
         <div className="CUSTOMCARDE" id="accordion">
@@ -79,9 +85,9 @@ function customcard({ UserData }) {
                                     {data.phoneNo}
                                 </div>
                             </div>
+                            <button id={id} onClick={handleApprove}>Approve</button>
+                            <button id={id++} onClick={handleReject}>Reject</button>
                         </div>
-                        <button id={id} onClick={handleApprove}>Approve</button>
-                        <button id={id++} onClick={handleReject}>Reject</button>
                     </div>
                 </div>
             ))}

@@ -20,19 +20,23 @@ const Verification = (props) => {
         const requiredOptions = {
             method: 'GET',
             header: { 'Content-Type': 'application/json' },
-            body: 
+            body: { phone: location.state.phone }
         }
         fetch('get-otp/', requiredOptions)
             .then(res => res.json())
-            .then(data => clg)
-        client.messages
-            .create({
-                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-                from: '+13237161729',
-                to: location.state.phone
+            .then(data => {
+                console.log(data)
+                setState({ phone: data.phone, otp: data.otp })
             })
-            .then(message => console.log(message.sid));
     }
+    // client.messages
+    //     .create({
+    //         body: state.otp,
+    //         from: '+13237161729',
+    //         to: location.state.phone
+    //     })
+    //     .then(message => console.log(message.sid));
+
 
     const digitValidate = (e) => {
         console.log(e.target.value);

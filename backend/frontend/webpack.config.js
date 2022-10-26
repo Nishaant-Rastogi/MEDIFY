@@ -3,12 +3,14 @@ const webpack = require("webpack");
 
 const DEVELOPMENT = process.env.NODE_ENV === "development";
 const PRODUCTION = process.env.NODE_ENV === "production";
+
 module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "./static/frontend"),
         filename: "[name].js",
     },
+    target: "node",
     module: {
         rules: [
             {

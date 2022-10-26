@@ -16,18 +16,24 @@ function customcard({ UserData }) {
         console.log(JSON.stringify(UserData[e.target.id]));
         fetch('/api/approve-user/', requiredOptions)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
     }
     let handleReject = (e) => {
         e.preventDefault();
         const requiredOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(UserData[e.target.id])
         }
         fetch('/api/reject-user/', requiredOptions)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
     }
     return (
         <div className="CUSTOMCARDE" id="accordion">
