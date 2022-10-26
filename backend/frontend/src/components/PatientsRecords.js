@@ -5,6 +5,20 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const PatientsRecords = () => {
+    const [records, setRecords] = useState([]);
+
+    let handleRecords = () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch('/api/get-records', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setRecords(data);
+            });
+    }
     return (
         <div>
             <Navbar />

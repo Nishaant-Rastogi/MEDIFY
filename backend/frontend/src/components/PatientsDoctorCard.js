@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-function customcard({ EmpData }) {
+function customcard({ doctors }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
+
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {EmpData.emp == null ? null : EmpData.emp.map((accoundata) => (
+            {doctors == null ? null : doctors.map((doctor) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
@@ -16,7 +18,7 @@ function customcard({ EmpData }) {
                                     Name:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {accoundata.Name}
+                                    {doctor.name}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
@@ -24,7 +26,7 @@ function customcard({ EmpData }) {
                                     License No:
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Employee_ID}
+                                    {doctor.aadharNo}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
@@ -32,59 +34,53 @@ function customcard({ EmpData }) {
                                     Specialisation :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Designation}
+                                    Doctor
                                 </div>
 
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Experience :
+                                    Address :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.PAN}
+                                    {doctor.address}
                                 </div>
                             </div>
                             <div className="DATA TO">
                                 <div className="HEAD">
-                                    Consultation Fees:
+                                    Contact No:
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Salary}
+                                    {doctor.phoneNo}
                                 </div>
                             </div>
-                            <div className="DATA DATE">
-                                <div className="HEAD">
-                                    Schedule:
-                                </div>
-                                <div className="VALUE">
-                                    {accoundata.Joining_Date}
-                                </div>
-                            </div>
+                            <Link to="/user/patients/doctor/consultation" state={{ doctor_name: doctor.name, doctor_id: doctor.id }}><button id={id++}>Consult</button></Link>
                         </div>
                     </div>
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     )
 }
 
 
 
-function PatientsDoctorCard({ EmpData }) {
+function PatientsDoctorCard({ doctors }) {
     return (
         <>
-            {EmpData == null ?
+            {doctors == null ?
                 <div className="CUSTOMCARDE" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne">No Doctors</div>
                     </div>
                 </div>
                 :
-                <div>{customcard({ EmpData })}</div>
+                <div>{customcard({ doctors })}</div>
             }
         </>
     );

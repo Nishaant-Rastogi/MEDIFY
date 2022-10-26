@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Organization
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,6 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
+        fields = '__all__'
+class ConsultationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consultation
         fields = '__all__'
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,3 +22,8 @@ class CreateOrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ('name', 'orgType', 'licenseNo', 'address', 'phoneNo', 'email', 'password')
+
+class CreateConsultationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consultation
+        fields = ('doctor_id', 'patient_id', 'doctor_name', 'patient_name', 'patient_gender', 'patient_email', 'problem')

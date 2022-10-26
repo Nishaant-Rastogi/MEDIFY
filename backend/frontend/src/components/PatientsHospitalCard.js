@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
-function customcard({ UserData }) {
+function customcard({ hospitals }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {UserData == null ? null : UserData.map((data) => (
+            {hospitals == null ? null : hospitals.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
@@ -22,20 +22,11 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Aadhar No:
+                                    License No:
                                 </div>
                                 <div className="VALUE">
-                                    {data.aadharNo}
+                                    {data.licenseNo}
                                 </div>
-                            </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Type:
-                                </div>
-                                <div className="VALUE">
-                                    {data.userType}
-                                </div>
-
                             </div>
                         </button>
                     </div>
@@ -78,19 +69,19 @@ function customcard({ UserData }) {
 
 
 
-function PatientsHospitalCard({ UserData }) {
+function PatientsHospitalCard({ hospitals }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <>
-            {UserData == null ?
+            {hospitals == null ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Hospitals</div>
                     </div>
-                </div> : customcard({ UserData })}
+                </div> : customcard({ hospitals })}
         </>
     );
 }

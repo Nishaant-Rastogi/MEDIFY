@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 import string
 import random
@@ -8,6 +9,17 @@ def generate_user_id(size=10, chars=string.ascii_uppercase + string.digits):
 def generate_org_id(size=10, chars=string.ascii_uppercase + string.digits):
     return 'O'+''.join(random.choice(chars) for _ in range(size))
 
+def generate_consultation_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'C'+''.join(random.choice(chars) for _ in range(size))
+
+def generate_prescription_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'P'+''.join(random.choice(chars) for _ in range(size))
+
+def generate_test_result_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'T'+''.join(random.choice(chars) for _ in range(size))
+
+def generate_bill_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'B'+''.join(random.choice(chars) for _ in range(size))
 
 class phoneModel(models.Model):
     Mobile = models.IntegerField(blank=False)
@@ -18,7 +30,7 @@ class phoneModel(models.Model):
             
 # Create your models here.
 class User(models.Model):
-    id = models.CharField(max_length=10, primary_key=True, default=generate_user_id)
+    id = models.CharField(max_length=11, primary_key=True, default=generate_user_id)
     name = models.CharField(max_length=200)
     dob = models.DateField()
     gender = models.CharField(max_length=10)
@@ -33,7 +45,7 @@ class User(models.Model):
         return self.name
 
 class Organization(models.Model):
-    id = models.CharField(max_length=10, primary_key=True, default=generate_org_id)
+    id = models.CharField(max_length=11, primary_key=True, default=generate_org_id)
     name = models.CharField(max_length=200)
     licenseNo = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -44,3 +56,56 @@ class Organization(models.Model):
     balance = models.IntegerField(default=1000000)
     def __str__(self):
         return self.name
+
+class Consultation(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_consultation_id)
+    doctor_id = models.CharField(max_length=11)
+    patient_id = models.CharField(max_length=11)
+    doctor_name = models.CharField(max_length=200)
+    patient_name = models.CharField(max_length=200)
+    patient_gender = models.CharField(max_length=10)
+    patient_email = models.CharField(max_length=200)
+    problem = models.CharField(max_length=200)
+    docType = models.CharField(default='C', max_length=1)
+
+    def __str__(self):
+        return self.id
+
+class Prescription(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_prescription_id)
+    consultation_id = models.CharField(max_length=11)
+    doctor_id = models.CharField(max_length=11)
+    patient_id = models.CharField(max_length=11)
+    doctor_name = models.CharField(max_length=200)
+    patient_name = models.CharField(max_length=200)
+    medicines_list = models.JSONField()
+    tests_list = models.JSONField()
+    docType = models.CharField(default='P', max_length=1)
+    def __str__(self):
+        return self.consultation_id
+
+class Test_Result(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_test_result_id)
+    prescription_id = models.CharField(max_length=11)
+    pharmacy_id = models.CharField(max_length=11)
+    pharmacy_name = models.CharField(max_length=200)
+    patient_id = models.CharField(max_length=11)
+    patient_name = models.CharField(max_length=200)
+    test_name = models.CharField(max_length=200)
+    test_result = models.CharField(max_length=200)
+    docType = models.CharField(default='T', max_length=1)
+    def __str__(self):
+        return self.consultation_id
+
+class Bill(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_bill_id)
+    prescription_id = models.CharField(max_length=11)
+    pharmacy_id = models.CharField(max_length=11)
+    pharmacy_name = models.CharField(max_length=200)
+    patient_id = models.CharField(max_length=11)
+    patient_name = models.CharField(max_length=200)
+    medicines_list = models.JSONField()
+    tests_list = models.JSONField()
+    docType = models.CharField(default='B', max_length=1)
+    def __str__(self):
+        return self.consultation_id

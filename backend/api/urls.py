@@ -26,5 +26,6 @@ urlpatterns = [
     path('delete-user/', DeleteUserView.as_view(), name="delete-user"),
     path('delete-organization/', DeleteOrganizationView.as_view(), name="delete-organization"),
     path('get-otp/', GetOTPView.as_view(), name="get-otp"),
-    
+    path('request-consultation/', CreateConsultationView.as_view(), name="consultation"),
+    # path('get-records/', GetConsultationsView.as_view(), name="get-consultations"),
 ]

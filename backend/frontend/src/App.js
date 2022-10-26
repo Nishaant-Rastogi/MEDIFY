@@ -38,6 +38,7 @@ import Verification from './pages/Verification';
 import AdminUserList from './components/AdminUserList';
 import AdminOrganisationList from './components/AdminOrganisationList';
 import ProfileInformation from './components/ProfileInformation';
+import ConsultationCard from './components/ConsultationCard';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/user/patients/home" element={<PatientsHome />} />
           <Route path="/user/patients/hospital" element={<PatientsHospitalsList />} />
           <Route path="/user/patients/doctor" element={<PatientsDoctorsList />} />
+          <Route path="/user/patients/doctor/consultation" element={<ConsultationCard />} />
           <Route path="/user/patients/insurance" element={<PatientsInsuranceList />} />
           <Route path="/user/patients/pharmacy" element={<PatientsPharmacyList />} />
           <Route path="/user/patients/upload" element={<PatientsUpload />} />

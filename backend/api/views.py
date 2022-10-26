@@ -3,8 +3,8 @@ import re
 from tabnanny import check
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import UserSerializer, CreateUserSerializer, CreateOrganizationSerializer, OrganizationSerializer
-from .models import User, Organization, phoneModel
+from .serializers import *
+from .models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from pymongo import MongoClient
@@ -21,6 +21,7 @@ check_user_collection = db['admin_users']
 check_org_collection = db['admin_organization']
 user_collection = db['Users']
 org_collection = db['Organizations']
+document_collection = db['Documents']
 # Create your views here.
 class UserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -258,6 +259,24 @@ class DeleteOrganizationView(APIView):
             org_collection.delete_one({'id': request.data['id']})
             return Response(request.data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateConsultationView(APIView):
+    serializer_class = CreateConsultationSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        print(serializer)
+        if serializer.is_valid():
+            consultation = Consultation(patient_id=request.data['patient_id'], doctor_id=request.data['doctor_id'], patient_name=request.data['patient_name'], doctor_name=request.data['doctor_name'], patient_gender = request.data['patient_gender'], patient_email = request.data['patient_email'], problem=request.data['problem'])
+            document_collection.insert_one(ConsultationSerializer(consultation).data)
+            return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
+        print(serializer.errors)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetDocumentsView(APIView):
+    serializer_class = CreateConsultationSerializer
+    def get(self, request, format=None):
+        documents = document_collection.find({})
+        return Response(ConsultationSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 EXPIRY_TIME = 60 # seconds
 # This class returns the string needed to generate the key

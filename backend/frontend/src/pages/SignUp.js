@@ -5,6 +5,9 @@ import '../styles/signup.css'
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
     let navigate = useNavigate()
+    const [userType, setUserType] = useState('patient')
+    const [orgType, setOrgType] = useState('hospital')
+
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
         const requestOptions = {
