@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import '../styles/navbar.css'
 import { Link } from 'react-router-dom';
@@ -8,6 +8,15 @@ const ProfileInformation = () => {
     const [UserData, setUserData] = useState([]);
     const [UserType, setUserType] = useState('user');
     const [Edit, setEdit] = useState(false);
+    const user_dob = useRef(null);
+    const user_gender = useRef(null);
+    const user_address = useRef(null);
+    const user_phoneNo = useRef(null);
+    const user_balance = useRef(null);
+
+    const org_address = useRef(null);
+    const org_phoneNo = useRef(null);
+    const org_balance = useRef(null);
 
     let handleUser = (e) => {
         const requestOptions = {
@@ -43,18 +52,17 @@ const ProfileInformation = () => {
     }
     let handleSaveData = (e) => {
         e.preventDefault();
-        console.log("hello")
         if (UserType === 'user') {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id: UserData.id,
-                    dob: e.target.dob.value,
-                    gender: e.target.gender.value,
-                    address: e.target.address.value,
-                    phoneNo: e.target.phoneNo.value,
-                    balance: e.target.balance.value
+                    dob: user_dob.current.value,
+                    gender: user_gender.current.value,
+                    address: user_address.current.value,
+                    phoneNo: user_phoneNo.current.value,
+                    balance: user_balance.current.value
                 })
             };
 
@@ -70,9 +78,9 @@ const ProfileInformation = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id: UserData.id,
-                    address: e.target.address.value,
-                    phoneNo: e.target.phoneNo.value,
-                    balance: e.target.balance.value
+                    address: org_address.current.value,
+                    phoneNo: org_phoneNo.current.value,
+                    balance: org_balance.current.value
                 })
             };
 
@@ -122,29 +130,29 @@ const ProfileInformation = () => {
                             </div>
                             <hr style={{ width: '600px' }} />
                             <div>Date of Birth:
-                                <input defaultValue={UserData.dob} type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" disabled={Edit ? "" : "disabled"} />
+                                <input ref={user_dob} defaultValue={UserData.dob} type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <div>Gender:
-                                <select defaultValue={UserData.gender} className="form-control" name='gender' disabled={Edit ? "" : "disabled"}>
+                                <select ref={user_gender} defaultValue={UserData.gender} className="form-control" name='gender' disabled={Edit ? "" : "disabled"}>
                                     <option value="DEFAULT" disabled>Select Gender</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                     <option value="O">Other</option>
                                 </select> </div>
                             <div>Phone No:
-                                <input defaultValue={UserData.phoneNo} type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" disabled={Edit ? "" : "disabled"} />
+                                <input ref={user_phoneNo} defaultValue={UserData.phoneNo} type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <div>Address:
-                                <input defaultValue={UserData.address} type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" disabled={Edit ? "" : "disabled"} />
+                                <input ref={user_address} defaultValue={UserData.address} type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <div>Aadhar No:
                                 <input defaultValue={UserData.aadharNo} type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar" disabled />
                             </div>
                             <div>Balance:
-                                <input defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} />
+                                <input ref={user_balance} defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <button onClick={handleEdit} style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">EDIT PROFILE INFORMATION</button>
-                            {Edit ? <button onSubmit={handleSaveData} style={{ marginTop: '20px' }} type="submit" className="btn btn-outline-dark">SAVE INFORMATION CHANGES</button> : null}
+                            {Edit ? <button onClick={handleSaveData} style={{ marginTop: '20px' }} type="submit" className="btn btn-outline-dark">SAVE INFORMATION CHANGES</button> : null}
                         </div>
                     </div>
                 </div> :
@@ -170,19 +178,19 @@ const ProfileInformation = () => {
                             </div>
                             <hr style={{ width: '600px' }} />
                             <div>Phone No:
-                                <input defaultValue={UserData.phoneNo} type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" disabled={Edit ? "" : "disabled"} />
+                                <input ref={org_phoneNo} defaultValue={UserData.phoneNo} type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <div>Address:
-                                <input defaultValue={UserData.address} type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" disabled={Edit ? "" : "disabled"} />
+                                <input ref={org_address} defaultValue={UserData.address} type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <div>License No:
                                 <input defaultValue={UserData.aadharNo} type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar" disabled />
                             </div>
                             <div>Balance:
-                                <input defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} />
+                                <input ref={org_balance} defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} />
                             </div>
                             <button onClick={handleEdit} style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark" >EDIT PROFILE INFORMATION</button>
-                            {Edit ? <button onSubmit={handleSaveData} style={{ marginTop: '20px' }} type="submit" className="btn btn-outline-dark">SAVE INFORMATION CHANGES</button> : null}
+                            {Edit ? <button onClick={handleSaveData} style={{ marginTop: '20px' }} type="submit" className="btn btn-outline-dark">SAVE INFORMATION CHANGES</button> : null}
                         </div>
                     </div>
                 </div>}
