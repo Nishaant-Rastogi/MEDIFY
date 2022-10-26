@@ -20,7 +20,7 @@ const Verification = (props) => {
         const requiredOptions = {
             method: 'GET',
             header: { 'Content-Type': 'application/json' },
-            body: { phone: location.state.phone }
+            body: 
         }
         fetch('get-otp/', requiredOptions)
             .then(res => res.json())
