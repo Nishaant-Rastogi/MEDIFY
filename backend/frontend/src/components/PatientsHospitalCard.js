@@ -30,14 +30,6 @@ function customcard({ hospitals }) {
                                     {data.id}
                                 </div>
                             </div>
-                            <div className="DATA ACCOUNT">
-                                <div className="HEAD HEAD1">
-                                    Test Cost:
-                                </div>
-                                <div className="VALUE NAME">
-                                    100
-                                </div>
-                            </div>
 
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
@@ -45,6 +37,14 @@ function customcard({ hospitals }) {
                                 </div>
                                 <div className="VALUE">
                                     {data.licenseNo}
+                                </div>
+                            </div>
+                            <div className="DATA ACCOUNT">
+                                <div className="HEAD HEAD1">
+                                    Test Cost:
+                                </div>
+                                <div className="VALUE NAME">
+                                    100
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
