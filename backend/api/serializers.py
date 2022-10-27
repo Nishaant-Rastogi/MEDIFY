@@ -1,6 +1,10 @@
 from rest_framework import serializers
 from .models import *
 
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'name', 'password')
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

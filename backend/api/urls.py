@@ -21,6 +21,7 @@ urlpatterns = [
     path('approve-organization/', ApproveOrganizationView.as_view(), name="approve-organization"),
     path('login-user/', LoginUserView.as_view(), name="login-user"),
     path('login-organization/', LoginOrganizationView.as_view(), name="login-organization"),
+    path('login-admin/', LoginAdminView.as_view(), name="login-admin"),
     path('reject-user/', RejectUserView.as_view(), name="reject-user"),
     path('reject-organization/', RejectOrganizationView.as_view(), name="reject-organization"),
     path('delete-user/', DeleteUserView.as_view(), name="delete-user"),

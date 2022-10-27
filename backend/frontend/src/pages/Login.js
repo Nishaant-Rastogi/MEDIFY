@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/home.css'
 
@@ -7,6 +7,21 @@ const Login = () => {
     const navigate = useNavigate();
     let handleLoginAdmin = (e) => {
         e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: e.target.id.value,
+                password: e.target.password.value
+            })
+        }
+        fetch('/api/login-admin/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('admin', JSON.stringify({ id: data.id }));
+                navigate('/admin_user/home');
+            })
     }
     let handleLoginUser = (e) => {
         e.preventDefault()
@@ -55,6 +70,10 @@ const Login = () => {
                 else if (data.userType === 'P') navigate('/organisation/pharmacy/home');
             })
     }
+    useEffect(() => {
+        localStorage.clear();
+
+    }, [])
 
     return (
         <div className='LOGIN'>

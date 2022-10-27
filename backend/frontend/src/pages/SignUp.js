@@ -29,9 +29,7 @@ const SignUp = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                if (data.status === 200) {
-                    navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
-                }
+                navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
             })
     }
     let handleSignUpAsOrganization = async (e) => {

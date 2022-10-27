@@ -22,6 +22,8 @@ check_org_collection = db['admin_organization']
 user_collection = db['Users']
 org_collection = db['Organizations']
 document_collection = db['Documents']
+admin_collection = db['Admin']
+
 # Create your views here.
 class UserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -104,6 +106,18 @@ class LoginOrganizationView(APIView):
         organization = org_collection.find({'id': id, 'password': password})
         if organization:
             return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginAdminView(APIView):
+    def post(self, request, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        print(request.data)
+        id = request.data['id']
+        password = request.data['password']
+        admin = admin_collection.find({'id': id, 'password': password})
+        if admin:
+            return Response(AdminSerializer(admin[0]).data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetCheckUsersView(APIView):

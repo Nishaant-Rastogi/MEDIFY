@@ -1,4 +1,5 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import PatientsHome from "./components/PatientsHome";
@@ -42,6 +43,15 @@ import ConsultationCard from './components/ConsultationCard';
 import PatientsPharmacyBuyMedicine from './components/PatientsPharmacyBuyMedicine';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(localStorage.getItem('user') || localStorage.getItem('organisation') || null)
+    window.addEventListener('storage', storageEventHandler, false);
+  }, []);
+  function storageEventHandler() {
+    setLoggedIn(localStorage.getItem('user') || localStorage.getItem('organisation') || null)
+  }
   return (
     <Router>
       <div className="app">
