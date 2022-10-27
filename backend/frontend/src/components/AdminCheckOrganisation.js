@@ -13,7 +13,7 @@ const AdminCheckOrganisation = () => {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch('/api/get-check-organizations', requestOptions)
+        fetch('/api/get-check-organizations/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

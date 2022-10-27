@@ -13,7 +13,7 @@ const AdminCheckUser = () => {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch('/api/get-check-users', requestOptions)
+        fetch('/api/get-check-users/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

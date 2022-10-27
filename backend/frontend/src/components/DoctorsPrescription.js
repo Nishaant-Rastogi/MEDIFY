@@ -12,7 +12,14 @@ const DoctorsPrescription = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: localStorage.getItem('user')
         }
+        fetch('/api/get-doctor-prescriptions/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setPrescriptions(data);
+            });
     }
     useEffect(() => {
         handlePrescriptions();
@@ -23,7 +30,7 @@ const DoctorsPrescription = () => {
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <DoctorsPrescriptionCard />
+                        <DoctorsPrescriptionCard prescriptions={prescriptions} />
                     </div>
                 </div>
             </div>

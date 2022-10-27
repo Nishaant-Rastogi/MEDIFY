@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
+import { Link } from "react-router-dom";
 
 function customcard({ hospitals }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
+
     return (
         <div className="CUSTOMCARDE" id="accordion">
             {hospitals == null ? null : hospitals.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
-                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
+                        <div className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
                                     Name:
@@ -20,6 +22,23 @@ function customcard({ hospitals }) {
                                     {data.name}
                                 </div>
                             </div>
+                            <div className="DATA ACCOUNT">
+                                <div className="HEAD HEAD1">
+                                    Hospital ID:
+                                </div>
+                                <div className="VALUE NAME">
+                                    {data.id}
+                                </div>
+                            </div>
+                            <div className="DATA ACCOUNT">
+                                <div className="HEAD HEAD1">
+                                    Test Cost:
+                                </div>
+                                <div className="VALUE NAME">
+                                    100
+                                </div>
+                            </div>
+
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
                                     License No:
@@ -28,7 +47,11 @@ function customcard({ hospitals }) {
                                     {data.licenseNo}
                                 </div>
                             </div>
-                        </button>
+                            <div className="DATA BALANCE">
+                                <Link to="/user/patients/hospital/test" state={{ hospital_id: data.id, hospital_name: data.name }}><button>REQUEST TEST</button></Link>
+                            </div>
+
+                        </div>
                     </div>
                     <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">

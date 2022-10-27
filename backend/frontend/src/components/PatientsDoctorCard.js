@@ -58,7 +58,15 @@ function customcard({ doctors }) {
                                     {doctor.phoneNo}
                                 </div>
                             </div>
-                            <Link to="/user/patients/doctor/consultation" state={{ doctor_name: doctor.name, doctor_id: doctor.id }}><button id={id++}>Consult</button></Link>
+                            <div className="DATA TO">
+                                <div className="HEAD">
+                                    Consultation Fee:
+                                </div>
+                                <div className="VALUE">
+                                    100
+                                </div>
+                            </div>
+                            <Link to="/user/patients/doctor/consultation" state={{ doctor_name: doctor.name, doctor_id: doctor.id }}><button id={id++}>CONSULT</button></Link>
                         </div>
                     </div>
                 </div>

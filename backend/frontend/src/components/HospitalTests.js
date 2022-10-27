@@ -5,6 +5,26 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const HospitalTests = () => {
+    const [tests, setTests] = useState([]);
+
+    let handleTests = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: localStorage.getItem('organisation')
+        }
+        fetch('/api/get-tests/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setTests(data)
+            });
+    }
+
+
+    useEffect(() => {
+        handleTests();
+    }, [])
     return (
         <div>
             <Navbar />

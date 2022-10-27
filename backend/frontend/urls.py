@@ -15,6 +15,7 @@ urlpatterns = [
     path('user/profile', index),
     path('user/patients/home', index),
     path('user/patients/hospital', index),
+    path('user/patients/hospital/test', index),
     path('user/patients/doctor', index),
     path('user/patients/doctor/consultation', index),
     path('user/patients/insurance', index),
@@ -23,7 +24,6 @@ urlpatterns = [
     path('user/patients/consultation', index),
     path('user/patients/prescription', index),
     path('user/patients/tests', index),
-    path('user/patients/records', index),
     path('user/patients/bills', index),
     path('user/patients/claim', index),
 
@@ -31,6 +31,7 @@ urlpatterns = [
     path('user/doctors/patients', index),
     path('user/doctors/prescriptions', index),
     path('user/doctors/consultations', index),
+    path('user/doctors/consultations/prescribe', index),
     path('user/doctors/upload', index),
 
     path('organisation/hospitals/home', index),

@@ -75,14 +75,14 @@ function PatientsHome({ User }) {
                 <div className='SUBHEADING'>Upload Medical Records</div>
               </div>
             </Link>
-            <Link to='/user/patients/records' className='COL COL2'>
+            <Link to='/user/patients/consultation' className='COL COL2'>
 
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' alt="/" src="/static/images/dental-report.png" />
               </div>
               <div className='DATA'>
-                <div className='HEADING'>MEDICAL RECORDS</div>
-                <div className='SUBHEADING'>View All Your Medical Records</div>
+                <div className='HEADING'>CONSULTATIONS</div>
+                <div className='SUBHEADING'>View All Your Consultations</div>
               </div>
 
             </Link>
@@ -132,7 +132,7 @@ function PatientsHome({ User }) {
             <Link to='/user/patients/bills' className='COL'>
 
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
+                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'>BILLS</div>

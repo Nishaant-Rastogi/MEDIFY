@@ -5,13 +5,31 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const PatientsTests = () => {
+    const [tests, setTests] = useState([]);
+
+    let handleTests = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: localStorage.getItem('user')
+        }
+        fetch('/api/get-test-results/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTests(data);
+            });
+    }
+    useEffect(() => {
+        handleTests();
+    }, []);
     return (
         <div>
             <Navbar />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <PatientsTestsCard />
+                        <PatientsTestsCard tests={tests} />
                     </div>
                 </div>
             </div>

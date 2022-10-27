@@ -5,12 +5,14 @@ import '../styles/navbar.css'
 
 const PrescriptionCard = () => {
     const location = useLocation()
-    const [user, setUser] = useState([])
+    const [doctor, setDoctor] = useState([])
+    const [prescription, setPrescription] = useState()
     const navigate = useNavigate()
-    const doctor = { id: location.state.doctor_id, name: location.state.doctor_name }
+    const user = { id: location.state.patient_id, name: location.state.patient_name, consultation_id: location.state.consultation_id }
 
     const handlePrescription = (e) => {
         e.preventDefault()
+        console.log("hello");
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -23,13 +25,14 @@ const PrescriptionCard = () => {
                 medicine: e.target.medicine.value,
                 dosage: e.target.dosage.value,
                 duration: e.target.duration.value,
-                consultation_id: e.target.consultation_id.value,
+                consultation_id: e.target.c_id.value,
             })
         }
-        fetch('/api/request-consultation/', requiredOptions)
+        fetch('/api/send-prescription/', requiredOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                setPrescription(data.id)
                 navigate(-1)
             })
     }
@@ -45,11 +48,12 @@ const PrescriptionCard = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                setUser(data);
+                setDoctor(data);
             });
     };
 
     useEffect(() => {
+        console.log(user)
         handleUser();
     }, [])
     return (
@@ -59,7 +63,7 @@ const PrescriptionCard = () => {
                 <div className='PROFILECONTAINER'>
                     <div className='PROFILEHEADER'>
                         <div className="USER_DETAILS">
-                            <div>CONSULTATION</div>
+                            <div>PRESCRIPTION</div>
                         </div>
                         <hr style={{ width: '600px' }} />
                         <form onSubmit={handlePrescription}>
@@ -70,7 +74,7 @@ const PrescriptionCard = () => {
                                 <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
                             </div>
                             <div>Consultation ID:
-                                <input defaultValue={user.email} type="text" className="form-control" name="c_id" aria-describedby="idHelp" placeholder="Enter Email" disabled />
+                                <input defaultValue={user.consultation_id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" placeholder="Enter Email" disabled />
                             </div>
                             <div>Medicine Prescribed:
                                 <select defaultValue={'DEFAULT'} className="form-control" name='medicine'>

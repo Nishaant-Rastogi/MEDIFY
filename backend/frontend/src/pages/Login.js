@@ -65,9 +65,9 @@ const Login = () => {
                 console.log(data);
                 localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
                 console.log(localStorage.getItem('organisation'));
-                if (data.userType === 'H') navigate('/organisation/hospitals/home');
-                else if (data.userType === 'I') navigate('/organisation/insurance/home');
-                else if (data.userType === 'P') navigate('/organisation/pharmacy/home');
+                if (data.orgType === 'H') navigate('/organisation/hospitals/home');
+                else if (data.orgType === 'I') navigate('/organisation/insurance/home');
+                else if (data.orgType === 'P') navigate('/organisation/pharmacy/home');
             })
     }
     useEffect(() => {

@@ -20,7 +20,6 @@ import DoctorsPatients from "./components/DoctorsPatients";
 import DoctorsPrescription from "./components/DoctorsPrescription";
 import PatientsConsultation from "./components/PatientsConsultation";
 import PatientsPrescription from "./components/PatientsPrescription";
-import PatientsRecords from "./components/PatientsRecords";
 import PatientsBills from "./components/PatientsBills";
 import DoctorsUpload from "./components/DoctorsUpload";
 import PatientsTests from "./components/PatientsTests";
@@ -41,6 +40,8 @@ import AdminOrganisationList from './components/AdminOrganisationList';
 import ProfileInformation from './components/ProfileInformation';
 import ConsultationCard from './components/ConsultationCard';
 import PatientsPharmacyBuyMedicine from './components/PatientsPharmacyBuyMedicine';
+import PrescriptionCard from './components/PrescriptionCard';
+import TestCard from './components/TestCard';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -69,16 +70,16 @@ function App() {
           <Route path="/user/profile" element={<ProfileInformation />} />
           <Route path="/user/patients/home" element={<PatientsHome />} />
           <Route path="/user/patients/hospital" element={<PatientsHospitalsList />} />
+          <Route path="/user/patients/hospital/test" element={<TestCard />} />
           <Route path="/user/patients/doctor" element={<PatientsDoctorsList />} />
           <Route path="/user/patients/doctor/consultation" element={<ConsultationCard />} />
           <Route path="/user/patients/insurance" element={<PatientsInsuranceList />} />
           <Route path="/user/patients/pharmacy" element={<PatientsPharmacyList />} />
           <Route path="/user/patients/pharmacy/buy" element={<PatientsPharmacyBuyMedicine />} />
           <Route path="/user/patients/upload" element={<PatientsUpload />} />
-          <Route path="/user/patients/consultation" element={<PatientsConsultation />} />
           <Route path="/user/patients/prescription" element={<PatientsPrescription />} />
           <Route path="/user/patients/tests" element={<PatientsTests />} />
-          <Route path="/user/patients/records" element={<PatientsRecords />} />
+          <Route path="/user/patients/consultation" element={<PatientsConsultation />} />
           <Route path="/user/patients/bills" element={<PatientsBills />} />
           <Route path="/user/patients/claim" element={<PatientsClaim />} />
 
@@ -86,6 +87,7 @@ function App() {
           <Route path="/user/doctors/patients" element={<DoctorsPatients />} />
           <Route path="/user/doctors/prescriptions" element={<DoctorsPrescription />} />
           <Route path="/user/doctors/consultations" element={<DoctorsConsultation />} />
+          <Route path="/user/doctors/consultations/prescribe" element={<PrescriptionCard />} />
           <Route path="/user/doctors/upload" element={<DoctorsUpload />} />
 
           <Route path="/organisation/hospitals/home" element={<HospitalsHome />} />

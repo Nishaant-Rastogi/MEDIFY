@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar'
 import '../styles/navbar.css'
+import ConsultationBillCard from './ConsultationBillCard'
 
 const ConsultationCard = () => {
     const location = useLocation()
     const [user, setUser] = useState([])
     const navigate = useNavigate()
     const doctor = { id: location.state.doctor_id, name: location.state.doctor_name }
+    const [consultation, setConsultation] = useState(null)
 
     const handleConsultation = (e) => {
         e.preventDefault()
@@ -28,7 +30,7 @@ const ConsultationCard = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                navigate(-1)
+                setConsultation(data.id)
             })
     }
 
@@ -53,45 +55,46 @@ const ConsultationCard = () => {
     return (
         <div>
             <Navbar />
-            <div className='UPROFILE'>
-                <div className='PROFILECONTAINER'>
-                    <div className='PROFILEHEADER'>
-                        <div className="USER_DETAILS">
-                            <div>CONSULTATION</div>
-                        </div>
-                        <hr style={{ width: '600px' }} />
-                        <form onSubmit={handleConsultation}>
-                            <div>Patient's Name:
-                                <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+            {consultation ? <ConsultationBillCard doctor={doctor} user={user} consultation={consultation} /> :
+                <div className='UPROFILE'>
+                    <div className='PROFILECONTAINER'>
+                        <div className='PROFILEHEADER'>
+                            <div className="USER_DETAILS">
+                                <div>CONSULTATION</div>
                             </div>
-                            <div>Patient's ID:
-                                <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
-                            </div>
-                            <div>Patient's Gender:
-                                <select defaultValue={user.gender} className="form-control" name='gender' disabled>
-                                    <option value="DEFAULT" disabled>Select Gender</option>
-                                    <option value="M">Male</option>
-                                    <option value="F">Female</option>
-                                    <option value="O">Other</option>
-                                </select> </div>
-                            <div>Patient's Email:
-                                <input defaultValue={user.email} type="text" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" disabled />
-                            </div>
-                            <div>Problem Faced:
-                                <input type="text" className="form-control" name="problem" aria-describedby="idHelp" placeholder="Enter Problem" />
-                            </div>
-                            <div>Doctor's Name:
-                                <input defaultValue={doctor.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
-                            </div>
-                            <div>Doctor's ID:
-                                <input defaultValue={doctor.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
-                            </div>
-                            <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">REQUEST CONSULTATION</button>
-                        </form>
+                            <hr style={{ width: '600px' }} />
+                            <form onSubmit={handleConsultation}>
+                                <div>Patient's Name:
+                                    <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                                </div>
+                                <div>Patient's ID:
+                                    <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
+                                </div>
+                                <div>Patient's Gender:
+                                    <select defaultValue={user.gender} className="form-control" name='gender' disabled>
+                                        <option value="DEFAULT" disabled>Select Gender</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                        <option value="O">Other</option>
+                                    </select> </div>
+                                <div>Patient's Email:
+                                    <input defaultValue={user.email} type="text" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" disabled />
+                                </div>
+                                <div>Problem Faced:
+                                    <input type="text" className="form-control" name="problem" aria-describedby="idHelp" placeholder="Enter Problem" />
+                                </div>
+                                <div>Doctor's Name:
+                                    <input defaultValue={doctor.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
+                                </div>
+                                <div>Doctor's ID:
+                                    <input defaultValue={doctor.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
+                                </div>
+                                <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">REQUEST CONSULTATION</button>
+                            </form>
 
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>}
 
         </div>
     )

@@ -1,4 +1,6 @@
 from ast import Or
+from calendar import c
+from cgi import test
 import re
 from tabnanny import check
 from django.shortcuts import render
@@ -30,30 +32,33 @@ class UserView(generics.CreateAPIView):
     serializer_class = UserSerializer  
 
 class CreateUserView(APIView):
-    serializer_class = CreateUserSerializer
-
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
         print(request.data)
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            name = serializer.data.get('name')
-            dob = serializer.data.get('dob')
-            gender = serializer.data.get('gender')
-            address = serializer.data.get('address')
-            phoneNo = serializer.data.get('phoneNo')
-            aadharNo = serializer.data.get('aadharNo')
-            userType = serializer.data.get('userType')
-            email = serializer.data.get('email')
-            password = serializer.data.get('password')
             
-            user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType=userType, email=email, password=password)
-            user.save()
-            print(UserSerializer(user).data)
-            check_user_collection.insert_one(UserSerializer(user).data)
-            return Response(CreateUserSerializer(user).data, status=status.HTTP_201_CREATED)
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        name = request.data['name']
+        dob = request.data['dob']
+        gender = request.data['gender']
+        address = request.data['address']
+        phoneNo = request.data['phoneNo']
+        aadharNo = request.data['aadharNo']
+        userType = request.data['userType']
+        email = request.data['email']
+        password = request.data['password']
+        if userType == 'D':
+            specialization = request.data['specialization']
+            experience = request.data['experience']
+            doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience)
+            doctor.save()
+            check_user_collection.insert_one(DoctorSerializer(doctor).data)
+            return Response(DoctorSerializer(doctor).data, status=status.HTTP_201_CREATED)
+
+        user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password)
+        user.save()
+        print(UserSerializer(user).data)
+        check_user_collection.insert_one(UserSerializer(user).data)
+        return Response(CreateUserSerializer(user).data, status=status.HTTP_201_CREATED)
 
 class CreateOrganizationView(APIView):
     serializer_class = CreateOrganizationSerializer
@@ -89,7 +94,10 @@ class LoginUserView(APIView):
         id = request.data['id']
         password = request.data['password']
         user = user_collection.find({'id': id, 'password': password})
+        print(UserSerializer(user[0]).data)
         if user:
+            if UserSerializer(user[0]).data['userType'] == 'D':
+                return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
             return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -124,7 +132,13 @@ class GetCheckUsersView(APIView):
     serializer_class = UserSerializer
     def get(self, request, format=None):
         users = check_user_collection.find({})
-        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
+        check_users = []
+        for user in users:
+            if user['userType'] == 'D':
+                check_users.append(DoctorSerializer(user).data)
+            else:
+                check_users.append(UserSerializer(user).data)
+        return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
     serializer_class = OrganizationSerializer
@@ -136,15 +150,25 @@ class GetUsersView(APIView):
     serializer_class = UserSerializer
     def get(self, request, format=None):
         users = user_collection.find({})
-        return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
+        all_users = []
+        for user in users:
+            if user['userType'] == 'D':
+                all_users.append(DoctorSerializer(user).data)
+            else:
+                all_users.append(UserSerializer(user).data)
+        return Response(all_users, status=status.HTTP_200_OK)
 
 class GetUserView(APIView):
     serializer_class = UserSerializer
     def post(self, request, format=None):
         id = request.data['id']
         user = user_collection.find({'id': id})
-        print(user)
-        return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+        print(UserSerializer(user[0]))
+        if user:
+            if UserSerializer(user[0]).data['userType'] == 'D':
+                return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
+            return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateUserView(APIView):
     serializer_class = CreateUserSerializer
@@ -216,15 +240,18 @@ class GetInsuranceView(APIView):
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class ApproveUserView(APIView):
-    serializer_class = CreateUserSerializer
     def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
+        userType = request.data['userType']
+        if userType == 'P':
             user = User(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'])
             user_collection.insert_one(UserSerializer(user).data)
             check_user_collection.delete_one({'id': request.data['id']})
             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
-        print(serializer.errors)   
+        elif userType == 'D':
+            doctor = Doctor(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], specialization=request.data['specialization'], experience=request.data['experience'])
+            user_collection.insert_one(DoctorSerializer(doctor).data)
+            check_user_collection.delete_one({'id': request.data['id']})
+            return Response(DoctorSerializer(doctor).data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class ApproveOrganizationView(APIView):
@@ -286,12 +313,212 @@ class CreateConsultationView(APIView):
         print(serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class CreatePrescriptionView(APIView):
+    serializer_class = CreatePrescriptionSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            prescription = Prescription(consultation_id=request.data['consultation_id'] ,patient_id=request.data['patient_id'], doctor_id=request.data['doctor_id'], patient_name=request.data['patient_name'], doctor_name=request.data['doctor_name'], medicine=request.data['medicine'], dosage=request.data['dosage'], duration=request.data['duration'], test=request.data['test'])
+            document_collection.insert_one(PrescriptionSerializer(prescription).data)
+            document_collection.update_one({'id': request.data['consultation_id']}, {'$set': {'prescribed': True}})
+    
+            return Response(PrescriptionSerializer(prescription).data, status=status.HTTP_200_OK)
+
+class UpdateConsultationView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        document_collection.update_one({'id': id}, {'$set': {'visible': False}})
+        consultation = document_collection.find_one({'id': id})
+        return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
+
+class UpdatePrescriptionView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        document_collection.update_one({'id': id}, {'$set': {'visible': False}})
+        prescription = document_collection.find_one({'id': id})
+        return Response(PrescriptionSerializer(prescription).data, status=status.HTTP_200_OK)
+
+class UpdateTestResultView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        document_collection.update_one({'id': id}, {'$set': {'visible': False}})
+        testResult = document_collection.find_one({'id': id})
+        return Response(TestResultSerializer(testResult).data, status=status.HTTP_200_OK)
+
+class UpdateBillView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        document_collection.update_one({'id': id}, {'$set': {'visible': False}})
+        return Response("Successfully Deleted", status=status.HTTP_200_OK)
+
+class GetBillView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        bills = document_collection.find({'patient_id': id, 'visible': True})
+        all_bills = []
+        for bill in bills:
+            if bill['docType'] == 'BC':
+                all_bills.append(ConsultationBillSerializer(bill).data)
+            elif bill['docType'] == 'BP':
+                all_bills.append(PharmacyBillSerializer(bill).data)
+            elif bill['docType'] == 'BT':
+                all_bills.append(TestResultBillSerializer(bill).data)
+        
+        return Response(all_bills, status=status.HTTP_200_OK)
+
+class GetUnClaimBillView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        print(document_collection.find({'patient_id': id, 'visible': True, 'claimed': False}).count())
+        bills = document_collection.find({'patient_id': id, 'visible': True, 'claimed': False})
+        all_bills = []
+        for bill in bills:
+            if bill['docType'] == 'BC':
+                all_bills.append(ConsultationBillSerializer(bill).data)
+            elif bill['docType'] == 'BP':
+                all_bills.append(PharmacyBillSerializer(bill).data)
+            elif bill['docType'] == 'BT':
+                all_bills.append(TestResultBillSerializer(bill).data)
+        
+        return Response(all_bills, status=status.HTTP_200_OK)
+
+class GetDoctorBillView(APIView):
+ def post(self, request, format=None):
+        id = request.data['id']
+        bills = document_collection.find({'docType': 'BC', 'visible': True})
+        all_bills = []
+        for bill in bills:
+            if bill['doctor_id'] == id:
+                all_bills.append(ConsultationBillSerializer(bill).data)
+        return Response(all_bills, status=status.HTTP_200_OK)
+
+class GetHospitalBillView(APIView):
+    def post(self, request, format=None):
+        print(request.data)
+        id = request.data['id']
+        bills = document_collection.find({'docType': 'BT', 'visible': True})
+        all_bills = []
+        for bill in bills:
+            if bill['hospital_id'] == id:
+                all_bills.append(TestResultBillSerializer(bill).data)
+        return Response(all_bills, status=status.HTTP_200_OK)
+
+class GetPharmacyBillView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        bills = document_collection.find({'docType': 'BP', 'visible': True})
+        all_bills = []
+        for bill in bills:
+            if bill['pharmacy_id'] == id:
+                all_bills.append(PharmacyBillSerializer(bill).data)
+        return Response(all_bills, status=status.HTTP_200_OK)
+
 # Document Types Discussion
-class GetDocumentsView(APIView):
+class GetConsultationView(APIView):
     serializer_class = CreateConsultationSerializer
-    def get(self, request, format=None):
-        documents = document_collection.find({})
+    def post(self, request, format=None):
+        patient_id = request.data['id']
+        documents = document_collection.find({'patient_id': patient_id, 'docType': 'C', 'visible': True})
         return Response(ConsultationSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
+class GetPrescriptionView(APIView):
+    serializer_class = CreatePrescriptionSerializer
+    def post(self, request, format=None):
+        patient_id = request.data['id']
+        documents = document_collection.find({'patient_id': patient_id, 'docType': 'P', 'visible': True})
+        return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
+class GetDoctorPrescriptionView(APIView):
+    serializer_class = CreatePrescriptionSerializer
+    def post(self, request, format=None):
+        doctor_id = request.data['id']
+        documents = document_collection.find({'doctor_id': doctor_id, 'docType': 'P'})
+        return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
+class GetDoctorConsultationView(APIView):
+    serializer_class = CreateConsultationSerializer
+    def post(self, request, format=None):
+        doctor_id = request.data['id']
+        documents = document_collection.find({'doctor_id': doctor_id, 'docType': 'C', 'prescribed': False})
+        return Response(ConsultationSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
+class CreateTestResultView(APIView):
+    serializer_class = CreateTestResultSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            test_result = TestResult(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], hospital_name=request.data['hospital_name'], patient_name=request.data['patient_name'],  test=request.data['test'], test_result=request.data['test_result'], hospital_id=request.data['hospital_id'])
+            document_collection.insert_one(TestResultSerializer(test_result).data)
+            return Response(TestResultSerializer(test_result).data, status=status.HTTP_200_OK)
+
+class GetTestResultView(APIView):
+    serializer_class = CreateTestResultSerializer
+    def post(self, request, format=None):
+        patient_id = request.data['id']
+        documents = document_collection.find({'patient_id': patient_id, 'docType': 'T', 'visible': True})
+        return Response(TestResultSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
+class CreateConsultationBillView(APIView):
+    serializer_class = CreateConsultationBillSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            consultation_bill = ConsultationBill(consultation_id=request.data['consultation_id'], patient_id=request.data['patient_id'], doctor_id=request.data['doctor_id'], patient_name=request.data['patient_name'], doctor_name=request.data['doctor_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'])
+            patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
+            if(int(patient_balance) < int(request.data['amount'])):
+                return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
+            user_collection.update_one({'id': request.data['patient_id']}, {'$set': {'balance': int(patient_balance) - int(request.data['amount'])}})
+            doctor_balance = user_collection.find_one({'id': request.data['doctor_id']})['balance']
+            user_collection.update_one({'id': request.data['doctor_id']}, {'$set': {'balance': int(doctor_balance) + int(request.data['amount'])}})
+            document_collection.insert_one(ConsultationBillSerializer(consultation_bill).data)
+            print(document_collection.find_one({'docType': 'BC', 'consultation_id': request.data['consultation_id']}))
+            return Response(ConsultationBillSerializer(consultation_bill).data, status=status.HTTP_200_OK)
+
+class CreateTestResultBillView(APIView):
+    serializer_class = CreateTestResultBillSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            test_result_bill = TestResultBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], hospital_id=request.data['hospital_id'], patient_name=request.data['patient_name'], hospital_name=request.data['hospital_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'], test=request.data['test'])
+            patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
+            if(int(patient_balance) < int(request.data['amount'])):
+                return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
+            user_collection.update_one({'id': request.data['patient_id']}, {'$set': {'balance': int(patient_balance) - int(request.data['amount'])}})
+            hospital_balance = org_collection.find_one({'id': request.data['hospital_id']})['balance']
+            org_collection.update_one({'id': request.data['hospital_id']}, {'$set': {'balance': int(hospital_balance) + int(request.data['amount'])}})
+            document_collection.insert_one(TestResultBillSerializer(test_result_bill).data)
+            return Response(TestResultBillSerializer(test_result_bill).data, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class CreatePharmacyBillView(APIView):
+    serializer_class = CreatePharmacyBillSerializer
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            pharmacy_bill = PharmacyBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'])
+            patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
+            if(int(patient_balance) < int(request.data['amount'])):
+                return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
+            user_collection.update_one({'id': request.data['patient_id']}, {'$set': {'balance': int(patient_balance) - int(request.data['amount'])}})
+            pharmacy_balance = org_collection.find_one({'id': request.data['pharmacy_id']})['balance']
+            org_collection  .update_one({'id': request.data['pharmacy_id']}, {'$set': {'balance': int(pharmacy_balance) + int(request.data['amount'])}})
+            document_collection.insert_one(PharmacyBillSerializer(pharmacy_bill).data)
+            return Response(PharmacyBillSerializer(pharmacy_bill).data, status=status.HTTP_200_OK)
+
+class ClaimRefundView(APIView):
+    def post(self, request, format=None):
+        patient_id = request.data['patient_id']
+        insurance_id = request.data['insurance_id']
+        refund = request.data['refund_amount']
+        bill_id = request.data['bill_id']
+        document_collection.update_one({'id': bill_id}, {'$set': {'claimed': True}})
+        patient_balance = user_collection.find_one({'id': patient_id})['balance']
+        user_collection.update_one({'id': patient_id}, {'$set': {'balance': int(patient_balance) + int(refund)}})
+        insurance_balance = org_collection.find_one({'id': insurance_id})['balance']
+        org_collection.update_one({'id': insurance_id}, {'$set': {'balance': int(insurance_balance) - int(refund)}})
+        return Response({'Success': 'Refund Claimed...'}, status=status.HTTP_200_OK)
 
 EXPIRY_TIME = 60 # seconds
 # This class returns the string needed to generate the key

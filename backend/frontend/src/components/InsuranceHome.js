@@ -16,7 +16,7 @@ function InsuranceHome({ User }) {
                     <div className='ROW ROW2'>
                         <Link to='/organisation/insurance/pateints' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagesstretcher.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>PATIENTS</div>
@@ -25,22 +25,22 @@ function InsuranceHome({ User }) {
                         </Link>
                         <Link to='/organisation/insurance/claims' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagespolicy.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/policy.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>CLAIMS</div>
                                 <div className='SUBHEADING'>View All Claims</div>
                             </div>
                         </Link>
-                        <Link to='/organisation/insurance/bills' className='COL'>
+                        {/* <Link to='/organisation/insurance/bills' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagesbill.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>BILLS</div>
                                 <div className='SUBHEADING'>View All Insurance Claim Bills</div>
                             </div>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ function HospitalsHome({ User }) {
                     <div className='ROW ROW2'>
                         <Link to='/organisation/hospitals/doctors' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagesstethoscope.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/stethoscope.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>DOCTORS</div>
@@ -25,7 +25,7 @@ function HospitalsHome({ User }) {
                         </Link>
                         <Link to='/organisation/hospitals/tests' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagesstretcher.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>SCANS & TESTS</div>
@@ -34,7 +34,7 @@ function HospitalsHome({ User }) {
                         </Link>
                         <Link to='/organisation/hospitals/bills' className='COL'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/imagesbill.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>BILLS</div>

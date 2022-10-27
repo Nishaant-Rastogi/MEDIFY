@@ -1,68 +1,76 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
-function customcard({ UserData }) {
+function customcard({ bills }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {UserData == null ? null : UserData.map((data) => (
+            {bills == null ? null : bills.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name:
+                                    Bill ID:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {data.name}
+                                    {data.id}
+                                </div>
+                            </div>
+                            <div className="DATA ACCOUNT">
+                                <div className="HEAD HEAD1">
+                                    Bill Type:
+                                </div>
+                                <div className="VALUE NAME">
+                                    Test Result Bill
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Aadhar No:
+                                    Sender ID:
                                 </div>
                                 <div className="VALUE">
-                                    {data.aadharNo}
+                                    {data.patient_id}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Type:
+                                    Sender Name:
                                 </div>
                                 <div className="VALUE">
-                                    {data.userType}
+                                    {data.patient_name}
                                 </div>
 
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Address :
+                                    Insurance ID :
                                 </div>
                                 <div className="VALUE">
-                                    {data.address}
+                                    {data.insurance_id}
                                 </div>
                             </div>
                             <div className="DATA TO">
                                 <div className="HEAD">
-                                    Phone No :
+                                    Insurance Name :
                                 </div>
                                 <div className="VALUE">
-                                    {data.phoneNo}
+                                    {data.insurance_name}
                                 </div>
                             </div>
                             <div className="DATA DATE">
                                 <div className="HEAD">
-                                    Email :
+                                    Amount :
                                 </div>
                                 <div className="VALUE">
-                                    {data.email}
+                                    {data.amount}
                                 </div>
                             </div>
                         </div>
@@ -78,19 +86,19 @@ function customcard({ UserData }) {
 
 
 
-function HospitalBillsCard({ UserData }) {
+function HospitalBillsCard({ bills }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <>
-            {UserData == null ?
+            {bills == null ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Bills</div>
                     </div>
-                </div> : customcard({ UserData })}
+                </div> : customcard({ bills })}
         </>
     );
 }

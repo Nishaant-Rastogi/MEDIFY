@@ -5,13 +5,33 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const HospitalBills = () => {
+    const [bills, setBills] = useState([]);
+
+    let handleBills = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: localStorage.getItem('organisation')
+        }
+        fetch('/api/get-hospital-bills/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setBills(data);
+            });
+    }
+
+
+    useEffect(() => {
+        handleBills();
+    }, [])
     return (
         <div>
             <Navbar />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <HospitalBillsCard />
+                        <HospitalBillsCard bills={bills} />
                     </div>
                 </div>
             </div>

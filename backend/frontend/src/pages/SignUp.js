@@ -5,25 +5,38 @@ import '../styles/signup.css'
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
     let navigate = useNavigate()
-    const [userType, setUserType] = useState('patient')
-    const [orgType, setOrgType] = useState('hospital')
+    const [userType, setUserType] = useState('P')
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: e.target.name.value,
-                dob: e.target.dob.value,
-                gender: e.target.gender.value,
-                address: e.target.address.value,
-                phoneNo: e.target.phoneNo.value,
-                aadharNo: e.target.aadharNo.value,
-                userType: e.target.userType.value,
-                email: e.target.email.value,
-                password: e.target.user_password.value,
-            }),
+            body: e.target.userType.value === 'P' ?
+                JSON.stringify({
+                    name: e.target.name.value,
+                    dob: e.target.dob.value,
+                    gender: e.target.gender.value,
+                    address: e.target.address.value,
+                    phoneNo: e.target.phoneNo.value,
+                    aadharNo: e.target.aadharNo.value,
+                    userType: 'P',
+                    email: e.target.email.value,
+                    password: e.target.user_password.value,
+                }) :
+                JSON.stringify({
+                    name: e.target.name.value,
+                    dob: e.target.dob.value,
+                    gender: e.target.gender.value,
+                    address: e.target.address.value,
+                    phoneNo: e.target.phoneNo.value,
+                    aadharNo: e.target.aadharNo.value,
+                    userType: 'D',
+                    email: e.target.email.value,
+                    password: e.target.user_password.value,
+                    specialization: e.target.specialization.value,
+                    experience: e.target.experience.value,
+                }),
         };
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
@@ -113,12 +126,30 @@ const SignUp = () => {
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
-                                <select defaultValue={"DEFAULT"} className="form-control" name="userType">
+                                <select defaultValue={"DEFAULT"} onChange={(e) => { console.log(e.target.value); setUserType(e.target.value) }} className="form-control" name="userType">
                                     <option value="DEFAULT" disabled>Select Type of User</option>
                                     <option value="P">Patient</option>
                                     <option value="D">Doctor</option>
                                 </select>
                             </div>
+                            {userType === 'D' ?
+                                <div style={{ display: 'flex' }}>
+                                    <div className="form-group" style={{ marginRight: '20px' }}>
+                                        <label html="exampleInputid1">Specialization</label><br></br>
+                                        <select defaultValue={"DEFAULT"} className="form-control" name="specialization">
+                                            <option value="DEFAULT" disabled>Select Specialization</option>
+                                            <option value="O">Ortho</option>
+                                            <option value="N">Neuro</option>
+                                            <option value="C">Cardio</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <label html="exampleInputid1">Experience</label>
+                                        <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" />
+                                    </div>
+                                </div>
+                                : null
+                            }
                             <div className="form-group">
                                 <label html="exampleInputid1">Email</label>
                                 <input type="id" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" />
