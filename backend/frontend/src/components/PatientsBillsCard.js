@@ -109,7 +109,7 @@ function PatientsBillsCard({ bills }) {
     let id = 0;
     return (
         <>
-            {bills === [] ?
+            {bills.length <= 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Bills</div>
