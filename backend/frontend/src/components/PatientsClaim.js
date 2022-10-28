@@ -29,6 +29,8 @@ const PatientsClaim = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                navigate(-1)
+                window.location.reload()
             });
     }
 

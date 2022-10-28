@@ -48,4 +48,5 @@ urlpatterns = [
     path('send-pharmacy-bill/', CreatePharmacyBillView.as_view(), name="send-pharmacy-bill"),
     path('send-test-result-bill/', CreateTestResultBillView.as_view(), name="send-test-bill"),
     path('claim-refund/', ClaimRefundView.as_view(), name="claim-refund"),
+    path('get-prescriptions-buy-medicine/', GetPrescriptionBuyMedicineView.as_view(), name="get-prescriptions-buy-medicine"),
 ]

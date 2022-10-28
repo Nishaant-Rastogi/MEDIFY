@@ -82,8 +82,9 @@ class Consultation(models.Model):
     patient_email = models.CharField(max_length=200)
     problem = models.CharField(max_length=200)
     docType = models.CharField(default='C', max_length=1)
-    amount = models.IntegerField(default=1000)
+    amount = models.IntegerField(default=100)
     visible = models.BooleanField(default=True)
+    prescribed = models.BooleanField(default=False)
     def __str__(self):
         return self.id
 
@@ -100,6 +101,7 @@ class Prescription(models.Model):
     test = models.CharField(max_length=20, default='None')
     docType = models.CharField(default='P', max_length=1)
     visible = models.BooleanField(default=True)
+    medicine_bought = models.BooleanField(default=False)
     def __str__(self):
         return self.consultation_id
 
@@ -134,7 +136,6 @@ class ConsultationBill(models.Model):
     docType = models.CharField(default='BC', max_length=1)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
-    prescribed = models.BooleanField(default=False)
     def __str__(self):
         return self.consultation_id
 
@@ -147,7 +148,7 @@ class TestResultBill(models.Model):
     hospital_name = models.CharField(max_length=200)
     # medicine = models.CharField(max_length=20, default='None')
     test = models.CharField(max_length=20, default='None')
-    amount = models.IntegerField(default=1000)
+    amount = models.IntegerField(default=100)
     insurance_id = models.CharField(max_length=11, default='None')
     insurance_name = models.CharField(max_length=200, default='None')
     docType = models.CharField(default='BT', max_length=1)
@@ -165,10 +166,10 @@ class PharmacyBill(models.Model):
     pharmacy_name = models.CharField(max_length=200)
     medicine = models.CharField(max_length=20, default='None')
     # test = models.CharField(max_length=20, default='None')
-    amount = models.IntegerField(default=1000)
+    amount = models.IntegerField(default=100)
     insurance_id = models.CharField(max_length=11, default='None')
     insurance_name = models.CharField(max_length=200, default='None')
-    docType = models.CharField(default='BP  ', max_length=1)
+    docType = models.CharField(default='BP', max_length=1)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
     def __str__(self):

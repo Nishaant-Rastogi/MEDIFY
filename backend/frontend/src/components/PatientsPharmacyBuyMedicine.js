@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 
 
@@ -10,22 +10,32 @@ const PharmacyBuyMedicine = () => {
   const [insurance, setInsurance] = useState({});
   const [insurances, setInsurances] = useState([]);
   const location = useLocation()
+  const navigate = useNavigate()
   const pharmacy = { id: location.state.pharmacy_id, name: location.state.pharmacy_name }
 
-  let handleBuyMedicine = () => {
+  let handleBuyMedicine = (e) => {
+    e.preventDefault()
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         prescription_id: prescription.id,
-        pharmacy_id: pharmacy.id
+        pharmacy_id: pharmacy.id,
+        pharmacy_name: pharmacy.name,
+        insurance_id: insurance.id,
+        insurance_name: insurance.name,
+        patient_id: user.id,
+        patient_name: user.name,
+        amount: e.target.amount.value,
+        medicine: e.target.medicine.value,
       })
     }
-    fetch('/api/get-prescriptions/', requestOptions)
+    fetch('/api/send-pharmacy-bill/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setPrescriptions(data);
+        navigate(-1)
+        window.location.reload()
       });
   }
 
@@ -50,7 +60,7 @@ const PharmacyBuyMedicine = () => {
       headers: { 'Content-Type': 'application/json' },
       body: localStorage.getItem('user')
     }
-    fetch('/api/get-prescriptions/', requestOptions)
+    fetch('/api/get-prescriptions-buy-medicine/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -85,13 +95,9 @@ const PharmacyBuyMedicine = () => {
         <div className='PROFILECONTAINER'>
           <div className='PROFILEHEADER'>
             <div className="USER_DETAILS">
-              <div className="USER_PROFILE_IMAGE">
-                <img className="img" src="/static/images/user.png" alt="/" />
-              </div>
               <div className="USER_DETAILS_DATA">
                 BUY MEDICINE
               </div>
-
             </div>
             <hr style={{ width: '600px' }} />
             <form onSubmit={handleBuyMedicine}>
@@ -116,7 +122,7 @@ const PharmacyBuyMedicine = () => {
                 </select>
               </div>
               {prescription ? <div>Medicine
-                <input defaultValue={prescription.medicine} type="text" className="form-control" name="test" aria-describedby="idHelp" disabled />
+                <input defaultValue={prescription.medicine} type="text" className="form-control" name="medicine" aria-describedby="idHelp" disabled />
               </div> : null}
               <div>Amount:
                 <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />

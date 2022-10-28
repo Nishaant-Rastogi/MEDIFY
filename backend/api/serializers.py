@@ -83,4 +83,4 @@ class CreateTestResultBillSerializer(serializers.ModelSerializer):
 class CreatePharmacyBillSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyBill
-        fields = ('prescription_id', 'patient_id', 'patient_name', 'amount', 'pharmacy_id', 'pharmacy_name', 'insurance_id', 'insurance_name')
+        fields = ('prescription_id', 'patient_id', 'patient_name', 'amount', 'pharmacy_id', 'pharmacy_name', 'insurance_id', 'insurance_name', 'medicine')
