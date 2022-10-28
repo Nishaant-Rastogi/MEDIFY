@@ -1,10 +1,43 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/home.css'
+import emailjs from '@emailjs/browser'
 
 const Login = () => {
     const [loginAs, setLoginAs] = useState(1)
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    let otp = ''
+
+    let generateOTP = () => {
+        var digits = '0123456789';
+        let OTP = '';
+        for (let i = 0; i < 4; i++) {
+            OTP += digits[Math.floor(Math.random() * 10)];
+        }
+        return OTP;
+    }
+
+    let sendEmail = (e) => {
+        e.preventDefault()
+        // console.log(e.target.email.value);
+        otp = generateOTP();
+        console.log(otp);
+        emailjs.send(
+            "service_fq04boo",
+            "template_50ai34b",
+            {
+                from_name: "MEDIFY",
+                to_name: name,
+                message: otp,
+                to_email: email,
+            },
+            'user_LaY6RXGTYd7nadYRQtJ3W'
+        )
+    }
+
+
     let handleLoginAdmin = (e) => {
         e.preventDefault()
         const requestOptions = {
@@ -37,15 +70,18 @@ const Login = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                setEmail(data.email);
+                setName(data.name);
                 localStorage.setItem('user', JSON.stringify({ id: data.id }));
                 console.log(localStorage.getItem('user'));
+                sendEmail(e);
                 if (data.userType === 'P') {
                     console.log("patient");
-                    navigate('/user/patients/home');
+                    navigate('/verification', { state: { otp: otp, type: 'P' } });
                 }
                 else if (data.userType === 'D') {
                     console.log("doctor");
-                    navigate('/user/doctors/home');
+                    navigate('/verification', { state: { otp: otp, type: 'D' } });
                 }
             })
     }
@@ -63,11 +99,14 @@ const Login = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                setEmail(data.email);
+                setName(data.name);
+                sendEmail(e);
                 localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
                 console.log(localStorage.getItem('organisation'));
-                if (data.orgType === 'H') navigate('/organisation/hospitals/home');
-                else if (data.orgType === 'I') navigate('/organisation/insurance/home');
-                else if (data.orgType === 'P') navigate('/organisation/pharmacy/home');
+                if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
+                else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
+                else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
             })
     }
     useEffect(() => {

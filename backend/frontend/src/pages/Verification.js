@@ -1,5 +1,5 @@
-import React, { useState, ReactDOM } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, ReactDOM, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
 
 // const accountSid = 'ACf118c042529876e027f078083bc9d83a';
@@ -8,36 +8,45 @@ import '../styles/verification.css';
 // console.log(accountSid, authToken);
 // const client = require('twilio')(accountSid, authToken);
 
-const Verification = (props) => {
+const Verification = () => {
     const location = useLocation();
-    const [state, setState] = useState({
-        phone: "",
-        otp: ""
-    });
+    const navigate = useNavigate();
+
+    const OTP = location.state.otp;
+    const type = location.state.type;
+    const orgType = location.state.orgType;
+    const signup = location.state.signup;
 
     let handleOTP = (e) => {
-        e.preventDefault();
-        const requiredOptions = {
-            method: 'GET',
-            header: { 'Content-Type': 'application/json' },
-            body: {}
+        e.preventDefault()
+        const code = e.target.one.value + e.target.two.value + e.target.three.value + e.target.four.value;
+        console.log(code)
+        console.log(OTP)
+        console.log(type)
+
+        if (signup) {
+            navigate('/');
+            return;
         }
-        fetch('get-otp/', requiredOptions)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setState({ phone: data.phone, otp: data.otp })
-            })
+
+        if (code === OTP) {
+            console.log("Verified");
+            if (type && type === 'P') {
+                navigate('/user/patients/home');
+            } else if (type && type === 'D') {
+                navigate('/user/doctors/home');
+            } else if (orgType && orgType === 'P') {
+                navigate('/organisation/pharmacy/home');
+            } else if (orgType && orgType === 'H') {
+                navigate('/organisation/hospitals/home');
+            } else if (orgType && orgType === 'I') {
+                navigate('/organisation/insurance/home');
+            }
+        } else {
+            alert('WRONG OTP! PLEASE RETRY')
+        }
+
     }
-    // client.messages
-    //     .create({
-    //         body: state.otp,
-    //         from: '+13237161729',
-    //         to: location.state.phone
-    //     })
-    //     .then(message => console.log(message.sid));
-
-
     const digitValidate = (e) => {
         console.log(e.target.value);
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
@@ -55,7 +64,6 @@ const Verification = (props) => {
         }
     }
 
-
     return (
         <div className='VERIFICATION'>
             <div className="container">
@@ -67,16 +75,15 @@ const Verification = (props) => {
                                     Verify OTP
                                 </div>
 
-                                <form action="" className="mt-5">
-                                    <input className="otp" id='1' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(2)} maxLength={1} />
-                                    <input className="otp" id='2' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(3)} maxLength={1} />
-                                    <input className="otp" id='3' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(4)} maxLength={1} />
-                                    <input className="otp" id='4' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(5)} maxLength={1} />
+                                <form onSubmit={handleOTP} action="" className="mt-5">
+                                    <input className="otp" style={{ marginRight: '3px' }} name='one' id='1' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(2)} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} name='two' id='2' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(3)} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} name='three' id='3' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(4)} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} name='four' id='4' type="text" onChange={(e) => digitValidate(e)} maxLength={1} />
+                                    <hr className="mt-4" />
+                                    <p>OTP sent to your email</p>
+                                    <button type='submit' id='verify' className='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
                                 </form>
-                                <hr className="mt-4" />
-
-                                <button className='btn btn-primary btn-block mt-4 mb-4 customBtn' onClick={handleOTP}>Generate OTP</button>
-                                <button className='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
                             </div>
                         </div>
                     </div>
@@ -88,9 +95,10 @@ const Verification = (props) => {
                         <div className="row">
                             <div className="col-sm-12 mt-5 bgWhite">
                                 <div className="title">
-                                    Verify OTP
+                                    Instruction
                                 </div>
                                 <hr className="mt-4" />
+                                <p>If you are a new user, wait for Admin approval before Login.</p>
                             </div>
                         </div>
                     </div>

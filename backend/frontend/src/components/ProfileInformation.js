@@ -123,7 +123,7 @@ const ProfileInformation = () => {
                                         ID : {UserData.id}
                                     </div>
                                     <div className="USER_DETAILS_PHONE">
-                                        {UserData.UserType === 'P' ? 'Patient' : UserData.UserType === 'D' ? 'Doctor' : 'Please Login'}
+                                        {UserData.userType === 'P' ? 'Patient' : UserData.userType === 'D' ? 'Doctor' : 'Please Login'}
                                     </div>
                                 </div>
 
