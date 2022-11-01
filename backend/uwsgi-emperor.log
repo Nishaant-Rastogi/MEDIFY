@@ -1,0 +1,2241 @@
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 16:07:19 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+bind(): No such file or directory [core/socket.c line 230]
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 16:08:45 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+bind(): No such file or directory [core/socket.c line 230]
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 16:09:26 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x558c3d7c14d0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x558c3d7c14d0 pid: 1679018 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1679018)
+spawned uWSGI worker 1 (pid: 1679030, cores: 1)
+spawned uWSGI worker 2 (pid: 1679031, cores: 1)
+spawned uWSGI worker 3 (pid: 1679032, cores: 1)
+spawned uWSGI worker 4 (pid: 1679033, cores: 1)
+spawned uWSGI worker 5 (pid: 1679034, cores: 1)
+spawned uWSGI worker 6 (pid: 1679035, cores: 1)
+spawned uWSGI worker 7 (pid: 1679036, cores: 1)
+spawned uWSGI worker 8 (pid: 1679037, cores: 1)
+spawned uWSGI worker 9 (pid: 1679038, cores: 1)
+spawned uWSGI worker 10 (pid: 1679039, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:13:57 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x555b928ce580
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x555b928ce580 pid: 1690836 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1690836)
+spawned uWSGI worker 1 (pid: 1690840, cores: 1)
+spawned uWSGI worker 2 (pid: 1690841, cores: 1)
+spawned uWSGI worker 3 (pid: 1690842, cores: 1)
+spawned uWSGI worker 4 (pid: 1690843, cores: 1)
+spawned uWSGI worker 5 (pid: 1690844, cores: 1)
+spawned uWSGI worker 6 (pid: 1690845, cores: 1)
+spawned uWSGI worker 7 (pid: 1690846, cores: 1)
+spawned uWSGI worker 8 (pid: 1690847, cores: 1)
+spawned uWSGI worker 9 (pid: 1690848, cores: 1)
+spawned uWSGI worker 10 (pid: 1690849, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:20:04 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55eb93c014b0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55eb93c014b0 pid: 1691405 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1691405)
+spawned uWSGI worker 1 (pid: 1691407, cores: 1)
+spawned uWSGI worker 2 (pid: 1691408, cores: 1)
+spawned uWSGI worker 3 (pid: 1691409, cores: 1)
+spawned uWSGI worker 4 (pid: 1691410, cores: 1)
+spawned uWSGI worker 5 (pid: 1691411, cores: 1)
+spawned uWSGI worker 6 (pid: 1691412, cores: 1)
+spawned uWSGI worker 7 (pid: 1691413, cores: 1)
+spawned uWSGI worker 8 (pid: 1691414, cores: 1)
+spawned uWSGI worker 9 (pid: 1691415, cores: 1)
+spawned uWSGI worker 10 (pid: 1691416, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:20:41 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a285c324b0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55a285c324b0 pid: 1691591 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1691591)
+spawned uWSGI worker 1 (pid: 1691611, cores: 1)
+spawned uWSGI worker 2 (pid: 1691612, cores: 1)
+spawned uWSGI worker 3 (pid: 1691613, cores: 1)
+spawned uWSGI worker 4 (pid: 1691614, cores: 1)
+spawned uWSGI worker 5 (pid: 1691615, cores: 1)
+spawned uWSGI worker 6 (pid: 1691616, cores: 1)
+spawned uWSGI worker 7 (pid: 1691617, cores: 1)
+spawned uWSGI worker 8 (pid: 1691618, cores: 1)
+spawned uWSGI worker 9 (pid: 1691619, cores: 1)
+spawned uWSGI worker 10 (pid: 1691620, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:27:21 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a1fa88c4d0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55a1fa88c4d0 pid: 1693172 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1693172)
+spawned uWSGI worker 1 (pid: 1693174, cores: 1)
+spawned uWSGI worker 2 (pid: 1693175, cores: 1)
+spawned uWSGI worker 3 (pid: 1693176, cores: 1)
+spawned uWSGI worker 4 (pid: 1693177, cores: 1)
+spawned uWSGI worker 5 (pid: 1693178, cores: 1)
+spawned uWSGI worker 6 (pid: 1693179, cores: 1)
+spawned uWSGI worker 7 (pid: 1693180, cores: 1)
+spawned uWSGI worker 8 (pid: 1693181, cores: 1)
+spawned uWSGI worker 9 (pid: 1693182, cores: 1)
+spawned uWSGI worker 10 (pid: 1693183, cores: 1)
+[pid: 1693181|app: 0|req: 1/1] 192.168.1.99 () {56 vars in 1045 bytes} [Fri Oct 28 18:27:47 2022] GET / => generated 1868 bytes in 1814 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1693181|app: 0|req: 2/2] 192.168.1.99 () {56 vars in 1006 bytes} [Fri Oct 28 18:28:12 2022] GET / => generated 1868 bytes in 3 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1693183|app: 0|req: 1/3] 192.168.1.99 () {54 vars in 937 bytes} [Fri Oct 28 18:28:12 2022] GET /favicon.ico => generated 179 bytes in 620 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 1693181|app: 0|req: 3/4] 192.168.1.99 () {40 vars in 751 bytes} [Fri Oct 28 18:32:46 2022] GET / => generated 1868 bytes in 4 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1693183|app: 0|req: 2/5] 192.168.1.99 () {40 vars in 703 bytes} [Fri Oct 28 18:32:46 2022] GET /favicon.ico => generated 179 bytes in 2 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 1693181|app: 0|req: 4/6] 192.168.1.99 () {42 vars in 782 bytes} [Fri Oct 28 18:32:52 2022] GET / => generated 1868 bytes in 3 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1693181|app: 0|req: 5/7] 192.168.1.99 () {40 vars in 768 bytes} [Fri Oct 28 18:33:56 2022] GET / => generated 1868 bytes in 9 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:52:12 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55e5878a24d0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55e5878a24d0 pid: 1695182 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1695182)
+spawned uWSGI worker 1 (pid: 1695185, cores: 1)
+spawned uWSGI worker 2 (pid: 1695186, cores: 1)
+spawned uWSGI worker 3 (pid: 1695187, cores: 1)
+spawned uWSGI worker 4 (pid: 1695189, cores: 1)
+spawned uWSGI worker 5 (pid: 1695190, cores: 1)
+spawned uWSGI worker 6 (pid: 1695191, cores: 1)
+spawned uWSGI worker 7 (pid: 1695192, cores: 1)
+spawned uWSGI worker 8 (pid: 1695193, cores: 1)
+spawned uWSGI worker 9 (pid: 1695194, cores: 1)
+spawned uWSGI worker 10 (pid: 1695195, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 18:57:21 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55d4a58204b0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1695722)
+spawned uWSGI worker 1 (pid: 1695723, cores: 1)
+spawned uWSGI worker 2 (pid: 1695724, cores: 1)
+spawned uWSGI worker 3 (pid: 1695725, cores: 1)
+spawned uWSGI worker 4 (pid: 1695726, cores: 1)
+spawned uWSGI worker 5 (pid: 1695727, cores: 1)
+spawned uWSGI worker 6 (pid: 1695728, cores: 1)
+spawned uWSGI worker 7 (pid: 1695729, cores: 1)
+spawned uWSGI worker 8 (pid: 1695730, cores: 1)
+spawned uWSGI worker 9 (pid: 1695731, cores: 1)
+spawned uWSGI worker 10 (pid: 1695732, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 19:32:43 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+chown(): Operation not permitted [core/utils.c line 2657]
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 19:44:42 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+bind(): Permission denied [core/socket.c line 230]
+*** Starting uWSGI 2.0.21 (64bit) on [Fri Oct 28 19:47:19 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+chown(): Operation not permitted [core/utils.c line 2657]
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 08:43:15 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5636305b54f0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1723346)
+spawned uWSGI worker 1 (pid: 1723348, cores: 1)
+spawned uWSGI worker 2 (pid: 1723349, cores: 1)
+spawned uWSGI worker 3 (pid: 1723350, cores: 1)
+spawned uWSGI worker 4 (pid: 1723351, cores: 1)
+spawned uWSGI worker 5 (pid: 1723352, cores: 1)
+spawned uWSGI worker 6 (pid: 1723353, cores: 1)
+spawned uWSGI worker 7 (pid: 1723354, cores: 1)
+spawned uWSGI worker 8 (pid: 1723355, cores: 1)
+spawned uWSGI worker 9 (pid: 1723356, cores: 1)
+spawned uWSGI worker 10 (pid: 1723357, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 08:44:14 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56351c9eb490
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1723514)
+spawned uWSGI worker 1 (pid: 1723521, cores: 1)
+spawned uWSGI worker 2 (pid: 1723522, cores: 1)
+spawned uWSGI worker 3 (pid: 1723523, cores: 1)
+spawned uWSGI worker 4 (pid: 1723524, cores: 1)
+spawned uWSGI worker 5 (pid: 1723525, cores: 1)
+spawned uWSGI worker 6 (pid: 1723526, cores: 1)
+spawned uWSGI worker 7 (pid: 1723527, cores: 1)
+spawned uWSGI worker 8 (pid: 1723528, cores: 1)
+spawned uWSGI worker 9 (pid: 1723529, cores: 1)
+spawned uWSGI worker 10 (pid: 1723530, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 08:55:54 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address unix:///fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a73e01e750
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1724519)
+spawned uWSGI worker 1 (pid: 1724520, cores: 1)
+spawned uWSGI worker 2 (pid: 1724521, cores: 1)
+spawned uWSGI worker 3 (pid: 1724522, cores: 1)
+spawned uWSGI worker 4 (pid: 1724523, cores: 1)
+spawned uWSGI worker 5 (pid: 1724524, cores: 1)
+spawned uWSGI worker 6 (pid: 1724525, cores: 1)
+spawned uWSGI worker 7 (pid: 1724526, cores: 1)
+spawned uWSGI worker 8 (pid: 1724527, cores: 1)
+spawned uWSGI worker 9 (pid: 1724528, cores: 1)
+spawned uWSGI worker 10 (pid: 1724529, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:23:06 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address unix:///fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55cdf0dd25c0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1728039)
+spawned uWSGI worker 1 (pid: 1728049, cores: 1)
+spawned uWSGI worker 2 (pid: 1728050, cores: 1)
+spawned uWSGI worker 3 (pid: 1728051, cores: 1)
+spawned uWSGI worker 4 (pid: 1728052, cores: 1)
+spawned uWSGI worker 5 (pid: 1728053, cores: 1)
+spawned uWSGI worker 6 (pid: 1728054, cores: 1)
+spawned uWSGI worker 7 (pid: 1728055, cores: 1)
+spawned uWSGI worker 8 (pid: 1728056, cores: 1)
+spawned uWSGI worker 9 (pid: 1728057, cores: 1)
+spawned uWSGI worker 10 (pid: 1728058, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:24:27 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address unix:///fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x561fb77b85c0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1728463)
+spawned uWSGI worker 1 (pid: 1728467, cores: 1)
+spawned uWSGI worker 2 (pid: 1728468, cores: 1)
+spawned uWSGI worker 3 (pid: 1728469, cores: 1)
+spawned uWSGI worker 4 (pid: 1728470, cores: 1)
+spawned uWSGI worker 5 (pid: 1728471, cores: 1)
+spawned uWSGI worker 6 (pid: 1728472, cores: 1)
+spawned uWSGI worker 7 (pid: 1728473, cores: 1)
+spawned uWSGI worker 8 (pid: 1728474, cores: 1)
+spawned uWSGI worker 9 (pid: 1728475, cores: 1)
+spawned uWSGI worker 10 (pid: 1728476, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:28:50 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55fd7fc8a4f0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1729001)
+spawned uWSGI worker 1 (pid: 1729002, cores: 1)
+spawned uWSGI worker 2 (pid: 1729003, cores: 1)
+spawned uWSGI worker 3 (pid: 1729004, cores: 1)
+spawned uWSGI worker 4 (pid: 1729005, cores: 1)
+spawned uWSGI worker 5 (pid: 1729006, cores: 1)
+spawned uWSGI worker 6 (pid: 1729007, cores: 1)
+spawned uWSGI worker 7 (pid: 1729008, cores: 1)
+spawned uWSGI worker 8 (pid: 1729009, cores: 1)
+spawned uWSGI worker 9 (pid: 1729010, cores: 1)
+spawned uWSGI worker 10 (pid: 1729011, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:30:16 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x562f9f91d4f0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1729148)
+spawned uWSGI worker 1 (pid: 1729149, cores: 1)
+spawned uWSGI worker 2 (pid: 1729150, cores: 1)
+spawned uWSGI worker 3 (pid: 1729151, cores: 1)
+spawned uWSGI worker 4 (pid: 1729152, cores: 1)
+spawned uWSGI worker 5 (pid: 1729153, cores: 1)
+spawned uWSGI worker 6 (pid: 1729154, cores: 1)
+spawned uWSGI worker 7 (pid: 1729155, cores: 1)
+spawned uWSGI worker 8 (pid: 1729156, cores: 1)
+spawned uWSGI worker 9 (pid: 1729157, cores: 1)
+spawned uWSGI worker 10 (pid: 1729158, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:31:31 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a5621c7500
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1729216)
+spawned uWSGI worker 1 (pid: 1729217, cores: 1)
+spawned uWSGI worker 2 (pid: 1729218, cores: 1)
+spawned uWSGI worker 3 (pid: 1729219, cores: 1)
+spawned uWSGI worker 4 (pid: 1729220, cores: 1)
+spawned uWSGI worker 5 (pid: 1729221, cores: 1)
+spawned uWSGI worker 6 (pid: 1729222, cores: 1)
+spawned uWSGI worker 7 (pid: 1729223, cores: 1)
+spawned uWSGI worker 8 (pid: 1729224, cores: 1)
+spawned uWSGI worker 9 (pid: 1729225, cores: 1)
+spawned uWSGI worker 10 (pid: 1729226, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:32:16 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56196dc4d500
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1729320)
+spawned uWSGI worker 1 (pid: 1729321, cores: 1)
+spawned uWSGI worker 2 (pid: 1729322, cores: 1)
+spawned uWSGI worker 3 (pid: 1729323, cores: 1)
+spawned uWSGI worker 4 (pid: 1729324, cores: 1)
+spawned uWSGI worker 5 (pid: 1729325, cores: 1)
+spawned uWSGI worker 6 (pid: 1729326, cores: 1)
+spawned uWSGI worker 7 (pid: 1729327, cores: 1)
+spawned uWSGI worker 8 (pid: 1729328, cores: 1)
+spawned uWSGI worker 9 (pid: 1729329, cores: 1)
+spawned uWSGI worker 10 (pid: 1729330, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/1] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 09:32:24 2022] GET / => generated 21 bytes in 3 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729328|app: -1|req: -1/2] 192.168.1.99 () {54 vars in 959 bytes} [Sat Oct 29 09:32:24 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/3] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 09:32:25 2022] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729330|app: -1|req: -1/4] 192.168.1.99 () {54 vars in 959 bytes} [Sat Oct 29 09:32:25 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/5] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 09:32:25 2022] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/6] 192.168.1.99 () {54 vars in 959 bytes} [Sat Oct 29 09:32:25 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729328|app: -1|req: -1/7] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 09:32:26 2022] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/8] 192.168.1.99 () {54 vars in 959 bytes} [Sat Oct 29 09:32:26 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729324|app: -1|req: -1/9] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 09:32:26 2022] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1729323|app: -1|req: -1/10] 192.168.1.99 () {54 vars in 959 bytes} [Sat Oct 29 09:32:26 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:32:49 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5598328414f0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+ModuleNotFoundError: No module named '/fcs_project_final/FCS_Project/backend/backend'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1729371)
+spawned uWSGI worker 1 (pid: 1729372, cores: 1)
+spawned uWSGI worker 2 (pid: 1729373, cores: 1)
+spawned uWSGI worker 3 (pid: 1729374, cores: 1)
+spawned uWSGI worker 4 (pid: 1729375, cores: 1)
+spawned uWSGI worker 5 (pid: 1729376, cores: 1)
+spawned uWSGI worker 6 (pid: 1729377, cores: 1)
+spawned uWSGI worker 7 (pid: 1729378, cores: 1)
+spawned uWSGI worker 8 (pid: 1729379, cores: 1)
+spawned uWSGI worker 9 (pid: 1729380, cores: 1)
+spawned uWSGI worker 10 (pid: 1729381, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:49:00 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /fcs_project_final/FCS_Project/backend
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x556e8ebcc4b0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x556e8ebcc4b0 pid: 1731385 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1731385)
+spawned uWSGI worker 1 (pid: 1731387, cores: 1)
+spawned uWSGI worker 2 (pid: 1731388, cores: 1)
+spawned uWSGI worker 3 (pid: 1731389, cores: 1)
+spawned uWSGI worker 4 (pid: 1731390, cores: 1)
+spawned uWSGI worker 5 (pid: 1731391, cores: 1)
+spawned uWSGI worker 6 (pid: 1731392, cores: 1)
+spawned uWSGI worker 7 (pid: 1731393, cores: 1)
+spawned uWSGI worker 8 (pid: 1731394, cores: 1)
+spawned uWSGI worker 9 (pid: 1731395, cores: 1)
+spawned uWSGI worker 10 (pid: 1731396, cores: 1)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+Sat Oct 29 09:49:29 2022 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request / (ip 192.168.1.99) !!!
+Sat Oct 29 09:49:29 2022 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET / (192.168.1.99)
+OSError: OSError: write error
+OSError: write errorwrite error
+OSError: OSError: write error
+[pid: 1731388|app: 0|req: 1/2] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:20 2022] GET / => generated 0 bytes in 9474 msecs (HTTP/1.1 500) 7 headers in 0 bytes (0 switches on core 0)
+OSError: write error
+[pid: 1731387|app: 0|req: 1/4] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:22 2022] GET / => generated 0 bytes in 7074 msecs (HTTP/1.1 500) 7 headers in 0 bytes (0 switches on core 0)
+OSError: 
+[pid: 1731392|app: 0|req: 1/5] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:14 2022] GET / => generated 0 bytes in 15160 msecs (HTTP/1.1 500) 7 headers in 0 bytes (1 switches on core 0)
+[pid: 1731393|app: 0|req: 1/1] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:20 2022] GET / => generated 0 bytes in 9824 msecs (HTTP/1.1 500) 7 headers in 0 bytes (0 switches on core 0)
+write error
+[pid: 1731395|app: 0|req: 1/6] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:15 2022] GET / => generated 0 bytes in 14022 msecs (HTTP/1.1 500) 7 headers in 0 bytes (1 switches on core 0)
+[pid: 1731396|app: 0|req: 1/3] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:17 2022] GET / => generated 0 bytes in 12143 msecs (HTTP/1.1 500) 7 headers in 0 bytes (1 switches on core 0)
+write error
+[pid: 1731391|app: 0|req: 1/7] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:18 2022] GET / => generated 0 bytes in 11240 msecs (HTTP/1.1 500) 7 headers in 0 bytes (1 switches on core 0)
+OSError: write errorOSErrorOSError: 
+[pid: 1731394|app: 0|req: 1/8] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:18 2022] GET / => generated 0 bytes in 11445 msecs (HTTP/1.1 500) 7 headers in 0 bytes (0 switches on core 0)
+: write errorwrite error
+
+[pid: 1731390|app: 0|req: 1/9] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:20 2022] GET / => generated 0 bytes in 9733 msecs (HTTP/1.1 500) 7 headers in 0 bytes (0 switches on core 0)
+[pid: 1731389|app: 0|req: 1/10] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 09:49:19 2022] GET / => generated 0 bytes in 9981 msecs (HTTP/1.1 500) 7 headers in 0 bytes (1 switches on core 0)
+[pid: 1731396|app: 0|req: 2/11] 192.168.1.99 () {56 vars in 989 bytes} [Sat Oct 29 09:49:30 2022] GET / => generated 1868 bytes in 24 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1731392|app: 0|req: 2/12] 192.168.1.99 () {54 vars in 920 bytes} [Sat Oct 29 09:49:31 2022] GET /favicon.ico => generated 179 bytes in 16 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 1731392|app: 0|req: 3/13] 192.168.1.99 () {50 vars in 760 bytes} [Sat Oct 29 09:50:45 2022] GET / => generated 1868 bytes in 16 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1731392|app: 0|req: 4/14] 192.168.1.99 () {48 vars in 702 bytes} [Sat Oct 29 09:50:51 2022] GET /favicon.ico => generated 179 bytes in 2 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 1731392|app: 0|req: 5/15] 192.168.1.99 () {56 vars in 1025 bytes} [Sat Oct 29 09:52:44 2022] GET /user/patients/home => generated 1868 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+[pid: 1731392|app: 0|req: 6/16] 192.168.1.99 () {54 vars in 930 bytes} [Sat Oct 29 09:52:44 2022] GET /ad1.png => generated 179 bytes in 5 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 1731392|app: 0|req: 7/17] 192.168.1.99 () {54 vars in 944 bytes} [Sat Oct 29 09:52:44 2022] GET /advertise2.png => generated 179 bytes in 1 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 1731389|app: 0|req: 2/18] 192.168.1.99 () {54 vars in 944 bytes} [Sat Oct 29 09:52:44 2022] GET /advertise3.png => generated 179 bytes in 13 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 09:57:00 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56255a951340
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x56255a951340 pid: 1731845 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1731845)
+spawned uWSGI worker 1 (pid: 1731867, cores: 1)
+spawned uWSGI worker 2 (pid: 1731868, cores: 1)
+spawned uWSGI worker 3 (pid: 1731869, cores: 1)
+spawned uWSGI worker 4 (pid: 1731870, cores: 1)
+spawned uWSGI worker 5 (pid: 1731871, cores: 1)
+spawned uWSGI worker 6 (pid: 1731872, cores: 1)
+spawned uWSGI worker 7 (pid: 1731873, cores: 1)
+spawned uWSGI worker 8 (pid: 1731874, cores: 1)
+spawned uWSGI worker 9 (pid: 1731875, cores: 1)
+spawned uWSGI worker 10 (pid: 1731876, cores: 1)
+[pid: 1731872|app: 0|req: 1/1] 192.168.1.99 () {58 vars in 1052 bytes} [Sat Oct 29 09:57:08 2022] GET / => generated 1868 bytes in 1298 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 1731872|app: 0|req: 2/2] 192.168.1.99 () {56 vars in 967 bytes} [Sat Oct 29 09:57:09 2022] GET /favicon.ico => generated 179 bytes in 37 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 1731875|app: 0|req: 1/3] 192.168.1.99 () {56 vars in 1028 bytes} [Sat Oct 29 09:57:09 2022] GET / => generated 1868 bytes in 1193 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+SIGINT/SIGTERM received...killing workers...
+Sat Oct 29 09:57:16 2022 - received message 0 from emperor
+worker 6 buried after 1 seconds
+worker 1 buried after 5 seconds
+worker 3 buried after 5 seconds
+worker 5 buried after 5 seconds
+worker 7 buried after 5 seconds
+worker 9 buried after 5 seconds
+worker 10 buried after 5 seconds
+worker 2 buried after 6 seconds
+worker 4 buried after 6 seconds
+worker 8 buried after 7 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /fcs_project_final/FCS_Project/backend/backend.sock removed.
+*** Starting uWSGI 2.0.21 (64bit) on [Sat Oct 29 10:02:44 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5596d5961340
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x5596d5961340 pid: 1732400 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1732400)
+spawned uWSGI worker 1 (pid: 1732422, cores: 1)
+spawned uWSGI worker 2 (pid: 1732423, cores: 1)
+spawned uWSGI worker 3 (pid: 1732424, cores: 1)
+spawned uWSGI worker 4 (pid: 1732425, cores: 1)
+spawned uWSGI worker 5 (pid: 1732426, cores: 1)
+spawned uWSGI worker 6 (pid: 1732427, cores: 1)
+spawned uWSGI worker 7 (pid: 1732428, cores: 1)
+spawned uWSGI worker 8 (pid: 1732429, cores: 1)
+spawned uWSGI worker 9 (pid: 1732430, cores: 1)
+spawned uWSGI worker 10 (pid: 1732431, cores: 1)
+[pid: 1732428|app: 0|req: 1/1] 192.168.1.99 () {58 vars in 1059 bytes} [Sat Oct 29 10:02:49 2022] GET / => generated 1868 bytes in 2647 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 1732429|app: 0|req: 1/2] 192.168.1.99 () {58 vars in 1020 bytes} [Sat Oct 29 10:02:57 2022] GET / => generated 1868 bytes in 627 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+announcing my loyalty to the Emperor...
+SIGINT/SIGTERM received...killing workers...
+Sat Oct 29 10:03:12 2022 - received message 0 from emperor
+worker 7 buried after 1 seconds
+worker 5 buried after 4 seconds
+worker 6 buried after 4 seconds
+worker 1 buried after 6 seconds
+worker 2 buried after 6 seconds
+worker 4 buried after 6 seconds
+worker 10 buried after 6 seconds
+worker 3 buried after 7 seconds
+worker 8 buried after 7 seconds
+worker 9 buried after 7 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /fcs_project_final/FCS_Project/backend/backend.sock removed.
+*** Starting uWSGI 2.0.18-debian (64bit) on [Sat Oct 29 10:06:46 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 1733181)
+spawned uWSGI worker 1 (pid: 1733182, cores: 1)
+spawned uWSGI worker 2 (pid: 1733183, cores: 1)
+spawned uWSGI worker 3 (pid: 1733184, cores: 1)
+spawned uWSGI worker 4 (pid: 1733185, cores: 1)
+spawned uWSGI worker 5 (pid: 1733186, cores: 1)
+spawned uWSGI worker 6 (pid: 1733187, cores: 1)
+spawned uWSGI worker 7 (pid: 1733188, cores: 1)
+spawned uWSGI worker 8 (pid: 1733189, cores: 1)
+spawned uWSGI worker 9 (pid: 1733190, cores: 1)
+spawned uWSGI worker 10 (pid: 1733191, cores: 1)
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:08:07 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 829)
+spawned uWSGI worker 1 (pid: 883, cores: 1)
+spawned uWSGI worker 2 (pid: 884, cores: 1)
+spawned uWSGI worker 3 (pid: 885, cores: 1)
+spawned uWSGI worker 4 (pid: 886, cores: 1)
+spawned uWSGI worker 5 (pid: 887, cores: 1)
+spawned uWSGI worker 6 (pid: 888, cores: 1)
+spawned uWSGI worker 7 (pid: 889, cores: 1)
+spawned uWSGI worker 8 (pid: 890, cores: 1)
+spawned uWSGI worker 9 (pid: 891, cores: 1)
+spawned uWSGI worker 10 (pid: 892, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Tue Nov  1 11:32:39 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55eee22c2310
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55eee22c2310 pid: 3597 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 3597)
+spawned uWSGI worker 1 (pid: 3630, cores: 1)
+spawned uWSGI worker 2 (pid: 3631, cores: 1)
+spawned uWSGI worker 3 (pid: 3632, cores: 1)
+spawned uWSGI worker 4 (pid: 3633, cores: 1)
+spawned uWSGI worker 5 (pid: 3634, cores: 1)
+spawned uWSGI worker 6 (pid: 3635, cores: 1)
+spawned uWSGI worker 7 (pid: 3636, cores: 1)
+spawned uWSGI worker 8 (pid: 3637, cores: 1)
+spawned uWSGI worker 9 (pid: 3638, cores: 1)
+spawned uWSGI worker 10 (pid: 3639, cores: 1)
+[pid: 3637|app: 0|req: 1/1] 192.168.64.67 () {58 vars in 1021 bytes} [Tue Nov  1 11:32:44 2022] GET / => generated 1868 bytes in 4100 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3637|app: 0|req: 2/2] 192.168.64.67 () {54 vars in 921 bytes} [Tue Nov  1 11:32:48 2022] GET /favicon.ico => generated 179 bytes in 49 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+[pid: 3637|app: 0|req: 3/3] 192.168.64.67 () {56 vars in 1026 bytes} [Tue Nov  1 11:33:00 2022] GET /user/patients/home => generated 1868 bytes in 13 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+[pid: 3637|app: 0|req: 4/4] 192.168.64.67 () {54 vars in 931 bytes} [Tue Nov  1 11:33:00 2022] GET /ad1.png => generated 179 bytes in 9 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 3631|app: 0|req: 1/5] 192.168.64.67 () {54 vars in 945 bytes} [Tue Nov  1 11:33:00 2022] GET /advertise2.png => generated 179 bytes in 991 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3638|app: 0|req: 1/6] 192.168.64.67 () {54 vars in 945 bytes} [Tue Nov  1 11:33:00 2022] GET /advertise3.png => generated 179 bytes in 1038 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3637|app: 0|req: 5/7] 192.168.64.67 () {60 vars in 1003 bytes} [Tue Nov  1 11:33:02 2022] POST /api/get-organization/ => generated 145 bytes in 247 msecs (HTTP/1.1 500) 6 headers in 226 bytes (1 switches on core 0)
+[pid: 3635|app: 0|req: 1/8] 192.168.64.67 () {60 vars in 1003 bytes} [Tue Nov  1 11:33:02 2022] POST /api/get-organization/ => generated 145 bytes in 903 msecs (HTTP/1.1 500) 6 headers in 226 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3637|app: 0|req: 6/9] 192.168.64.67 () {60 vars in 1011 bytes} [Tue Nov  1 11:33:08 2022] POST /api/update-organization/ => generated 145 bytes in 31 msecs (HTTP/1.1 500) 6 headers in 226 bytes (1 switches on core 0)
+[pid: 3637|app: 0|req: 7/10] 192.168.64.67 () {56 vars in 1026 bytes} [Tue Nov  1 11:33:16 2022] GET /user/patients/home => generated 1868 bytes in 2 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 3631|app: 0|req: 2/11] 192.168.64.67 () {54 vars in 931 bytes} [Tue Nov  1 11:33:16 2022] GET /ad1.png => generated 179 bytes in 3 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 3638|app: 0|req: 2/12] 192.168.64.67 () {54 vars in 945 bytes} [Tue Nov  1 11:33:16 2022] GET /advertise2.png => generated 179 bytes in 5 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 3639|app: 0|req: 1/13] 192.168.64.67 () {54 vars in 945 bytes} [Tue Nov  1 11:33:16 2022] GET /advertise3.png => generated 179 bytes in 746 msecs (HTTP/1.1 404) 6 headers in 214 bytes (2 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3637|app: 0|req: 8/14] 192.168.64.67 () {60 vars in 1003 bytes} [Tue Nov  1 11:33:17 2022] POST /api/get-organization/ => generated 145 bytes in 52 msecs (HTTP/1.1 500) 6 headers in 226 bytes (1 switches on core 0)
+[pid: 3630|app: 0|req: 1/15] 192.168.64.67 () {60 vars in 1003 bytes} [Tue Nov  1 11:33:17 2022] POST /api/get-organization/ => generated 145 bytes in 927 msecs (HTTP/1.1 500) 6 headers in 226 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 3637|app: 0|req: 9/16] 192.168.64.67 () {56 vars in 990 bytes} [Tue Nov  1 11:33:40 2022] GET / => generated 1868 bytes in 4 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 3637|app: 0|req: 10/17] 192.168.164.89 () {56 vars in 1035 bytes} [Tue Nov  1 11:33:45 2022] GET / => generated 1868 bytes in 3 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+[pid: 3637|app: 0|req: 11/18] 192.168.164.89 () {54 vars in 966 bytes} [Tue Nov  1 11:33:48 2022] GET /favicon.ico => generated 179 bytes in 3 msecs (HTTP/1.1 404) 6 headers in 214 bytes (1 switches on core 0)
+[pid: 3637|app: 0|req: 12/19] 192.168.164.89 () {58 vars in 1049 bytes} [Tue Nov  1 11:33:53 2022] GET / => generated 1868 bytes in 4 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+Tue Nov  1 11:35:28 2022 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+worker 6 buried after 1 seconds
+worker 7 buried after 1 seconds
+worker 8 buried after 1 seconds
+worker 9 buried after 1 seconds
+worker 10 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /fcs_project_final/FCS_Project/backend/backend.sock removed.
+...brutally killing workers...
+Tue Nov  1 11:35:53 2022 - received message 0 from emperor
+worker 1 buried after 0 seconds
+worker 2 buried after 0 seconds
+worker 3 buried after 0 seconds
+worker 4 buried after 0 seconds
+worker 5 buried after 0 seconds
+worker 6 buried after 0 seconds
+worker 7 buried after 0 seconds
+worker 8 buried after 0 seconds
+worker 9 buried after 0 seconds
+worker 10 buried after 0 seconds
+binary reloading uWSGI...
+chdir() to /etc/uwsgi/vassals
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (/fcs_project_final/FCS_Project/backend/backend.sock)
+running /usr/bin/uwsgi-core
+*** has_emperor mode detected (fd: 6) ***
+[uWSGI] getting INI configuration from django.ini
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:35:53 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+gracefully (RE)spawned uWSGI master process (pid: 829)
+spawned uWSGI worker 1 (pid: 4113, cores: 1)
+spawned uWSGI worker 2 (pid: 4114, cores: 1)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:53 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:53 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4113)...
+spawned uWSGI worker 3 (pid: 4115, cores: 1)
+spawned uWSGI worker 4 (pid: 4116, cores: 1)
+spawned uWSGI worker 5 (pid: 4117, cores: 1)
+spawned uWSGI worker 6 (pid: 4118, cores: 1)
+spawned uWSGI worker 7 (pid: 4119, cores: 1)
+spawned uWSGI worker 8 (pid: 4120, cores: 1)
+spawned uWSGI worker 9 (pid: 4121, cores: 1)
+spawned uWSGI worker 10 (pid: 4122, cores: 1)
+worker 1 killed successfully (pid: 4113)
+Respawned uWSGI worker 1 (new pid: 4123)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:53 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:53 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4123)...
+worker 1 killed successfully (pid: 4123)
+Respawned uWSGI worker 1 (new pid: 4124)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:54 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:54 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4124)...
+worker 1 killed successfully (pid: 4124)
+Respawned uWSGI worker 1 (new pid: 4137)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:55 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:55 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4137)...
+worker 1 killed successfully (pid: 4137)
+Respawned uWSGI worker 1 (new pid: 4147)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:56 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:56 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4147)...
+worker 1 killed successfully (pid: 4147)
+Respawned uWSGI worker 1 (new pid: 4150)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:57 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:57 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4150)...
+worker 1 killed successfully (pid: 4150)
+Respawned uWSGI worker 1 (new pid: 4151)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:58 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:58 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4151)...
+worker 1 killed successfully (pid: 4151)
+Respawned uWSGI worker 1 (new pid: 4152)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:35:59 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:35:59 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4152)...
+worker 1 killed successfully (pid: 4152)
+Respawned uWSGI worker 1 (new pid: 4153)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:00 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:00 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4153)...
+worker 1 killed successfully (pid: 4153)
+Respawned uWSGI worker 1 (new pid: 4154)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:01 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:01 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4154)...
+worker 1 killed successfully (pid: 4154)
+Respawned uWSGI worker 1 (new pid: 4157)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:02 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:02 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4157)...
+worker 1 killed successfully (pid: 4157)
+worker respawning too fast !!! i have to sleep a bit (2 seconds)...
+Respawned uWSGI worker 1 (new pid: 4158)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:05 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:05 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4158)...
+worker 1 killed successfully (pid: 4158)
+Respawned uWSGI worker 1 (new pid: 4159)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:06 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:06 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4159)...
+worker 1 killed successfully (pid: 4159)
+Respawned uWSGI worker 1 (new pid: 4162)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:07 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:07 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4162)...
+worker 1 killed successfully (pid: 4162)
+Respawned uWSGI worker 1 (new pid: 4163)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:08 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:08 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4163)...
+worker 1 killed successfully (pid: 4163)
+Respawned uWSGI worker 1 (new pid: 4164)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:09 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:09 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4164)...
+worker 1 killed successfully (pid: 4164)
+Respawned uWSGI worker 1 (new pid: 4165)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:10 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:10 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4165)...
+worker 1 killed successfully (pid: 4165)
+Respawned uWSGI worker 1 (new pid: 4166)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:11 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:11 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4166)...
+worker 1 killed successfully (pid: 4166)
+Respawned uWSGI worker 1 (new pid: 4169)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:12 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:12 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4169)...
+worker 1 killed successfully (pid: 4169)
+Respawned uWSGI worker 1 (new pid: 4170)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:13 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:13 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4170)...
+worker 1 killed successfully (pid: 4170)
+Respawned uWSGI worker 1 (new pid: 4171)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:14 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:14 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4171)...
+worker 1 killed successfully (pid: 4171)
+Respawned uWSGI worker 1 (new pid: 4172)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:15 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:15 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4172)...
+worker 1 killed successfully (pid: 4172)
+worker respawning too fast !!! i have to sleep a bit (2 seconds)...
+Respawned uWSGI worker 1 (new pid: 4196)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:18 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:18 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4196)...
+worker 1 killed successfully (pid: 4196)
+Respawned uWSGI worker 1 (new pid: 4197)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:19 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:19 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4197)...
+worker 1 killed successfully (pid: 4197)
+Respawned uWSGI worker 1 (new pid: 4198)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:20 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:20 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4198)...
+worker 1 killed successfully (pid: 4198)
+Respawned uWSGI worker 1 (new pid: 4211)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:21 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:21 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4211)...
+worker 1 killed successfully (pid: 4211)
+Respawned uWSGI worker 1 (new pid: 4220)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:22 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:22 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4220)...
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:36:23 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 4240)
+spawned uWSGI worker 1 (pid: 4246, cores: 1)
+spawned uWSGI worker 2 (pid: 4247, cores: 1)
+spawned uWSGI worker 3 (pid: 4248, cores: 1)
+spawned uWSGI worker 4 (pid: 4249, cores: 1)
+spawned uWSGI worker 5 (pid: 4250, cores: 1)
+spawned uWSGI worker 6 (pid: 4251, cores: 1)
+spawned uWSGI worker 7 (pid: 4252, cores: 1)
+spawned uWSGI worker 8 (pid: 4253, cores: 1)
+spawned uWSGI worker 9 (pid: 4254, cores: 1)
+spawned uWSGI worker 10 (pid: 4255, cores: 1)
+...brutally killing workers...
+Tue Nov  1 11:36:28 2022 - received message 0 from emperor
+worker 1 buried after 0 seconds
+worker 2 buried after 0 seconds
+worker 3 buried after 0 seconds
+worker 4 buried after 0 seconds
+worker 5 buried after 0 seconds
+worker 6 buried after 0 seconds
+worker 7 buried after 0 seconds
+worker 8 buried after 0 seconds
+worker 9 buried after 0 seconds
+worker 10 buried after 0 seconds
+binary reloading uWSGI...
+chdir() to /etc/uwsgi/vassals
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (/fcs_project_final/FCS_Project/backend/backend.sock)
+running /usr/bin/uwsgi-core
+*** has_emperor mode detected (fd: 6) ***
+[uWSGI] getting INI configuration from django.ini
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:36:28 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+gracefully (RE)spawned uWSGI master process (pid: 4240)
+spawned uWSGI worker 1 (pid: 4285, cores: 1)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:28 2022 - lost communication with the Emperor, goodbye...
+spawned uWSGI worker 2 (pid: 4286, cores: 1)
+Tue Nov  1 11:36:28 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4285)...
+spawned uWSGI worker 3 (pid: 4287, cores: 1)
+spawned uWSGI worker 4 (pid: 4288, cores: 1)
+spawned uWSGI worker 5 (pid: 4289, cores: 1)
+spawned uWSGI worker 6 (pid: 4290, cores: 1)
+spawned uWSGI worker 7 (pid: 4291, cores: 1)
+spawned uWSGI worker 8 (pid: 4292, cores: 1)
+spawned uWSGI worker 9 (pid: 4293, cores: 1)
+spawned uWSGI worker 10 (pid: 4294, cores: 1)
+worker 1 killed successfully (pid: 4285)
+Respawned uWSGI worker 1 (new pid: 4295)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:28 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:28 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4295)...
+worker 1 killed successfully (pid: 4295)
+Respawned uWSGI worker 1 (new pid: 4308)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:29 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:29 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4308)...
+worker 1 killed successfully (pid: 4308)
+Respawned uWSGI worker 1 (new pid: 4318)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:30 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:30 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4318)...
+worker 1 killed successfully (pid: 4318)
+Respawned uWSGI worker 1 (new pid: 4319)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:31 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:31 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4319)...
+worker 1 killed successfully (pid: 4319)
+Respawned uWSGI worker 1 (new pid: 4322)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:32 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:32 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4322)...
+worker 1 killed successfully (pid: 4322)
+Respawned uWSGI worker 1 (new pid: 4335)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:33 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:33 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4335)...
+worker 1 killed successfully (pid: 4335)
+Respawned uWSGI worker 1 (new pid: 4345)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:34 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:34 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4345)...
+worker 1 killed successfully (pid: 4345)
+Respawned uWSGI worker 1 (new pid: 4346)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:35 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:35 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4346)...
+worker 1 killed successfully (pid: 4346)
+Respawned uWSGI worker 1 (new pid: 4347)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:36 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:36 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4347)...
+worker 1 killed successfully (pid: 4347)
+Respawned uWSGI worker 1 (new pid: 4350)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:37 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:37 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4350)...
+worker 1 killed successfully (pid: 4350)
+worker respawning too fast !!! i have to sleep a bit (2 seconds)...
+Respawned uWSGI worker 1 (new pid: 4351)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:40 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:40 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4351)...
+worker 1 killed successfully (pid: 4351)
+Respawned uWSGI worker 1 (new pid: 4352)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:41 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:41 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4352)...
+worker 1 killed successfully (pid: 4352)
+Respawned uWSGI worker 1 (new pid: 4364)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:42 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:42 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4364)...
+worker 1 killed successfully (pid: 4364)
+Respawned uWSGI worker 1 (new pid: 4368)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:43 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:43 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4368)...
+worker 1 killed successfully (pid: 4368)
+Respawned uWSGI worker 1 (new pid: 4369)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:44 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:44 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4369)...
+worker 1 killed successfully (pid: 4369)
+Respawned uWSGI worker 1 (new pid: 4377)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:45 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:45 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4377)...
+worker 1 killed successfully (pid: 4377)
+Respawned uWSGI worker 1 (new pid: 4391)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:46 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:46 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4391)...
+worker 1 killed successfully (pid: 4391)
+Respawned uWSGI worker 1 (new pid: 4405)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:47 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:47 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4405)...
+worker 1 killed successfully (pid: 4405)
+Respawned uWSGI worker 1 (new pid: 4406)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:48 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:48 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4406)...
+worker 1 killed successfully (pid: 4406)
+Respawned uWSGI worker 1 (new pid: 4407)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:49 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:49 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4407)...
+worker 1 killed successfully (pid: 4407)
+Respawned uWSGI worker 1 (new pid: 4408)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:50 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:50 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4408)...
+worker 1 killed successfully (pid: 4408)
+worker respawning too fast !!! i have to sleep a bit (2 seconds)...
+Respawned uWSGI worker 1 (new pid: 4434)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:53 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:53 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4434)...
+worker 1 killed successfully (pid: 4434)
+Respawned uWSGI worker 1 (new pid: 4435)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:54 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:54 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4435)...
+worker 1 killed successfully (pid: 4435)
+Respawned uWSGI worker 1 (new pid: 4436)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:55 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:55 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4436)...
+worker 1 killed successfully (pid: 4436)
+Respawned uWSGI worker 1 (new pid: 4449)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:56 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:56 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4449)...
+worker 1 killed successfully (pid: 4449)
+Respawned uWSGI worker 1 (new pid: 4461)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:36:57 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:36:57 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4461)...
+Tue Nov  1 11:36:58 2022 - uWSGI worker 10 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Tue Nov  1 11:36:58 2022 - uWSGI worker 9 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:36:58 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 4474)
+spawned uWSGI worker 1 (pid: 4478, cores: 1)
+spawned uWSGI worker 2 (pid: 4479, cores: 1)
+spawned uWSGI worker 3 (pid: 4481, cores: 1)
+spawned uWSGI worker 4 (pid: 4482, cores: 1)
+spawned uWSGI worker 5 (pid: 4483, cores: 1)
+spawned uWSGI worker 6 (pid: 4484, cores: 1)
+spawned uWSGI worker 7 (pid: 4485, cores: 1)
+spawned uWSGI worker 8 (pid: 4486, cores: 1)
+spawned uWSGI worker 9 (pid: 4487, cores: 1)
+spawned uWSGI worker 10 (pid: 4488, cores: 1)
+...brutally killing workers...
+Tue Nov  1 11:37:31 2022 - received message 0 from emperor
+worker 2 buried after 0 seconds
+worker 3 buried after 0 seconds
+worker 4 buried after 0 seconds
+worker 5 buried after 0 seconds
+worker 6 buried after 0 seconds
+worker 7 buried after 0 seconds
+worker 8 buried after 0 seconds
+worker 9 buried after 0 seconds
+worker 1 buried after 1 seconds
+worker 10 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /etc/uwsgi/vassals
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (/fcs_project_final/FCS_Project/backend/backend.sock)
+running /usr/bin/uwsgi-core
+*** has_emperor mode detected (fd: 6) ***
+[uWSGI] getting INI configuration from django.ini
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:37:32 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+gracefully (RE)spawned uWSGI master process (pid: 4474)
+spawned uWSGI worker 1 (pid: 4913, cores: 1)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+spawned uWSGI worker 2 (pid: 4914, cores: 1)
+Tue Nov  1 11:37:32 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:32 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4913)...
+spawned uWSGI worker 3 (pid: 4915, cores: 1)
+spawned uWSGI worker 4 (pid: 4916, cores: 1)
+spawned uWSGI worker 5 (pid: 4917, cores: 1)
+spawned uWSGI worker 6 (pid: 4918, cores: 1)
+spawned uWSGI worker 7 (pid: 4919, cores: 1)
+spawned uWSGI worker 8 (pid: 4920, cores: 1)
+spawned uWSGI worker 9 (pid: 4921, cores: 1)
+spawned uWSGI worker 10 (pid: 4922, cores: 1)
+worker 1 killed successfully (pid: 4913)
+Respawned uWSGI worker 1 (new pid: 4923)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:32 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:32 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4923)...
+worker 1 killed successfully (pid: 4923)
+Respawned uWSGI worker 1 (new pid: 4925)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:33 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:33 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4925)...
+worker 1 killed successfully (pid: 4925)
+Respawned uWSGI worker 1 (new pid: 4959)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:34 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:34 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 4959)...
+worker 1 killed successfully (pid: 4959)
+Respawned uWSGI worker 1 (new pid: 5119)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:35 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:35 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5119)...
+worker 1 killed successfully (pid: 5119)
+Respawned uWSGI worker 1 (new pid: 5240)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:36 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:36 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5240)...
+worker 1 killed successfully (pid: 5240)
+Respawned uWSGI worker 1 (new pid: 5243)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:37 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:37 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5243)...
+worker 1 killed successfully (pid: 5243)
+Respawned uWSGI worker 1 (new pid: 5244)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:38 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:38 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5244)...
+worker 1 killed successfully (pid: 5244)
+Respawned uWSGI worker 1 (new pid: 5245)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:39 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:39 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5245)...
+worker 1 killed successfully (pid: 5245)
+Respawned uWSGI worker 1 (new pid: 5246)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:40 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:40 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5246)...
+worker 1 killed successfully (pid: 5246)
+Respawned uWSGI worker 1 (new pid: 5247)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:41 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:41 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5247)...
+worker 1 killed successfully (pid: 5247)
+worker respawning too fast !!! i have to sleep a bit (2 seconds)...
+Respawned uWSGI worker 1 (new pid: 5250)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:44 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:44 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5250)...
+worker 1 killed successfully (pid: 5250)
+Respawned uWSGI worker 1 (new pid: 5251)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:45 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:45 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5251)...
+worker 1 killed successfully (pid: 5251)
+Respawned uWSGI worker 1 (new pid: 5252)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:46 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:46 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5252)...
+worker 1 killed successfully (pid: 5252)
+Respawned uWSGI worker 1 (new pid: 5255)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:47 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:47 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5255)...
+worker 1 killed successfully (pid: 5255)
+Respawned uWSGI worker 1 (new pid: 5256)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:48 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:48 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5256)...
+worker 1 killed successfully (pid: 5256)
+Respawned uWSGI worker 1 (new pid: 5257)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:49 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:49 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5257)...
+worker 1 killed successfully (pid: 5257)
+Respawned uWSGI worker 1 (new pid: 5258)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:50 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:50 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5258)...
+worker 1 killed successfully (pid: 5258)
+Respawned uWSGI worker 1 (new pid: 5261)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:51 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:51 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5261)...
+worker 1 killed successfully (pid: 5261)
+Respawned uWSGI worker 1 (new pid: 5262)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:52 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:52 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5262)...
+worker 1 killed successfully (pid: 5262)
+Respawned uWSGI worker 1 (new pid: 5263)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:53 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:53 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5263)...
+worker 1 killed successfully (pid: 5263)
+Respawned uWSGI worker 1 (new pid: 5264)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:55 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:55 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5264)...
+worker 1 killed successfully (pid: 5264)
+Respawned uWSGI worker 1 (new pid: 5265)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:56 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:56 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5265)...
+worker 1 killed successfully (pid: 5265)
+Respawned uWSGI worker 1 (new pid: 5270)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:57 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:57 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5270)...
+worker 1 killed successfully (pid: 5270)
+Respawned uWSGI worker 1 (new pid: 5271)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:58 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:58 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5271)...
+worker 1 killed successfully (pid: 5271)
+Respawned uWSGI worker 1 (new pid: 5272)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:37:59 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:37:59 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5272)...
+worker 1 killed successfully (pid: 5272)
+Respawned uWSGI worker 1 (new pid: 5273)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:38:00 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:38:00 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5273)...
+worker 1 killed successfully (pid: 5273)
+Respawned uWSGI worker 1 (new pid: 5274)
+emperor-i-am-ready-to-accept/write(): Bad file descriptor [core/uwsgi.c line 3576]
+Tue Nov  1 11:38:01 2022 - lost communication with the Emperor, goodbye...
+Tue Nov  1 11:38:01 2022 - graceful shutdown triggered...
+Gracefully killing worker 1 (pid: 5274)...
+Tue Nov  1 11:38:01 2022 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:48:45 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 3070)
+spawned uWSGI worker 1 (pid: 3071, cores: 1)
+spawned uWSGI worker 2 (pid: 3072, cores: 1)
+spawned uWSGI worker 3 (pid: 3073, cores: 1)
+spawned uWSGI worker 4 (pid: 3074, cores: 1)
+spawned uWSGI worker 5 (pid: 3075, cores: 1)
+spawned uWSGI worker 6 (pid: 3076, cores: 1)
+spawned uWSGI worker 7 (pid: 3077, cores: 1)
+spawned uWSGI worker 8 (pid: 3089, cores: 1)
+spawned uWSGI worker 9 (pid: 3090, cores: 1)
+spawned uWSGI worker 10 (pid: 3091, cores: 1)
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+-- unavailable modifier requested: 0 --
+announcing my loyalty to the Emperor...
+Tue Nov  1 11:49:05 2022 - received message 0 from emperor
+SIGINT/SIGQUIT received...killing workers...
+...brutally killing workers...
+worker 1 buried after 0 seconds
+worker 2 buried after 0 seconds
+worker 3 buried after 0 seconds
+worker 4 buried after 0 seconds
+worker 5 buried after 0 seconds
+worker 6 buried after 0 seconds
+worker 7 buried after 0 seconds
+worker 8 buried after 0 seconds
+worker 9 buried after 0 seconds
+worker 10 buried after 0 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /fcs_project_final/FCS_Project/backend/backend.sock removed.
+*** Starting uWSGI 2.0.18-debian (64bit) on [Tue Nov  1 11:49:34 2022] ***
+compiled with version: 10.0.1 20200405 (experimental) [master revision 0be9efad938:fcb98e4978a:705510a708d3642c9c962beb663c476167e4e8a4] on 11 April 2020 11:15:55
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /usr/bin/uwsgi-core
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 802120 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!
+no request plugin is loaded, you will not be able to manage requests.
+you may need to install the package for your language of choice, or simply load it with --plugin.
+!!!!!!!!!!! END OF WARNING !!!!!!!!!!
+spawned uWSGI master process (pid: 770)
+spawned uWSGI worker 1 (pid: 789, cores: 1)
+spawned uWSGI worker 2 (pid: 790, cores: 1)
+spawned uWSGI worker 3 (pid: 791, cores: 1)
+spawned uWSGI worker 4 (pid: 792, cores: 1)
+spawned uWSGI worker 5 (pid: 793, cores: 1)
+spawned uWSGI worker 6 (pid: 794, cores: 1)
+spawned uWSGI worker 7 (pid: 795, cores: 1)
+spawned uWSGI worker 8 (pid: 796, cores: 1)
+spawned uWSGI worker 9 (pid: 797, cores: 1)
+spawned uWSGI worker 10 (pid: 798, cores: 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Tue Nov  1 11:52:54 2022] ***
+compiled with version: 9.4.0 on 28 October 2022 15:51:17
+os: Linux-5.4.0-131-generic #147-Ubuntu SMP Fri Oct 14 17:07:22 UTC 2022
+nodename: fcs01
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /etc/uwsgi/vassals
+detected binary path: /home/iiitd/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /fcs_project_final/FCS_Project/backend
+your processes number limit is 7579
+your memory page size is 4096 bytes
+detected max file descriptor number: 1048576
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /fcs_project_final/FCS_Project/backend/backend.sock fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5646c79ca310
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 801944 bytes (783 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x5646c79ca310 pid: 2182 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 2182)
+spawned uWSGI worker 1 (pid: 2204, cores: 1)
+spawned uWSGI worker 2 (pid: 2205, cores: 1)
+spawned uWSGI worker 3 (pid: 2206, cores: 1)
+spawned uWSGI worker 4 (pid: 2207, cores: 1)
+spawned uWSGI worker 5 (pid: 2208, cores: 1)
+spawned uWSGI worker 6 (pid: 2209, cores: 1)
+spawned uWSGI worker 7 (pid: 2210, cores: 1)
+spawned uWSGI worker 8 (pid: 2211, cores: 1)
+spawned uWSGI worker 9 (pid: 2212, cores: 1)
+spawned uWSGI worker 10 (pid: 2213, cores: 1)
+[pid: 2204|app: 0|req: 1/1] 192.168.64.67 () {58 vars in 1021 bytes} [Tue Nov  1 11:52:57 2022] GET / => generated 1868 bytes in 1782 msecs (HTTP/1.1 200) 6 headers in 208 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+SIGINT/SIGTERM received...killing workers...
+Tue Nov  1 11:53:07 2022 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+worker 6 buried after 1 seconds
+worker 7 buried after 1 seconds
+worker 8 buried after 1 seconds
+worker 9 buried after 1 seconds
+worker 10 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /fcs_project_final/FCS_Project/backend/backend.sock removed.

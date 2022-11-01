@@ -30,3 +30,4 @@ yarn-error.log*
 /backend/api/__pycache__
 /backend/.env
 /backend/frontend/__pycache__
+/backend/static/
