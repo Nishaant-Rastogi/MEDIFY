@@ -1,11 +1,40 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
+import emailjs from '@emailjs/browser'
 
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
     let navigate = useNavigate()
     const [userType, setUserType] = useState('P')
+    let otp = ''
+
+    let generateOTP = () => {
+        var digits = '0123456789';
+        let OTP = '';
+        for (let i = 0; i < 4; i++) {
+            OTP += digits[Math.floor(Math.random() * 10)];
+        }
+        return OTP;
+    }
+
+    let sendEmail = (e) => {
+        e.preventDefault()
+        // console.log(e.target.email.value);
+        otp = generateOTP();
+        console.log(otp);
+        emailjs.send(
+            "service_fq04boo",
+            "template_50ai34b",
+            {
+                from_name: "MEDIFY",
+                to_name: e.target.name.value,
+                message: otp,
+                to_email: e.target.email.value,
+            },
+            'user_LaY6RXGTYd7nadYRQtJ3W'
+        )
+    }
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
@@ -42,7 +71,9 @@ const SignUp = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
+                sendEmail(e)
+                console.log('sent', otp);
+                navigate('/verification', { state: { otp: otp, type: e.target.userType.value, signup: true } })
             })
     }
     let handleSignUpAsOrganization = async (e) => {
@@ -64,9 +95,9 @@ const SignUp = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                if (data.status === 200) {
-                    navigate('/verification', { state: { phoneNo: e.target.phoneNo.value } })
-                }
+                sendEmail(e)
+                navigate('/verification', { state: { otp: otp, orgType: e.target.orgType.value, signup: true } })
+
             });
     }
 

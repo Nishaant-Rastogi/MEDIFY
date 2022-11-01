@@ -13,7 +13,7 @@ const HospitalTests = () => {
             headers: { 'Content-Type': 'application/json' },
             body: localStorage.getItem('organisation')
         }
-        fetch('/api/get-tests/', requestOptions)
+        fetch('/api/get-hospital-tests/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -31,7 +31,7 @@ const HospitalTests = () => {
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <HospitalTestsCard />
+                        <HospitalTestsCard tests={tests} />
                     </div>
                 </div>
             </div>

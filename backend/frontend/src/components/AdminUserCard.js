@@ -93,7 +93,7 @@ function AdminCheckUserCard({ UserData }) {
     return (
         <>
             {console.log(UserData)}
-            {UserData === null ?
+            {UserData.length <= 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No User</div>

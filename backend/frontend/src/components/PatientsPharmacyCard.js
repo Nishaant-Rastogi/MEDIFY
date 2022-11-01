@@ -86,7 +86,7 @@ function PatientsPharmacyCard({ pharmacies }) {
     let id = 0;
     return (
         <>
-            {pharmacies === [] ?
+            {pharmacies.length <= 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Pharmacies</div>

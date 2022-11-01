@@ -13,7 +13,7 @@ const AdminUserList = () => {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch('/api/get-users', requestOptions)
+        fetch('/api/get-users/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

@@ -468,6 +468,13 @@ class GetTestResultView(APIView):
         documents = document_collection.find({'patient_id': patient_id, 'docType': 'T', 'visible': True})
         return Response(TestResultSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
+class GetTestResultHospitalView(APIView):
+    serializer_class = CreateTestResultSerializer
+    def post(self, request, format=None):
+        hospital_id = request.data['id']
+        documents = document_collection.find({'hospital_id': hospital_id, 'docType': 'T', 'visible': True})
+        return Response(TestResultSerializer(documents, many=True).data, status=status.HTTP_200_OK)
+
 class CreateConsultationBillView(APIView):
     serializer_class = CreateConsultationBillSerializer
     def post(self, request, format=None):
