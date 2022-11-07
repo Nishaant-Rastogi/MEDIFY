@@ -19,9 +19,9 @@ const Login = () => {
         return OTP;
     }
 
-    let sendEmail = (e) => {
+    let sendEmail = async (e, email) => {
         e.preventDefault()
-        // console.log(e.target.email.value);
+        console.log(email);
         otp = generateOTP();
         console.log(otp);
         emailjs.send(
@@ -74,7 +74,7 @@ const Login = () => {
                 setName(data.name);
                 localStorage.setItem('user', JSON.stringify({ id: data.id }));
                 console.log(localStorage.getItem('user'));
-                sendEmail(e);
+                sendEmail(e, data.email);
                 if (data.userType === 'P') {
                     console.log("patient");
                     navigate('/verification', { state: { otp: otp, type: 'P' } });
