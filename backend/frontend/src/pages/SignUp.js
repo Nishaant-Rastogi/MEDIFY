@@ -214,8 +214,8 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputid1">Aadhar No</label>
-                                    <input type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar" />
-                                    {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
+                                    <input type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar No" />
+                                    <small id="idHelp" className="form-text text-muted">Aadhar is a 12 digit ID no.</small>
                                 </div>
                             </div>
                             <div className="form-group" aria-label="Default select example">

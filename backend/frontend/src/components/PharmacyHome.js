@@ -8,7 +8,7 @@ function PharmacyHome({ User }) {
 
     return (
         <div className='UHOME'>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('organisation')).name} />
             <AdCarousel />
             <div className="UHCONTAINER1">
                 {/*...............................................................................................................*/}

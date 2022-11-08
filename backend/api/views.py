@@ -249,7 +249,7 @@ class ApproveUserView(APIView):
             check_user_collection.delete_one({'id': request.data['id']})
             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
         elif userType == 'D':
-            doctor = Doctor(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], specialization=request.data['specialization'], experience=request.data['experience'])
+            doctor = Doctor(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], specialization=request.data['specialization'], experience=request.data['experience'], hospital=request.data['hospital'])
             user_collection.insert_one(DoctorSerializer(doctor).data)
             check_user_collection.delete_one({'id': request.data['id']})
             return Response(DoctorSerializer(doctor).data, status=status.HTTP_200_OK)
@@ -539,6 +539,16 @@ class ClaimRefundView(APIView):
         insurance_balance = org_collection.find_one({'id': insurance_id})['balance']
         org_collection.update_one({'id': insurance_id}, {'$set': {'balance': int(insurance_balance) - int(refund)}})
         return Response({'Success': 'Refund Claimed...'}, status=status.HTTP_200_OK)
+
+class GetHospitalDoctorsView(APIView):
+    def post(self, request, format=None):
+        hospital_id = request.data['id']
+        doctors = []
+        for doctor in user_collection.find({'userType': 'D'}):
+            if(doctor['hospital'] == hospital_id):
+                doctors.append(doctor)
+        print(DoctorSerializer(doctors).data)
+        return Response(DoctorSerializer(doctors).data, status=status.HTTP_200_OK)
 
 EXPIRY_TIME = 60 # seconds
 # This class returns the string needed to generate the key

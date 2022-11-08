@@ -13,7 +13,7 @@ function AdminHome({ User }) {
     }, []);
     return (
         <div className='UHOME'>
-            <Navbar />
+            <Navbar name={"Admin"} />
             <AdCarousel />
             <div className="UHCONTAINER1">
                 {/*...............................................................................................................*/}

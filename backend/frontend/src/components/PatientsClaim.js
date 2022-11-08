@@ -97,7 +97,7 @@ const PatientsClaim = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
             <div className='UPROFILE'>
                 <div className='PROFILECONTAINER'>
                     <div className='PROFILEHEADER'>

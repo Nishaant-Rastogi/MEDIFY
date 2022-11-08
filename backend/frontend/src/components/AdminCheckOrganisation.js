@@ -28,7 +28,7 @@ const AdminCheckOrganisation = () => {
     }, []);
     return (
         <div>
-            <Navbar />
+            <Navbar name={"Admin"} />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>

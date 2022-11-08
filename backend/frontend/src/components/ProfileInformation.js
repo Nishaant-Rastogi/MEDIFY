@@ -96,8 +96,12 @@ const ProfileInformation = () => {
     useEffect(() => {
         console.log(localStorage.getItem('user'));
         if (localStorage.getItem('user') === null) {
-            setUserType('organisation');
-            handleOrganisation();
+            if (localStorage.getItem('organisation') === null) {
+                window.location.href = '/';
+            } else {
+                setUserType('organisation');
+                handleOrganisation();
+            }
         } else {
             setUserType('user');
             handleUser();
@@ -106,7 +110,7 @@ const ProfileInformation = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('user')).name ? JSON.parse(localStorage.getItem('user')).name : JSON.parse(localStorage.getItem('organisation')).name} />
             {UserType === 'user' ?
                 <div className='UPROFILE'>
                     <div className='PROFILECONTAINER'>

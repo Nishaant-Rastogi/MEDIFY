@@ -7,8 +7,6 @@ var sanitize = require('mongo-sanitize');
 const Login = () => {
     const [loginAs, setLoginAs] = useState(1)
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
     let otp = ''
 
     let generateOTP = () => {
@@ -20,7 +18,7 @@ const Login = () => {
         return OTP;
     }
 
-    let sendEmail = async (e, email) => {
+    let sendEmail = async (e, name, email) => {
         e.preventDefault()
         console.log(email);
         otp = generateOTP();
@@ -54,7 +52,12 @@ const Login = () => {
             })
         }
         fetch('/api/login-admin/', requestOptions)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                alert("Invalid Credentials! Please try again.");
+            })
             .then(data => {
                 console.log(data);
                 localStorage.setItem('admin', JSON.stringify({ id: data.id }));
@@ -71,28 +74,29 @@ const Login = () => {
                 password: sanitize(e.target.password.value)
             })
         }
-        try {
-            fetch('/api/login-user/', requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    setEmail(data.email);
-                    setName(data.name);
-                    localStorage.setItem('user', JSON.stringify({ id: data.id }));
-                    console.log(localStorage.getItem('user'));
-                    sendEmail(e, data.email);
-                    if (data.userType === 'P') {
-                        console.log("patient");
-                        navigate('/verification', { state: { otp: otp, type: 'P' } });
-                    }
-                    else if (data.userType === 'D') {
-                        console.log("doctor");
-                        navigate('/verification', { state: { otp: otp, type: 'D' } });
-                    }
-                })
-        } catch (err) {
-            alert(err);
-        }
+
+        fetch('/api/login-user/', requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                alert("Invalid Credentials!, Please try Again");
+            })
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
+                console.log(localStorage.getItem('user'));
+                sendEmail(e, data.name, data.email);
+                if (data.userType === 'P') {
+                    console.log("patient");
+                    navigate('/verification', { state: { otp: otp, type: 'P' } });
+                }
+                else if (data.userType === 'D') {
+                    console.log("doctor");
+                    navigate('/verification', { state: { otp: otp, type: 'D' } });
+                }
+            })
+
     }
     let handleLoginOrganisation = (e) => {
         e.preventDefault()
@@ -104,24 +108,22 @@ const Login = () => {
                 password: sanitize(e.target.password.value)
             })
         }
-        try {
-            fetch('/api/login-organization/', requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    setEmail(data.email);
-                    setName(data.name);
-                    sendEmail(e);
-                    localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
-                    console.log(localStorage.getItem('organisation'));
-                    if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
-                    else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
-                    else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
-                })
-        } catch (err) {
-            alert(err);
-        }
-
+        fetch('/api/login-organization/', requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                alert("Invalid Credentials!, Please try again");
+            })
+            .then(data => {
+                console.log(data);
+                sendEmail(e, data.name, data.email);
+                localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
+                console.log(localStorage.getItem('organisation'));
+                if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
+                else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
+                else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
+            })
     }
     useEffect(() => {
         localStorage.clear();

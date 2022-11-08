@@ -30,7 +30,7 @@ const HospitalTests = () => {
     }, [])
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('organisation')).name} />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>

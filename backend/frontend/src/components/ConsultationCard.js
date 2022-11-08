@@ -57,7 +57,7 @@ const ConsultationCard = () => {
     }, [])
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
             {consultation ? <ConsultationBillCard doctor={doctor} user={user} consultation={consultation} /> :
                 <div className='UPROFILE'>
                     <div className='PROFILECONTAINER'>

@@ -44,8 +44,10 @@ const TestCard = () => {
             });
     };
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleUser();
-        console.log('hello')
         handlePrescriptions();
     }, [])
     useEffect(() => {
@@ -53,7 +55,7 @@ const TestCard = () => {
     }, [prescription])
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
             {test ? <TestBillCard hospital={hospital} user={user} prescription={prescription} /> :
                 <div className='UPROFILE'>
                     <div className='PROFILECONTAINER'>

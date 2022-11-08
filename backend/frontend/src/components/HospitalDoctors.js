@@ -5,13 +5,32 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const HospitalDoctors = () => {
+    const [doctors, setDoctors] = useState([]);
+
+    let handleDoctors = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: localStorage.getItem('organisation')
+        }
+        fetch('/api/get-hospital-doctors/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setDoctors(data);
+            });
+    }
+
+    useEffect(() => {
+        handleDoctors();
+    }, []);
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('organisation')).name} />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <HospitalDoctorsCard />
+                        <HospitalDoctorsCard doctors={doctors} />
                     </div>
                 </div>
             </div>

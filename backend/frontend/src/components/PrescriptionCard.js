@@ -53,12 +53,15 @@ const PrescriptionCard = () => {
     };
 
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         console.log(user)
         handleUser();
     }, [])
     return (
         <div>
-            <Navbar />
+            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
             <div className='UPROFILE'>
                 <div className='PROFILECONTAINER'>
                     <div className='PROFILEHEADER'>

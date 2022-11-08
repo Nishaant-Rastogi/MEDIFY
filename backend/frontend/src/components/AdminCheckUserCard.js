@@ -8,12 +8,12 @@ function customcard({ UserData }) {
     const heading = "H";
     let id = 0;
 
-    let sendEmail = (e, data) => {
+    let sendEmail = async (e, data) => {
         e.preventDefault()
         // console.log(e.target.email.value);
         emailjs.send(
             "service_fq04boo",
-            "template_50ai34b",
+            "template_fbjb1dn",
             {
                 from_name: "MEDIFY",
                 to_name: data.name,
@@ -37,7 +37,6 @@ function customcard({ UserData }) {
             .then(data => {
                 console.log(data)
                 sendEmail(e, data);
-                window.location.reload();
             })
     }
     let handleReject = (e) => {
@@ -128,7 +127,7 @@ function AdminCheckUserCard({ UserData }) {
     return (
         <>
             {console.log(UserData)}
-            {UserData.length <= 1 ?
+            {UserData.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No User</div>

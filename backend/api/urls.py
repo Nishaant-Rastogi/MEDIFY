@@ -36,6 +36,7 @@ urlpatterns = [
     path('get-bills/', GetBillView.as_view(), name="get-bills"),
     path('get-unclaim-bills/', GetUnClaimBillView.as_view(), name="get-unclaim-bills"),
     path('get-hospital-bills/', GetHospitalBillView.as_view(), name="get-hospital-bills"),
+    path('get-hospital-doctors/', GetHospitalDoctorsView.as_view(), name="get-hospital-doctors"),
     path('get-doctor-bills/', GetDoctorBillView.as_view(), name="get-doctor-bills"),
     path('get-pharmacy-bills/', GetPharmacyBillView.as_view(), name="get-insurance-bills"),
     path('get-doctor-prescriptions/', GetDoctorPrescriptionView.as_view(), name="get-doctor-prescriptions"),
