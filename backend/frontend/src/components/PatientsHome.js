@@ -13,7 +13,7 @@ function PatientsHome() {
   }, []);
   return (
     <div className='UHOME'>
-      <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
+      <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
       <AdCarousel />
       <div className="UHCONTAINER1">
         {/*...............................................................................................................*/}

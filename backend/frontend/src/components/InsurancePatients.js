@@ -7,7 +7,7 @@ import '../styles/hospitals.css'
 const InsurancePatients = () => {
     return (
         <div>
-            <Navbar name={JSON.parse(localStorage.getItem('organisation')).name} />
+            <Navbar name={localStorage.getItem('organisation') ? JSON.parse(localStorage.getItem('organisation')).name : window.location.href = '/'} />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>

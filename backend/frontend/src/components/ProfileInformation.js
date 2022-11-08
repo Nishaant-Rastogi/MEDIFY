@@ -110,7 +110,7 @@ const ProfileInformation = () => {
 
     return (
         <div>
-            <Navbar name={JSON.parse(localStorage.getItem('user')).name ? JSON.parse(localStorage.getItem('user')).name : JSON.parse(localStorage.getItem('organisation')).name} />
+            <Navbar name={JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).name : localStorage.getItem('organisation') ? JSON.parse(localStorage.getItem('organisation')).name : window.location.href = '/'} />
             {UserType === 'user' ?
                 <div className='UPROFILE'>
                     <div className='PROFILECONTAINER'>

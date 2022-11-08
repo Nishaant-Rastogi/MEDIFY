@@ -55,7 +55,7 @@ const TestCard = () => {
     }, [prescription])
     return (
         <div>
-            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
+            <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
             {test ? <TestBillCard hospital={hospital} user={user} prescription={prescription} /> :
                 <div className='UPROFILE'>
                     <div className='PROFILECONTAINER'>

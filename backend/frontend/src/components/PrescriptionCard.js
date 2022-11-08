@@ -61,7 +61,7 @@ const PrescriptionCard = () => {
     }, [])
     return (
         <div>
-            <Navbar name={JSON.parse(localStorage.getItem('user')).name} />
+            <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
             <div className='UPROFILE'>
                 <div className='PROFILECONTAINER'>
                     <div className='PROFILEHEADER'>
