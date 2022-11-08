@@ -23,6 +23,9 @@ const HospitalBills = () => {
 
 
     useEffect(() => {
+        if (localStorage.getItem('organisation') === null) {
+            window.location.href = '/';
+        }
         handleBills();
     }, [])
     return (

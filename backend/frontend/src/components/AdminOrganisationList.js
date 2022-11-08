@@ -21,6 +21,9 @@ const AdminOrganisationList = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('admin') === null) {
+            window.location.href = '/';
+        }
         handleOrganizations();
     }, []);
     return (

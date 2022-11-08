@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import '../styles/userhome.css';
 
-function HospitalsHome({ User }) {
+function PharmacyHome({ User }) {
 
     return (
         <div className='UHOME'>
@@ -38,7 +38,7 @@ function HospitalsHome({ User }) {
                             </div>
                             <div className='DATA'>
                                 <div className='HEADING'>BILLS</div>
-                                <div className='SUBHEADING'>View All Hospital's Bills</div>
+                                <div className='SUBHEADING'>View All Pharmacy's Bills</div>
                             </div>
                         </Link>
                     </div>
@@ -48,4 +48,4 @@ function HospitalsHome({ User }) {
     )
 }
 
-export default HospitalsHome;
+export default PharmacyHome;

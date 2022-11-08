@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/home.css'
 import emailjs from '@emailjs/browser'
+var sanitize = require('mongo-sanitize');
 
 const Login = () => {
     const [loginAs, setLoginAs] = useState(1)
@@ -24,17 +25,21 @@ const Login = () => {
         console.log(email);
         otp = generateOTP();
         console.log(otp);
-        emailjs.send(
-            "service_fq04boo",
-            "template_50ai34b",
-            {
-                from_name: "MEDIFY",
-                to_name: name,
-                message: otp,
-                to_email: email,
-            },
-            'user_LaY6RXGTYd7nadYRQtJ3W'
-        )
+        try {
+            emailjs.send(
+                "service_fq04boo",
+                "template_50ai34b",
+                {
+                    from_name: "MEDIFY",
+                    to_name: name,
+                    message: otp,
+                    to_email: email,
+                },
+                'user_LaY6RXGTYd7nadYRQtJ3W'
+            )
+        } catch (err) {
+            alert(err);
+        }
     }
 
 
@@ -44,8 +49,8 @@ const Login = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: e.target.id.value,
-                password: e.target.password.value
+                id: sanitize(e.target.id.value),
+                password: sanitize(e.target.password.value)
             })
         }
         fetch('/api/login-admin/', requestOptions)
@@ -62,28 +67,32 @@ const Login = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: e.target.id.value,
-                password: e.target.password.value
+                id: sanitize(e.target.id.value),
+                password: sanitize(e.target.password.value)
             })
         }
-        fetch('/api/login-user/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setEmail(data.email);
-                setName(data.name);
-                localStorage.setItem('user', JSON.stringify({ id: data.id }));
-                console.log(localStorage.getItem('user'));
-                sendEmail(e, data.email);
-                if (data.userType === 'P') {
-                    console.log("patient");
-                    navigate('/verification', { state: { otp: otp, type: 'P' } });
-                }
-                else if (data.userType === 'D') {
-                    console.log("doctor");
-                    navigate('/verification', { state: { otp: otp, type: 'D' } });
-                }
-            })
+        try {
+            fetch('/api/login-user/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    setEmail(data.email);
+                    setName(data.name);
+                    localStorage.setItem('user', JSON.stringify({ id: data.id }));
+                    console.log(localStorage.getItem('user'));
+                    sendEmail(e, data.email);
+                    if (data.userType === 'P') {
+                        console.log("patient");
+                        navigate('/verification', { state: { otp: otp, type: 'P' } });
+                    }
+                    else if (data.userType === 'D') {
+                        console.log("doctor");
+                        navigate('/verification', { state: { otp: otp, type: 'D' } });
+                    }
+                })
+        } catch (err) {
+            alert(err);
+        }
     }
     let handleLoginOrganisation = (e) => {
         e.preventDefault()
@@ -91,23 +100,28 @@ const Login = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: e.target.id.value,
-                password: e.target.password.value
+                id: sanitize(e.target.id.value),
+                password: sanitize(e.target.password.value)
             })
         }
-        fetch('/api/login-organization/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setEmail(data.email);
-                setName(data.name);
-                sendEmail(e);
-                localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
-                console.log(localStorage.getItem('organisation'));
-                if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
-                else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
-                else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
-            })
+        try {
+            fetch('/api/login-organization/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    setEmail(data.email);
+                    setName(data.name);
+                    sendEmail(e);
+                    localStorage.setItem('organisation', JSON.stringify({ id: data.id }));
+                    console.log(localStorage.getItem('organisation'));
+                    if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
+                    else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
+                    else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
+                })
+        } catch (err) {
+            alert(err);
+        }
+
     }
     useEffect(() => {
         localStorage.clear();

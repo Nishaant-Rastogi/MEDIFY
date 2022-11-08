@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import AdCarousel from './AdCarousel';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,11 @@ import '../styles/userhome.css';
 
 function AdminHome({ User }) {
 
+    useEffect(() => {
+        if (localStorage.getItem('admin') === null) {
+            window.location.href = '/';
+        }
+    }, []);
     return (
         <div className='UHOME'>
             <Navbar />

@@ -27,6 +27,9 @@ const PharmacyList = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handlePharmacies();
     }, []);
     return (

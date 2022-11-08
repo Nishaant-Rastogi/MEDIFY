@@ -23,6 +23,9 @@ const HospitalTests = () => {
 
 
     useEffect(() => {
+        if (localStorage.getItem('organisation') === null) {
+            window.location.href = '/';
+        }
         handleTests();
     }, [])
     return (

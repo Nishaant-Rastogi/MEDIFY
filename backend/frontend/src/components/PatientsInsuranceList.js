@@ -24,6 +24,9 @@ const PatientsInsuranceList = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleInsurances();
     }, []);
     return (

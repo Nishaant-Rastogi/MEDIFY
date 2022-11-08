@@ -21,6 +21,9 @@ const AdminCheckOrganisation = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('admin') === null) {
+            window.location.href = '/';
+        }
         handleCheckOrganizations();
     }, []);
     return (

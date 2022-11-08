@@ -21,6 +21,9 @@ const PatientsPrescription = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handlePrescriptions();
     }, []);
     return (

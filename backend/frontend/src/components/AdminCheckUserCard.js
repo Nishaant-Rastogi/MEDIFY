@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
+import emailjs from '@emailjs/browser'
 
 function customcard({ UserData }) {
     const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
+
+    let sendEmail = (e, data) => {
+        e.preventDefault()
+        // console.log(e.target.email.value);
+        emailjs.send(
+            "service_fq04boo",
+            "template_50ai34b",
+            {
+                from_name: "MEDIFY",
+                to_name: data.name,
+                message: data.id,
+                to_email: data.email,
+            },
+            'user_LaY6RXGTYd7nadYRQtJ3W'
+        )
+    }
+
     let handleApprove = (e) => {
         e.preventDefault();
         const requiredOptions = {
@@ -18,6 +36,7 @@ function customcard({ UserData }) {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                sendEmail(e, data);
                 window.location.reload();
             })
     }

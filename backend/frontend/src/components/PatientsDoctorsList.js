@@ -26,6 +26,9 @@ const PatientsDoctorsList = () => {
     }
 
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleDoctors();
     }, []);
 

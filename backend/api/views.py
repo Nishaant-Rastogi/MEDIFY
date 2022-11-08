@@ -49,7 +49,8 @@ class CreateUserView(APIView):
         if userType == 'D':
             specialization = request.data['specialization']
             experience = request.data['experience']
-            doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience)
+            hospital = request.data['hospital']
+            doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience, hospital=hospital)
             doctor.save()
             check_user_collection.insert_one(DoctorSerializer(doctor).data)
             return Response(DoctorSerializer(doctor).data, status=status.HTTP_201_CREATED)

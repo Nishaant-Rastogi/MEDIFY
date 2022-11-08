@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import AdCarousel from './AdCarousel';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import '../styles/userhome.css';
 
-function PatientsHome({ User }) {
+function PatientsHome() {
 
-  const handleInsuranceClaim = () => { };
-
+  useEffect(() => {
+    if (localStorage.getItem('user') === null) {
+      window.location.href = '/';
+    }
+  }, []);
   return (
     <div className='UHOME'>
       <Navbar />
@@ -88,7 +91,7 @@ function PatientsHome({ User }) {
             </Link>
           </div>
         </div>
-        <div className='UHFLEX3' onClick={handleInsuranceClaim}>
+        <div className='UHFLEX3'>
           <Link to='/user/patients/claim' >
             <div className='ROW ROW1'>
               INSURANCE CLAIM

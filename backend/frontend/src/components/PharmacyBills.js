@@ -22,6 +22,9 @@ const PharmacyBills = () => {
     }
 
     useEffect(() => {
+        if (localStorage.getItem('organisation') === null) {
+            window.location.href = '/';
+        }
         handleBills();
     }, [])
     return (

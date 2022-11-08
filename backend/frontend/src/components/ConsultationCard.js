@@ -50,6 +50,9 @@ const ConsultationCard = () => {
     };
 
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleUser();
     }, [])
     return (

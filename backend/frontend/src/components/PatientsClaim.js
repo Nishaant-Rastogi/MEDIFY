@@ -79,6 +79,9 @@ const PatientsClaim = () => {
     };
 
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleUser();
         handleBills();
         handleInsurance();

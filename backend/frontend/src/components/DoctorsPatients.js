@@ -5,6 +5,11 @@ import Navbar from './Navbar';
 import '../styles/hospitals.css'
 
 const DoctorsPatients = () => {
+    useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
+    }, []);
     return (
         <div>
             <Navbar />

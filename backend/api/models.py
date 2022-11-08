@@ -57,6 +57,7 @@ class Doctor(models.Model):
     balance = models.IntegerField(default=100000)
     specialization = models.CharField(max_length=200)
     experience = models.IntegerField()
+    hospital = models.CharField(max_length=11, blank=True)
     def __str__(self):
         return self.name
 class Organization(models.Model):

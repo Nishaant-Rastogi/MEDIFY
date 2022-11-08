@@ -21,6 +21,9 @@ const AdminUserList = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('admin') === null) {
+            window.location.href = '/';
+        }
         handleUser();
     }, []);
     return (

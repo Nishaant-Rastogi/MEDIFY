@@ -21,6 +21,9 @@ const PatientsTests = () => {
             });
     }
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleTests();
     }, []);
     return (

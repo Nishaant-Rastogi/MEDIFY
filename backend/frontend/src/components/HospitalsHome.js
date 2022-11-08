@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import AdCarousel from './AdCarousel';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import '../styles/userhome.css';
 
-function HospitalsHome({ User }) {
+function HospitalsHome() {
+    useEffect(() => {
+        if (localStorage.getItem('organisation') === null) {
+            window.location.href = '/';
+        }
+    }, []);
 
     return (
         <div className='UHOME'>

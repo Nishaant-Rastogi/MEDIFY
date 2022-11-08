@@ -81,6 +81,9 @@ const PharmacyBuyMedicine = () => {
       });
   }
   useEffect(() => {
+    if (localStorage.getItem('user') === null) {
+      window.location.href = '/';
+    }
     handleUser();
     handlePrescriptions();
     handleInsurance();

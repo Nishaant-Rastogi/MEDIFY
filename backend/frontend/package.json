@@ -19,6 +19,7 @@
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.3",
     "emailjs-com": "^3.2.0",
+    "mongo-sanitize": "^1.1.0",
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",

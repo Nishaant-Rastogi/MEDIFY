@@ -22,6 +22,9 @@ const DoctorsConsultation = () => {
     }
 
     useEffect(() => {
+        if (localStorage.getItem('user') === null) {
+            window.location.href = '/';
+        }
         handleConsultations();
     }, []);
     return (

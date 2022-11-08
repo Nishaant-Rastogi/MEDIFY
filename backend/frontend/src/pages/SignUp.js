@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
 import emailjs from '@emailjs/browser'
+var sanitize = require('mongo-sanitize');
 
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
     let navigate = useNavigate()
     const [userType, setUserType] = useState('P')
+    const [hospitals, setHospitals] = useState([])
+    const [hospital, setHospital] = useState('')
+
     let otp = ''
 
     let generateOTP = () => {
@@ -23,48 +27,70 @@ const SignUp = () => {
         // console.log(e.target.email.value);
         otp = generateOTP();
         console.log(otp);
-        emailjs.send(
-            "service_fq04boo",
-            "template_50ai34b",
-            {
-                from_name: "MEDIFY",
-                to_name: e.target.name.value,
-                message: otp,
-                to_email: e.target.email.value,
-            },
-            'user_LaY6RXGTYd7nadYRQtJ3W'
-        )
+        try {
+            emailjs.send(
+                "service_fq04boo",
+                "template_50ai34b",
+                {
+                    from_name: "MEDIFY",
+                    to_name: e.target.name.value,
+                    message: otp,
+                    to_email: e.target.email.value,
+                },
+                'user_LaY6RXGTYd7nadYRQtJ3W'
+            )
+        } catch (err) {
+            alert(err);
+        }
     }
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
+        console.log(hospital.id)
+        if (e.target.user_password.value !== e.target.confirm_user_password.value) {
+            alert("Passwords don't match!")
+            return
+        }
+        if (e.target.user_password.value.length < 8) {
+            alert("Password must be atleast 8 characters long!")
+            return
+        }
+        if (e.target.aadharNo.value.length !== 12) {
+            alert("Aadhar number must be 12 digits long!")
+            return
+        }
+        if (e.target.phoneNo.value.length !== 10) {
+            alert("Phone number must be 10 digits long!")
+            return
+        }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: e.target.userType.value === 'P' ?
                 JSON.stringify({
-                    name: e.target.name.value,
+                    name: sanitize(e.target.name.value),
                     dob: e.target.dob.value,
                     gender: e.target.gender.value,
-                    address: e.target.address.value,
-                    phoneNo: e.target.phoneNo.value,
-                    aadharNo: e.target.aadharNo.value,
+                    address: sanitize(e.target.address.value),
+                    phoneNo: sanitize(e.target.phoneNo.value),
+                    aadharNo: sanitize(e.target.aadharNo.value),
                     userType: 'P',
-                    email: e.target.email.value,
-                    password: e.target.user_password.value,
+                    email: sanitize(e.target.email.value),
+                    password: sanitize(e.target.user_password.value),
                 }) :
                 JSON.stringify({
-                    name: e.target.name.value,
+                    name: sanitize(e.target.name.value),
                     dob: e.target.dob.value,
                     gender: e.target.gender.value,
-                    address: e.target.address.value,
-                    phoneNo: e.target.phoneNo.value,
-                    aadharNo: e.target.aadharNo.value,
+                    address: sanitize(e.target.address.value),
+                    phoneNo: sanitize(e.target.phoneNo.value),
+                    aadharNo: sanitize(e.target.aadharNo.value),
                     userType: 'D',
-                    email: e.target.email.value,
-                    password: e.target.user_password.value,
+                    email: sanitize(e.target.email.value),
+                    password: sanitize(e.target.user_password.value),
                     specialization: e.target.specialization.value,
                     experience: e.target.experience.value,
+                    hospital: sanitize(hospital.id),
                 }),
         };
         fetch('/api/create-user/', requestOptions)
@@ -78,17 +104,33 @@ const SignUp = () => {
     }
     let handleSignUpAsOrganization = async (e) => {
         e.preventDefault()
+        if (e.target.org_password.value !== e.target.confirm_org_password.value) {
+            alert("Passwords don't match!")
+            return
+        }
+        if (e.target.org_password.value.length < 8) {
+            alert("Password must be atleast 8 characters long!")
+            return
+        }
+        if (e.target.licenseNo.value.length !== 12) {
+            alert("License number must be 12 digits long!")
+            return
+        }
+        if (e.target.phoneNo.value.length !== 10) {
+            alert("Phone number must be 10 digits long!")
+            return
+        }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name: e.target.name.value,
-                licenseNo: e.target.licenseNo.value,
-                address: e.target.address.value,
-                phoneNo: e.target.phoneNo.value,
+                name: sanitize(e.target.name.value),
+                licenseNo: sanitize(e.target.licenseNo.value),
+                address: sanitize(e.target.address.value),
+                phoneNo: sanitize(e.target.phoneNo.value),
                 orgType: e.target.orgType.value,
-                email: e.target.email.value,
-                password: e.target.org_password.value,
+                email: sanitize(e.target.email.value),
+                password: sanitize(e.target.org_password.value),
             }),
         };
         fetch('/api/create-organization/', requestOptions)
@@ -100,6 +142,27 @@ const SignUp = () => {
 
             });
     }
+
+    let handleHospitals = () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch('/api/get-hospitals/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setHospitals(data);
+            });
+    }
+    useEffect(() => {
+        handleHospitals();
+    }, []);
+    useEffect(() => {
+        hospitals.map((hos) => hos.id === hospital.id ? setHospital(hos) : null)
+        console.log(hospital);
+    }, [hospital])
 
     return (
         <div className='SIGNUP'>
@@ -164,21 +227,34 @@ const SignUp = () => {
                                 </select>
                             </div>
                             {userType === 'D' ?
-                                <div style={{ display: 'flex' }}>
-                                    <div className="form-group" style={{ marginRight: '20px' }}>
-                                        <label html="exampleInputid1">Specialization</label><br></br>
-                                        <select defaultValue={"DEFAULT"} className="form-control" name="specialization">
-                                            <option value="DEFAULT" disabled>Select Specialization</option>
-                                            <option value="O">Ortho</option>
-                                            <option value="N">Neuro</option>
-                                            <option value="C">Cardio</option>
-                                        </select>
+                                <div>
+                                    <div style={{ display: 'flex' }}>
+                                        <div className="form-group" style={{ marginRight: '20px' }}>
+                                            <label html="exampleInputid1">Specialization</label><br></br>
+                                            <select defaultValue={"DEFAULT"} className="form-control" name="specialization">
+                                                <option value="DEFAULT" disabled>Select Specialization</option>
+                                                <option value="O">Ortho</option>
+                                                <option value="N">Neuro</option>
+                                                <option value="C">Cardio</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label html="exampleInputid1">Experience</label>
+                                            <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" />
+                                        </div>
                                     </div>
                                     <div className="form-group">
-                                        <label html="exampleInputid1">Experience</label>
-                                        <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" />
+                                        <label html="exampleInputid1">Hospital</label>
+                                        <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setHospital({ id: e.target.value, name: e.target.value }) }}>
+                                            <option value={"DEFAULT"} disabled>Select Hospital</option>
+                                            <option value="None">None</option>
+                                            {
+                                                hospitals.map((hospital, index) => <option key={index} value={hospital.id}>{hospital.name}</option>)
+                                            }
+                                        </select>
                                     </div>
                                 </div>
+
                                 : null
                             }
                             <div className="form-group">
