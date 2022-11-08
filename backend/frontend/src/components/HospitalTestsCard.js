@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
 function customcard({ tests }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -79,7 +78,6 @@ function customcard({ tests }) {
 
 
 function HospitalTestsCard({ tests }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;

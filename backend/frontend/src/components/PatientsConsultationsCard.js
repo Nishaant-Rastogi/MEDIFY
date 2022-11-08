@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
 function customcard({ consultations }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -17,7 +16,6 @@ function customcard({ consultations }) {
         fetch('/api/update-consultation-view/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 window.location.reload();
             });
     }
@@ -83,7 +81,6 @@ function customcard({ consultations }) {
 
 
 function PatientsConsultationsCard({ consultations }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;

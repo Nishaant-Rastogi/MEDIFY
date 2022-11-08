@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
 function customcard({ bills }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -17,7 +16,6 @@ function customcard({ bills }) {
         fetch('/api/update-bill-view/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 window.location.reload();
             });
     }
@@ -103,7 +101,6 @@ function customcard({ bills }) {
 
 
 function PatientsBillsCard({ bills }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;

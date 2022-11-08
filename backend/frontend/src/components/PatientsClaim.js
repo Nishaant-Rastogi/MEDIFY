@@ -28,14 +28,12 @@ const PatientsClaim = () => {
         fetch('/api/claim-refund/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 navigate(-1)
                 window.location.reload()
             });
     }
 
     let handleBills = () => {
-        console.log("hello");
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -44,7 +42,6 @@ const PatientsClaim = () => {
         fetch('/api/get-unclaim-bills/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setBills(data)
             })
     }
@@ -58,7 +55,6 @@ const PatientsClaim = () => {
         fetch('/api/get-insurance-companies/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setInsurances(data)
             });
     }
@@ -73,7 +69,6 @@ const PatientsClaim = () => {
         fetch('/api/get-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUser(data);
             });
     };

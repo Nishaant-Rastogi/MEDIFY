@@ -13,14 +13,12 @@ function ConsultationBillCard({ doctor, user, consultation }) {
         fetch('/api/get-insurance-companies/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setInsurances(data)
             });
     }
 
     let handleBill = (e) => {
         e.preventDefault()
-        console.log(insurance);
 
         insurances.map((ins) => ins.id === insurance.id ? setInsurance(ins) : null)
 
@@ -42,7 +40,6 @@ function ConsultationBillCard({ doctor, user, consultation }) {
         fetch('/api/send-consultation-bill/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 navigate(-1)
             });
     }

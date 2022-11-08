@@ -22,7 +22,6 @@ const PharmacyList = () => {
         fetch('/api/get-pharmacies/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setPharmacies(data);
             });
     }

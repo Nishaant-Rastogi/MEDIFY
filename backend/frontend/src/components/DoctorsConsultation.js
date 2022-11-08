@@ -16,7 +16,6 @@ const DoctorsConsultation = () => {
         fetch('/api/get-doctor-consultations/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 setConsultations(data);
             });
     }

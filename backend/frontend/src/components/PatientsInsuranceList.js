@@ -19,7 +19,6 @@ const PatientsInsuranceList = () => {
         fetch('/api/get-insurance-companies/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setInsurances(data);
             });
     }

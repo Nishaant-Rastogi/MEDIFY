@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
 function customcard({ UserData }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -13,11 +12,9 @@ function customcard({ UserData }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(UserData[e.target.id])
         }
-        console.log(JSON.stringify(UserData[e.target.id]));
         fetch('/api/delete-user/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 window.location.reload();
             })
     }
@@ -87,12 +84,10 @@ function customcard({ UserData }) {
 
 
 function AdminCheckUserCard({ UserData }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     return (
         <>
-            {console.log(UserData)}
             {UserData.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">

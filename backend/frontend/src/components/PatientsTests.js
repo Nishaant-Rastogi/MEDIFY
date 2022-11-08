@@ -16,7 +16,6 @@ const PatientsTests = () => {
         fetch('/api/get-test-results/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 setTests(data);
             });
     }

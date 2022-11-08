@@ -16,7 +16,6 @@ const AdminCheckOrganisation = () => {
         fetch('/api/get-check-organizations/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUserData(data);
             });
     }

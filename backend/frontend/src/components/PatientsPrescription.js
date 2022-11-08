@@ -16,7 +16,6 @@ const PatientsPrescription = () => {
         fetch('/api/get-prescriptions/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setPrescriptions(data);
             });
     }

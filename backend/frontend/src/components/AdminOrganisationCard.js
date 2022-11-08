@@ -13,11 +13,9 @@ function customcard({ UserData }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(UserData[e.target.id])
         }
-        console.log(JSON.stringify(UserData[e.target.id]));
         fetch('/api/delete-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 window.location.reload();
             })
     }

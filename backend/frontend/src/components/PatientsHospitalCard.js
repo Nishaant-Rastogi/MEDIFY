@@ -3,7 +3,6 @@ import '../styles/hospital_card.css';
 import { Link } from "react-router-dom";
 
 function customcard({ hospitals }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -93,7 +92,6 @@ function customcard({ hospitals }) {
 
 
 function PatientsHospitalCard({ hospitals }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;

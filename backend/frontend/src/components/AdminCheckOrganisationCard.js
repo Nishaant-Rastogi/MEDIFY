@@ -9,7 +9,6 @@ function customcard({ UserData }) {
 
     let sendEmail = async (e, data) => {
         e.preventDefault()
-        // console.log(e.target.email.value);
         emailjs.send(
             "service_fq04boo",
             "template_fbjb1dn",
@@ -33,7 +32,6 @@ function customcard({ UserData }) {
         fetch('/api/approve-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 sendEmail(e, data);
             })
     }
@@ -47,7 +45,6 @@ function customcard({ UserData }) {
         fetch('/api/reject-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 window.location.reload();
             })
     }

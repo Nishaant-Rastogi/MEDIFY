@@ -9,7 +9,6 @@ const PatientsHospitalsList = () => {
     const [searchItem, setSearchItem] = useState('');
 
     let search = () => {
-        console.log(searchItem)
         hospitals.map((hospital) => hospital.name === searchItem ? setHospitals(hospital) : null)
     }
     let handleHospitals = () => {
@@ -21,7 +20,6 @@ const PatientsHospitalsList = () => {
         fetch('/api/get-hospitals/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setHospitals(data);
             });
     }

@@ -13,7 +13,6 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/get-insurance-companies/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setInsurances(data)
             });
     }
@@ -35,13 +34,13 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                navigate(-1)
+                window.location.reload()
             });
     }
 
     let handleBill = (e) => {
         e.preventDefault()
-        console.log(insurance);
 
         const requestOptions = {
             method: 'POST',
@@ -62,7 +61,6 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result-bill/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 handleTestResult();
                 navigate(-1)
             });

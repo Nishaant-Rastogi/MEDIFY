@@ -16,7 +16,6 @@ const PharmacyBills = () => {
         fetch('/api/get-pharmacy-bills/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setBills(data)
             });
     }

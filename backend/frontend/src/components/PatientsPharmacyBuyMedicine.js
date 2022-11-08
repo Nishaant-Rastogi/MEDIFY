@@ -33,7 +33,6 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/send-pharmacy-bill/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         navigate(-1)
         window.location.reload()
       });
@@ -49,7 +48,6 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/get-user/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUser(data);
       });
   };
@@ -63,7 +61,6 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/get-prescriptions-buy-medicine/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setPrescriptions(data);
       });
   }
@@ -76,7 +73,6 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/get-insurance-companies/', requestOptions)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setInsurances(data)
       });
   }

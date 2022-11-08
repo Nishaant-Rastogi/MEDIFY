@@ -25,7 +25,6 @@ const TestCard = () => {
         fetch('/api/get-prescriptions/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setPrescriptions(data);
             });
     }
@@ -39,7 +38,6 @@ const TestCard = () => {
         fetch('/api/get-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUser(data);
             });
     };

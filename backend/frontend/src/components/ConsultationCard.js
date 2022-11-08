@@ -29,7 +29,6 @@ const ConsultationCard = () => {
         fetch('/api/request-consultation/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setConsultation(data.id)
             })
     }
@@ -44,7 +43,6 @@ const ConsultationCard = () => {
         fetch('/api/get-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUser(data);
             });
     };

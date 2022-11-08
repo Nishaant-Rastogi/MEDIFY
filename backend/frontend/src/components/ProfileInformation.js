@@ -28,7 +28,6 @@ const ProfileInformation = () => {
         fetch('/api/get-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUserData(data);
             });
     }
@@ -42,7 +41,6 @@ const ProfileInformation = () => {
         fetch('/api/get-organization/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUserData(data);
             });
     }
@@ -69,7 +67,6 @@ const ProfileInformation = () => {
             fetch('/api/update-user/', requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     handleUser();
                 });
         } else {
@@ -87,14 +84,12 @@ const ProfileInformation = () => {
             fetch('/api/update-organization/', requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     handleOrganisation();
                 });
         }
         setEdit(false);
     }
     useEffect(() => {
-        console.log(localStorage.getItem('user'));
         if (localStorage.getItem('user') === null) {
             if (localStorage.getItem('organisation') === null) {
                 window.location.href = '/';

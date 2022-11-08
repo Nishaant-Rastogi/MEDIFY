@@ -12,7 +12,6 @@ const PrescriptionCard = () => {
 
     const handlePrescription = (e) => {
         e.preventDefault()
-        console.log("hello");
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -31,7 +30,6 @@ const PrescriptionCard = () => {
         fetch('/api/send-prescription/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setPrescription(data.id)
                 navigate(-1)
             })
@@ -47,7 +45,6 @@ const PrescriptionCard = () => {
         fetch('/api/get-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setDoctor(data);
             });
     };
@@ -56,7 +53,6 @@ const PrescriptionCard = () => {
         if (localStorage.getItem('user') === null) {
             window.location.href = '/';
         }
-        console.log(user)
         handleUser();
     }, [])
     return (

@@ -16,7 +16,6 @@ const AdminUserList = () => {
         fetch('/api/get-users/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setUserData(data);
             });
     }

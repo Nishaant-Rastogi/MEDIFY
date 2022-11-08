@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function customcard({ EmpData }) {
-    const handler = (i) => { console.log(i); }
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
