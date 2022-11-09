@@ -86,7 +86,7 @@ function PatientsConsultationsCard({ consultations }) {
     let id = 0;
     return (
         <>
-            {consultations.length <= 1 ?
+            {consultations.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne"> No Medical Consultations</div>

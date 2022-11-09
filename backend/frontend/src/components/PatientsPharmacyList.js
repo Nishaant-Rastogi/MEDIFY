@@ -9,8 +9,12 @@ const PharmacyList = () => {
     const [searchItem, setSearchItem] = useState('');
 
     let search = () => {
-        pharmacies.map((pharmacy) => pharmacy.name === searchItem ? setPharmacies(pharmacy) : null)
+        pharmacies.map((pharmacy) => pharmacy.name === searchItem ? setPharmacies([pharmacy]) : null)
 
+    }
+
+    let handleSearch = () => {
+        pharmacies.map((pharmacy) => pharmacy.name === searchItem ? setPharmacies([pharmacy]) : alert('No pharmacy found'))
     }
 
     let handlePharmacies = () => {
@@ -31,13 +35,20 @@ const PharmacyList = () => {
         }
         handlePharmacies();
     }, []);
+    useEffect(() => {
+        if (searchItem === '') {
+            handlePharmacies();
+        } else if (searchItem !== '') {
+            search();
+        }
+    }, [searchItem]);
     return (
-        <div>
+        <div style={{ backgroundColor: '#e3f7e3' }}>
             <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
             <div style={{ marginLeft: '400px', width: '700px' }} className="input-group mb-3">
                 <input type="text" onChange={(e) => setSearchItem(e.target.value)} className="form-control" placeholder="Search Pharmacy Name" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                 <div className="input-group-append">
-                    <button onClick={search} className="btn btn-outline-secondary" type="button">Search</button>
+                    <button onClick={handleSearch} className="btn btn-outline-secondary" type="button">Search</button>
                 </div>
             </div>
             <div className="SAVINGACCOUNT">

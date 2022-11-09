@@ -67,6 +67,20 @@ function AdminHome({ User }) {
                         </Link>
                     </div>
                 </div>
+                <div className='UHFLEX3'>
+                    <Link to='/user/patients/claim' >
+                        <div className='ROW ROW1'>
+                            ACTIVITY LOG
+                        </div>
+                        <div className='ROW ROW2'>
+                            <div className='COL'>
+                                <div className='IMGCONTAINER'>
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/shield.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div >
     )
