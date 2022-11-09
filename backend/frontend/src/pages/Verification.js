@@ -2,11 +2,6 @@ import React, { useState, ReactDOM, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
 
-// const accountSid = 'ACf118c042529876e027f078083bc9d83a';
-// const authToken = 'c86f6a73a5ddcbb25dbf44c3cf8b3a01';
-
-// console.log(accountSid, authToken);
-// const client = require('twilio')(accountSid, authToken);
 
 const Verification = () => {
     const location = useLocation();
@@ -20,9 +15,6 @@ const Verification = () => {
     let handleOTP = (e) => {
         e.preventDefault()
         const code = e.target.one.value + e.target.two.value + e.target.three.value + e.target.four.value;
-        console.log(code)
-        console.log(OTP)
-        console.log(type)
 
         if (signup) {
             navigate('/');
@@ -30,7 +22,6 @@ const Verification = () => {
         }
 
         if (code === OTP) {
-            console.log("Verified");
             if (type && type === 'P') {
                 navigate('/user/patients/home');
             } else if (type && type === 'D') {
@@ -48,7 +39,6 @@ const Verification = () => {
 
     }
     const digitValidate = (e) => {
-        console.log(e.target.value);
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
     }
 

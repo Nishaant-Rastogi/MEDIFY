@@ -80,7 +80,7 @@ function customcard({ tests }) {
                                 </div>
                             </div>
 
-                            <button id={id++} style={{ marginLeft: '100px' }} onClick={handleDelete}>DELETE</button>
+                            <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '100px' }} onClick={handleDelete}>DELETE</button>
 
                         </div>
                     </div>

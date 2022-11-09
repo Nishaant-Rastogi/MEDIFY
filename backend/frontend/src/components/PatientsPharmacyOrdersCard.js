@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
 
-function customcard({ consultations }) {
+function customcard({ orders }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
@@ -11,9 +11,9 @@ function customcard({ consultations }) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(consultations[e.target.id])
+            body: JSON.stringify(orders[e.target.id])
         }
-        fetch('/api/update-consultation-view/', requestOptions)
+        fetch('/api/update-test-result-view/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 window.location.reload();
@@ -22,32 +22,32 @@ function customcard({ consultations }) {
 
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {consultations === [] ? null : consultations.map((data) => (
+            {orders === [] ? null : orders.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
-                                <div className="HEAD">
-                                    Consultation ID:
+                                <div className="HEAD HEAD1">
+                                    Order ID:
                                 </div>
-                                <div className="VALUE">
+                                <div className="VALUE NAME">
                                     {data.id}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Doctor's Name:
+                                    Medicine Name:
                                 </div>
                                 <div className="VALUE">
-                                    {data.doctor_name}
+                                    {data.medicine}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
-                                <div className="HEAD HEAD1">
-                                    Doctor's ID:
+                                <div className="HEAD">
+                                    Amount:
                                 </div>
-                                <div className="VALUE NAME">
-                                    {data.doctor_id}
+                                <div className="VALUE">
+                                    {data.amount}
                                 </div>
 
                             </div>
@@ -57,21 +57,36 @@ function customcard({ consultations }) {
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Problem :
+                                    Prescription ID:
                                 </div>
                                 <div className="VALUE">
-                                    {data.problem}
+                                    {data.prescription_id}
                                 </div>
-
-                                <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '500px' }} onClick={handleDelete}>DELETE</button>
-
                             </div>
+                            <div className="DATA TO">
+                                <div className="HEAD">
+                                    Pharmacy Name :
+                                </div>
+                                <div className="VALUE">
+                                    {data.pharmacy_name}
+                                </div>
+                            </div>
+                            <div className="DATA DATE">
+                                <div className="HEAD">
+                                    Delivered:
+                                </div>
+                                <div className="VALUE">
+                                    {data.delivered}
+                                </div>
+                            </div>
+
+                            <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '100px' }} onClick={handleDelete}>DELETE</button>
+
                         </div>
                     </div>
                 </div>
-            ))
-            }
-        </div >
+            ))}
+        </div>
     )
 }
 
@@ -80,20 +95,20 @@ function customcard({ consultations }) {
 
 
 
-function PatientsConsultationsCard({ consultations }) {
+function PatientsPharmacyOrdersCard({ orders }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <>
-            {consultations.length < 1 ?
+            {orders.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
-                        <div className="card-header COL" id="headingOne"> No Medical Consultations</div>
+                        <div className="card-header COL" id="headingOne"> No orders</div>
                     </div>
-                </div> : customcard({ consultations })}
+                </div> : customcard({ orders })}
         </>
     );
 }
 
-export default PatientsConsultationsCard;
+export default PatientsPharmacyOrdersCard;

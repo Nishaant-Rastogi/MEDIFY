@@ -35,7 +35,6 @@ class CreateUserView(APIView):
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        print(request.data)
             
         name = request.data['name']
         dob = request.data['dob']
@@ -57,7 +56,6 @@ class CreateUserView(APIView):
 
         user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password)
         user.save()
-        print(UserSerializer(user).data)
         check_user_collection.insert_one(UserSerializer(user).data)
         return Response(CreateUserSerializer(user).data, status=status.HTTP_201_CREATED)
 
@@ -67,7 +65,6 @@ class CreateOrganizationView(APIView):
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        print(request.data)
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             name = serializer.data.get('name')
@@ -79,7 +76,6 @@ class CreateOrganizationView(APIView):
             password = serializer.data.get('password')
             
             organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password)
-            print(OrganizationSerializer(organization).data)
             organization.save()
             check_org_collection.insert_one(OrganizationSerializer(organization).data)
             return Response(CreateOrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
@@ -91,11 +87,9 @@ class LoginUserView(APIView):
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        print(request.data)
         id = request.data['id']
         password = request.data['password']
         user = user_collection.find({'id': id, 'password': password})
-        print(UserSerializer(user[0]).data)
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
                 return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
@@ -108,10 +102,8 @@ class LoginOrganizationView(APIView):
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        print(request.data)
         id = request.data['id']
         password = request.data['password']
-        print(id, password)
         organization = org_collection.find({'id': id, 'password': password})
         if organization:
             return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
@@ -121,7 +113,6 @@ class LoginAdminView(APIView):
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        print(request.data)
         id = request.data['id']
         password = request.data['password']
         admin = admin_collection.find({'id': id, 'password': password})
@@ -164,7 +155,6 @@ class GetUserView(APIView):
     def post(self, request, format=None):
         id = request.data['id']
         user = user_collection.find({'id': id})
-        print(UserSerializer(user[0]))
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
                 return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
@@ -182,7 +172,6 @@ class UpdateUserView(APIView):
         id = request.data['id']
         user_collection.update_one({'id': id}, {'$set': {'dob': dob, 'gender': gender, 'address': address, 'phoneNo': phoneNo, 'balance': balance}})
         user = user_collection.find({'id': id})
-        print(user)
         return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
 
 class UpdateOrganizationView(APIView):
@@ -207,7 +196,6 @@ class GetOrganizationsView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({})
-        print(orgs)
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class GetHospitalsView(APIView):
@@ -306,12 +294,10 @@ class CreateConsultationView(APIView):
     serializer_class = CreateConsultationSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-        print(serializer)
         if serializer.is_valid():
             consultation = Consultation(patient_id=request.data['patient_id'], doctor_id=request.data['doctor_id'], patient_name=request.data['patient_name'], doctor_name=request.data['doctor_name'], patient_gender = request.data['patient_gender'], patient_email = request.data['patient_email'], problem=request.data['problem'])
             document_collection.insert_one(ConsultationSerializer(consultation).data)
             return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
-        print(serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreatePrescriptionView(APIView):
@@ -370,7 +356,6 @@ class GetBillView(APIView):
 class GetUnClaimBillView(APIView):
     def post(self, request, format=None):
         id = request.data['id']
-        print(document_collection.find({'patient_id': id, 'visible': True, 'claimed': False}).count())
         bills = document_collection.find({'patient_id': id, 'visible': True, 'claimed': False})
         all_bills = []
         for bill in bills:
@@ -395,7 +380,6 @@ class GetDoctorBillView(APIView):
 
 class GetHospitalBillView(APIView):
     def post(self, request, format=None):
-        print(request.data)
         id = request.data['id']
         bills = document_collection.find({'docType': 'BT', 'visible': True})
         all_bills = []
@@ -425,7 +409,6 @@ class GetConsultationView(APIView):
 class GetPrescriptionView(APIView):
     serializer_class = CreatePrescriptionSerializer
     def post(self, request, format=None):
-        print(request.data)
         patient_id = request.data['id']
         documents = document_collection.find({'patient_id': patient_id, 'docType': 'P', 'visible': True})
         return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
@@ -433,9 +416,7 @@ class GetPrescriptionView(APIView):
 class GetPrescriptionBuyMedicineView(APIView):
     serializer_class = CreatePrescriptionSerializer
     def post(self, request, format=None):
-        print(request.data)
         patient_id = request.data['id']
-        print(patient_id)
         documents = document_collection.find({'patient_id': patient_id, 'docType': 'P', 'visible': True, 'medicine_bought': False})
         return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
@@ -480,7 +461,6 @@ class CreateConsultationBillView(APIView):
     serializer_class = CreateConsultationBillSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             consultation_bill = ConsultationBill(consultation_id=request.data['consultation_id'], patient_id=request.data['patient_id'], doctor_id=request.data['doctor_id'], patient_name=request.data['patient_name'], doctor_name=request.data['doctor_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'])
             patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
@@ -490,14 +470,12 @@ class CreateConsultationBillView(APIView):
             doctor_balance = user_collection.find_one({'id': request.data['doctor_id']})['balance']
             user_collection.update_one({'id': request.data['doctor_id']}, {'$set': {'balance': int(doctor_balance) + int(request.data['amount'])}})
             document_collection.insert_one(ConsultationBillSerializer(consultation_bill).data)
-            print(document_collection.find_one({'docType': 'BC', 'consultation_id': request.data['consultation_id']}))
             return Response(ConsultationBillSerializer(consultation_bill).data, status=status.HTTP_200_OK)
 
 class CreateTestResultBillView(APIView):
     serializer_class = CreateTestResultBillSerializer
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             test_result_bill = TestResultBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], hospital_id=request.data['hospital_id'], patient_name=request.data['patient_name'], hospital_name=request.data['hospital_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'], test=request.data['test'])
             patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
@@ -515,7 +493,6 @@ class CreatePharmacyBillView(APIView):
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            print(request.data)
             pharmacy_bill = PharmacyBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'], medicine=request.data['medicine'])
             patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
             if(int(patient_balance) < int(request.data['amount'])):
@@ -524,8 +501,26 @@ class CreatePharmacyBillView(APIView):
             pharmacy_balance = org_collection.find_one({'id': request.data['pharmacy_id']})['balance']
             org_collection  .update_one({'id': request.data['pharmacy_id']}, {'$set': {'balance': int(pharmacy_balance) + int(request.data['amount'])}})
             document_collection.insert_one(PharmacyBillSerializer(pharmacy_bill).data)
-            print("bill sent")
+
+            pharmacy_order = PharmacyOrder(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], medicine=request.data['medicine'], amount=request.data['amount'])
+            print(pharmacy_order)
+            document_collection.insert_one(PharmacyOrderSerializer(pharmacy_order).data)
             return Response(PharmacyBillSerializer(pharmacy_bill).data, status=status.HTTP_200_OK)
+
+class GetPharmacyOrderView(APIView):
+    def post(self, request, format=None):
+        pharmacy_order = document_collection.find_one({'pharmacy_id': request.data['id'],'docType':'O'})
+        return Response(pharmacy_order, status=status.HTTP_200_OK)
+
+class GetUserPharmacyOrderView(APIView):
+    def post(self, request, format=None):
+        pharmacy_order = document_collection.find_one({'patient_id': request.data['id'],'docType':'O'})
+        return Response(pharmacy_order, status=status.HTTP_200_OK)
+
+class PharmacyDeliverOrderView(APIView):
+    def post(self, request, format=None):
+        document_collection.update_one({'id': request.data['id']}, {'$set': {'delivered': 'Delivered'}})
+        return Response({'Success': 'Order Delivered...'}, status=status.HTTP_200_OK)
 
 class ClaimRefundView(APIView):
     def post(self, request, format=None):
@@ -546,50 +541,5 @@ class GetHospitalDoctorsView(APIView):
         doctors = []
         for doctor in user_collection.find({'userType': 'D'}):
             if(doctor['hospital'] == hospital_id):
-                doctors.append(doctor)
-        print(DoctorSerializer(doctors).data)
-        return Response(DoctorSerializer(doctors).data, status=status.HTTP_200_OK)
-
-EXPIRY_TIME = 60 # seconds
-# This class returns the string needed to generate the key
-class generateKey:
-
-    def returnValue(phone):
-        return str(phone) + str(datetime.date(datetime.now())) + "Some Random Secret Key"
-
-class GetOTPView(APIView):
-    # Get to Create a call for OTP
-    def get(self, request):
-        phone = request.GET.get('phone')
-        print(phone)
-        try:
-            Mobile = phoneModel.objects.get(Mobile=phone)  # if Mobile already exists the take this else create New One
-        except ObjectDoesNotExist:
-            phoneModel.objects.create(
-                Mobile=phone,
-            )
-            Mobile = phoneModel.objects.get(Mobile=phone)  # user Newly created Model
-        Mobile.save()  # Save the data
-        keygen = generateKey()
-        key = base64.b32encode(keygen.returnValue(phone).encode())  # Key is generated
-        OTP = pyotp.TOTP(key,interval = EXPIRY_TIME)  # TOTP Model for OTP is created
-        print(OTP.now())
-        # Using Multi-Threading send the OTP Using Messaging Services like Twilio or Fast2sms
-        return Response({"OTP": OTP.now()}, status=200)  # Just for demonstration
-
-    # This Method verifies the OTP
-    def post(self, request):
-        phone = request.data.get('phone')
-        try:
-            Mobile = phoneModel.objects.get(Mobile=phone)
-        except ObjectDoesNotExist:
-            return Response("User does not exist", status=404)  # False Call
-
-        keygen = generateKey()
-        key = base64.b32encode(keygen.returnValue(phone).encode())  # Generating Key
-        OTP = pyotp.TOTP(key,interval = EXPIRY_TIME)  # TOTP Model 
-        if OTP.verify(request.data["otp"]):  # Verifying the OTP
-            Mobile.isVerified = True
-            Mobile.save()
-            return Response("You are authorised", status=200)
-        return Response("OTP is wrong/expired", status=400)
+                doctors.append(DoctorSerializer(doctor).data)
+        return Response(DoctorSerializer(doctors, many=True).data, status=status.HTTP_200_OK)

@@ -65,7 +65,7 @@ function customcard({ doctors }) {
                                     100
                                 </div>
                             </div>
-                            <Link to="/user/patients/doctor/consultation" state={{ doctor_name: doctor.name, doctor_id: doctor.id }}><button id={id++}>CONSULT</button></Link>
+                            <Link to="/user/patients/doctor/consultation" state={{ doctor_name: doctor.name, doctor_id: doctor.id }}><button className="btn btn-primary btn-sm" id={id++}>CONSULT</button></Link>
                         </div>
                     </div>
                 </div>

@@ -57,7 +57,7 @@ function customcard({ consultations }) {
                                     {data.patient_gender}
                                 </div>
                             </div>
-                            <Link to="/user/doctors/consultations/prescribe" state={{ patient_id: data.patient_id, patient_name: data.patient_name, consultation_id: data.id }}><button>PRESCRIBE</button></Link>
+                            <Link to="/user/doctors/consultations/prescribe" state={{ patient_id: data.patient_id, patient_name: data.patient_name, consultation_id: data.id }}><button className="btn btn-primary btn-sm">PRESCRIBE</button></Link>
                         </div>
                     </div>
                 </div>

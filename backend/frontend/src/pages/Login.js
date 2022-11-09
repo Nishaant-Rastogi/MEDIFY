@@ -20,9 +20,7 @@ const Login = () => {
 
     let sendEmail = async (e, name, email) => {
         e.preventDefault()
-        console.log(email);
         otp = generateOTP();
-        console.log(otp);
         try {
             emailjs.send(
                 "service_fq04boo",
@@ -59,7 +57,6 @@ const Login = () => {
                 alert("Invalid Credentials! Please try again.");
             })
             .then(data => {
-                console.log(data);
                 localStorage.setItem('admin', JSON.stringify({ id: data.id }));
                 navigate('/admin_user/home');
             })
@@ -83,16 +80,12 @@ const Login = () => {
                 alert("Invalid Credentials!, Please try Again");
             })
             .then(data => {
-                console.log(data);
                 localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
-                console.log(localStorage.getItem('user'));
                 sendEmail(e, data.name, data.email);
                 if (data.userType === 'P') {
-                    console.log("patient");
                     navigate('/verification', { state: { otp: otp, type: 'P' } });
                 }
                 else if (data.userType === 'D') {
-                    console.log("doctor");
                     navigate('/verification', { state: { otp: otp, type: 'D' } });
                 }
             })
@@ -116,10 +109,8 @@ const Login = () => {
                 alert("Invalid Credentials!, Please try again");
             })
             .then(data => {
-                console.log(data);
                 sendEmail(e, data.name, data.email);
                 localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
-                console.log(localStorage.getItem('organisation'));
                 if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
                 else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
                 else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });

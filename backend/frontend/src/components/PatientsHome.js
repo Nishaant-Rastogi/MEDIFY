@@ -68,14 +68,14 @@ function PatientsHome() {
         </div>
         <div className='UHFLEX2'>
           <div className='ROW'>
-            <Link to='/user/patients/upload' className='COL COL1'>
+            <Link to='/user/patients/pharmacy-orders' className='COL COL1'>
 
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' alt="/" src="/static/images/upload.png" />
+                <img className='IMG ACIMG' alt="/" src="/static/images/checklist.png" />
               </div>
               <div className='DATA'>
-                <div className='HEADING'>UPLOAD DOCUMENTS</div>
-                <div className='SUBHEADING'>Upload Medical Records</div>
+                <div className='HEADING'>PHARMACY ORDERS</div>
+                <div className='SUBHEADING'>View All Pharmacy Orders</div>
               </div>
             </Link>
             <Link to='/user/patients/consultation' className='COL COL2'>

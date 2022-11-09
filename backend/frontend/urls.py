@@ -21,7 +21,7 @@ urlpatterns = [
     path('user/patients/insurance', index),
     path('user/patients/pharmacy', index),
     path('user/patients/pharmacy/buy', index),
-    path('user/patients/upload', index),
+    path('user/patients/pharmacy-orders', index),
     path('user/patients/consultation', index),
     path('user/patients/prescription', index),
     path('user/patients/tests', index),

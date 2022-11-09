@@ -47,7 +47,7 @@ function customcard({ hospitals }) {
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
-                                <Link to="/user/patients/hospital/test" state={{ hospital_id: data.id, hospital_name: data.name }}><button>REQUEST TEST</button></Link>
+                                <Link to="/user/patients/hospital/test" state={{ hospital_id: data.id, hospital_name: data.name }}><button className="btn btn-primary btn-sm">REQUEST TEST</button></Link>
                             </div>
 
                         </div>
@@ -81,8 +81,9 @@ function customcard({ hospitals }) {
                         </div>
                     </div>
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     )
 }
 

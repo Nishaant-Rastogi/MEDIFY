@@ -45,6 +45,11 @@ class PharmacyBillSerializer(serializers.ModelSerializer):
         model = PharmacyBill
         fields = '__all__'
 
+class PharmacyOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PharmacyOrder
+        fields = '__all__'
+
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -84,3 +89,8 @@ class CreatePharmacyBillSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyBill
         fields = ('prescription_id', 'patient_id', 'patient_name', 'amount', 'pharmacy_id', 'pharmacy_name', 'insurance_id', 'insurance_name', 'medicine')
+
+class CreatePharmacyOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PharmacyOrder
+        fields = ('prescription_id', 'patient_id', 'patient_name', 'amount', 'medicine', 'pharmacy_id', 'pharmacy_name')

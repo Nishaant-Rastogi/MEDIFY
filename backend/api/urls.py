@@ -26,7 +26,6 @@ urlpatterns = [
     path('reject-organization/', RejectOrganizationView.as_view(), name="reject-organization"),
     path('delete-user/', DeleteUserView.as_view(), name="delete-user"),
     path('delete-organization/', DeleteOrganizationView.as_view(), name="delete-organization"),
-    path('get-otp/', GetOTPView.as_view(), name="get-otp"),
     path('request-consultation/', CreateConsultationView.as_view(), name="consultation"),
     path('get-consultations/', GetConsultationView.as_view(), name="get-consultations"),
     path('get-prescriptions/', GetPrescriptionView.as_view(), name="get-prescriptions"),
@@ -51,4 +50,7 @@ urlpatterns = [
     path('send-test-result-bill/', CreateTestResultBillView.as_view(), name="send-test-bill"),
     path('claim-refund/', ClaimRefundView.as_view(), name="claim-refund"),
     path('get-prescriptions-buy-medicine/', GetPrescriptionBuyMedicineView.as_view(), name="get-prescriptions-buy-medicine"),
+    path('get-user-pharmacy-orders/', GetUserPharmacyOrderView.as_view(), name="get-pharmacy-orders"),
+    path('get-pharmacy-orders/', GetPharmacyOrderView.as_view(), name="get-pharmacy-order"),
+    path('pharmacy-deliver-order/', PharmacyDeliverOrderView.as_view(), name="pharmacy-deliver-order"),
 ]

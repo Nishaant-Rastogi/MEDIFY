@@ -99,8 +99,8 @@ function customcard({ UserData }) {
                                     {data.phoneNo}
                                 </div>
                             </div>
-                            <button id={id} onClick={handleApprove}>Approve</button>
-                            <button id={id++} onClick={handleReject}>Reject</button>
+                            <button className="btn btn-primary btn-sm" id={id} onClick={handleApprove}>Approve</button>
+                            <button className="btn btn-primary btn-sm" id={id++} onClick={handleReject}>Reject</button>
                         </div>
                     </div>
                 </div>

@@ -98,7 +98,7 @@ function customcard({ prescriptions }) {
                                 </div>
                             </div>
                             <div className="DATA DATE">
-                                <button id={id++} onClick={handleDelete}>DELETE</button>
+                                <button className="btn btn-primary btn-sm" id={id++} onClick={handleDelete}>DELETE</button>
                             </div>
                         </div>
                     </div>

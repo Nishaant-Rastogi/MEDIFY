@@ -86,7 +86,7 @@ function customcard({ bills }) {
                                     {data.amount}
                                 </div>
                             </div>
-                            <button id={id++} style={{ marginLeft: '10px' }} onClick={handleDelete}>DELETE</button>
+                            <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '10px' }} onClick={handleDelete}>DELETE</button>
                         </div>
                     </div>
                 </div>

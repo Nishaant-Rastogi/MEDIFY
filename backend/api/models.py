@@ -21,6 +21,9 @@ def generate_test_result_id(size=10, chars=string.ascii_uppercase + string.digit
 def generate_bill_id(size=10, chars=string.ascii_uppercase + string.digits):
     return 'B'+''.join(random.choice(chars) for _ in range(size))
 
+def generate_order_id(size=10, chars=string.ascii_uppercase + string.digits):
+    return 'O'+''.join(random.choice(chars) for _ in range(size))
+
 class phoneModel(models.Model):
     Mobile = models.IntegerField(blank=False)
     isVerified = models.BooleanField(blank=False, default=False)
@@ -173,5 +176,20 @@ class PharmacyBill(models.Model):
     docType = models.CharField(default='BP', max_length=1)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
+    def __str__(self):
+        return self.consultation_id
+
+class PharmacyOrder(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_order_id)
+    prescription_id = models.CharField(max_length=11)
+    patient_id = models.CharField(max_length=11)
+    patient_name = models.CharField(max_length=200)
+    pharmacy_id = models.CharField(max_length=11)
+    pharmacy_name = models.CharField(max_length=200)
+    medicine = models.CharField(max_length=20, default='None')
+    amount = models.IntegerField(default=100)
+    docType = models.CharField(default='O', max_length=1)
+    visible = models.BooleanField(default=True)
+    delivered = models.BooleanField(default="Pending")
     def __str__(self):
         return self.consultation_id

@@ -11,7 +11,7 @@ import InsuranceHome from './components/InsuranceHome';
 import PharmacyHome from './components/PharmacyHome';
 import PatientsPharmacyList from './components/PatientsPharmacyList';
 import PatientsInsuranceList from './components/PatientsInsuranceList';
-import PatientsUpload from './components/PatientsUpload';
+import PatientsPharmacyOrders from './components/PatientsPharmacyOrders';
 import AdminHome from './components/AdminHome';
 import AdminCheckUser from "./components/AdminCheckUser";
 import AdminCheckOrganisation from "./components/AdminCheckOrganisation";
@@ -76,7 +76,7 @@ function App() {
           <Route path="/user/patients/insurance" element={<PatientsInsuranceList />} />
           <Route path="/user/patients/pharmacy" element={<PatientsPharmacyList />} />
           <Route path="/user/patients/pharmacy/buy" element={<PatientsPharmacyBuyMedicine />} />
-          <Route path="/user/patients/upload" element={<PatientsUpload />} />
+          <Route path="/user/patients/pharmacy-orders" element={<PatientsPharmacyOrders />} />
           <Route path="/user/patients/prescription" element={<PatientsPrescription />} />
           <Route path="/user/patients/tests" element={<PatientsTests />} />
           <Route path="/user/patients/consultation" element={<PatientsConsultation />} />

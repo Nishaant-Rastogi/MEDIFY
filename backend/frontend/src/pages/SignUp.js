@@ -24,9 +24,7 @@ const SignUp = () => {
 
     let sendEmail = (e) => {
         e.preventDefault()
-        // console.log(e.target.email.value);
         otp = generateOTP();
-        console.log(otp);
         try {
             emailjs.send(
                 "service_fq04boo",
@@ -46,7 +44,6 @@ const SignUp = () => {
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
-        console.log(hospital.id)
         if (e.target.user_password.value !== e.target.confirm_user_password.value) {
             alert("Passwords don't match!")
             return
@@ -96,9 +93,7 @@ const SignUp = () => {
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 sendEmail(e)
-                console.log('sent', otp);
                 navigate('/verification', { state: { otp: otp, type: e.target.userType.value, signup: true } })
             })
     }
@@ -136,7 +131,6 @@ const SignUp = () => {
         fetch('/api/create-organization/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 sendEmail(e)
                 navigate('/verification', { state: { otp: otp, orgType: e.target.orgType.value, signup: true } })
 
@@ -152,7 +146,6 @@ const SignUp = () => {
         fetch('/api/get-hospitals/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setHospitals(data);
             });
     }
@@ -161,7 +154,6 @@ const SignUp = () => {
     }, []);
     useEffect(() => {
         hospitals.map((hos) => hos.id === hospital.id ? setHospital(hos) : null)
-        console.log(hospital);
     }, [hospital])
 
     return (
@@ -220,7 +212,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
-                                <select defaultValue={"DEFAULT"} onChange={(e) => { console.log(e.target.value); setUserType(e.target.value) }} className="form-control" name="userType">
+                                <select defaultValue={"DEFAULT"} onChange={(e) => { setUserType(e.target.value) }} className="form-control" name="userType">
                                     <option value="DEFAULT" disabled>Select Type of User</option>
                                     <option value="P">Patient</option>
                                     <option value="D">Doctor</option>

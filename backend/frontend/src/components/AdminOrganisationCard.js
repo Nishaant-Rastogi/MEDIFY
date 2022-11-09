@@ -71,7 +71,7 @@ function customcard({ UserData }) {
                                 </div>
                             </div>
 
-                            <button id={id++} onClick={handleDelete}>Delete</button>
+                            <button className="btn btn-primary btn-sm" id={id++} onClick={handleDelete}>Delete</button>
                         </div>
                     </div>
                 </div>

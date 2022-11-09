@@ -11,11 +11,11 @@ function Navbar({ name }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark USERBAR COLOR1">
-        <b style={{ color: 'white', fontSize: '30px' }}>MEDIFY</b>
+        <b style={{ color: 'white', fontSize: '25px' }}>MEDIFY</b>
         <div>
           <div className='nav-item dropdown USERDROPDOWN'>
             <img className="PROFILEIMAGE" src="/static/images/user.png" alt='/' />
-            <b className="PROFILE" style={{ color: 'white', paddingTop: '6px', fontSize: '20px' }}>{name}</b>
+            {/* <b className="PROFILE" style={{ color: 'white', paddingTop: '6px', fontSize: '20px' }}>{name}</b> */}
             <Link to="/user/profile"><button className='btn btn-outline-light PROFILE'>Profile</button></Link>
             <Link to="/"><button onClick={handleLogOut} className="btn btn-outline-light LOGOUT">Logout</button></Link>
           </div>

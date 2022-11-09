@@ -36,7 +36,7 @@ function customcard({ pharmacies }) {
                                     {data.licenseNo}
                                 </div>
                             </div>
-                            <Link to='/user/patients/pharmacy/buy' state={{ pharmacy_id: data.id, pharmacy_name: data.name }}><button>Buy Medicines</button></Link>
+                            <Link to='/user/patients/pharmacy/buy' state={{ pharmacy_id: data.id, pharmacy_name: data.name }}><button className="btn btn-primary btn-sm">Buy Medicines</button></Link>
                         </button>
                     </div>
                     <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
