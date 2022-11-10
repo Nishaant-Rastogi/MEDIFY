@@ -11,7 +11,8 @@ urlpatterns = [
     path('admin_user/organisations', index),
     path('admin_user/users_list', index ),
     path('admin_user/organisations_list', index ),
-    
+    path('admin_user/activity-log', index ),
+
     path('user/profile', index),
     path('user/patients/home', index),
     path('user/patients/hospital', index),

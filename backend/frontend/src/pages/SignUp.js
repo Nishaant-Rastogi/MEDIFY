@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
 import emailjs from '@emailjs/browser'
 var sanitize = require('mongo-sanitize');
+import bcrypt from 'bcryptjs'
+
+const salt = bcrypt.genSaltSync(10);
 
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
@@ -73,7 +76,7 @@ const SignUp = () => {
                     aadharNo: sanitize(e.target.aadharNo.value),
                     userType: 'P',
                     email: sanitize(e.target.email.value),
-                    password: sanitize(e.target.user_password.value),
+                    password: bcrypt.hashSync(sanitize(e.target.user_password.value), salt),
                 }) :
                 JSON.stringify({
                     name: sanitize(e.target.name.value),
@@ -84,7 +87,7 @@ const SignUp = () => {
                     aadharNo: sanitize(e.target.aadharNo.value),
                     userType: 'D',
                     email: sanitize(e.target.email.value),
-                    password: sanitize(e.target.user_password.value),
+                    password: bcrypt.hashSync(sanitize(e.target.user_password.value), salt),
                     specialization: e.target.specialization.value,
                     experience: e.target.experience.value,
                     hospital: sanitize(hospital.id),
@@ -125,7 +128,7 @@ const SignUp = () => {
                 phoneNo: sanitize(e.target.phoneNo.value),
                 orgType: e.target.orgType.value,
                 email: sanitize(e.target.email.value),
-                password: sanitize(e.target.org_password.value),
+                password: bcrypt.hashSync(sanitize(e.target.org_password.value), salt),
             }),
         };
         fetch('/api/create-organization/', requestOptions)

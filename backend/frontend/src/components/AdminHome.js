@@ -68,7 +68,7 @@ function AdminHome({ User }) {
                     </div>
                 </div>
                 <div className='UHFLEX3'>
-                    <Link to='/user/patients/claim' >
+                    <Link to='/admin_user/activity-log' >
                         <div className='ROW ROW1'>
                             ACTIVITY LOG
                         </div>

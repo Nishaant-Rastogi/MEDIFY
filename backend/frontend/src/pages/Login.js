@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../styles/home.css'
 import emailjs from '@emailjs/browser'
 var sanitize = require('mongo-sanitize');
+import bcrypt from 'bcryptjs'
 
 const Login = () => {
     const [loginAs, setLoginAs] = useState(1)
@@ -80,14 +81,19 @@ const Login = () => {
                 alert("Invalid Credentials!, Please try Again");
             })
             .then(data => {
-                localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
-                sendEmail(e, data.name, data.email);
-                if (data.userType === 'P') {
-                    navigate('/verification', { state: { otp: otp, type: 'P' } });
+                if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
+                    localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
+                    sendEmail(e, data.name, data.email);
+                    if (data.userType === 'P') {
+                        navigate('/verification', { state: { otp: otp, type: 'P' } });
+                    }
+                    else if (data.userType === 'D') {
+                        navigate('/verification', { state: { otp: otp, type: 'D' } });
+                    }
+                } else {
+                    alert("Invalid Credentials!, Please try Again");
                 }
-                else if (data.userType === 'D') {
-                    navigate('/verification', { state: { otp: otp, type: 'D' } });
-                }
+
             })
 
     }
@@ -109,11 +115,16 @@ const Login = () => {
                 alert("Invalid Credentials!, Please try again");
             })
             .then(data => {
-                sendEmail(e, data.name, data.email);
-                localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
-                if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
-                else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
-                else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
+                if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
+                    console.log("Password Matched");
+                    sendEmail(e, data.name, data.email);
+                    localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
+                    if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
+                    else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
+                    else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
+                } else {
+                    alert("Invalid Credentials!, Please try again");
+                }
             })
     }
     useEffect(() => {

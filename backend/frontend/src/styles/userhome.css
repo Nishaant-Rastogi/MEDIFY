@@ -100,7 +100,7 @@
 }
 
 .UHCONTAINER1 .UHFLEX5{
-    flex: 0.8;
+    flex: 1.6;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

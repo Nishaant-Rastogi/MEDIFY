@@ -42,6 +42,7 @@ import ConsultationCard from './components/ConsultationCard';
 import PatientsPharmacyBuyMedicine from './components/PatientsPharmacyBuyMedicine';
 import PrescriptionCard from './components/PrescriptionCard';
 import TestCard from './components/TestCard';
+import AdminActivityLog from './components/AdminActivityLog';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -66,6 +67,7 @@ function App() {
           <Route path="/admin_user/organisations" element={<AdminCheckOrganisation />} />
           <Route path="/admin_user/users_list" element={<AdminUserList />} />
           <Route path="/admin_user/organisations_list" element={<AdminOrganisationList />} />
+          <Route path="/admin_user/activity-log" element={<AdminActivityLog />} />
 
           <Route path="/user/profile" element={<ProfileInformation />} />
           <Route path="/user/patients/home" element={<PatientsHome />} />

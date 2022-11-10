@@ -13,8 +13,7 @@ from pymongo import MongoClient
 import urllib
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-import base64
-import pyotp
+import bcrypt
 
 client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
 db = client['FCS_Project']
@@ -89,7 +88,7 @@ class LoginUserView(APIView):
             self.request.session.create()
         id = request.data['id']
         password = request.data['password']
-        user = user_collection.find({'id': id, 'password': password})
+        user = user_collection.find({'id': id})
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
                 return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
@@ -104,7 +103,7 @@ class LoginOrganizationView(APIView):
             self.request.session.create()
         id = request.data['id']
         password = request.data['password']
-        organization = org_collection.find({'id': id, 'password': password})
+        organization = org_collection.find({'id': id})
         if organization:
             return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)

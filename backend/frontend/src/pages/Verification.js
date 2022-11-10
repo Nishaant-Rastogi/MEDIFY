@@ -6,7 +6,7 @@ import '../styles/verification.css';
 const Verification = () => {
     const location = useLocation();
     const navigate = useNavigate();
-
+    const trials = 10;
     const OTP = location.state.otp;
     const type = location.state.type;
     const orgType = location.state.orgType;
@@ -34,7 +34,14 @@ const Verification = () => {
                 navigate('/organisation/insurance/home');
             }
         } else {
-            alert('WRONG OTP! PLEASE RETRY')
+            if (trials > 0) {
+                alert('WRONG OTP! PLEASE RETRY')
+                trials--;
+            } else {
+                alert('OTP EXPIRED! PLEASE RETRY')
+                OTP = 0;
+
+            }
         }
 
     }
