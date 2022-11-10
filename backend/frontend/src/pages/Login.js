@@ -116,7 +116,6 @@ const Login = () => {
             })
             .then(data => {
                 if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
-                    console.log("Password Matched");
                     sendEmail(e, data.name, data.email);
                     localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
                     if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });

@@ -7,10 +7,10 @@ const Verification = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const trials = 10;
-    const OTP = location.state.otp;
-    const type = location.state.type;
-    const orgType = location.state.orgType;
-    const signup = location.state.signup;
+    const [OTP, setOTP] = useState('');
+    const [type, setType] = useState('');
+    const [orgType, setOrgType] = useState('');
+    const [signup, setSignup] = useState(false);
 
     let handleOTP = (e) => {
         e.preventDefault()
@@ -61,6 +61,16 @@ const Verification = () => {
         }
     }
 
+    useEffect(() => {
+        if (!location.state) {
+            navigate('/');
+        } else {
+            setOTP(location.state.otp);
+            setType(location.state.type);
+            setOrgType(location.state.orgType);
+            setSignup(location.state.signup);
+        }
+    }, [])
     return (
         <div className='VERIFICATION'>
             <div className="container">
