@@ -34,7 +34,7 @@ urlpatterns = [
     path('user/doctors/prescriptions', index),
     path('user/doctors/consultations', index),
     path('user/doctors/consultations/prescribe', index),
-    path('user/doctors/upload', index),
+    path('user/doctors/bills', index),
 
     path('organisation/hospitals/home', index),
     path('organisation/hospitals/tests', index),

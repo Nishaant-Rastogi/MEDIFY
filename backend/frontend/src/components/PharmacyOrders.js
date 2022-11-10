@@ -21,7 +21,7 @@ const PharmacyOrders = () => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('user') === null) {
+        if (localStorage.getItem('organisation') === null) {
             window.location.href = '/';
         }
         handleOrders();

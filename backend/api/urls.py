@@ -53,4 +53,5 @@ urlpatterns = [
     path('get-user-pharmacy-orders/', GetUserPharmacyOrderView.as_view(), name="get-pharmacy-orders"),
     path('get-pharmacy-orders/', GetPharmacyOrderView.as_view(), name="get-pharmacy-order"),
     path('pharmacy-deliver-order/', PharmacyDeliverOrderView.as_view(), name="pharmacy-deliver-order"),
+    path('get-claims/', GetClaimView.as_view(), name="get-claims"),
 ]

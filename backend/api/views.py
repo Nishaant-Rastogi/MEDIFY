@@ -395,6 +395,7 @@ class GetPharmacyBillView(APIView):
         for bill in bills:
             if bill['pharmacy_id'] == id:
                 all_bills.append(PharmacyBillSerializer(bill).data)
+        print(all_bills)
         return Response(all_bills, status=status.HTTP_200_OK)
 
 # Document Types Discussion
@@ -488,23 +489,20 @@ class CreateTestResultBillView(APIView):
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreatePharmacyBillView(APIView):
-    serializer_class = CreatePharmacyBillSerializer
-    def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            pharmacy_bill = PharmacyBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'], medicine=request.data['medicine'])
-            patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
-            if(int(patient_balance) < int(request.data['amount'])):
-                return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
-            user_collection.update_one({'id': request.data['patient_id']}, {'$set': {'balance': int(patient_balance) - int(request.data['amount'])}})
-            pharmacy_balance = org_collection.find_one({'id': request.data['pharmacy_id']})['balance']
-            org_collection  .update_one({'id': request.data['pharmacy_id']}, {'$set': {'balance': int(pharmacy_balance) + int(request.data['amount'])}})
-            document_collection.insert_one(PharmacyBillSerializer(pharmacy_bill).data)
-
-            pharmacy_order = PharmacyOrder(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], medicine=request.data['medicine'], amount=request.data['amount'])
-            print(pharmacy_order)
-            document_collection.insert_one(PharmacyOrderSerializer(pharmacy_order).data)
-            return Response(PharmacyBillSerializer(pharmacy_bill).data, status=status.HTTP_200_OK)
+    def post(self, request, format=None):            
+        pharmacy_bill = PharmacyBill(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], amount=request.data['amount'], insurance_id=request.data['insurance_id'], insurance_name=request.data['insurance_name'], medicine=request.data['medicine'])
+        patient_balance = user_collection.find_one({'id': request.data['patient_id']})['balance']
+        if(int(patient_balance) < int(request.data['amount'])):
+            return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
+        user_collection.update_one({'id': request.data['patient_id']}, {'$set': {'balance': int(patient_balance) - int(request.data['amount'])}})
+        pharmacy_balance = org_collection.find_one({'id': request.data['pharmacy_id']})['balance']
+        org_collection  .update_one({'id': request.data['pharmacy_id']}, {'$set': {'balance': int(pharmacy_balance) + int(request.data['amount'])}})
+        document_collection.insert_one(PharmacyBillSerializer(pharmacy_bill).data)
+        
+        pharmacy_order = PharmacyOrder(prescription_id=request.data['prescription_id'], patient_id=request.data['patient_id'], pharmacy_id=request.data['pharmacy_id'], patient_name=request.data['patient_name'], pharmacy_name=request.data['pharmacy_name'], medicine=request.data['medicine'], amount=request.data['amount'])
+        print(pharmacy_order)
+        document_collection.insert_one(PharmacyOrderSerializer(pharmacy_order).data)
+        return Response(PharmacyBillSerializer(pharmacy_bill).data, status=status.HTTP_200_OK)
 
 class GetPharmacyOrderView(APIView):
     def post(self, request, format=None):
@@ -533,6 +531,11 @@ class ClaimRefundView(APIView):
         insurance_balance = org_collection.find_one({'id': insurance_id})['balance']
         org_collection.update_one({'id': insurance_id}, {'$set': {'balance': int(insurance_balance) - int(refund)}})
         return Response({'Success': 'Refund Claimed...'}, status=status.HTTP_200_OK)
+
+class GetClaimView(APIView):
+    def post(self, request, format=None):
+        claim = document_collection.find_one({'patient_id': request.data['id'], 'docType': /^B/,'claimed':True})
+        return Response(claim, status=status.HTTP_200_OK)
 
 class GetHospitalDoctorsView(APIView):
     def post(self, request, format=None):

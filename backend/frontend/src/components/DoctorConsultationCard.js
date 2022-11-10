@@ -77,10 +77,10 @@ function DoctorConsultationCard({ consultations }) {
     let id = 0;
     return (
         <>
-            {consultations === [] ?
+            {consultations.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
-                        <div className="card-header COL" id="headingOne"> No Prescriptions</div>
+                        <div className="card-header COL" id="headingOne"> No Pending Consultations</div>
                     </div>
                 </div> : customcard({ consultations })}
         </>

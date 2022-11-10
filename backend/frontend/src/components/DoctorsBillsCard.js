@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/hospital_card.css';
 
 function customcard({ bills }) {
     const hashtag = "#H";
@@ -23,12 +24,12 @@ function customcard({ bills }) {
                                     Bill Type:
                                 </div>
                                 <div className="VALUE NAME">
-                                    Pharmacy Bill
+                                    Consultation Bill
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Patient ID:
+                                    Sender ID:
                                 </div>
                                 <div className="VALUE">
                                     {data.patient_id}
@@ -36,7 +37,7 @@ function customcard({ bills }) {
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Patient Name:
+                                    Sender Name:
                                 </div>
                                 <div className="VALUE">
                                     {data.patient_name}
@@ -81,20 +82,23 @@ function customcard({ bills }) {
 
 
 
-function PharmacyBillsCard({ bills }) {
+
+
+
+function DoctorsBillsCard({ bills }) {
+    const hashtag = "#H";
+    const heading = "H";
+    let id = 0;
     return (
         <>
             {bills.length < 1 ?
-                <div className="CUSTOMCARDE" id="accordion">
+                <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
-                        <div className="card-header COL" id="headingOne">No Pharmacy Bills</div>
+                        <div className="card-header COL" id="headingOne"> No Bills</div>
                     </div>
-                </div>
-                :
-                <div>{customcard({ bills })}</div>
-            }
+                </div> : customcard({ bills })}
         </>
     );
 }
 
-export default PharmacyBillsCard;
+export default DoctorsBillsCard;

@@ -16,7 +16,7 @@ function InsuranceHome({ User }) {
             <AdCarousel />
             <div className="UHCONTAINER1">
                 {/*...............................................................................................................*/}
-                <div className='UHFLEX5'>
+                <div className='UHFLEX5' style={{ flex: '0.8' }}>
                     <div className='ROW ROW2'>
                         <Link to='/organisation/insurance/pateints' className='COL'>
                             <div className='IMGCONTAINER'>

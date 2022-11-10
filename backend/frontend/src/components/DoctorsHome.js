@@ -42,13 +42,13 @@ function DoctorsHome({ User }) {
                 </div>
                 <div className='UHFLEX2'>
                     <div className='ROW'>
-                        <Link to='/user/doctors/upload' className='COL COL1'>
+                        <Link to='/user/doctors/bills' className='COL COL1'>
                             <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/upload.png" />
+                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
                             </div>
                             <div className='DATA'>
-                                <div className='HEADING'>UPLOAD DOCUMENTS</div>
-                                <div className='SUBHEADING'>Upload Medical Records</div>
+                                <div className='HEADING'>BILLS</div>
+                                <div className='SUBHEADING'>View All Bills</div>
                             </div>
                         </Link>
                     </div>

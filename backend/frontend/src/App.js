@@ -21,7 +21,7 @@ import DoctorsPrescription from "./components/DoctorsPrescription";
 import PatientsConsultation from "./components/PatientsConsultation";
 import PatientsPrescription from "./components/PatientsPrescription";
 import PatientsBills from "./components/PatientsBills";
-import DoctorsUpload from "./components/DoctorsUpload";
+import DoctorsBills from "./components/DoctorsBills";
 import PatientsTests from "./components/PatientsTests";
 import HospitalTests from "./components/HospitalTests";
 import HospitalBills from "./components/HospitalBills";
@@ -90,7 +90,7 @@ function App() {
           <Route path="/user/doctors/prescriptions" element={<DoctorsPrescription />} />
           <Route path="/user/doctors/consultations" element={<DoctorsConsultation />} />
           <Route path="/user/doctors/consultations/prescribe" element={<PrescriptionCard />} />
-          <Route path="/user/doctors/upload" element={<DoctorsUpload />} />
+          <Route path="/user/doctors/bills" element={<DoctorsBills />} />
 
           <Route path="/organisation/hospitals/home" element={<HospitalsHome />} />
           <Route path="/organisation/hospitals/tests" element={<HospitalTests />} />
