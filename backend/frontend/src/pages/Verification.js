@@ -11,6 +11,7 @@ const Verification = () => {
     const [type, setType] = useState('');
     const [orgType, setOrgType] = useState('');
     const [signup, setSignup] = useState(false);
+    const [input, setInput] = useState('');
 
     let handleOTP = (e) => {
         e.preventDefault()
@@ -39,8 +40,6 @@ const Verification = () => {
                 trials--;
             } else {
                 alert('OTP EXPIRED! PLEASE RETRY')
-                OTP = 0;
-
             }
         }
 
@@ -69,8 +68,14 @@ const Verification = () => {
             setType(location.state.type);
             setOrgType(location.state.orgType);
             setSignup(location.state.signup);
+            document.getElementById('1').focus();
         }
     }, [])
+    useEffect(() => {
+        if (input.length === 5) {
+            return;
+        }
+    }, [input])
     return (
         <div className='VERIFICATION'>
             <div className="container">
@@ -83,14 +88,36 @@ const Verification = () => {
                                 </div>
 
                                 <form onSubmit={handleOTP} action="" className="mt-5">
-                                    <input className="otp" style={{ marginRight: '3px' }} name='one' id='1' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(2)} maxLength={1} />
-                                    <input className="otp" style={{ marginRight: '3px' }} name='two' id='2' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(3)} maxLength={1} />
-                                    <input className="otp" style={{ marginRight: '3px' }} name='three' id='3' type="text" onChange={(e) => digitValidate(e)} onKeyUp={() => tabChange(4)} maxLength={1} />
-                                    <input className="otp" style={{ marginRight: '3px' }} name='four' id='4' type="text" onChange={(e) => digitValidate(e)} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} value={input[0]} name='one' id='1' type="text" onChange={(e) => { digitValidate(e); tabChange(2) }} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} value={input[1]} name='two' id='2' type="text" onChange={(e) => { digitValidate(e); tabChange(3) }} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} value={input[2]} name='three' id='3' type="text" onChange={(e) => { digitValidate(e); tabChange(4) }} maxLength={1} />
+                                    <input className="otp" style={{ marginRight: '3px' }} value={input[3]} name='four' id='4' type="text" onChange={(e) => { digitValidate(e) }} maxLength={1} />
                                     <hr className="mt-4" />
                                     <p>OTP sent to your email</p>
                                     <button type='submit' id='verify' className='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
                                 </form>
+                                <div className="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example" style={{ width: "300px", right: '10px' }}>
+                                    <div className="btn-group">
+                                        <button type="button" onClick={(e) => setInput(input + '1')} className="btn btn-outline-secondary py-3" >1</button>
+                                        <button type="button" onClick={(e) => setInput(input + '2')} className="btn btn-outline-secondary py-3" >2</button>
+                                        <button type="button" onClick={(e) => setInput(input + '3')} className="btn btn-outline-secondary py-3" >3</button>
+                                    </div>
+                                    <div className="btn-group">
+                                        <button type="button" onClick={(e) => setInput(input + '4')} className="btn btn-outline-secondary py-3" >4</button>
+                                        <button type="button" onClick={(e) => setInput(input + '5')} className="btn btn-outline-secondary py-3" >5</button>
+                                        <button type="button" onClick={(e) => setInput(input + '6')} className="btn btn-outline-secondary py-3" >6</button>
+                                    </div>
+                                    <div className="btn-group">
+                                        <button type="button" onClick={(e) => setInput(input + '7')} className="btn btn-outline-secondary py-3" >7</button>
+                                        <button type="button" onClick={(e) => setInput(input + '8')} className="btn btn-outline-secondary py-3" >8</button>
+                                        <button type="button" onClick={(e) => setInput(input + '9')} className="btn btn-outline-secondary py-3" >9</button>
+                                    </div>
+                                    <div className="btn-group">
+                                        <button type="button" className="btn btn-outline-secondary py-3" >DEL</button>
+                                        <button type="button" onClick={(e) => setInput(input + '0')} className="btn btn-outline-secondary py-3" >0</button>
+                                        <button type="button" className="btn btn-outline-secondary py-3" ></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

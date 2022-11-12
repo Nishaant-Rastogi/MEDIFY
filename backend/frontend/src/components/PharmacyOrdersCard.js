@@ -6,20 +6,6 @@ function customcard({ orders }) {
     const heading = "H";
     let id = 0;
 
-    let handleDeliver = (e) => {
-        e.preventDefault();
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orders[e.target.id])
-        }
-        fetch('/api/pharmacy-deliver-order/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                window.location.reload();
-            });
-    }
-
     return (
         <div className="CUSTOMCARDE" id="accordion">
             {orders === [] ? null : orders.map((data) => (
@@ -79,17 +65,6 @@ function customcard({ orders }) {
                                     {data.patient_name}
                                 </div>
                             </div>
-                            <div className="DATA DATE">
-                                <div className="HEAD">
-                                    Delivered:
-                                </div>
-                                <div className="VALUE">
-                                    {data.delivered}
-                                </div>
-                            </div>
-
-                            <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '100px' }} onClick={handleDeliver}>DELIVER</button>
-
                         </div>
                     </div>
                 </div>

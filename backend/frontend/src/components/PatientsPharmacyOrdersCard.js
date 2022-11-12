@@ -71,14 +71,6 @@ function customcard({ orders }) {
                                     {data.pharmacy_name}
                                 </div>
                             </div>
-                            <div className="DATA DATE">
-                                <div className="HEAD">
-                                    Delivered:
-                                </div>
-                                <div className="VALUE">
-                                    {data.delivered}
-                                </div>
-                            </div>
 
                             <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '100px' }} onClick={handleDelete}>DELETE</button>
 
@@ -101,6 +93,7 @@ function PatientsPharmacyOrdersCard({ orders }) {
     let id = 0;
     return (
         <>
+            {console.log(orders)}
             {orders.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">

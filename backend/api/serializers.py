@@ -53,12 +53,12 @@ class PharmacyOrderSerializer(serializers.ModelSerializer):
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'dob', 'gender', 'address', 'phoneNo', 'aadharNo', 'userType', 'email', 'password')
+        fields = ('name', 'dob', 'gender', 'address', 'phoneNo', 'aadharNo', 'userType', 'email')
 
 class CreateOrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
-        fields = ('name', 'orgType', 'licenseNo', 'address', 'phoneNo', 'email', 'password')
+        fields = ('name', 'orgType', 'licenseNo', 'address', 'phoneNo', 'email')
 
 class CreateConsultationSerializer(serializers.ModelSerializer):
     class Meta:

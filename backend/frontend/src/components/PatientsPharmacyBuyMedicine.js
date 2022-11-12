@@ -34,7 +34,6 @@ const PharmacyBuyMedicine = () => {
       .then((response) => response.json())
       .then((data) => {
         navigate(-1)
-        window.location.reload()
       });
   }
 

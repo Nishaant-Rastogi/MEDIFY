@@ -13,7 +13,10 @@ const SignUp = () => {
     const [userType, setUserType] = useState('P')
     const [hospitals, setHospitals] = useState([])
     const [hospital, setHospital] = useState('')
-
+    const [userProof, setUserProof] = useState(null)
+    const [doctorProof, setDoctorProof] = useState(null)
+    const [licenseProof, setLicenseProof] = useState(null)
+    const [orgImages, setOrgImages] = useState(null)
     let otp = ''
 
     let generateOTP = () => {
@@ -47,6 +50,7 @@ const SignUp = () => {
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
+        console.log(userProof)
         if (e.target.user_password.value !== e.target.confirm_user_password.value) {
             alert("Passwords don't match!")
             return
@@ -63,35 +67,30 @@ const SignUp = () => {
             alert("Phone number must be 10 digits long!")
             return
         }
+
+        const userFormData = new FormData();
+        userFormData.append('name', sanitize(e.target.name.value))
+        userFormData.append('dob', e.target.dob.value)
+        userFormData.append('gender', e.target.gender.value)
+        userFormData.append('address', sanitize(e.target.address.value))
+        userFormData.append('email', sanitize(e.target.email.value))
+        userFormData.append('password', bcrypt.hashSync(sanitize(e.target.user_password.value), salt))
+        userFormData.append('aadharNo', sanitize(e.target.aadharNo.value))
+        userFormData.append('phoneNo', sanitize(e.target.phoneNo.value))
+        userFormData.append('userType', 'P')
+        userFormData.append('user_proof', userProof)
+
+        if (e.target.userType.value === 'D') {
+            userFormData.append('hospital', hospital.id)
+            userFormData.append('userType', 'D')
+            userFormData.append('specialization', e.target.specialization.value)
+            userFormData.append('experience', e.target.experience.value)
+            userFormData.append('doctor_proof', doctorProof)
+        }
+
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: e.target.userType.value === 'P' ?
-                JSON.stringify({
-                    name: sanitize(e.target.name.value),
-                    dob: e.target.dob.value,
-                    gender: e.target.gender.value,
-                    address: sanitize(e.target.address.value),
-                    phoneNo: sanitize(e.target.phoneNo.value),
-                    aadharNo: sanitize(e.target.aadharNo.value),
-                    userType: 'P',
-                    email: sanitize(e.target.email.value),
-                    password: bcrypt.hashSync(sanitize(e.target.user_password.value), salt),
-                }) :
-                JSON.stringify({
-                    name: sanitize(e.target.name.value),
-                    dob: e.target.dob.value,
-                    gender: e.target.gender.value,
-                    address: sanitize(e.target.address.value),
-                    phoneNo: sanitize(e.target.phoneNo.value),
-                    aadharNo: sanitize(e.target.aadharNo.value),
-                    userType: 'D',
-                    email: sanitize(e.target.email.value),
-                    password: bcrypt.hashSync(sanitize(e.target.user_password.value), salt),
-                    specialization: e.target.specialization.value,
-                    experience: e.target.experience.value,
-                    hospital: sanitize(hospital.id),
-                }),
+            body: userFormData,
         };
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
@@ -118,18 +117,20 @@ const SignUp = () => {
             alert("Phone number must be 10 digits long!")
             return
         }
+        const orgFormData = new FormData();
+        orgFormData.append('name', sanitize(e.target.name.value))
+        orgFormData.append('address', sanitize(e.target.address.value))
+        orgFormData.append('email', sanitize(e.target.email.value))
+        orgFormData.append('password', bcrypt.hashSync(sanitize(e.target.org_password.value), salt))
+        orgFormData.append('licenseNo', sanitize(e.target.licenseNo.value))
+        orgFormData.append('phoneNo', sanitize(e.target.phoneNo.value))
+        orgFormData.append('orgType', e.target.orgType.value)
+        orgFormData.append('org_images', orgImages)
+        orgFormData.append('license_proof', licenseProof)
+
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: sanitize(e.target.name.value),
-                licenseNo: sanitize(e.target.licenseNo.value),
-                address: sanitize(e.target.address.value),
-                phoneNo: sanitize(e.target.phoneNo.value),
-                orgType: e.target.orgType.value,
-                email: sanitize(e.target.email.value),
-                password: bcrypt.hashSync(sanitize(e.target.org_password.value), salt),
-            }),
+            body: orgFormData,
         };
         fetch('/api/create-organization/', requestOptions)
             .then((response) => response.json())
@@ -162,7 +163,7 @@ const SignUp = () => {
     return (
         <div className='SIGNUP'>
             <img className="SIGNUPIMG" src="/static/images/Healthcare-portal.jpg" />
-            <div className='SIGNUPCONTAINER'>
+            <div className='SIGNUPCONTAINER' style={userType === 'D' ? { height: '1050px' } : null}>
                 <div className='SIGNUPS'>
                     <div className='USER'>
                         <button type="button" className="btn COLOR" active="true" onClick={() => { setSignUpAsUser(true) }}>USER</button>
@@ -213,9 +214,9 @@ const SignUp = () => {
                                     <small id="idHelp" className="form-text text-muted">Aadhar is a 12 digit ID no.</small>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload Identity Proof (Aadhar Card)</label>
-                                <input class="form-control" name="user_proof" type="file" id="formFile" />
+                            <div className="form-group">
+                                <label htmlFor="formFile" className="form-label">Upload Identity Proof (Aadhar Card)</label>
+                                <input className="form-control" onChange={(e) => { console.log(e.target.files[0]); setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" />
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
@@ -242,15 +243,21 @@ const SignUp = () => {
                                             <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" />
                                         </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label html="exampleInputid1">Hospital</label>
-                                        <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setHospital({ id: e.target.value, name: e.target.value }) }}>
-                                            <option value={"DEFAULT"} disabled>Select Hospital</option>
-                                            <option value="None">None</option>
-                                            {
-                                                hospitals.map((hospital, index) => <option key={index} value={hospital.id}>{hospital.name}</option>)
-                                            }
-                                        </select>
+                                    <div style={{ display: 'flex' }}>
+                                        <div className="form-group" style={{ marginRight: '20px' }}>
+                                            <label html="exampleInputid1">Hospital</label>
+                                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setHospital({ id: e.target.value, name: e.target.value }) }}>
+                                                <option value={"DEFAULT"} disabled>Select Hospital</option>
+                                                <option value="None">None</option>
+                                                {
+                                                    hospitals.map((hospital, index) => <option key={index} value={hospital.id}>{hospital.name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formFile" className="form-label">Upload Doctor License</label>
+                                            <input className="form-control" onChange={(e) => { setDoctorProof(e.target.files[0]) }} name="doctor_proof" type="file" id="formFile" />
+                                        </div>
                                     </div>
                                 </div>
 
@@ -292,9 +299,9 @@ const SignUp = () => {
                                     <label html="exampleInputid1">License No</label>
                                     <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" />
                                 </div>
-                                <div className="mb-3">
-                                    <label for="formFile" className="form-label">Upload License Proof</label>
-                                    <input className="form-control" name="license_proof" type="file" id="formFile" />
+                                <div className="form-group">
+                                    <label htmlFor="formFile" className="form-label">Upload License Proof</label>
+                                    <input className="form-control" onChange={(e) => { setLicenseProof(e.target.files[0]) }} name="license_proof" type="file" id="formFile" />
                                 </div>
                             </div>
 
@@ -309,9 +316,9 @@ const SignUp = () => {
                                     {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                                 </div>
                             </div>
-                            <div className="mb-3">
-                                <label for="formFileMultiple" className="form-label">Upload 2 Organisation Images</label>
-                                <input className="form-control" name="organisation_images" type="file" id="formFileMultiple" multiple />
+                            <div className="form-group">
+                                <label htmlFor="formFileMultiple" className="form-label">Upload 2 Organisation Images</label>
+                                <input className="form-control" onChange={(e) => { setOrgImages(e.target.files[0], e.target.files[1]) }} name="organisation_images" type="file" id="formFileMultiple" multiple />
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>

@@ -54,6 +54,7 @@ function customcard({ UserData }) {
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
+                            <img src={data.user_proof} />
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
                                     Name:

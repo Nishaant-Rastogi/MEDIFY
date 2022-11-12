@@ -1,66 +1,64 @@
-.SIGNUP{
-    background-color:#e3f7e3;
-    /* width: 100vw; */
+.SIGNUP {
+  background-color: #e3f7e3;
+  /* width: 100vw; */
 }
-input{
-    padding:10px;
+input {
+  padding: 10px;
 }
-.SIGNUP .SIGNUPIMG{
-    float: left;
-    height: 100vh;
-    position: absolute;
-}
-
-
-.SIGNUP .SIGNUPS{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 10px;
+.SIGNUP .SIGNUPIMG {
+  float: left;
+  height: 100vh;
+  position: absolute;
 }
 
-.SIGNUP .SIGNUPCONTAINER{
-    width: 30vw;
-    height: 120vh;
-    background-color: #131a27;
-    position: absolute;
-    left: 65vw;
-    color: white;
-    border-radius: 10px;
+.SIGNUP .SIGNUPS {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 10px;
 }
 
-.SIGNUP .USER{
-    margin-top:20px;
+.SIGNUP .SIGNUPCONTAINER {
+  width: 39vw;
+  height: 900px;
+  background-color: #131a27;
+  position: absolute;
+  left: 57vw;
+  color: white;
+  border-radius: 10px;
 }
 
-.SIGNUP .ADMIN{
-    margin-top:20px;
-    padding-left: 10px;
-    padding-right: 10px ;
-}
-.SIGNUP .ORGANISATION{
-    margin-top:20px;
-    padding-left: 10px;
+.SIGNUP .USER {
+  margin-top: 20px;
 }
 
-
-.SIGNUP .FORMCONTAINER{
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 30px;
-    margin-top: 20px;   
+.SIGNUP .ADMIN {
+  margin-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.SIGNUP .ORGANISATION {
+  margin-top: 20px;
+  padding-left: 10px;
 }
 
-.SIGNUP .FORMCONTAINER .SIGNUPB :hover{
-    background-color:white;
+.SIGNUP .FORMCONTAINER {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
-.SIGNUP .SIGNUPCONTAINER .COLOR{
-    background-color: #232f4a;
-    color: white;
+.SIGNUP .FORMCONTAINER .SIGNUPB :hover {
+  background-color: white;
 }
 
-.HOME{
-    height: 100vh;
-    background-color: #e3f7e3;
+.SIGNUP .SIGNUPCONTAINER .COLOR {
+  background-color: #232f4a;
+  color: white;
+}
+
+.HOME {
+  height: 100vh;
+  background-color: #e3f7e3;
 }

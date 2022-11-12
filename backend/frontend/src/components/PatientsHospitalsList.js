@@ -7,12 +7,14 @@ import '../styles/hospitals.css'
 const PatientsHospitalsList = () => {
     const [hospitals, setHospitals] = useState([]);
     const [searchItem, setSearchItem] = useState('');
+    const [locationSearch, setLocationSearch] = useState(false);
+
 
     let search = () => {
         hospitals.map((hospital) => hospital.name === searchItem ? setHospitals([hospital]) : null)
     }
     let handleSearch = () => {
-        hospitals.map((hospital) => hospital.name === searchItem ? setHospitals([hospital]) : alert('No hospital found'))
+        locationSearch ? (hospitals.map((hospital) => hospital.address.toLowerCase().includes(searchItem.toLowerCase()) ? setHospitals([hospital]) : alert("No Hospitals in this Location"))) : hospitals.map((hospital) => hospital.name === searchItem ? setHospitals([hospital]) : alert('No hospital found'))
     }
     let handleHospitals = () => {
         const requestOptions = {
@@ -47,6 +49,10 @@ const PatientsHospitalsList = () => {
                 <div className="input-group-append">
                     <button onClick={handleSearch} className="btn btn-outline-secondary" type="button">Search</button>
                 </div>
+            </div>
+            <div className="btn-group" style={{ marginLeft: '400px', width: '700px' }} role="group" aria-label="Basic example">
+                <button type="button" onClick={(e) => { setLocationSearch(false) }} style={{ width: '350px' }} className="btn btn-primary">Search With Name</button>
+                <button type="button" onClick={(e) => { setLocationSearch(true) }} style={{ width: '350px' }} className="btn btn-primary">Search With Location</button>
             </div>
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
