@@ -213,6 +213,10 @@ const SignUp = () => {
                                     <small id="idHelp" className="form-text text-muted">Aadhar is a 12 digit ID no.</small>
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload Identity Proof (Aadhar Card)</label>
+                                <input class="form-control" name="user_proof" type="file" id="formFile" />
+                            </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
                                 <select defaultValue={"DEFAULT"} onChange={(e) => { setUserType(e.target.value) }} className="form-control" name="userType">
@@ -283,14 +287,31 @@ const SignUp = () => {
                                     <option value="P">Pharmacy</option>
                                 </select>
                             </div>
-                            <div className="form-group">
-                                <label html="exampleInputid1">License No</label>
-                                <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" />
+                            <div style={{ display: 'flex' }}>
+                                <div className="form-group" style={{ marginRight: '20px' }}>
+                                    <label html="exampleInputid1">License No</label>
+                                    <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" />
+                                </div>
+                                <div className="mb-3">
+                                    <label for="formFile" className="form-label">Upload License Proof</label>
+                                    <input className="form-control" name="license_proof" type="file" id="formFile" />
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label html="exampleInputid1">Contact No</label>
-                                <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" />
-                                {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
+
+                            <div style={{ display: 'flex' }}>
+                                <div className="form-group" style={{ marginRight: '20px' }}>
+                                    <label html="exampleInputid1">Description</label>
+                                    <input type="id" className="form-control" name="description" aria-describedby="idHelp" placeholder="Enter Description" />
+                                </div>
+                                <div className="form-group">
+                                    <label html="exampleInputid1">Contact No</label>
+                                    <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" />
+                                    {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
+                                </div>
+                            </div>
+                            <div className="mb-3">
+                                <label for="formFileMultiple" className="form-label">Upload 2 Organisation Images</label>
+                                <input className="form-control" name="organisation_images" type="file" id="formFileMultiple" multiple />
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>

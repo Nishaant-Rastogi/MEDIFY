@@ -534,7 +534,7 @@ class ClaimRefundView(APIView):
 
 class GetClaimView(APIView):
     def post(self, request, format=None):
-        claim = document_collection.find_one({'patient_id': request.data['id'], 'docType': /^B/,'claimed':True})
+        claim = document_collection.find({'patient_id': request.data['id'], 'docType': {'$regex':"B"},'claimed':True})
         return Response(claim, status=status.HTTP_200_OK)
 
 class GetHospitalDoctorsView(APIView):
