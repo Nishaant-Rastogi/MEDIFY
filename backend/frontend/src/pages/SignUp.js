@@ -177,18 +177,18 @@ const SignUp = () => {
                         <form onSubmit={handleSignUpAsUser}>
                             <div className="form-group">
                                 <label html="exampleInputid1">Name</label>
-                                <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" />
+                                <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" required />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputid1">Date of Birth</label>
-                                    <input type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" />
+                                    <input type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" required />
                                     {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                                 </div>
                                 <div className="form-group" aria-label="Default select example">
                                     <label html="exampleInputid1">Gender</label><br></br>
-                                    <select defaultValue={'DEFAULT'} className="form-control" name='gender'>
+                                    <select defaultValue={'DEFAULT'} className="form-control" name='gender' required>
                                         <option value="DEFAULT" disabled>Select Gender</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
@@ -199,28 +199,28 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>
-                                <input type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" />
+                                <input type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" required />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputid1">Phone No</label>
-                                    <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" />
+                                    <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" required />
                                     {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputid1">Aadhar No</label>
-                                    <input type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar No" />
+                                    <input type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar No" required />
                                     <small id="idHelp" className="form-text text-muted">Aadhar is a 12 digit ID no.</small>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="formFile" className="form-label">Upload Identity Proof (Aadhar Card)</label>
-                                <input className="form-control" onChange={(e) => { console.log(e.target.files[0]); setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" />
+                                <input className="form-control" onChange={(e) => { console.log(e.target.files[0]); setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" required />
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
-                                <select defaultValue={"DEFAULT"} onChange={(e) => { setUserType(e.target.value) }} className="form-control" name="userType">
+                                <select defaultValue={"DEFAULT"} onChange={(e) => { setUserType(e.target.value) }} className="form-control" name="userType" required>
                                     <option value="DEFAULT" disabled>Select Type of User</option>
                                     <option value="P">Patient</option>
                                     <option value="D">Doctor</option>
@@ -231,7 +231,7 @@ const SignUp = () => {
                                     <div style={{ display: 'flex' }}>
                                         <div className="form-group" style={{ marginRight: '20px' }}>
                                             <label html="exampleInputid1">Specialization</label><br></br>
-                                            <select defaultValue={"DEFAULT"} className="form-control" name="specialization">
+                                            <select defaultValue={"DEFAULT"} className="form-control" name="specialization" required>
                                                 <option value="DEFAULT" disabled>Select Specialization</option>
                                                 <option value="O">Ortho</option>
                                                 <option value="N">Neuro</option>
@@ -240,13 +240,13 @@ const SignUp = () => {
                                         </div>
                                         <div className="form-group">
                                             <label html="exampleInputid1">Experience</label>
-                                            <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" />
+                                            <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" required />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex' }}>
                                         <div className="form-group" style={{ marginRight: '20px' }}>
                                             <label html="exampleInputid1">Hospital</label>
-                                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setHospital({ id: e.target.value, name: e.target.value }) }}>
+                                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setHospital({ id: e.target.value, name: e.target.value }) }} required>
                                                 <option value={"DEFAULT"} disabled>Select Hospital</option>
                                                 <option value="None">None</option>
                                                 {
@@ -256,7 +256,7 @@ const SignUp = () => {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formFile" className="form-label">Upload Doctor License</label>
-                                            <input className="form-control" onChange={(e) => { setDoctorProof(e.target.files[0]) }} name="doctor_proof" type="file" id="formFile" />
+                                            <input className="form-control" onChange={(e) => { setDoctorProof(e.target.files[0]) }} name="doctor_proof" type="file" id="formFile" required />
                                         </div>
                                     </div>
                                 </div>
@@ -265,17 +265,17 @@ const SignUp = () => {
                             }
                             <div className="form-group">
                                 <label html="exampleInputid1">Email</label>
-                                <input type="id" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" />
+                                <input type="id" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" required />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" name="user_password" placeholder="Password" />
+                                    <input type="password" className="form-control" name="user_password" placeholder="Password" required />
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" name="confirm_user_password" placeholder="Confirm Password" />
+                                    <input type="password" className="form-control" name="confirm_user_password" placeholder="Confirm Password" required />
                                 </div>
                             </div>
                             <button type="submit" className="btn COLOR SIGNUPB">Sign Up User</button>
@@ -283,11 +283,11 @@ const SignUp = () => {
                         <form onSubmit={handleSignUpAsOrganization}>
                             <div className="form-group">
                                 <label html="exampleInputid1">Name</label>
-                                <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" />
+                                <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" required />
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">Type Of Organisation</label><br></br>
-                                <select defaultValue={"DEFAULT"} className="form-control" name='orgType'>
+                                <select defaultValue={"DEFAULT"} className="form-control" name='orgType' required>
                                     <option value="DEFAULT" disabled>Select Organization Type</option>
                                     <option value="H">Hospital</option>
                                     <option value="I">Insurance</option>
@@ -297,47 +297,47 @@ const SignUp = () => {
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputid1">License No</label>
-                                    <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" />
+                                    <input type="id" className="form-control" name="licenseNo" aria-describedby="idHelp" placeholder="Enter License No" required />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="formFile" className="form-label">Upload License Proof</label>
-                                    <input className="form-control" onChange={(e) => { setLicenseProof(e.target.files[0]) }} name="license_proof" type="file" id="formFile" />
+                                    <input className="form-control" onChange={(e) => { setLicenseProof(e.target.files[0]) }} name="license_proof" type="file" id="formFile" required />
                                 </div>
                             </div>
 
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputid1">Description</label>
-                                    <input type="id" className="form-control" name="description" aria-describedby="idHelp" placeholder="Enter Description" />
+                                    <input type="id" className="form-control" name="description" aria-describedby="idHelp" placeholder="Enter Description" required />
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputid1">Contact No</label>
-                                    <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" />
+                                    <input type="text" className="form-control" name="phoneNo" aria-describedby="idHelp" placeholder="Enter Phone" required />
                                     {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="formFileMultiple" className="form-label">Upload 2 Organisation Images</label>
-                                <input className="form-control" onChange={(e) => { setOrgImages(e.target.files[0], e.target.files[1]) }} name="organisation_images" type="file" id="formFileMultiple" multiple />
+                                <input className="form-control" onChange={(e) => { setOrgImages(e.target.files[0], e.target.files[1]) }} name="organisation_images" type="file" id="formFileMultiple" multiple required />
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>
-                                <input type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" />
+                                <input type="text" className="form-control" name="address" aria-describedby="idHelp" placeholder="Enter Address" required />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Email</label>
-                                <input type="id" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" />
+                                <input type="id" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" required />
                                 {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                             </div>
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" name="org_password" placeholder="Password" />
+                                    <input type="password" className="form-control" name="org_password" placeholder="Password" required />
                                 </div>
                                 <div className="form-group">
                                     <label html="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" name="confirm_org_password" placeholder="Confirm Password" />
+                                    <input type="password" className="form-control" name="confirm_org_password" placeholder="Confirm Password" required />
                                 </div>
                             </div>
                             <button type="submit" className="btn COLOR SIGNUPB">Sign Up Organisation</button>

@@ -117,11 +117,12 @@ class GetCheckUsersView(APIView):
         check_users = []
         for user in users:
             if user['userType'] == 'D':
+                user = Doctor(user['id'], user['name'], user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], specialization=user['specialization'], experience=user['experience'], hospital=user['hospital'], user_proof=user['user_proof'], doctor_proof=user['doctor_proof'])
                 check_users.append(DoctorSerializer(user).data)
             else:
+                print(user['id'])
                 user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'])
                 check_users.append(UserSerializer(user).data)
-                print(user.user_proof)
         return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
