@@ -41,7 +41,6 @@ const Verification = () => {
         setOTP(otp);
         try {
             alert("New OTP sent to your email");
-            console.log(otp)
             emailjs.send(
                 "service_4pahk8s",
                 "template_nzw9tlk",
@@ -85,7 +84,6 @@ const Verification = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id })
         }
-        console.log(requiredOptions)
         fetch("/api/verify/", requiredOptions)
             .then(response => response.json())
             .then(data => {
