@@ -45,6 +45,7 @@ class User(models.Model):
     email = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
     balance = models.IntegerField(default=100000)
+    verified = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 class Doctor(models.Model):
@@ -64,6 +65,7 @@ class Doctor(models.Model):
     experience = models.IntegerField()
     doctor_proof = models.ImageField(upload_to='doctor_proof')
     hospital = models.CharField(max_length=11, blank=True)
+    verified = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 class Organization(models.Model):
@@ -78,6 +80,7 @@ class Organization(models.Model):
     email = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
     balance = models.IntegerField(default=1000000)
+    verified = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 

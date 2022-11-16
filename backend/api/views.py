@@ -54,7 +54,7 @@ class CreateUserView(APIView):
         user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password, user_proof=user_proof)
         check_user_collection.insert_one(UserSerializer(user).data)
         print(UserSerializer(user).data)
-        return Response(CreateUserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
 
 class CreateOrganizationView(APIView):
     def post(self, request, format=None):
@@ -69,8 +69,17 @@ class CreateOrganizationView(APIView):
         org_images = request.data['org_images']
         organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password, license_proof=license_proof, org_images=org_images)
         check_org_collection.insert_one(OrganizationSerializer(organization).data)
-        return Response(CreateOrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
-        
+        return Response(OrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
+
+class VerifyView(APIView):
+    def post(self, request, format=None):
+        id = request.data['id']
+        if check_user_collection.find_one({'id': id}):
+            check_user_collection.update_one({'id':id}, {'$set':{'verified':True}})
+        else:
+            check_org_collection.update_one({'id':id}, {'$set':{'verified':True}})
+        return Response(status=status.HTTP_200_OK)
+
 class LoginUserView(APIView):
     serializer_class = UserSerializer
 

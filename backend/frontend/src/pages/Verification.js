@@ -1,6 +1,7 @@
 import React, { useState, ReactDOM, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
+import emailjs from '@emailjs/browser'
 
 
 const Verification = () => {
@@ -9,12 +10,31 @@ const Verification = () => {
     const trials = 10;
     const [OTP, setOTP] = useState('');
     const [type, setType] = useState('');
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [orgType, setOrgType] = useState('');
     const [signup, setSignup] = useState(false);
     const [input1, setInput1] = useState('');
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
     const [input4, setInput4] = useState('');
+
+    let handleVerification = (e, path) => {
+        e.preventDefault();
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        }
+        console.log(requiredOptions)
+        fetch("/api/verify/", requiredOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log("first")
+                navigate(path);
+            })
+    }
 
     let handleInput = (input) => {
         if (input !== 'DEL') {
@@ -43,26 +63,58 @@ const Verification = () => {
             }
         }
     }
-
+    let sendEmail = (e) => {
+        e.preventDefault()
+        try {
+            emailjs.send(
+                "service_fq04boo",
+                "template_fbjb1dn",
+                {
+                    from_name: "MEDIFY",
+                    to_name: name,
+                    message: id,
+                    to_email: email,
+                },
+                'user_LaY6RXGTYd7nadYRQtJ3W'
+            )
+        } catch (err) {
+            alert(err);
+        }
+    }
     let handleOTP = (e) => {
         e.preventDefault()
         const code = input1 + input2 + input3 + input4;
         if (signup) {
-            navigate('/');
-            return;
+            if (code === OTP) {
+                sendEmail(e);
+                handleVerification(e, '/');
+                return;
+            } else {
+                if (trials > 0) {
+                    alert('WRONG OTP! PLEASE RETRY')
+                    trials--;
+                } else {
+                    alert('OTP EXPIRED! PLEASE RETRY')
+                }
+            }
         }
 
         if (code === OTP) {
             if (type && type === 'P') {
-                navigate('/user/patients/home');
+                sendEmail(e);
+                handleVerification(e, '/user/patients/home');
             } else if (type && type === 'D') {
-                navigate('/user/doctors/home');
+                sendEmail(e);
+                handleVerification(e, '/user/doctors/home');
             } else if (orgType && orgType === 'P') {
-                navigate('/organisation/pharmacy/home');
+                sendEmail(e);
+                handleVerification(e, '/organisation/pharmacy/home');
             } else if (orgType && orgType === 'H') {
-                navigate('/organisation/hospitals/home');
+                sendEmail(e);
+                handleVerification(e, '/organisation/hospital/home');
             } else if (orgType && orgType === 'I') {
-                navigate('/organisation/insurance/home');
+                sendEmail(e);
+                handleVerification(e, '/organisation/insurance/home');
             }
         } else {
             if (trials > 0) {
@@ -79,13 +131,16 @@ const Verification = () => {
         if (!location.state) {
             navigate('/');
         } else {
+            console.log(location.state);
             setOTP(location.state.otp);
             setType(location.state.type);
             setOrgType(location.state.orgType);
             setSignup(location.state.signup);
+            setId(location.state.id);
+            setName(location.state.name);
+            setEmail(location.state.email);
             document.getElementById('1').focus();
         }
-        console.log(input1, input2, input3, input4);
     }, [])
 
     return (

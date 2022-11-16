@@ -79,6 +79,15 @@ function customcard({ UserData }) {
                                 </div>
 
                             </div>
+                            <div className="DATA STATUS">
+                                <div className="HEAD">
+                                    Verified:
+                                </div>
+                                <div className="VALUE">
+                                    {data.verified}
+                                </div>
+
+                            </div>
                         </button>
                     </div>
                     <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">

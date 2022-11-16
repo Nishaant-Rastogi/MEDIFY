@@ -96,7 +96,8 @@ const SignUp = () => {
             .then((response) => response.json())
             .then((data) => {
                 sendEmail(e)
-                navigate('/verification', { state: { otp: otp, type: e.target.userType.value, signup: true } })
+                console.log(data)
+                navigate('/verification', { state: { otp: otp, type: e.target.userType.value, id: data.id, name: data.name, email: data.email, signup: true } })
             })
     }
     let handleSignUpAsOrganization = async (e) => {
@@ -136,7 +137,7 @@ const SignUp = () => {
             .then((response) => response.json())
             .then((data) => {
                 sendEmail(e)
-                navigate('/verification', { state: { otp: otp, orgType: e.target.orgType.value, signup: true } })
+                navigate('/verification', { state: { otp: otp, orgType: e.target.orgType.value, id: data.id, name: data.name, email: data.email, signup: true } })
 
             });
     }
