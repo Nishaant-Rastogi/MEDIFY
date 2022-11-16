@@ -7,7 +7,7 @@ import emailjs from '@emailjs/browser'
 const Verification = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const trials = 10;
+    let trials = 10;
     const [OTP, setOTP] = useState('');
     const [type, setType] = useState('');
     const [id, setId] = useState('');
@@ -20,6 +20,59 @@ const Verification = () => {
     const [input3, setInput3] = useState('');
     const [input4, setInput4] = useState('');
 
+    let otp = ''
+
+    let generateOTP = () => {
+        var digits = '0123456789';
+        let OTP = '';
+        for (let i = 0; i < 4; i++) {
+            OTP += digits[Math.floor(Math.random() * 10)];
+        }
+        return OTP;
+    }
+
+    let sendEmail_OTP = () => {
+        otp = generateOTP();
+        setOTP(otp);
+        try {
+            alert("New OTP sent to your email");
+            console.log(otp)
+            emailjs.send(
+                "service_4pahk8s",
+                "template_nzw9tlk",
+                {
+                    to_name: name,
+                    message: otp,
+                    to_email: email,
+                },
+                '7A_kS-q43thPMuT0U'
+            ).catch((err) => {
+                emailjs.send(
+                    "service_iillxki",
+                    "template_fiksu5v",
+                    {
+                        to_name: name,
+                        message: otp,
+                        to_email: email,
+                    },
+                    '6sJWKePGX8r9Kc3kc'
+                ).catch((err) => {
+                    emailjs.send(
+                        "service_3px0u4p",
+                        "template_w9crofp",
+                        {
+                            to_name: name,
+                            message: otp,
+                            to_email: email,
+                        },
+                        'LcBNB6520jOik-TOV'
+                    ).catch((err) => { })
+                })
+            })
+        } catch (err) {
+            alert(err);
+        }
+    }
     let handleVerification = (e, path) => {
         e.preventDefault();
         const requiredOptions = {
@@ -31,7 +84,7 @@ const Verification = () => {
         fetch("/api/verify/", requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log("first")
+                location.state = null;
                 navigate(path);
             })
     }
@@ -63,20 +116,41 @@ const Verification = () => {
             }
         }
     }
-    let sendEmail = (e) => {
+    let sendEmail_ID = (e) => {
         e.preventDefault()
         try {
             emailjs.send(
-                "service_fq04boo",
-                "template_fbjb1dn",
+                "service_4pahk8s",
+                "template_dcoqq18",
                 {
-                    from_name: "MEDIFY",
                     to_name: name,
                     message: id,
                     to_email: email,
                 },
-                'user_LaY6RXGTYd7nadYRQtJ3W'
-            )
+                '7A_kS-q43thPMuT0U'
+            ).catch((err) => {
+                emailjs.send(
+                    "service_iillxki",
+                    "template_amw1p34",
+                    {
+                        to_name: name,
+                        message: id,
+                        to_email: email,
+                    },
+                    '6sJWKePGX8r9Kc3kc'
+                ).catch((err) => {
+                    emailjs.send(
+                        "service_3px0u4p",
+                        "template_94w6m5a",
+                        {
+                            to_name: name,
+                            message: id,
+                            to_email: email,
+                        },
+                        'LcBNB6520jOik-TOV'
+                    ).catch((err) => { alert(err) })
+                })
+            })
         } catch (err) {
             alert(err);
         }
@@ -86,7 +160,7 @@ const Verification = () => {
         const code = input1 + input2 + input3 + input4;
         if (signup) {
             if (code === OTP) {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/');
                 return;
             } else {
@@ -101,19 +175,19 @@ const Verification = () => {
 
         if (code === OTP) {
             if (type && type === 'P') {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/user/patients/home');
             } else if (type && type === 'D') {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/user/doctors/home');
             } else if (orgType && orgType === 'P') {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/organisation/pharmacy/home');
             } else if (orgType && orgType === 'H') {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/organisation/hospital/home');
             } else if (orgType && orgType === 'I') {
-                sendEmail(e);
+                sendEmail_ID(e);
                 handleVerification(e, '/organisation/insurance/home');
             }
         } else {
@@ -131,8 +205,11 @@ const Verification = () => {
         if (!location.state) {
             navigate('/');
         } else {
-            console.log(location.state);
-            setOTP(location.state.otp);
+            window.onpopstate = () => {
+                location.state = null;
+                alert("CONFIRM FORM RESUBMISSION");
+                navigate('/signup');
+            }
             setType(location.state.type);
             setOrgType(location.state.orgType);
             setSignup(location.state.signup);
@@ -142,6 +219,7 @@ const Verification = () => {
             document.getElementById('1').focus();
         }
     }, [])
+
 
     return (
         <div className='VERIFICATION'>
@@ -154,6 +232,7 @@ const Verification = () => {
                                     Verify OTP
                                 </div>
 
+                                <button onClick={(e) => sendEmail_OTP()} className='btn btn-primary btn-block mt-4 mb-4 customBtn'>SEND OTP</button>
                                 <form onSubmit={handleOTP} action="" className="mt-5">
                                     <input className="otp" style={{ marginRight: '3px' }} value={input1} name='one' id='1' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input2} name='two' id='2' type="text" maxLength={1} disabled />

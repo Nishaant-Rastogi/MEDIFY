@@ -19,7 +19,9 @@ function customcard({ UserData }) {
                 to_email: data.email,
             },
             'user_LaY6RXGTYd7nadYRQtJ3W'
-        )
+        ).then(() => {
+            window.location.reload();
+        })
     }
 
     let handleApprove = (e) => {
@@ -32,6 +34,7 @@ function customcard({ UserData }) {
         fetch('/api/approve-organization/', requiredOptions)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 sendEmail(e, data);
             })
     }
@@ -84,7 +87,7 @@ function customcard({ UserData }) {
                                     Verified:
                                 </div>
                                 <div className="VALUE">
-                                    {data.verified}
+                                    {data.verified ? "Yes" : "No"}
                                 </div>
 
                             </div>

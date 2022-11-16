@@ -17,40 +17,10 @@ const SignUp = () => {
     const [doctorProof, setDoctorProof] = useState(null)
     const [licenseProof, setLicenseProof] = useState(null)
     const [orgImages, setOrgImages] = useState(null)
-    let otp = ''
 
-    let generateOTP = () => {
-        var digits = '0123456789';
-        let OTP = '';
-        for (let i = 0; i < 4; i++) {
-            OTP += digits[Math.floor(Math.random() * 10)];
-        }
-        return OTP;
-    }
-
-    let sendEmail = (e) => {
-        e.preventDefault()
-        otp = generateOTP();
-        try {
-            emailjs.send(
-                "service_fq04boo",
-                "template_50ai34b",
-                {
-                    from_name: "MEDIFY",
-                    to_name: e.target.name.value,
-                    message: otp,
-                    to_email: e.target.email.value,
-                },
-                'user_LaY6RXGTYd7nadYRQtJ3W'
-            )
-        } catch (err) {
-            alert(err);
-        }
-    }
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
-        console.log(userProof)
         if (e.target.user_password.value !== e.target.confirm_user_password.value) {
             alert("Passwords don't match!")
             return
@@ -95,9 +65,8 @@ const SignUp = () => {
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                sendEmail(e)
-                console.log(data)
-                navigate('/verification', { state: { otp: otp, type: e.target.userType.value, id: data.id, name: data.name, email: data.email, signup: true } })
+                // sendEmail(e)
+                navigate('/verification', { state: { type: e.target.userType.value, id: data.id, name: data.name, email: data.email, signup: true } })
             })
     }
     let handleSignUpAsOrganization = async (e) => {
@@ -136,8 +105,8 @@ const SignUp = () => {
         fetch('/api/create-organization/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                sendEmail(e)
-                navigate('/verification', { state: { otp: otp, orgType: e.target.orgType.value, id: data.id, name: data.name, email: data.email, signup: true } })
+                // sendEmail(e)
+                navigate('/verification', { state: { orgType: e.target.orgType.value, id: data.id, name: data.name, email: data.email, signup: true } })
 
             });
     }
@@ -217,7 +186,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="formFile" className="form-label">Upload Identity Proof (Aadhar Card)</label>
-                                <input className="form-control" onChange={(e) => { console.log(e.target.files[0]); setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" required />
+                                <input className="form-control" onChange={(e) => { setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" required />
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>

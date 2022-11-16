@@ -47,11 +47,11 @@ class CreateUserView(APIView):
             experience = request.data['experience']
             hospital = request.data['hospital']
             doctor_proof = request.data['doctor_proof']
-            doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience, hospital=hospital, user_proof=user_proof, doctor_proof=doctor_proof)
+            doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience, hospital=hospital, user_proof=user_proof, doctor_proof=doctor_proof, verified=False)
             check_user_collection.insert_one(DoctorSerializer(doctor).data)
             return Response(DoctorSerializer(doctor).data, status=status.HTTP_201_CREATED)
 
-        user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password, user_proof=user_proof)
+        user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password, user_proof=user_proof, verified=False)
         check_user_collection.insert_one(UserSerializer(user).data)
         print(UserSerializer(user).data)
         return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
@@ -67,7 +67,7 @@ class CreateOrganizationView(APIView):
         password = request.data['password']
         license_proof = request.data['license_proof']
         org_images = request.data['org_images']
-        organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password, license_proof=license_proof, org_images=org_images)
+        organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password, license_proof=license_proof, org_images=org_images, verified=False)
         check_org_collection.insert_one(OrganizationSerializer(organization).data)
         return Response(OrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
 
@@ -78,7 +78,7 @@ class VerifyView(APIView):
             check_user_collection.update_one({'id':id}, {'$set':{'verified':True}})
         else:
             check_org_collection.update_one({'id':id}, {'$set':{'verified':True}})
-        return Response(status=status.HTTP_200_OK)
+        return Response("Success",status=status.HTTP_200_OK)
 
 class LoginUserView(APIView):
     serializer_class = UserSerializer
