@@ -42,38 +42,38 @@ const Verification = () => {
         try {
             alert("New OTP sent to your email");
             console.log(otp)
-            // emailjs.send(
-            //     "service_4pahk8s",
-            //     "template_nzw9tlk",
-            //     {
-            //         to_name: name,
-            //         message: otp,
-            //         to_email: email,
-            //     },
-            //     '7A_kS-q43thPMuT0U'
-            // ).catch((err) => {
-            //     emailjs.send(
-            //         "service_iillxki",
-            //         "template_fiksu5v",
-            //         {
-            //             to_name: name,
-            //             message: otp,
-            //             to_email: email,
-            //         },
-            //         '6sJWKePGX8r9Kc3kc'
-            //     ).catch((err) => {
-            //         emailjs.send(
-            //             "service_3px0u4p",
-            //             "template_w9crofp",
-            //             {
-            //                 to_name: name,
-            //                 message: otp,
-            //                 to_email: email,
-            //             },
-            //             'LcBNB6520jOik-TOV'
-            //         ).catch((err) => { })
-            //     })
-            // })
+            emailjs.send(
+                "service_4pahk8s",
+                "template_nzw9tlk",
+                {
+                    to_name: name,
+                    message: otp,
+                    to_email: email,
+                },
+                '7A_kS-q43thPMuT0U'
+            ).catch((err) => {
+                emailjs.send(
+                    "service_iillxki",
+                    "template_fiksu5v",
+                    {
+                        to_name: name,
+                        message: otp,
+                        to_email: email,
+                    },
+                    '6sJWKePGX8r9Kc3kc'
+                ).catch((err) => {
+                    emailjs.send(
+                        "service_3px0u4p",
+                        "template_w9crofp",
+                        {
+                            to_name: name,
+                            message: otp,
+                            to_email: email,
+                        },
+                        'LcBNB6520jOik-TOV'
+                    ).catch((err) => { })
+                })
+            })
         } catch (err) {
             alert(err);
         }
