@@ -1,8 +1,7 @@
-import React, { useState, ReactDOM, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
 import emailjs from '@emailjs/browser'
-
 
 const Verification = () => {
     const location = useLocation();
@@ -19,6 +18,7 @@ const Verification = () => {
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
     const [input4, setInput4] = useState('');
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     let otp = ''
 
@@ -32,43 +32,48 @@ const Verification = () => {
     }
 
     let sendEmail_OTP = () => {
+        setButtonDisabled(true);
+        setTimeout(() => {
+            setButtonDisabled(false);
+        }, 60000)
+        startTimer();
         otp = generateOTP();
         setOTP(otp);
         try {
             alert("New OTP sent to your email");
             console.log(otp)
-            emailjs.send(
-                "service_4pahk8s",
-                "template_nzw9tlk",
-                {
-                    to_name: name,
-                    message: otp,
-                    to_email: email,
-                },
-                '7A_kS-q43thPMuT0U'
-            ).catch((err) => {
-                emailjs.send(
-                    "service_iillxki",
-                    "template_fiksu5v",
-                    {
-                        to_name: name,
-                        message: otp,
-                        to_email: email,
-                    },
-                    '6sJWKePGX8r9Kc3kc'
-                ).catch((err) => {
-                    emailjs.send(
-                        "service_3px0u4p",
-                        "template_w9crofp",
-                        {
-                            to_name: name,
-                            message: otp,
-                            to_email: email,
-                        },
-                        'LcBNB6520jOik-TOV'
-                    ).catch((err) => { })
-                })
-            })
+            // emailjs.send(
+            //     "service_4pahk8s",
+            //     "template_nzw9tlk",
+            //     {
+            //         to_name: name,
+            //         message: otp,
+            //         to_email: email,
+            //     },
+            //     '7A_kS-q43thPMuT0U'
+            // ).catch((err) => {
+            //     emailjs.send(
+            //         "service_iillxki",
+            //         "template_fiksu5v",
+            //         {
+            //             to_name: name,
+            //             message: otp,
+            //             to_email: email,
+            //         },
+            //         '6sJWKePGX8r9Kc3kc'
+            //     ).catch((err) => {
+            //         emailjs.send(
+            //             "service_3px0u4p",
+            //             "template_w9crofp",
+            //             {
+            //                 to_name: name,
+            //                 message: otp,
+            //                 to_email: email,
+            //             },
+            //             'LcBNB6520jOik-TOV'
+            //         ).catch((err) => { })
+            //     })
+            // })
         } catch (err) {
             alert(err);
         }
@@ -159,7 +164,7 @@ const Verification = () => {
         e.preventDefault()
         const code = input1 + input2 + input3 + input4;
         if (signup) {
-            if (code === OTP) {
+            if (code === OTP && OTP !== '') {
                 sendEmail_ID(e);
                 handleVerification(e, '/');
                 return;
@@ -173,7 +178,7 @@ const Verification = () => {
             }
         }
 
-        if (code === OTP) {
+        if (code === OTP && OTP !== '') {
             if (type && type === 'P') {
                 sendEmail_ID(e);
                 handleVerification(e, '/user/patients/home');
@@ -220,7 +225,26 @@ const Verification = () => {
         }
     }, [])
 
+    const [seconds, setSeconds] = useState(60);
+    const [isActive, setIsActive] = useState('');
+    const startTimer = () => {
+        setIsActive(setInterval(() => {
+            setSeconds(seconds => seconds - 1);
+        }, 1000))
+    }
 
+    const stopTimer = () => {
+        setSeconds(60);
+        clearInterval(isActive);
+    }
+
+    useEffect(() => {
+        if (seconds === 0) {
+            setOTP('');
+            stopTimer();
+            alert('OTP EXPIRED! PLEASE RESEND OTP')
+        }
+    }, [seconds])
     return (
         <div className='VERIFICATION'>
             <div className="container">
@@ -232,14 +256,14 @@ const Verification = () => {
                                     Verify OTP
                                 </div>
 
-                                <button onClick={(e) => sendEmail_OTP()} className='btn btn-primary btn-block mt-4 mb-4 customBtn'>SEND OTP</button>
                                 <form onSubmit={handleOTP} action="" className="mt-5">
                                     <input className="otp" style={{ marginRight: '3px' }} value={input1} name='one' id='1' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input2} name='two' id='2' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input3} name='three' id='3' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input4} name='four' id='4' type="text" maxLength={1} disabled />
                                     <hr className="mt-4" />
-                                    <p>OTP sent to your email</p>
+                                    <p id="timer">Resend OTP in : {seconds} seconds</p>
+                                    <button onClick={(e) => sendEmail_OTP()} className='btn btn-primary btn-block mt-4 mb-4 customBtn' disabled={buttonDisabled}>SEND OTP</button>
                                     <button type='submit' id='verify' className='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
                                 </form>
                                 <div className="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example" style={{ width: "300px", right: '10px' }}>

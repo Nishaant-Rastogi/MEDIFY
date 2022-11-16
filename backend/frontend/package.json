@@ -25,6 +25,7 @@
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
+    "react-countdown": "^2.3.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "style-loader": "^3.3.1",

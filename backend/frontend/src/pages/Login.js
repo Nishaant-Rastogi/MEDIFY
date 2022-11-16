@@ -8,37 +8,6 @@ import bcrypt from 'bcryptjs'
 const Login = () => {
     const [loginAs, setLoginAs] = useState(1)
     const navigate = useNavigate();
-    let otp = ''
-
-    let generateOTP = () => {
-        var digits = '0123456789';
-        let OTP = '';
-        for (let i = 0; i < 4; i++) {
-            OTP += digits[Math.floor(Math.random() * 10)];
-        }
-        return OTP;
-    }
-
-    let sendEmail = async (e, name, email) => {
-        e.preventDefault()
-        otp = generateOTP();
-        try {
-            emailjs.send(
-                "service_fq04boo",
-                "template_50ai34b",
-                {
-                    from_name: "MEDIFY",
-                    to_name: name,
-                    message: otp,
-                    to_email: email,
-                },
-                'user_LaY6RXGTYd7nadYRQtJ3W'
-            )
-        } catch (err) {
-            alert(err);
-        }
-    }
-
 
     let handleLoginAdmin = (e) => {
         e.preventDefault()
@@ -83,12 +52,11 @@ const Login = () => {
             .then(data => {
                 if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
                     localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
-                    sendEmail(e, data.name, data.email);
                     if (data.userType === 'P') {
-                        navigate('/verification', { state: { otp: otp, type: 'P' } });
+                        navigate('/verification', { state: { type: 'P', name: data.name, email: data.email } });
                     }
                     else if (data.userType === 'D') {
-                        navigate('/verification', { state: { otp: otp, type: 'D' } });
+                        navigate('/verification', { state: { type: 'D', name: data.name, email: data.email } });
                     }
                 } else {
                     alert("Invalid Credentials!, Please try Again");
@@ -116,11 +84,10 @@ const Login = () => {
             })
             .then(data => {
                 if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
-                    sendEmail(e, data.name, data.email);
                     localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
-                    if (data.orgType === 'H') navigate('/verification', { state: { otp: otp, orgType: 'H' } });
-                    else if (data.orgType === 'I') navigate('/verification', { state: { otp: otp, orgType: 'I' } });
-                    else if (data.orgType === 'P') navigate('/verification', { state: { otp: otp, orgType: 'P' } });
+                    if (data.orgType === 'H') navigate('/verification', { state: { orgType: 'H', name: data.name, email: data.email } });
+                    else if (data.orgType === 'I') navigate('/verification', { state: { orgType: 'I', name: data.name, email: data.email } });
+                    else if (data.orgType === 'P') navigate('/verification', { state: { orgType: 'P', name: data.name, email: data.email } });
                 } else {
                     alert("Invalid Credentials!, Please try again");
                 }
