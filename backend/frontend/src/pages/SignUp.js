@@ -39,6 +39,7 @@ const SignUp = () => {
         }
 
         const userFormData = new FormData();
+        const user_proof = new File([userProof], e.target.name.value + "_user_proof.jpg", { type: "image/jpeg" })
         userFormData.append('name', sanitize(e.target.name.value))
         userFormData.append('dob', e.target.dob.value)
         userFormData.append('gender', e.target.gender.value)
@@ -48,14 +49,15 @@ const SignUp = () => {
         userFormData.append('aadharNo', sanitize(e.target.aadharNo.value))
         userFormData.append('phoneNo', sanitize(e.target.phoneNo.value))
         userFormData.append('userType', 'P')
-        userFormData.append('user_proof', userProof)
+        userFormData.append('user_proof', user_proof)
 
         if (e.target.userType.value === 'D') {
+            const doctor_proof = new File([doctorProof], e.target.name.value + "_doctor_proof.jpg", { type: "image/jpeg" })
             userFormData.append('hospital', hospital.id)
             userFormData.append('userType', 'D')
             userFormData.append('specialization', e.target.specialization.value)
             userFormData.append('experience', e.target.experience.value)
-            userFormData.append('doctor_proof', doctorProof)
+            userFormData.append('doctor_proof', doctor_proof)
         }
 
         const requestOptions = {
@@ -88,6 +90,8 @@ const SignUp = () => {
             return
         }
         const orgFormData = new FormData();
+        const new_images = new File([orgImages], e.target.name.value + '.jpg')
+        const new_license = new File([licenseProof], e.target.name.value + '_license.jpg')
         orgFormData.append('name', sanitize(e.target.name.value))
         orgFormData.append('address', sanitize(e.target.address.value))
         orgFormData.append('email', sanitize(e.target.email.value))
@@ -95,8 +99,8 @@ const SignUp = () => {
         orgFormData.append('licenseNo', sanitize(e.target.licenseNo.value))
         orgFormData.append('phoneNo', sanitize(e.target.phoneNo.value))
         orgFormData.append('orgType', e.target.orgType.value)
-        orgFormData.append('org_images', orgImages)
-        orgFormData.append('license_proof', licenseProof)
+        orgFormData.append('org_images', new_images)
+        orgFormData.append('license_proof', new_license)
 
         const requestOptions = {
             method: 'POST',
@@ -186,7 +190,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="formFile" className="form-label">Upload Identity Proof (Aadhar Card)</label>
-                                <input className="form-control" onChange={(e) => { setUserProof(e.target.files[0]) }} name="user_proof" type="file" id="formFile" required />
+                                <input className="form-control" onChange={(e) => { setUserProof(e.target.files[0]) }} name="user_proof" type="file" accept=".jpg, .jpeg" id="formFile" required />
                             </div>
                             <div className="form-group" aria-label="Default select example">
                                 <label html="exampleInputid1">User Type</label><br></br>
@@ -226,7 +230,7 @@ const SignUp = () => {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formFile" className="form-label">Upload Doctor License</label>
-                                            <input className="form-control" onChange={(e) => { setDoctorProof(e.target.files[0]) }} name="doctor_proof" type="file" id="formFile" required />
+                                            <input className="form-control" onChange={(e) => { setDoctorProof(e.target.files[0]) }} name="doctor_proof" type="file" accept=".jpg, .jpeg" id="formFile" required />
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +275,7 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="formFile" className="form-label">Upload License Proof</label>
-                                    <input className="form-control" onChange={(e) => { setLicenseProof(e.target.files[0]) }} name="license_proof" type="file" id="formFile" required />
+                                    <input className="form-control" onChange={(e) => { setLicenseProof(e.target.files[0]) }} name="license_proof" type="file" accept=".jpg, .jpeg" id="formFile" required />
                                 </div>
                             </div>
 
@@ -288,7 +292,7 @@ const SignUp = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="formFileMultiple" className="form-label">Upload 2 Organisation Images</label>
-                                <input className="form-control" onChange={(e) => { setOrgImages(e.target.files[0], e.target.files[1]) }} name="organisation_images" type="file" id="formFileMultiple" multiple required />
+                                <input className="form-control" onChange={(e) => { setOrgImages(e.target.files[0], e.target.files[1]) }} name="organisation_images" type="file" accept=".jpg, .jpeg" id="formFileMultiple" multiple required />
                             </div>
                             <div className="form-group">
                                 <label html="exampleInputid1">Address</label>
