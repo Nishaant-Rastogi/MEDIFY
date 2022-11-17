@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar'
 import '../styles/navbar.css'
 import ConsultationBillCard from './ConsultationBillCard'
+var sanitize = require('mongo-sanitize');
 
 const ConsultationCard = () => {
     const location = useLocation()
@@ -23,16 +24,30 @@ const ConsultationCard = () => {
                 patient_name: e.target.p_name.value,
                 patient_gender: e.target.gender.value,
                 patient_email: e.target.email.value,
-                problem: e.target.problem.value,
+                problem: sanitize(e.target.problem.value),
             })
         }
         fetch('/api/request-consultation/', requiredOptions)
             .then(response => response.json())
             .then(data => {
                 setConsultation(data.id)
+                // addBlock(data)
             })
     }
-
+    let addBlock = (data) => {
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                document: data.id
+            })
+        }
+        fetch('/api/add-block/', requiredOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
     let handleUser = () => {
         const requestOptions = {
             method: 'POST',
@@ -82,7 +97,7 @@ const ConsultationCard = () => {
                                     <input defaultValue={user.email} type="text" className="form-control" name="email" aria-describedby="idHelp" placeholder="Enter Email" disabled />
                                 </div>
                                 <div>Problem Faced:
-                                    <input type="text" className="form-control" name="problem" aria-describedby="idHelp" placeholder="Enter Problem" />
+                                    <input type="text" className="form-control" name="problem" aria-describedby="idHelp" placeholder="Enter Problem" required />
                                 </div>
                                 <div>Doctor's Name:
                                     <input defaultValue={doctor.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />

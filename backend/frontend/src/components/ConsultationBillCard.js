@@ -41,6 +41,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
             .then((response) => response.json())
             .then((data) => {
                 navigate(-1)
+                alert("Consultation Requested Successfully!")
             });
     }
 
@@ -76,7 +77,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                             <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
                         </div>
                         <div>Insurance Companies:
-                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }}>
+                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }} required>
                                 <option value={"DEFAULT"} disabled>Select Insurance</option>
                                 {
                                     insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)

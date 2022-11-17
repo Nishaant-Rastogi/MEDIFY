@@ -54,4 +54,9 @@ urlpatterns = [
     path('get-pharmacy-orders/', GetPharmacyOrderView.as_view(), name="get-pharmacy-order"),
     path('get-claims/', GetClaimView.as_view(), name="get-claims"),
     path('verify/', VerifyView.as_view(), name="verify"),
+    path('get-aadhar/', GetAadharView.as_view(), name="get-aadhar"),
+    path('get-license/', GetLicenseView.as_view(), name="get-license"),
+    path('get-email/', GetEmailView.as_view(), name="get-email"),
+    path('add-block/', AddBlockView.as_view(), name="add-block"),
+    path('get-blocks/', GetBlocksView.as_view(), name="get-blocks"),
 ]

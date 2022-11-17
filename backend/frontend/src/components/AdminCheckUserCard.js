@@ -7,22 +7,53 @@ function customcard({ UserData }) {
     const heading = "H";
     let id = 0;
 
-    let sendEmail = async (e, data) => {
+    let sendEmail_ID = (e, data) => {
         e.preventDefault()
-        emailjs.send(
-            "service_fq04boo",
-            "template_fbjb1dn",
-            {
-                from_name: "MEDIFY",
-                to_name: data.name,
-                message: data.id,
-                to_email: data.email,
-            },
-            'user_LaY6RXGTYd7nadYRQtJ3W'
-        ).then(() => {
-            window.location.reload();
-        })
+        try {
+            emailjs.send(
+                "service_4pahk8s",
+                "template_dcoqq18",
+                {
+                    to_name: data.name,
+                    message: data.id,
+                    to_email: data.email,
+                },
+                '7A_kS-q43thPMuT0U'
+            ).catch((err) => {
+                emailjs.send(
+                    "service_iillxki",
+                    "template_amw1p34",
+                    {
+                        to_name: data.name,
+                        message: data.id,
+                        to_email: data.email,
+                    },
+                    '6sJWKePGX8r9Kc3kc'
+                ).catch((err) => {
+                    emailjs.send(
+                        "service_3px0u4p",
+                        "template_94w6m5a",
+                        {
+                            to_name: data.name,
+                            message: data.id,
+                            to_email: data.email,
+                        },
+                        'LcBNB6520jOik-TOV'
+                    ).catch((err) => { alert(err) })
+                        .then(() => {
+                            window.location.reload();
+                        })
+                }).then(() => {
+                    window.location.reload();
+                })
+            }).then(() => {
+                window.location.reload();
+            })
+        } catch (err) {
+            alert(err);
+        }
     }
+
 
     let handleApprove = (e) => {
         e.preventDefault();
@@ -34,7 +65,7 @@ function customcard({ UserData }) {
         fetch('/api/approve-user/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                sendEmail(e, data);
+                sendEmail_ID(e, data);
             })
     }
     let handleReject = (e) => {

@@ -112,7 +112,7 @@ const PharmacyBuyMedicine = () => {
                 <input defaultValue={pharmacy.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
               </div>
               <div>Select Prescription
-                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setPrescription({ id: e.target.value, name: e.target.value }) }}>
+                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setPrescription({ id: e.target.value, name: e.target.value }) }} required>
                   <option value={"DEFAULT"} disabled>Select Prescriptions</option>
                   {
                     prescriptions.map((prescription, index) => <option key={index} value={prescription.id}>{prescription.id}</option>)
@@ -126,7 +126,7 @@ const PharmacyBuyMedicine = () => {
                 <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
               </div>
               <div>Insurance Companies:
-                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }}>
+                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }} required>
                   <option value={"DEFAULT"} disabled>Select Insurance</option>
                   {
                     insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)

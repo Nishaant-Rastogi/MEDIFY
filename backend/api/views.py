@@ -13,7 +13,7 @@ from pymongo import MongoClient
 import urllib
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-import bcrypt
+from hashchain import records, ethereum
 
 client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
 db = client['FCS_Project']
@@ -24,6 +24,12 @@ user_collection = db['Users']
 org_collection = db['Organizations']
 document_collection = db['Documents']
 admin_collection = db['Admin']
+log_collection = db['Logs']
+contract_collection = db['Contracts']
+
+ETH_PRIVATE_KEY = 'cd1c09736ce0eb2f1cda86d1c5d426bae85de8bbb5e6200056ce6143b27c83b0'
+ETH_PUBLIC_KEY = '0xd889370ca1bf99d18B9a7Fe9e16e004Ca2fE0331'
+ETH_PROVIDER_URL = 'https://aurora-testnet.infura.io/v3/20fd4c6c32ad40ca9764f861e978d847'
 
 # Create your views here.
 class UserView(generics.CreateAPIView):
@@ -70,6 +76,31 @@ class CreateOrganizationView(APIView):
         organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password, license_proof=license_proof, org_images=org_images, verified=False)
         check_org_collection.insert_one(OrganizationSerializer(organization).data)
         return Response(OrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
+
+class GetAadharView(APIView):
+    def get(self, request, format=None):
+        aadhars = []
+        for user in user_collection.find():
+            aadhars.append(user['aadharNo'])
+        
+        return Response(aadhars, status=status.HTTP_200_OK)
+
+class GetLicenseView(APIView):
+    def get(self, request, format=None):
+        licenses = []
+        for org in org_collection.find():
+            licenses.append(org['licenseNo'])
+        
+        return Response(licenses, status=status.HTTP_200_OK)
+
+class GetEmailView(APIView):
+    def get(self, request, format=None):
+        emails = []
+        for user in user_collection.find():
+            emails.append(user['email'])
+        for org in org_collection.find():
+            emails.append(org['email'])
+        return Response(emails, status=status.HTTP_200_OK)
 
 class VerifyView(APIView):
     def post(self, request, format=None):
@@ -126,11 +157,11 @@ class GetCheckUsersView(APIView):
         check_users = []
         for user in users:
             if user['userType'] == 'D':
-                user = Doctor(user['id'], user['name'], user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], specialization=user['specialization'], experience=user['experience'], hospital=user['hospital'], user_proof=user['user_proof'], doctor_proof=user['doctor_proof'])
+                user = Doctor(user['id'], user['name'], user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], specialization=user['specialization'], experience=user['experience'], hospital=user['hospital'], user_proof=user['user_proof'], doctor_proof=user['doctor_proof'], verified=user['verified'])
                 check_users.append(DoctorSerializer(user).data)
             else:
                 print(user['id'])
-                user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'])
+                user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'], verified=user['verified'])
                 check_users.append(UserSerializer(user).data)
         return Response(check_users, status=status.HTTP_200_OK)
 
@@ -140,7 +171,7 @@ class GetCheckOrganizationsView(APIView):
         orgs = check_org_collection.find({})
         check_orgs = []
         for org in orgs:
-            org = Organization(id=org['id'], name=org['name'], orgType=org['orgType'], licenseNo=org['licenseNo'], address=org['address'], phoneNo=org['phoneNo'], email=org['email'], password=org['password'], license_proof=org['license_proof'], org_images=org['org_images'])
+            org = Organization(id=org['id'], name=org['name'], orgType=org['orgType'], licenseNo=org['licenseNo'], address=org['address'], phoneNo=org['phoneNo'], email=org['email'], password=org['password'], license_proof=org['license_proof'], org_images=org['org_images'], verified=org['verified'])
             check_orgs.append(OrganizationSerializer(org).data)
         return Response(check_orgs, status=status.HTTP_200_OK)
 
@@ -238,12 +269,12 @@ class ApproveUserView(APIView):
     def post(self, request, format=None):
         userType = request.data['userType']
         if userType == 'P':
-            user = User(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], user_proof=request.data['user_proof'])
+            user = User(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], user_proof=request.data['user_proof'], verified=request.data['verified'])
             user_collection.insert_one(UserSerializer(user).data)
             check_user_collection.delete_one({'id': request.data['id']})
             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
         elif userType == 'D':
-            doctor = Doctor(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], user_proof=request.data['user_proof'], doctor_proof=request.data['doctor_proof'], specialization=request.data['specialization'], experience=request.data['experience'], hospital=request.data['hospital'])
+            doctor = Doctor(id=request.data['id'], name=request.data['name'], dob=request.data['dob'], gender=request.data['gender'], address=request.data['address'], phoneNo=request.data['phoneNo'], aadharNo=request.data['aadharNo'], userType=request.data['userType'], email=request.data['email'], password=request.data['password'], user_proof=request.data['user_proof'], doctor_proof=request.data['doctor_proof'], specialization=request.data['specialization'], experience=request.data['experience'], hospital=request.data['hospital'], verified=request.data['verified'])
             user_collection.insert_one(DoctorSerializer(doctor).data)
             check_user_collection.delete_one({'id': request.data['id']})
             return Response(DoctorSerializer(doctor).data, status=status.HTTP_200_OK)
@@ -251,7 +282,7 @@ class ApproveUserView(APIView):
 
 class ApproveOrganizationView(APIView):
     def post(self, request, format=None):
-        org = Organization(id=request.data['id'],name=request.data['name'], orgType=request.data['orgType'], licenseNo=request.data['licenseNo'], address=request.data['address'], phoneNo=request.data['phoneNo'], email=request.data['email'], password=request.data['password'], license_proof=request.data['license_proof'], org_images=request.data['org_images'])
+        org = Organization(id=request.data['id'],name=request.data['name'], orgType=request.data['orgType'], licenseNo=request.data['licenseNo'], address=request.data['address'], phoneNo=request.data['phoneNo'], email=request.data['email'], password=request.data['password'], license_proof=request.data['license_proof'], org_images=request.data['org_images'], verified=request.data['verified'])
         org_collection.insert_one(OrganizationSerializer(org).data)
         check_org_collection.delete_one({'id': request.data['id']})
         return Response(OrganizationSerializer(org).data, status=status.HTTP_200_OK)
@@ -552,3 +583,48 @@ class GetHospitalDoctorsView(APIView):
             if(doctor['hospital'] == hospital_id):
                 doctors.append(DoctorSerializer(doctor).data)
         return Response(DoctorSerializer(doctors, many=True).data, status=status.HTTP_200_OK)
+
+class AddBlockView(APIView):
+    def post(self, request, format=None):
+        # print('Deploying contract ...')
+        # contract = ethereum.EthContract()
+        # contract.deploy(ETH_PUBLIC_KEY, ETH_PRIVATE_KEY, ETH_PROVIDER_URL)
+        # contract.get_txn_receipt()
+        # print('Contract deployed. Address: {}'.format(contract.address))
+        
+        # contract_interface = dict(address=contract.address, abi=contract.abi)
+        # contract_collection.insert_one(contract_interface)
+        
+        # connector = ethereum.EthConnector(
+        #     contract_abi=contract_interface['abi'],
+        #     contract_address=contract_interface['address'],
+        #     sender_public_key=ETH_PUBLIC_KEY,
+        #     sender_private_key=ETH_PRIVATE_KEY,
+        #     provider_url=ETH_PROVIDER_URL
+        # )
+        chain = list(log_collection.find_one({'blockChainID':'MDFY-FCS'},{"_id":0}.sort([('timestamp', -1)])))
+        records.verify(chain)
+
+        print('Adding block 1...')
+        data = {
+            'timestamp': datetime.datetime.now(),
+            'blockChainID': 'MDFY-FCS',
+            'document': request.data['document'],
+        }
+        try:
+            last_record = log_collection.find({"blockChainID": 'MDFY-FCS'}).sort([("timestamp", -1)])[0]
+            last_record_hash = last_record['hash']
+
+        except: # If this is the first record in the DB
+            last_record_hash = None
+
+        record = records.Record(data, last_record_hash)
+        
+        # transaction_hash = connector.record('MDFY-FCS', record.get_hash())
+        log_collection.insert_one(record.to_dict())
+        return Response({'Success': 'Block Added...'}, status=status.HTTP_200_OK)
+
+class GetBlocksView(APIView):
+    def post(self, request, format=None):
+        chain = list(log_collection.find({}))
+        return Response(chain, status=status.HTTP_200_OK)

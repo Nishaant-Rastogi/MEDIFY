@@ -17,7 +17,9 @@ const SignUp = () => {
     const [doctorProof, setDoctorProof] = useState(null)
     const [licenseProof, setLicenseProof] = useState(null)
     const [orgImages, setOrgImages] = useState(null)
-
+    const [aadhar, setAadhar] = useState([])
+    const [license, setLicense] = useState([])
+    const [email, setEmail] = useState([])
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
@@ -37,9 +39,16 @@ const SignUp = () => {
             alert("Phone number must be 10 digits long!")
             return
         }
-
+        if (aadhar.includes(sanitize(e.target.aadharNo.value))) {
+            alert("Aadhar number already exists! Please Enter Unique Aadhar No")
+            return
+        }
+        if (email.includes(sanitize(e.target.email.value))) {
+            alert("Email already exists! Please Enter Unique Email")
+            return
+        }
         const userFormData = new FormData();
-        const user_proof = new File([userProof], e.target.name.value + "_user_proof.jpg", { type: "image/jpeg" })
+        const user_proof = new File([userProof], sanitize(e.target.aadharNo.value) + "_user_proof.jpg", { type: "image/jpeg" })
         userFormData.append('name', sanitize(e.target.name.value))
         userFormData.append('dob', e.target.dob.value)
         userFormData.append('gender', e.target.gender.value)
@@ -52,7 +61,7 @@ const SignUp = () => {
         userFormData.append('user_proof', user_proof)
 
         if (e.target.userType.value === 'D') {
-            const doctor_proof = new File([doctorProof], e.target.name.value + "_doctor_proof.jpg", { type: "image/jpeg" })
+            const doctor_proof = new File([doctorProof], sanitize(e.target.aadharNo.value) + "_doctor_proof.jpg", { type: "image/jpeg" })
             userFormData.append('hospital', hospital.id)
             userFormData.append('userType', 'D')
             userFormData.append('specialization', e.target.specialization.value)
@@ -89,9 +98,17 @@ const SignUp = () => {
             alert("Phone number must be 10 digits long!")
             return
         }
+        if (license.includes(sanitize(e.target.licenseNo.value))) {
+            alert("License number already exists! Please Enter Unique License No")
+            return
+        }
+        if (email.includes(sanitize(e.target.email.value))) {
+            alert("Email already exists! Please Enter Unique Email")
+            return
+        }
         const orgFormData = new FormData();
-        const new_images = new File([orgImages], e.target.name.value + '.jpg')
-        const new_license = new File([licenseProof], e.target.name.value + '_license.jpg')
+        const new_images = new File([orgImages], sanitize(e.target.licenseNo.value) + '_org.jpg')
+        const new_license = new File([licenseProof], sanitize(e.target.licenseNo.value) + '_license.jpg')
         orgFormData.append('name', sanitize(e.target.name.value))
         orgFormData.append('address', sanitize(e.target.address.value))
         orgFormData.append('email', sanitize(e.target.email.value))
@@ -127,8 +144,47 @@ const SignUp = () => {
                 setHospitals(data);
             });
     }
+    let handleAadhar = (e) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch('/api/get-aadhar/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                setAadhar(data);
+            });
+    }
+    let handleLicense = (e) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch('/api/get-license/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                setLicense(data);
+            });
+    }
+    let handleEmail = (e) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch('/api/get-email/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                setEmail(data);
+            });
+    }
     useEffect(() => {
         handleHospitals();
+        handleAadhar();
+        handleLicense();
+        handleEmail();
     }, []);
     useEffect(() => {
         hospitals.map((hos) => hos.id === hospital.id ? setHospital(hos) : null)

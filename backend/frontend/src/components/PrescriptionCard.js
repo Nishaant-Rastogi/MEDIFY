@@ -85,15 +85,15 @@ const PrescriptionCard = () => {
                             </div>
                             <div>
                                 Dosage:
-                                <input type="text" className="form-control" name="dosage" aria-describedby="idHelp" placeholder="Enter Dosage" />
+                                <input type="text" className="form-control" name="dosage" aria-describedby="idHelp" placeholder="Enter Dosage" required />
                             </div>
                             <div>
                                 Medicine Duration:
-                                <input type="text" className="form-control" name="duration" aria-describedby="idHelp" placeholder="Enter Duration" />
+                                <input type="text" className="form-control" name="duration" aria-describedby="idHelp" placeholder="Enter Duration" required />
                             </div>
                             <div>
                                 Tests
-                                <select defaultValue={'DEFAULT'} className="form-control" name='test'>
+                                <select defaultValue={'DEFAULT'} className="form-control" name='test' required>
                                     <option value="DEFAULT" disabled>Select Tests</option>
                                     <option value="1">Test 1</option>
                                     <option value="2">Test 2</option>

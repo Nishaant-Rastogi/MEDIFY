@@ -39,6 +39,7 @@ const Verification = () => {
         startTimer();
         otp = generateOTP();
         setOTP(otp);
+        // console.log(otp)
         try {
             alert("New OTP sent to your email");
             emailjs.send(
@@ -89,6 +90,7 @@ const Verification = () => {
             .then(data => {
                 location.state = null;
                 navigate(path);
+                alert("Verified Successfully");
             })
     }
 
@@ -119,51 +121,12 @@ const Verification = () => {
             }
         }
     }
-    let sendEmail_ID = (e) => {
-        e.preventDefault()
-        try {
-            emailjs.send(
-                "service_4pahk8s",
-                "template_dcoqq18",
-                {
-                    to_name: name,
-                    message: id,
-                    to_email: email,
-                },
-                '7A_kS-q43thPMuT0U'
-            ).catch((err) => {
-                emailjs.send(
-                    "service_iillxki",
-                    "template_amw1p34",
-                    {
-                        to_name: name,
-                        message: id,
-                        to_email: email,
-                    },
-                    '6sJWKePGX8r9Kc3kc'
-                ).catch((err) => {
-                    emailjs.send(
-                        "service_3px0u4p",
-                        "template_94w6m5a",
-                        {
-                            to_name: name,
-                            message: id,
-                            to_email: email,
-                        },
-                        'LcBNB6520jOik-TOV'
-                    ).catch((err) => { alert(err) })
-                })
-            })
-        } catch (err) {
-            alert(err);
-        }
-    }
+
     let handleOTP = (e) => {
         e.preventDefault()
         const code = input1 + input2 + input3 + input4;
         if (signup) {
             if (code === OTP && OTP !== '') {
-                sendEmail_ID(e);
                 handleVerification(e, '/');
                 return;
             } else {
@@ -178,20 +141,15 @@ const Verification = () => {
 
         if (code === OTP && OTP !== '') {
             if (type && type === 'P') {
-                sendEmail_ID(e);
-                handleVerification(e, '/user/patients/home');
+                navigate('/user/patients/home');
             } else if (type && type === 'D') {
-                sendEmail_ID(e);
-                handleVerification(e, '/user/doctors/home');
+                navigate('/user/doctors/home');
             } else if (orgType && orgType === 'P') {
-                sendEmail_ID(e);
-                handleVerification(e, '/organisation/pharmacy/home');
+                navigate('/organisation/pharmacy/home');
             } else if (orgType && orgType === 'H') {
-                sendEmail_ID(e);
-                handleVerification(e, '/organisation/hospital/home');
+                navigate('/organisation/hospital/home');
             } else if (orgType && orgType === 'I') {
-                sendEmail_ID(e);
-                handleVerification(e, '/organisation/insurance/home');
+                navigate('/organisation/insurance/home');
             }
         } else {
             if (trials > 0) {
@@ -209,9 +167,11 @@ const Verification = () => {
             navigate('/');
         } else {
             window.onpopstate = () => {
-                location.state = null;
-                alert("CONFIRM FORM RESUBMISSION");
-                navigate('/signup');
+                if (window.location.pathname === '/verification') {
+                    location.state = null;
+                    alert("CONFIRM FORM RESUBMISSION");
+                    navigate('/signup');
+                }
             }
             setType(location.state.type);
             setOrgType(location.state.orgType);

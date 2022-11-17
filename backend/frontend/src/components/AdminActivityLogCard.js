@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
+import emailjs from '@emailjs/browser'
 
-function customcard({ UserData }) {
+function customcard({ transactions }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
-    let handleDelete = (e) => {
-        e.preventDefault();
-        const requiredOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(UserData[e.target.id])
-        }
-        fetch('/api/delete-user/', requiredOptions)
-            .then(response => response.json())
-            .then(data => {
-                window.location.reload();
-            })
-    }
+
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {UserData == null ? null : UserData.map((data) => (
-                <div key={id} className="card CARD" >
-                    {console.log(data)}
+            {transactions == null ? null : transactions.map((data) => (
+                <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
-                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
+                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
                                     Name:
@@ -35,18 +23,18 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    Aadhar No:
+                                    License No:
                                 </div>
                                 <div className="VALUE">
-                                    {data.aadharNo}
+                                    {data.licenseNo}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Type:
+                                    Type :
                                 </div>
                                 <div className="VALUE">
-                                    {data.userType}
+                                    {data.orgType}
                                 </div>
 
                             </div>
@@ -65,7 +53,7 @@ function customcard({ UserData }) {
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Address :
+                                    Address:
                                 </div>
                                 <div className="VALUE">
                                     {data.address}
@@ -73,19 +61,17 @@ function customcard({ UserData }) {
                             </div>
                             <div className="DATA TO">
                                 <div className="HEAD">
-                                    Phone No :
+                                    Contact No:
                                 </div>
                                 <div className="VALUE">
                                     {data.phoneNo}
                                 </div>
                             </div>
-                            <button className="btn btn-primary btn-sm" id={id++} onClick={handleDelete}>Delete</button>
                         </div>
                     </div>
                 </div>
-            ))
-            }
-        </div >
+            ))}
+        </div>
     )
 }
 
@@ -94,19 +80,18 @@ function customcard({ UserData }) {
 
 
 
-function AdminCheckUserCard({ UserData }) {
-    const hashtag = "#H";
-    const heading = "H";
+function AdminActivityLogCard({ transactions }) {
     return (
         <>
-            {UserData.length < 1 ?
+            {console.log(transactions)}
+            {transactions.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">
-                        <div className="card-header COL" id="headingOne"> No User</div>
+                        <div className="card-header COL" id="headingOne"> No Transactions</div>
                     </div>
-                </div> : customcard({ UserData })}
+                </div> : customcard({ transactions })}
         </>
     );
 }
 
-export default AdminCheckUserCard;
+export default AdminActivityLogCard;
