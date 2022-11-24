@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
-import emailjs from '@emailjs/browser'
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
+var CryptoJS = require("crypto-js");
 
+const rnd = (() => {
+    const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
+
+    const sets = {
+        num: gen(48, 57),
+        alphaLower: gen(97, 122),
+        alphaUpper: gen(65, 90),
+        special: [...`~!@#$%^&*()_+-=[]\{}|;:'",./<>?`]
+    };
+
+    function* iter(len, set) {
+        if (set.length < 1) set = Object.values(sets).flat();
+        for (let i = 0; i < len; i++) yield set[Math.random() * set.length | 0]
+    }
+
+    return Object.assign(((len, ...set) => [...iter(len, set.flat())].join('')), sets);
+})();
+const enc = rnd(16)
+const encryption_key = CryptoJS.enc.Utf8.parse(enc)
+const IV = rnd(16)
+const iv = CryptoJS.enc.Utf8.parse(IV)
 const salt = bcrypt.genSaltSync(10);
 
 const SignUp = () => {
@@ -68,10 +89,10 @@ const SignUp = () => {
             userFormData.append('experience', e.target.experience.value)
             userFormData.append('doctor_proof', doctor_proof)
         }
-
         const requestOptions = {
             method: 'POST',
-            body: userFormData,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(Object.fromEntries(userFormData)), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
         fetch('/api/create-user/', requestOptions)
             .then((response) => response.json())
@@ -121,7 +142,7 @@ const SignUp = () => {
 
         const requestOptions = {
             method: 'POST',
-            body: orgFormData,
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(Object.fromEntries(orgFormData)), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
         fetch('/api/create-organization/', requestOptions)
             .then((response) => response.json())

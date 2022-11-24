@@ -187,6 +187,19 @@ class PharmacyBill(models.Model):
     def __str__(self):
         return self.consultation_id
 
+class InsuranceBill(models.Model):
+    id = models.CharField(max_length=11, primary_key=True, default=generate_bill_id)
+    bill_id = models.CharField(max_length=11)
+    patient_id = models.CharField(max_length=11)
+    # test = models.CharField(max_length=20, default='None')
+    refund = models.IntegerField(default=10)
+    insurance_id = models.CharField(max_length=11, default='None')
+    docType = models.CharField(default='BI', max_length=1)
+    visible = models.BooleanField(default=True)
+    claimed = models.BooleanField(default=False)
+    def __str__(self):
+        return self.consultation_id
+
 class PharmacyOrder(models.Model):
     id = models.CharField(max_length=11, primary_key=True, default=generate_order_id)
     prescription_id = models.CharField(max_length=11)

@@ -1,6 +1,28 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
+var CryptoJS = require("crypto-js");
 
+const rnd = (() => {
+    const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
+
+    const sets = {
+        num: gen(48, 57),
+        alphaLower: gen(97, 122),
+        alphaUpper: gen(65, 90),
+        special: [...`~!@#$%^&*()_+-=[]\{}|;:'",./<>?`]
+    };
+
+    function* iter(len, set) {
+        if (set.length < 1) set = Object.values(sets).flat();
+        for (let i = 0; i < len; i++) yield set[Math.random() * set.length | 0]
+    }
+
+    return Object.assign(((len, ...set) => [...iter(len, set.flat())].join('')), sets);
+})();
+const enc = rnd(16)
+const encryption_key = CryptoJS.enc.Utf8.parse(enc)
+const IV = rnd(16)
+const iv = CryptoJS.enc.Utf8.parse(IV)
 function customcard({ bills }) {
     const hashtag = "#H";
     const heading = "H";
@@ -11,7 +33,7 @@ function customcard({ bills }) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bills[e.target.id])
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(bills[e.target.id]), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
         fetch('/api/update-bill-view/', requestOptions)
             .then(response => response.json())
@@ -38,7 +60,7 @@ function customcard({ bills }) {
                                     Bill Type:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {data.docType === 'BC' ? "Consultation Bill" : data.docType === 'BP' ? "Pharmacy Bill" : data.docType === 'BT' ? "Test Result Bill" : null}
+                                    {data.docType === 'BC' ? "Consultation Bill" : data.docType === 'BP' ? "Pharmacy Bill" : data.docType === 'BT' ? "Test Result Bill" : "Insurance Claim Bill"}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
@@ -83,7 +105,7 @@ function customcard({ bills }) {
                                     Amount :
                                 </div>
                                 <div className="VALUE">
-                                    {data.amount}
+                                    {data.amount ? data.amount : data.refund}
                                 </div>
                             </div>
                             <button className="btn btn-primary btn-sm" id={id++} style={{ marginLeft: '10px' }} onClick={handleDelete}>DELETE</button>

@@ -1,8 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
+var sanitize = require('mongo-sanitize');
+import bcrypt from 'bcryptjs'
+var CryptoJS = require("crypto-js");
 
+const rnd = (() => {
+  const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
+  const sets = {
+    num: gen(48, 57),
+    alphaLower: gen(97, 122),
+    alphaUpper: gen(65, 90),
+    special: [...`~!@#$%^&*()_+-=[]\{}|;:'",./<>?`]
+  };
+
+  function* iter(len, set) {
+    if (set.length < 1) set = Object.values(sets).flat();
+    for (let i = 0; i < len; i++) yield set[Math.random() * set.length | 0]
+  }
+
+  return Object.assign(((len, ...set) => [...iter(len, set.flat())].join('')), sets);
+})();
+const enc = rnd(16)
+const encryption_key = CryptoJS.enc.Utf8.parse(enc)
+const IV = rnd(16)
+const iv = CryptoJS.enc.Utf8.parse(IV)
+const salt = bcrypt.genSaltSync(10);
 const PharmacyBuyMedicine = () => {
   const [user, setUser] = useState([])
   const [prescriptions, setPrescriptions] = useState([])
@@ -19,29 +43,47 @@ const PharmacyBuyMedicine = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        prescription_id: prescription.id,
-        pharmacy_id: pharmacy.id,
-        pharmacy_name: pharmacy.name,
-        insurance_id: insurance.id,
-        insurance_name: insurance.name,
-        patient_id: user.id,
-        patient_name: user.name,
-        amount: e.target.amount.value,
-        medicine: e.target.medicine.value,
-      })
+        data: CryptoJS.AES.encrypt(JSON.stringify({
+          prescription_id: prescription.id,
+          pharmacy_id: pharmacy.id,
+          pharmacy_name: pharmacy.name,
+          insurance_id: insurance.id,
+          insurance_name: insurance.name,
+          patient_id: user.id,
+          patient_name: user.name,
+          amount: e.target.amount.value,
+          medicine: e.target.medicine.value,
+        }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+      }),
+
     }
     fetch('/api/send-pharmacy-bill/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        navigate(-1)
+        addBlock(data).then(() => { navigate(-1) })
       });
   }
-
+  let addBlock = (data) => {
+    const requiredOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: CryptoJS.AES.encrypt(JSON.stringify({
+          document: bcrypt.hashSync(data, salt),
+        }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+      }),
+    }
+    fetch('/api/add-block/', requiredOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+  }
   let handleUser = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: localStorage.getItem('user')
+      body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
     };
 
     fetch('/api/get-user/', requestOptions)
@@ -55,7 +97,8 @@ const PharmacyBuyMedicine = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: localStorage.getItem('user')
+      body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
+
     }
     fetch('/api/get-prescriptions-buy-medicine/', requestOptions)
       .then((response) => response.json())

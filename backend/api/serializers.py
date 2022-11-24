@@ -44,7 +44,11 @@ class PharmacyBillSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyBill
         fields = '__all__'
-
+class InsuranceBillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InsuranceBill
+        fields = '__all__'
+        
 class PharmacyOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyOrder

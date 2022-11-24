@@ -59,4 +59,5 @@ urlpatterns = [
     path('get-email/', GetEmailView.as_view(), name="get-email"),
     path('add-block/', AddBlockView.as_view(), name="add-block"),
     path('get-blocks/', GetBlocksView.as_view(), name="get-blocks"),
+    path('get-insurance-bills/', GetInsuranceBillView.as_view(), name="get-insurance-bills"),
 ]

@@ -2,11 +2,35 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar'
 import '../styles/navbar.css'
+var sanitize = require('mongo-sanitize');
+import bcrypt from 'bcryptjs'
+var CryptoJS = require("crypto-js");
 
+const rnd = (() => {
+    const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
+
+    const sets = {
+        num: gen(48, 57),
+        alphaLower: gen(97, 122),
+        alphaUpper: gen(65, 90),
+        special: [...`~!@#$%^&*()_+-=[]\{}|;:'",./<>?`]
+    };
+
+    function* iter(len, set) {
+        if (set.length < 1) set = Object.values(sets).flat();
+        for (let i = 0; i < len; i++) yield set[Math.random() * set.length | 0]
+    }
+
+    return Object.assign(((len, ...set) => [...iter(len, set.flat())].join('')), sets);
+})();
+const enc = rnd(16)
+const encryption_key = CryptoJS.enc.Utf8.parse(enc)
+const IV = rnd(16)
+const iv = CryptoJS.enc.Utf8.parse(IV)
+const salt = bcrypt.genSaltSync(10);
 const PrescriptionCard = () => {
     const location = useLocation()
     const [doctor, setDoctor] = useState([])
-    const [prescription, setPrescription] = useState()
     const navigate = useNavigate()
     const user = { id: location.state.patient_id, name: location.state.patient_name, consultation_id: location.state.consultation_id }
 
@@ -16,30 +40,49 @@ const PrescriptionCard = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                doctor_id: e.target.d_id.value,
-                doctor_name: e.target.d_name.value,
-                patient_id: e.target.p_id.value,
-                patient_name: e.target.p_name.value,
-                test: e.target.test.value,
-                medicine: e.target.medicine.value,
-                dosage: e.target.dosage.value,
-                duration: e.target.duration.value,
-                consultation_id: e.target.c_id.value,
-            })
+                data: CryptoJS.AES.encrypt(JSON.stringify({
+                    doctor_id: e.target.d_id.value,
+                    doctor_name: e.target.d_name.value,
+                    patient_id: e.target.p_id.value,
+                    patient_name: e.target.p_name.value,
+                    test: e.target.test.value,
+                    medicine: e.target.medicine.value,
+                    dosage: sanitize(e.target.dosage.value),
+                    duration: sanitize(e.target.duration.value),
+                    consultation_id: e.target.c_id.value,
+                }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+            }),
+
         }
         fetch('/api/send-prescription/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                setPrescription(data.id)
-                navigate(-1)
+                addBlock(data).then(() => { navigate(-1) })
             })
     }
+    let addBlock = (data) => {
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                data: CryptoJS.AES.encrypt(JSON.stringify({
+                    document: bcrypt.hashSync(data, salt),
+                }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+            }),
 
+        }
+        fetch('/api/add-block/', requiredOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
     let handleUser = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: localStorage.getItem('user')
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
+
         };
 
         fetch('/api/get-user/', requestOptions)

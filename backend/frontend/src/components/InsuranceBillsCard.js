@@ -1,66 +1,59 @@
 import React, { useState } from "react";
 
-function customcard({ EmpData }) {
+function customcard({ bills }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {EmpData.emp == null ? null : EmpData.emp.map((accoundata) => (
+            {bills.emp == null ? null : bills.emp.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name:
+                                    Bill ID:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {accoundata.Name}
+                                    {data.id}
+                                </div>
+                            </div>
+                            <div className="DATA ACCOUNT">
+                                <div className="HEAD HEAD1">
+                                    Bill Type:
+                                </div>
+                                <div className="VALUE NAME">
+                                    Insurance Claim Bill
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    License No:
+                                    Receiver ID:
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Employee_ID}
+                                    {data.patient_id}
                                 </div>
-                            </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Specialisation :
-                                </div>
-                                <div className="VALUE">
-                                    {accoundata.Designation}
-                                </div>
-
                             </div>
                         </button>
                     </div>
-                    <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id={heading.concat(id++).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Experience :
+                                    Insurance ID :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.PAN}
+                                    {data.insurance_id}
                                 </div>
                             </div>
                             <div className="DATA TO">
-                                <div className="HEAD">
-                                    Consultation Fees:
-                                </div>
-                                <div className="VALUE">
-                                    {accoundata.Salary}
-                                </div>
                             </div>
                             <div className="DATA DATE">
                                 <div className="HEAD">
-                                    Schedule:
+                                    Refund :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Joining_Date}
+                                    {data.refund}
                                 </div>
                             </div>
                         </div>
@@ -73,17 +66,17 @@ function customcard({ EmpData }) {
 
 
 
-function InsuranceBillsCard({ EmpData }) {
+function InsuranceBillsCard({ bills }) {
     return (
         <>
-            {EmpData == null ?
+            {bills == null ?
                 <div className="CUSTOMCARDE" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne">No Insurance Bills</div>
                     </div>
                 </div>
                 :
-                <div>{customcard({ EmpData })}</div>
+                <div>{customcard({ bills })}</div>
             }
         </>
     );
