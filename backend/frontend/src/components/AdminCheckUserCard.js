@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
-import emailjs from '@emailjs/browser'
 var CryptoJS = require("crypto-js");
 
 const rnd = (() => {
@@ -30,52 +29,20 @@ function customcard({ UserData }) {
     let id = 0;
 
     let sendEmail_ID = (e, data) => {
-        e.preventDefault()
-        try {
-            emailjs.send(
-                "service_4pahk8s",
-                "template_dcoqq18",
-                {
-                    to_name: data.name,
-                    message: data.id,
-                    to_email: data.email,
-                },
-                '7A_kS-q43thPMuT0U'
-            ).catch((err) => {
-                emailjs.send(
-                    "service_iillxki",
-                    "template_amw1p34",
-                    {
-                        to_name: data.name,
-                        message: data.id,
-                        to_email: data.email,
-                    },
-                    '6sJWKePGX8r9Kc3kc'
-                ).catch((err) => {
-                    emailjs.send(
-                        "service_3px0u4p",
-                        "template_94w6m5a",
-                        {
-                            to_name: data.name,
-                            message: data.id,
-                            to_email: data.email,
-                        },
-                        'LcBNB6520jOik-TOV'
-                    ).catch((err) => { alert(err) })
-                        .then(() => {
-                            window.location.reload();
-                        })
-                }).then(() => {
-                    window.location.reload();
-                })
-            }).then(() => {
-                window.location.reload();
-            })
-        } catch (err) {
-            alert(err);
+        let requiredOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ name: data.name, email: data.email, id: data.id }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
-    }
 
+        fetch("/api/send-mail-id/", requiredOptions)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+    }
 
     let handleApprove = (e) => {
         e.preventDefault();

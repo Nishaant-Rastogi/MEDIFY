@@ -60,4 +60,6 @@ urlpatterns = [
     path('add-block/', AddBlockView.as_view(), name="add-block"),
     path('get-blocks/', GetBlocksView.as_view(), name="get-blocks"),
     path('get-insurance-bills/', GetInsuranceBillView.as_view(), name="get-insurance-bills"),
+    path('send-mail/', SendMailView.as_view(), name="send-mail"),
+    path('send-mail-id/', SendMailIdView.as_view(), name="send-mail-id"),
 ]

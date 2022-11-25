@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
-import emailjs from '@emailjs/browser'
 
 function customcard({ transactions }) {
     const hashtag = "#H";

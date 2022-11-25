@@ -1,18 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
-import emailjs from '@emailjs/browser'
 var CryptoJS = require("crypto-js");
 
-// const nodemailer = require('nodemailer')
-// const transporter = nodemailer.createTransport({
-//     host: 'smtp.gmail.com',
-//     port: '587', // must be 587 for gmail
-//     auth: {
-//         user: 'yourAccount@gmail.com',
-//         pass: 'yourPassword'
-//     }
-// })
+
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -71,44 +62,19 @@ const Verification = () => {
         startTimer();
         otp = generateOTP();
         setOTP(otp);
-        try {
-            alert("New OTP sent to your email");
-            emailjs.send(
-                "service_4pahk8s",
-                "template_nzw9tlk",
-                {
-                    to_name: name,
-                    message: otp,
-                    to_email: email,
-                },
-                '7A_kS-q43thPMuT0U'
-            ).catch((err) => {
-                emailjs.send(
-                    "service_iillxki",
-                    "template_fiksu5v",
-                    {
-                        to_name: name,
-                        message: otp,
-                        to_email: email,
-                    },
-                    '6sJWKePGX8r9Kc3kc'
-                ).catch((err) => {
-                    emailjs.send(
-                        "service_3px0u4p",
-                        "template_w9crofp",
-                        {
-                            to_name: name,
-                            message: otp,
-                            to_email: email,
-                        },
-                        'LcBNB6520jOik-TOV'
-                    ).catch((err) => { })
-                })
-            })
-        } catch (err) {
-            alert(err);
+        let requiredOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ name: name, email: email, otp: otp }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
 
+        fetch("/api/send-mail/", requiredOptions)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            })
     }
     let handleVerification = (e, path) => {
         e.preventDefault();

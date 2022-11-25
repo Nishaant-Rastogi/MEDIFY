@@ -18,6 +18,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad,unpad
 from Crypto.Random import get_random_bytes
+from django.core.mail import EmailMessage
 
 client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
 db = client['FCS_Project']
@@ -688,3 +689,27 @@ class GetBlocksView(APIView):
             data.append(LogSerializer(block).data)
         print(data)
         return Response(data, status=status.HTTP_200_OK)
+
+class SendMailView(APIView):
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        status = False
+        try:
+            email = EmailMessage("New message from MEDIFY", "Hello "+decrypted_data['name']+",\nThank You for Signing Up on Medify.\nHere is your OTP for verification.\n"+decrypted_data['otp']+"\nBest wishes,\nMedify Team", to=[decrypted_data['email'],])
+            email.send()
+            status = True
+        except Exception as e:
+            print(e)    
+        return Response({'Mail sent Successfully!'}, status=status.HTTP_200_OK)
+
+class SendMailIdView(APIView):
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        status = False
+        try:
+            email = EmailMessage("New message from MEDIFY", "Hello "+decrypted_data['name']+",\nThank You for Signing Up on Medify.\nHere is your ID for login.\n"+decrypted_data['id']+"\nBest wishes,\nMedify Team", to=[decrypted_data['email'],])
+            email.send()
+            status = True
+        except Exception as e:
+            print(e)    
+        return Response({'Mail sent Successfully!'}, status=status.HTTP_200_OK)
