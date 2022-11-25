@@ -75,8 +75,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 }
             })
             .then((data) => {
-                // addBlock(data).then(() => { navigate(-1); })
-                navigate(-1)
+                addBlock(data)
             });
     }
     let addBlock = (data) => {
@@ -85,7 +84,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(data, salt),
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -94,7 +93,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            })
+            }).then(() => { navigate(-1); })
     }
     useEffect(() => {
         handleInsurance();

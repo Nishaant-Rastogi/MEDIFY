@@ -56,7 +56,7 @@ const PatientsClaim = () => {
         fetch('/api/claim-refund/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock(data).then(() => { navigate(-1); window.location.reload() })
+                addBlock(data)
             });
     }
     let addBlock = (data) => {
@@ -65,7 +65,7 @@ const PatientsClaim = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(data, salt),
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -74,7 +74,7 @@ const PatientsClaim = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            })
+            }).then(() => { navigate(-1); window.location.reload() })
     }
     let handleBills = () => {
         const requiredOptions = {

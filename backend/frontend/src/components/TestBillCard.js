@@ -62,16 +62,16 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock(data).then(() => { navigate(-1); window.location.reload(); })
+                addBlock1(data)
             });
     }
-    let addBlock = (data) => {
+    let addBlock1 = (data) => {
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(data, salt),
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -80,7 +80,24 @@ function TestBillCard({ hospital, user, prescription }) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            })
+            }).then(() => { navigate(-1); window.location.reload(); })
+    }
+    let addBlock2 = (data) => {
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                data: CryptoJS.AES.encrypt(JSON.stringify({
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+            }),
+
+        }
+        fetch('/api/add-block/', requiredOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            }).then(() => { handleTestResult(); navigate(-1); })
     }
     let handleBill = (e) => {
         e.preventDefault()
@@ -107,7 +124,7 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result-bill/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                addBlock(data).then(() => { handleTestResult(); navigate(-1); })
+                addBlock2(data)
             });
     }
 

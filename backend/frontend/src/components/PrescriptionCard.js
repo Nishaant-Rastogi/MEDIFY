@@ -57,7 +57,7 @@ const PrescriptionCard = () => {
         fetch('/api/send-prescription/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock(data).then(() => { navigate(-1) })
+                addBlock(data)
             })
     }
     let addBlock = (data) => {
@@ -66,7 +66,7 @@ const PrescriptionCard = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(data, salt),
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -75,7 +75,7 @@ const PrescriptionCard = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            })
+            }).then(() => { navigate(-1) })
     }
     let handleUser = () => {
         const requestOptions = {

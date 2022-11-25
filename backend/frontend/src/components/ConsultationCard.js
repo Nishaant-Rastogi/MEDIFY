@@ -57,8 +57,7 @@ const ConsultationCard = () => {
         fetch('/api/request-consultation/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                // addBlock(data).then(() => { setConsultation(data.id) })
-                setConsultation(data.id)
+                addBlock(data)
             })
     }
     let addBlock = (data) => {
@@ -67,7 +66,7 @@ const ConsultationCard = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(data, salt),
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -76,7 +75,7 @@ const ConsultationCard = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            })
+            }).then(() => { setConsultation(data.id) })
     }
     let handleUser = () => {
         const requestOptions = {
