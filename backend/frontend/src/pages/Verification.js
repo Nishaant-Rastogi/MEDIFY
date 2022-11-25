@@ -4,15 +4,15 @@ import '../styles/verification.css';
 import emailjs from '@emailjs/browser'
 var CryptoJS = require("crypto-js");
 
-const nodemailer = require('nodemailer')
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: '587', // must be 587 for gmail
-    auth: {
-        user: 'yourAccount@gmail.com',
-        pass: 'yourPassword'
-    }
-})
+// const nodemailer = require('nodemailer')
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com',
+//     port: '587', // must be 587 for gmail
+//     auth: {
+//         user: 'yourAccount@gmail.com',
+//         pass: 'yourPassword'
+//     }
+// })
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -71,7 +71,6 @@ const Verification = () => {
         startTimer();
         otp = generateOTP();
         setOTP(otp);
-        console.log(otp)
         try {
             alert("New OTP sent to your email");
             emailjs.send(
