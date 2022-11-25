@@ -270,7 +270,7 @@ class GetHospitalsView(APIView):
         orgs = org_collection.find({'orgType': 'H'})
         data = []
         for org in orgs:
-            data.append({"name": OrganizationSerializer(org).data['name'], "id": OrganizationSerializer(org).data['id'], "email": OrganizationSerializer(org).data['email'], "orgType": OrganizationSerializer(org).data['orgType'], "licenseNo": OrganizationSerializer(org).data['licenseNo'], "address": OrganizationSerializer(org).data['address'], "phoneNo": OrganizationSerializer(org).data['phoneNo']})
+            data.append({"name": OrganizationSerializer(org).data['name'], "id": OrganizationSerializer(org).data['id'], "email": OrganizationSerializer(org).data['email'], "licenseNo": OrganizationSerializer(org).data['licenseNo'], "address": OrganizationSerializer(org).data['address'], "phoneNo": OrganizationSerializer(org).data['phoneNo']})
         return Response(data, status=status.HTTP_200_OK)
 
 class GetDoctorsView(APIView):
