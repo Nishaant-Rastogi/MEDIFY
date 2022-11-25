@@ -60,7 +60,8 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/send-pharmacy-bill/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        addBlock(data)
+        // addBlock(data)
+        navigate(-1)
       });
   }
   let addBlock = (data) => {

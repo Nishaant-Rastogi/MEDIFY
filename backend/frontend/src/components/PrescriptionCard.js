@@ -57,7 +57,8 @@ const PrescriptionCard = () => {
         fetch('/api/send-prescription/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock(data)
+                // addBlock(data)
+                navigate(-1)
             })
     }
     let addBlock = (data) => {

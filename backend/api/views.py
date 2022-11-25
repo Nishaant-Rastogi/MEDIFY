@@ -92,29 +92,41 @@ class CreateOrganizationView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 class GetAadharView(APIView):
-    def get(self, request, format=None):
-        aadhars = []
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        aadharNo = decrypted_data['aadhar']
+        response = True
         for user in user_collection.find():
-            aadhars.append(user['aadharNo'])
-        
-        return Response(aadhars, status=status.HTTP_200_OK)
+            if user['aadharNo'] == aadharNo:
+                response = False
+                break
+        return Response({"data": response}, status=status.HTTP_200_OK)
 
 class GetLicenseView(APIView):
-    def get(self, request, format=None):
-        licenses = []
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        licenseNo = decrypted_data['license']
+        response = True
         for org in org_collection.find():
-            licenses.append(org['licenseNo'])
-        
-        return Response(licenses, status=status.HTTP_200_OK)
+            if org['licenseNo'] == licenseNo:
+                response = False
+                break
+        return Response({"data": response}, status=status.HTTP_200_OK)
 
 class GetEmailView(APIView):
-    def get(self, request, format=None):
-        emails = []
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        email = decrypted_data['email']
+        response = True
         for user in user_collection.find():
-            emails.append(user['email'])
+            if user['email'] == email:
+                response = False
+                break
         for org in org_collection.find():
-            emails.append(org['email'])
-        return Response(emails, status=status.HTTP_200_OK)
+            if org['email'] == email:
+                response = False
+                break
+        return Response({"data":response}, status=status.HTTP_200_OK)
 
 class VerifyView(APIView):
     def post(self, request, format=None):

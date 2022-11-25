@@ -62,7 +62,9 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock1(data)
+                // addBlock1(data)
+                navigate(-1)
+                window.location.reload()
             });
     }
     let addBlock1 = (data) => {
@@ -121,7 +123,8 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/send-test-result-bill/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                addBlock2(data)
+                // addBlock2(data)
+                handleTestResult(); navigate(-1);
             });
     }
 

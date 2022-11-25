@@ -38,12 +38,14 @@ const SignUp = () => {
     const [doctorProof, setDoctorProof] = useState(null)
     const [licenseProof, setLicenseProof] = useState(null)
     const [orgImages, setOrgImages] = useState(null)
-    const [aadhar, setAadhar] = useState([])
-    const [license, setLicense] = useState([])
-    const [email, setEmail] = useState([])
+    const [aadhar, setAadhar] = useState(true)
+    const [license, setLicense] = useState(true)
+    const [email, setEmail] = useState(true)
 
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
+        handleAadhar(e, sanitize(e.target.aadharNo.value))
+        handleEmail(e, sanitize(e.target.email.value))
         if (e.target.user_password.value !== e.target.confirm_user_password.value) {
             alert("Passwords don't match!")
             return
@@ -58,14 +60,6 @@ const SignUp = () => {
         }
         if (e.target.phoneNo.value.length !== 10) {
             alert("Phone number must be 10 digits long!")
-            return
-        }
-        if (aadhar.includes(sanitize(e.target.aadharNo.value))) {
-            alert("Aadhar number already exists! Please Enter Unique Aadhar No")
-            return
-        }
-        if (email.includes(sanitize(e.target.email.value))) {
-            alert("Email already exists! Please Enter Unique Email")
             return
         }
         const userFormData = new FormData();
@@ -103,6 +97,8 @@ const SignUp = () => {
     }
     let handleSignUpAsOrganization = async (e) => {
         e.preventDefault()
+        handleEmail(e, sanitize(e.target.email.value));
+        handleLicense(e, sanitize(e.target.licenseNo.value));
         if (e.target.org_password.value !== e.target.confirm_org_password.value) {
             alert("Passwords don't match!")
             return
@@ -117,14 +113,6 @@ const SignUp = () => {
         }
         if (e.target.phoneNo.value.length !== 10) {
             alert("Phone number must be 10 digits long!")
-            return
-        }
-        if (license.includes(sanitize(e.target.licenseNo.value))) {
-            alert("License number already exists! Please Enter Unique License No")
-            return
-        }
-        if (email.includes(sanitize(e.target.email.value))) {
-            alert("Email already exists! Please Enter Unique Email")
             return
         }
         const orgFormData = new FormData();
@@ -165,48 +153,65 @@ const SignUp = () => {
                 setHospitals(data);
             });
     }
-    let handleAadhar = (e) => {
+    let handleAadhar = async (e, aadharNo) => {
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ aadhar: aadharNo }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
         fetch('/api/get-aadhar/', requestOptions)
             .then((response) => response.json())
-            .then((data) => {
-                setAadhar(data);
-            });
+            .then((data) => { console.log(data); setAadhar(data.data) });
     }
-    let handleLicense = (e) => {
+    let handleLicense = async (e, licenseNo) => {
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ license: licenseNo }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
         fetch('/api/get-license/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setLicense(data);
+                console.log(data);
+                setLicense(data.data)
             });
     }
-    let handleEmail = (e) => {
+    let handleEmail = async (e, emailId) => {
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ email: emailId }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
         fetch('/api/get-email/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setEmail(data);
-            });
+                console.log(data);
+                setEmail(data.data);
+            })
     }
     useEffect(() => {
-        handleHospitals();
-        handleAadhar();
-        handleLicense();
-        handleEmail();
-    }, []);
+        handleHospitals()
+    }, [])
+    useEffect(() => {
+        if (aadhar === false) {
+            alert("Aadhar number already exists! Please Enter Unique Aadhar No")
+            window.location.reload()
+            return
+        }
+        if (email === false) {
+            alert("Email already exists! Please Enter Unique Email")
+            window.location.reload()
+            return
+        }
+        if (license === false) {
+            alert("License number already exists! Please Enter Unique License No")
+            window.location.reload()
+            return
+        }
+    }, [aadhar, license, email])
     useEffect(() => {
         hospitals.map((hos) => hos.id === hospital.id ? setHospital(hos) : null)
     }, [hospital])

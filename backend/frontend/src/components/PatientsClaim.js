@@ -56,7 +56,8 @@ const PatientsClaim = () => {
         fetch('/api/claim-refund/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                addBlock(data)
+                // addBlock(data)
+                navigate(-1); window.location.reload()
             });
     }
     let addBlock = (data) => {

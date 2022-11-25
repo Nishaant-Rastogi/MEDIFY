@@ -75,7 +75,8 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 }
             })
             .then((data) => {
-                addBlock(data)
+                // addBlock(data)
+                navigate(-1)
             });
     }
     let addBlock = (data) => {
@@ -91,7 +92,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
         }
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
-            .then(data => { }).then(() => { navigate(-1); })
+            .then(data => { navigate(-1); })
     }
     useEffect(() => {
         handleInsurance();
