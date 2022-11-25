@@ -75,8 +75,8 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 }
             })
             .then((data) => {
-                // addBlock(data)
-                navigate(-1)
+                addBlock(data)
+                // navigate(-1)
             });
     }
     let addBlock = (data) => {

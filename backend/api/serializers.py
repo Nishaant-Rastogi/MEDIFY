@@ -98,3 +98,8 @@ class CreatePharmacyOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = PharmacyOrder
         fields = ('prescription_id', 'patient_id', 'patient_name', 'amount', 'medicine', 'pharmacy_id', 'pharmacy_name')
+
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Log
+        fields = '__all__'

@@ -12,59 +12,58 @@ function customcard({ transactions }) {
             {transactions == null ? null : transactions.map((data) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
-                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
+                        <button className="btn btn-link" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name:
+                                    TimeStamp:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {data.name}
+                                    {data.timestamp}
                                 </div>
                             </div>
-                            <div className="DATA BALANCE">
+                            <div className="DATA ACCOUNT">
                                 <div className="HEAD">
-                                    License No:
+                                    Document Hash:
                                 </div>
                                 <div className="VALUE">
-                                    {data.licenseNo}
+                                    {data.document}
                                 </div>
                             </div>
-                            <div className="DATA STATUS">
+                            <div className="DATA ACCOUNT">
                                 <div className="HEAD">
-                                    Type :
+                                    Blockchain ID:
                                 </div>
                                 <div className="VALUE">
-                                    {data.orgType}
+                                    {data.blockChainID}
                                 </div>
+                            </div>
 
-                            </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Verified:
-                                </div>
-                                <div className="VALUE">
-                                    {data.verified ? "Yes" : "No"}
-                                </div>
-
-                            </div>
                         </button>
                     </div>
                     <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div className="card-body CBODY">
+                        <div className="card-body">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Address:
+                                    Block Hash:
                                 </div>
                                 <div className="VALUE">
-                                    {data.address}
+                                    {data.hash}
                                 </div>
                             </div>
-                            <div className="DATA TO">
+                            <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Contact No:
+                                    Previous Block Hash:
                                 </div>
                                 <div className="VALUE">
-                                    {data.phoneNo}
+                                    {data.previous_hash}
+                                </div>
+                            </div>
+                            <div className="DATA FROM">
+                                <div className="HEAD">
+                                    Contract Address:
+                                </div>
+                                <div className="VALUE">
+                                    {data.contract_address}
                                 </div>
                             </div>
                         </div>

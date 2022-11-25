@@ -60,8 +60,8 @@ const PharmacyBuyMedicine = () => {
     fetch('/api/send-pharmacy-bill/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // addBlock(data)
-        navigate(-1)
+        addBlock(data)
+        // navigate(-1)
       });
   }
   let addBlock = (data) => {
@@ -76,9 +76,7 @@ const PharmacyBuyMedicine = () => {
     }
     fetch('/api/add-block/', requiredOptions)
       .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      }).then(() => { navigate(-1) })
+      .then(data => { navigate(-1) })
   }
   let handleUser = () => {
     const requestOptions = {

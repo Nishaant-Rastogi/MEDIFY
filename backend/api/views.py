@@ -268,7 +268,10 @@ class GetHospitalsView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'H'})
-        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+        data = []
+        for org in orgs:
+            data.append({"name": OrganizationSerializer(org).data['name'], "id": OrganizationSerializer(org).data['id'], "email": OrganizationSerializer(org).data['email'], "orgType": OrganizationSerializer(org).data['orgType'], "licenseNo": OrganizationSerializer(org).data['licenseNo'], "address": OrganizationSerializer(org).data['address'], "phoneNo": OrganizationSerializer(org).data['phoneNo']})
+        return Response(data, status=status.HTTP_200_OK)
 
 class GetDoctorsView(APIView):
     serializer_class = UserSerializer
@@ -286,13 +289,19 @@ class GetPharmaciesView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'P'})
-        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+        data = []
+        for org in orgs:
+            data.append({"name": OrganizationSerializer(org).data['name'], "id": OrganizationSerializer(org).data['id'], "email": OrganizationSerializer(org).data['email'], "licenseNo": OrganizationSerializer(org).data['licenseNo'], "address": OrganizationSerializer(org).data['address'], "phoneNo": OrganizationSerializer(org).data['phoneNo']})
+        return Response(data, status=status.HTTP_200_OK)
 
 class GetInsuranceView(APIView):
     serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'I'})
-        return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
+        data = []
+        for org in orgs:
+            data.append({"name": OrganizationSerializer(org).data['name'], "id": OrganizationSerializer(org).data['id'], "email": OrganizationSerializer(org).data['email'], "licenseNo": OrganizationSerializer(org).data['licenseNo'], "address": OrganizationSerializer(org).data['address'], "phoneNo": OrganizationSerializer(org).data['phoneNo']})
+        return Response(data, status=status.HTTP_200_OK)
 
 class ApproveUserView(APIView):
     def post(self, request, format=None):
@@ -593,10 +602,12 @@ class ClaimRefundView(APIView):
         insurance_bill = InsuranceBill(bill_id=bill_id, patient_id=patient_id, insurance_id=insurance_id, refund=refund)
         patient_balance = user_collection.find_one({'id': patient_id})['balance']
         insurance_balance = org_collection.find_one({'id': insurance_id})['balance']
-        if insurance_balance < refund:
+        if int(insurance_balance) < int(refund):
             return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
+        print(patient_id, insurance_id, refund, bill_id)
         user_collection.update_one({'id': patient_id}, {'$set': {'balance': int(patient_balance) + int(refund)}})
         org_collection.update_one({'id': insurance_id}, {'$set': {'balance': int(insurance_balance) - int(refund)}})
+        document_collection.insert_one(InsuranceBillSerializer(insurance_bill).data)
         return Response(InsuranceBillSerializer(insurance_bill).data, status=status.HTTP_200_OK)
 
 class GetInsuranceBillView(APIView):
@@ -650,6 +661,7 @@ class AddBlockView(APIView):
         records.verify(chain)
         data = {
             'timestamp': datetime.now().isoformat(),
+            'contract_address': contract_interface['address'],
             'blockChainID': 'MDFY-FCS',
             'document': decrypted_data['document'],
         }
@@ -668,5 +680,9 @@ class AddBlockView(APIView):
 
 class GetBlocksView(APIView):
     def get(self, request, format=None):
-        chain = list(log_collection.find({}))
-        return Response(chain, status=status.HTTP_200_OK)
+        chain = log_collection.find({})
+        data = []
+        for block in chain:
+            data.append(LogSerializer(block).data)
+        print(data)
+        return Response(data, status=status.HTTP_200_OK)

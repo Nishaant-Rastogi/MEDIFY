@@ -214,3 +214,13 @@ class PharmacyOrder(models.Model):
     delivered = models.BooleanField(default="Pending")
     def __str__(self):
         return self.consultation_id
+
+class Log(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    document = models.CharField(max_length=64, default='None')
+    blockChainID = models.CharField(max_length=64, default='None')
+    contract_address = models.CharField(max_length=64, default='None')
+    hash = models.CharField(max_length=64, default='None')
+    previous_hash = models.CharField(max_length=64, default='None')
+    def __str__(self):
+        return self.consultation_id

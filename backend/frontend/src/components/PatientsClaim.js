@@ -56,8 +56,8 @@ const PatientsClaim = () => {
         fetch('/api/claim-refund/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                // addBlock(data)
-                navigate(-1); window.location.reload()
+                addBlock(data)
+                // alert("Insurance Claim Received"); navigate(-1); window.location.reload()
             });
     }
     let addBlock = (data) => {
@@ -75,7 +75,7 @@ const PatientsClaim = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-            }).then(() => { navigate(-1); window.location.reload() })
+            }).then(() => { alert("Insurance Claim Received"); navigate(-1); window.location.reload() })
     }
     let handleBills = () => {
         const requiredOptions = {
