@@ -19,16 +19,6 @@ function DoctorsHome({ User }) {
                 {/*...............................................................................................................*/}
                 <div className='UHFLEX1'>
                     <div className='ROW ROW2'>
-                        <Link to='/user/doctors/patients' className='COL'>
-                            <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
-                            </div>
-                            <div className='DATA'>
-                                <div className='HEADING'>PATIENTS</div>
-                                <div className='SUBHEADING'>View All Your Patients</div>
-                            </div>
-                        </Link>
-
                         <Link to='/user/doctors/prescriptions' className='COL'>
                             <div className='IMGCONTAINER'>
                                 <img className='IMG ACIMG' alt="/" src="/static/images/medical-prescription.png" />
@@ -38,19 +28,17 @@ function DoctorsHome({ User }) {
                                 <div className='SUBHEADING'>View All Your Prescriptions</div>
                             </div>
                         </Link>
-                    </div>
-                </div>
-                <div className='UHFLEX2'>
-                    <div className='ROW'>
-                        <Link to='/user/doctors/bills' className='COL COL1'>
-                            <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
-                            </div>
-                            <div className='DATA'>
-                                <div className='HEADING'>BILLS</div>
-                                <div className='SUBHEADING'>View All Bills</div>
-                            </div>
-                        </Link>
+                        <div className='ROW'>
+                            <Link to='/user/doctors/bills' className='COL COL1'>
+                                <div className='IMGCONTAINER'>
+                                    <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
+                                </div>
+                                <div className='DATA'>
+                                    <div className='HEADING'>BILLS</div>
+                                    <div className='SUBHEADING'>View All Bills</div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div className='UHFLEX3'>
