@@ -360,7 +360,6 @@ class CreateConsultationView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         consultation = Consultation(patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], patient_gender = decrypted_data['patient_gender'], patient_email = decrypted_data['patient_email'], problem=decrypted_data['problem'])
-        document_collection.insert_one(ConsultationSerializer(consultation).data)
         return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
 
 class CreatePrescriptionView(APIView):
@@ -535,7 +534,8 @@ class GetTestResultHospitalView(APIView):
 class CreateConsultationBillView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        consultation_bill = ConsultationBill(consultation_id=decrypted_data['consultation_id'], patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'])
+        consultation = Consultation(decrypted_data['consultation'])
+        consultation_bill = ConsultationBill(consultation_id=decrypted_data['consultation']['id'], patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'])
         patient_balance = user_collection.find_one({'id': decrypted_data['patient_id']})['balance']
         if(int(patient_balance) < int(decrypted_data['amount'])):
             return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
@@ -543,6 +543,8 @@ class CreateConsultationBillView(APIView):
         doctor_balance = user_collection.find_one({'id': decrypted_data['doctor_id']})['balance']
         user_collection.update_one({'id': decrypted_data['doctor_id']}, {'$set': {'balance': int(doctor_balance) + int(decrypted_data['amount'])}})
         document_collection.insert_one(ConsultationBillSerializer(consultation_bill).data)
+        document_collection.insert_one(ConsultationSerializer(consultation).data)
+        print(ConsultationBillSerializer(consultation_bill).data)
         return Response(ConsultationBillSerializer(consultation_bill).data, status=status.HTTP_200_OK)
 
 class CreateTestResultBillView(APIView):

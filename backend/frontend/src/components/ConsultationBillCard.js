@@ -57,7 +57,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                     doctor_id: doctor.id,
                     doctor_name: doctor.name,
                     amount: 100,
-                    consultation_id: consultation,
+                    consultation: consultation,
                     insurance_id: insurance.id,
                     insurance_name: insurance.name,
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
@@ -73,9 +73,12 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 } else {
                     alert("Consultation Request Failed! Insufficient Balance")
                 }
+                return response.json();
             })
             .then((data) => {
+                console.log(data);
                 addBlock(data)
+                addBlock(consultation)
                 // navigate(-1)
             });
     }
@@ -120,7 +123,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                             <input defaultValue={doctor.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
                         </div>
                         <div>Consultation ID:
-                            <input defaultValue={consultation} type="text" className="form-control" name="c_id" aria-describedby="idHelp" disabled />
+                            <input defaultValue={consultation.id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" disabled />
                         </div>
                         <div>Amount:
                             <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
