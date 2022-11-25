@@ -28,17 +28,16 @@ function DoctorsHome({ User }) {
                                 <div className='SUBHEADING'>View All Your Prescriptions</div>
                             </div>
                         </Link>
-                        <div className='ROW'>
-                            <Link to='/user/doctors/bills' className='COL COL1'>
-                                <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
-                                </div>
-                                <div className='DATA'>
-                                    <div className='HEADING'>BILLS</div>
-                                    <div className='SUBHEADING'>View All Bills</div>
-                                </div>
-                            </Link>
-                        </div>
+                        <Link to='/user/doctors/bills' className='COL COL1'>
+                            <div className='IMGCONTAINER'>
+                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
+                            </div>
+                            <div className='DATA'>
+                                <div className='HEADING'>BILLS</div>
+                                <div className='SUBHEADING'>View All Bills</div>
+                            </div>
+                        </Link>
+
                     </div>
                 </div>
                 <div className='UHFLEX3'>

@@ -30,7 +30,6 @@ urlpatterns = [
     path('user/patients/claim', index),
 
     path('user/doctors/home', index),
-    path('user/doctors/patients', index),
     path('user/doctors/prescriptions', index),
     path('user/doctors/consultations', index),
     path('user/doctors/consultations/prescribe', index),

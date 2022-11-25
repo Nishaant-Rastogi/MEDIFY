@@ -16,7 +16,6 @@ import AdminHome from './components/AdminHome';
 import AdminCheckUser from "./components/AdminCheckUser";
 import AdminCheckOrganisation from "./components/AdminCheckOrganisation";
 import DoctorsConsultation from "./components/DoctorsConsultation";
-import DoctorsPatients from "./components/DoctorsPatients";
 import DoctorsPrescription from "./components/DoctorsPrescription";
 import PatientsConsultation from "./components/PatientsConsultation";
 import PatientsPrescription from "./components/PatientsPrescription";
@@ -86,7 +85,6 @@ function App() {
           <Route path="/user/patients/claim" element={<PatientsClaim />} />
 
           <Route path="/user/doctors/home" element={<DoctorsHome />} />
-          <Route path="/user/doctors/patients" element={<DoctorsPatients />} />
           <Route path="/user/doctors/prescriptions" element={<DoctorsPrescription />} />
           <Route path="/user/doctors/consultations" element={<DoctorsConsultation />} />
           <Route path="/user/doctors/consultations/prescribe" element={<PrescriptionCard />} />
