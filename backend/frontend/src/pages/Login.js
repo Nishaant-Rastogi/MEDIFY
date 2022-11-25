@@ -78,7 +78,7 @@ const Login = () => {
             })
             .then(data => {
                 if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
-                    localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name }));
+                    localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name, userType: data.userType }));
                     if (data.userType === 'P') {
                         navigate('/verification', { state: { type: 'P', name: data.name, email: data.email } });
                     }
@@ -113,7 +113,7 @@ const Login = () => {
             })
             .then(data => {
                 if (bcrypt.compareSync(sanitize(e.target.password.value), data.password)) {
-                    localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name }));
+                    localStorage.setItem('organisation', JSON.stringify({ id: data.id, name: data.name, orgType: data.orgType }));
                     if (data.orgType === 'H') navigate('/verification', { state: { orgType: 'H', name: data.name, email: data.email } });
                     else if (data.orgType === 'I') navigate('/verification', { state: { orgType: 'I', name: data.name, email: data.email } });
                     else if (data.orgType === 'P') navigate('/verification', { state: { orgType: 'P', name: data.name, email: data.email } });

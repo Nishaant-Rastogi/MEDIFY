@@ -667,6 +667,6 @@ class AddBlockView(APIView):
         return Response({'Success': 'Block Added...'}, status=status.HTTP_200_OK)
 
 class GetBlocksView(APIView):
-    def post(self, request, format=None):
+    def get(self, request, format=None):
         chain = list(log_collection.find({}))
         return Response(chain, status=status.HTTP_200_OK)

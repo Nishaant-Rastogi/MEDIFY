@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AdminActivityLogCard from './AdminActivityLogCard';
-
+import Navbar from './Navbar';
 const AdminActivityLog = () => {
     const [transactions, setTransactions] = useState([])
 
