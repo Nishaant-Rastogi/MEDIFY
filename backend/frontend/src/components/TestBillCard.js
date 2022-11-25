@@ -79,7 +79,6 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
             }).then(() => { navigate(-1); window.location.reload(); })
     }
     let addBlock2 = (data) => {
@@ -95,9 +94,7 @@ function TestBillCard({ hospital, user, prescription }) {
         }
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            }).then(() => { handleTestResult(); navigate(-1); })
+            .then(data => { }).then(() => { handleTestResult(); navigate(-1); })
     }
     let handleBill = (e) => {
         e.preventDefault()

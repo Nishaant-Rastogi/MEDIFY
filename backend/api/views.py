@@ -66,12 +66,13 @@ class CreateUserView(APIView):
             doctor_proof = decrypted_data['doctor_proof']
             doctor = Doctor(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='D', email=email, password=password, specialization=specialization, experience=experience, hospital=hospital, user_proof=user_proof, doctor_proof=doctor_proof, verified=False)
             check_user_collection.insert_one(DoctorSerializer(doctor).data)
-            return Response(DoctorSerializer(doctor).data, status=status.HTTP_201_CREATED)
+            data = {"name": DoctorSerializer(doctor).data['name'], "id": DoctorSerializer(doctor).data['id'], "email": DoctorSerializer(doctor).data['email']}
+            return Response(data, status=status.HTTP_201_CREATED)
 
         user = User(name=name, dob=dob, gender=gender, address=address, phoneNo=phoneNo, aadharNo=aadharNo, userType='P', email=email, password=password, user_proof=user_proof, verified=False)
         check_user_collection.insert_one(UserSerializer(user).data)
-        print(UserSerializer(user).data)
-        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        data = {"name": UserSerializer(user).data['name'], "id": UserSerializer(user).data['id'], "email": UserSerializer(user).data['email']}
+        return Response(data, status=status.HTTP_201_CREATED)
 
 class CreateOrganizationView(APIView):
     def post(self, request, format=None):
@@ -87,7 +88,8 @@ class CreateOrganizationView(APIView):
         org_images = decrypted_data['org_images']
         organization = Organization(name=name, orgType=orgType, licenseNo=licenseNo, address=address, phoneNo=phoneNo, email=email, password=password, license_proof=license_proof, org_images=org_images, verified=False)
         check_org_collection.insert_one(OrganizationSerializer(organization).data)
-        return Response(OrganizationSerializer(organization).data, status=status.HTTP_201_CREATED)
+        data = {"name": OrganizationSerializer(organization).data['name'], "id": OrganizationSerializer(organization).data['id'], "email": OrganizationSerializer(organization).data['email']}
+        return Response(data, status=status.HTTP_201_CREATED)
 
 class GetAadharView(APIView):
     def get(self, request, format=None):
@@ -129,10 +131,11 @@ class LoginUserView(APIView):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
+        data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password']}
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
-                return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
-            return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+                return Response(data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginOrganizationView(APIView):
@@ -140,8 +143,9 @@ class LoginOrganizationView(APIView):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         organization = org_collection.find({'id': id})
+        data = {"name": OrganizationSerializer(organization[0]).data['name'], "id": OrganizationSerializer(organization[0]).data['id'], "email": OrganizationSerializer(organization[0]).data['email'], "orgType": OrganizationSerializer(organization[0]).data['orgType'], "password": OrganizationSerializer(organization[0]).data['password']}
         if organization:
-            return Response(OrganizationSerializer(organization[0]).data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginAdminView(APIView):
@@ -152,8 +156,9 @@ class LoginAdminView(APIView):
         id = decrypted_data['id']
         password = decrypted_data['password']
         admin = admin_collection.find({'id': id, 'password': password})
+        data = {"id": AdminSerializer(admin[0]).data['id']}
         if admin:
-            return Response(AdminSerializer(admin[0]).data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetCheckUsersView(APIView):
@@ -199,10 +204,11 @@ class GetUserView(APIView):
         print(decrypted_data)
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
+        data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "gender": UserSerializer(user[0]).data['gender'], "dob": UserSerializer(user[0]).data['dob'], "address": UserSerializer(user[0]).data['address'], "phoneNo": UserSerializer(user[0]).data['phoneNo'], "aadharNo": UserSerializer(user[0]).data['aadharNo'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password'], "balance": UserSerializer(user[0]).data['balance']}
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
-                return Response(DoctorSerializer(user[0]).data, status=status.HTTP_200_OK)
-            return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+                return Response(data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateUserView(APIView):
@@ -237,7 +243,8 @@ class GetOrganizationView(APIView):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         org = org_collection.find({'id': id})
-        return Response(OrganizationSerializer(org[0]).data, status=status.HTTP_200_OK)
+        data = {"name": OrganizationSerializer(org[0]).data['name'], "id": OrganizationSerializer(org[0]).data['id'], "email": OrganizationSerializer(org[0]).data['email'], "orgType": OrganizationSerializer(org[0]).data['orgType'], "licenseNo": OrganizationSerializer(org[0]).data['licenseNo'], "address": OrganizationSerializer(org[0]).data['address'], "phoneNo": OrganizationSerializer(org[0]).data['phoneNo'],  "balance": OrganizationSerializer(org[0]).data['balance']}
+        return Response(data, status=status.HTTP_200_OK)
 
 class GetOrganizationsView(APIView):
     serializer_class = OrganizationSerializer
@@ -283,12 +290,14 @@ class ApproveUserView(APIView):
             user = User(id=decrypted_data['id'], name=decrypted_data['name'], dob=decrypted_data['dob'], gender=decrypted_data['gender'], address=decrypted_data['address'], phoneNo=decrypted_data['phoneNo'], aadharNo=decrypted_data['aadharNo'], userType=decrypted_data['userType'], email=decrypted_data['email'], password=decrypted_data['password'], user_proof=decrypted_data['user_proof'], verified=decrypted_data['verified'])
             user_collection.insert_one(UserSerializer(user).data)
             check_user_collection.delete_one({'id': decrypted_data['id']})
-            return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+            data = {'id': decrypted_data['id'], 'name': decrypted_data['name'], 'email': decrypted_data['email']}
+            return Response(data, status=status.HTTP_200_OK)
         elif userType == 'D':
             doctor = Doctor(id=decrypted_data['id'], name=decrypted_data['name'], dob=decrypted_data['dob'], gender=decrypted_data['gender'], address=decrypted_data['address'], phoneNo=decrypted_data['phoneNo'], aadharNo=decrypted_data['aadharNo'], userType=decrypted_data['userType'], email=decrypted_data['email'], password=decrypted_data['password'], user_proof=decrypted_data['user_proof'], doctor_proof=decrypted_data['doctor_proof'], specialization=decrypted_data['specialization'], experience=decrypted_data['experience'], hospital=decrypted_data['hospital'], verified=decrypted_data['verified'])
             user_collection.insert_one(DoctorSerializer(doctor).data)
             check_user_collection.delete_one({'id': decrypted_data['id']})
-            return Response(DoctorSerializer(doctor).data, status=status.HTTP_200_OK)
+            data = {'id': decrypted_data['id'], 'name': decrypted_data['name'], 'email': decrypted_data['email']}
+            return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class ApproveOrganizationView(APIView):
@@ -297,33 +306,34 @@ class ApproveOrganizationView(APIView):
         org = Organization(id=decrypted_data['id'],name=decrypted_data['name'], orgType=decrypted_data['orgType'], licenseNo=decrypted_data['licenseNo'], address=decrypted_data['address'], phoneNo=decrypted_data['phoneNo'], email=decrypted_data['email'], password=decrypted_data['password'], license_proof=decrypted_data['license_proof'], org_images=decrypted_data['org_images'], verified=decrypted_data['verified'])
         org_collection.insert_one(OrganizationSerializer(org).data)
         check_org_collection.delete_one({'id': decrypted_data['id']})
-        return Response(OrganizationSerializer(org).data, status=status.HTTP_200_OK)
+        data = {'id': decrypted_data['id'], 'name': decrypted_data['name'], 'email': decrypted_data['email']}
+        return Response(data, status=status.HTTP_200_OK)
 
 class RejectUserView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         check_user_collection.delete_one({'id': decrypted_data['id']})
-        return Response(decrypted_data, status=status.HTTP_200_OK)
+        return Response("User Rejected", status=status.HTTP_200_OK)
 
 class RejectOrganizationView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         check_org_collection.delete_one({'id': decrypted_data['id']})
-        return Response(decrypted_data, status=status.HTTP_200_OK)
+        return Response("User Rejected", status=status.HTTP_200_OK)
 
 class DeleteUserView(APIView):
     serializer_class = CreateUserSerializer
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         user_collection.delete_one({'id': decrypted_data['id']})
-        return Response(decrypted_data, status=status.HTTP_200_OK)
+        return Response("Deleted User", status=status.HTTP_200_OK)
 
 class DeleteOrganizationView(APIView):
     serializer_class = CreateOrganizationSerializer
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         org_collection.delete_one({'id': decrypted_data['id']})
-        return Response(decrypted_data, status=status.HTTP_200_OK)
+        return Response("Deleted Organisation", status=status.HTTP_200_OK)
 
 class CreateConsultationView(APIView):
     def post(self, request, format=None):

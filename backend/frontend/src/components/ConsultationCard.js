@@ -73,9 +73,7 @@ const ConsultationCard = () => {
         }
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            }).then(() => { setConsultation(data.id) })
+            .then(data => { }).then(() => { setConsultation(data.id) })
     }
     let handleUser = () => {
         const requestOptions = {

@@ -158,7 +158,7 @@ const ProfileInformation = () => {
                             </div>
                             <hr style={{ width: '600px' }} />
                             <div>Date of Birth:
-                                <input ref={user_dob} defaultValue={UserData.dob} type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" disabled={Edit ? "" : "disabled"} />
+                                <input ref={user_dob} defaultValue={UserData.dob} type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" disabled />
                             </div>
                             <div>Gender:
                                 <select ref={user_gender} defaultValue={UserData.gender} className="form-control" name='gender' disabled={Edit ? "" : "disabled"}>
