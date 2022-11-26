@@ -122,6 +122,14 @@ function customcard({ UserData }) {
                                     {data.address}
                                 </div>
                             </div>
+                            <div className="DATA FROM">
+                                <div className="HEAD">
+                                    Email :
+                                </div>
+                                <div className="VALUE">
+                                    {data.email}
+                                </div>
+                            </div>
                             <div className="DATA TO">
                                 <div className="HEAD">
                                     Contact No:

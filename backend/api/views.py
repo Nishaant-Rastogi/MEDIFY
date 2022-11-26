@@ -41,10 +41,16 @@ ETH_PUBLIC_KEY = '0xd889370ca1bf99d18B9a7Fe9e16e004Ca2fE0331'
 ETH_PROVIDER_URL = 'https://aurora-testnet.infura.io/v3/20fd4c6c32ad40ca9764f861e978d847'
 
 def decrypt(enc):
-        encryption_key = enc[-32:-16].encode()
-        iv = enc[-16:].encode()
-        cipher = AES.new(encryption_key, AES.MODE_CBC, iv)
-        return json.loads(unpad(cipher.decrypt(base64.b64decode(enc[:-32])), AES.block_size))
+    encryption_key = enc[-32:-16].encode()
+    iv = enc[-16:].encode()
+    cipher = AES.new(encryption_key, AES.MODE_CBC, iv)
+    return json.loads(unpad(cipher.decrypt(base64.b64decode(enc[:-32])), AES.block_size))
+
+def encrypt(data):
+    encryption_key = get_random_bytes(16)
+    iv = get_random_bytes(16)
+    cipher = AES.new(encryption_key, AES.MODE_CBC, iv)
+    return base64.b64encode(cipher.encrypt(pad(json.dumps(data).encode(), AES.block_size))).decode() + encryption_key.decode() + iv.decode()
 
 # Create your views here.
 class UserView(generics.CreateAPIView):
@@ -150,12 +156,12 @@ class VerifyView(APIView):
         return Response("Success",status=status.HTTP_200_OK)
 
 class LoginUserView(APIView):   
-
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
         data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password']}
+        # print(encrypt(data))
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
                 return Response(data, status=status.HTTP_200_OK)
@@ -195,11 +201,11 @@ class GetCheckUsersView(APIView):
         for user in users:
             if user['userType'] == 'D':
                 user = Doctor(user['id'], user['name'], user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], specialization=user['specialization'], experience=user['experience'], hospital=user['hospital'], user_proof=user['user_proof'], doctor_proof=user['doctor_proof'], verified=user['verified'])
-                check_users.append(DoctorSerializer(user).data)
+                check_users.append(DoctorSerializer(user).data.pop('password'))
             else:
                 print(user['id'])
                 user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'], verified=user['verified'])
-                check_users.append(UserSerializer(user).data)
+                check_users.append(UserSerializer(user).data.pop('password'))
         return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
@@ -208,7 +214,7 @@ class GetCheckOrganizationsView(APIView):
         check_orgs = []
         for org in orgs:
             org = Organization(id=org['id'], name=org['name'], orgType=org['orgType'], licenseNo=org['licenseNo'], address=org['address'], phoneNo=org['phoneNo'], email=org['email'], password=org['password'], license_proof=org['license_proof'], org_images=org['org_images'], verified=org['verified'])
-            check_orgs.append(OrganizationSerializer(org).data)
+            check_orgs.append(OrganizationSerializer(org).data.pop('password'))
         return Response(check_orgs, status=status.HTTP_200_OK)
 
 class GetUsersView(APIView):
@@ -217,9 +223,9 @@ class GetUsersView(APIView):
         all_users = []
         for user in users:
             if user['userType'] == 'D':
-                all_users.append(DoctorSerializer(user).data)
+                all_users.append(DoctorSerializer(user).data.pop('password'))
             else:
-                all_users.append(UserSerializer(user).data)
+                all_users.append(UserSerializer(user).data.pop('password'))
         return Response(all_users, status=status.HTTP_200_OK)
 
 class GetUserView(APIView):
@@ -248,7 +254,8 @@ class UpdateUserView(APIView):
         id = decrypted_data['id']
         user_collection.update_one({'id': id}, {'$set': {'dob': dob, 'gender': gender, 'address': address, 'phoneNo': phoneNo, 'balance': balance}})
         user = user_collection.find({'id': id})
-        return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+
+        return Response("Successfully Updated!", status=status.HTTP_200_OK)
 
 class UpdateOrganizationView(APIView):
     ##@csrf_protect_form 
@@ -260,7 +267,7 @@ class UpdateOrganizationView(APIView):
         id = decrypted_data['id']
         org_collection.update_one({'id': id}, {'$set': { 'address': address, 'phoneNo': phoneNo, 'balance': balance}})
         org = org_collection.find({'id': id})
-        return Response(OrganizationSerializer(org[0]).data, status=status.HTTP_200_OK)
+        return Response("Successfully Updated!", status=status.HTTP_200_OK)
 
 class GetOrganizationView(APIView):
     ##@csrf_protect_form
@@ -719,6 +726,7 @@ class AddBlockView(APIView):
         record = records.Record(data, last_record_hash)
         
         transaction_hash = connector.record('MDFY-FCS', record.get_hash())
+        record.to_dict()['transaction_hash'] = transaction_hash
         log_collection.insert_one(record.to_dict())
         return Response({'Success': 'Block Added...'}, status=status.HTTP_200_OK)
 

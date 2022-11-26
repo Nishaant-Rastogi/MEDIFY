@@ -60,6 +60,9 @@ const SignUp = () => {
     const [license, setLicense] = useState(true)
     const [email, setEmail] = useState(true)
 
+    function isNumeric(str) {
+        return str.match(/^[0-9]+$/);
+    }
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
         handleAadhar(e, sanitize(e.target.aadharNo.value))
@@ -72,11 +75,11 @@ const SignUp = () => {
             alert("Password must be atleast 8 characters long!")
             return
         }
-        if (e.target.aadharNo.value.length !== 12) {
+        if (e.target.aadharNo.value.length !== 12 && isNumeric(e.target.aadharNo.value) !== null) {
             alert("Aadhar number must be 12 digits long!")
             return
         }
-        if (e.target.phoneNo.value.length !== 10) {
+        if (e.target.phoneNo.value.length !== 10 && isNumeric(e.target.phoneNo.value) !== null) {
             alert("Phone number must be 10 digits long!")
             return
         }
@@ -125,11 +128,11 @@ const SignUp = () => {
             alert("Password must be atleast 8 characters long!")
             return
         }
-        if (e.target.licenseNo.value.length !== 12) {
+        if (e.target.licenseNo.value.length !== 12 && isNumeric(e.target.licenseNo.value) !== null) {
             alert("License number must be 12 digits long!")
             return
         }
-        if (e.target.phoneNo.value.length !== 10) {
+        if (e.target.phoneNo.value.length !== 10 && isNumeric(e.target.phoneNo.value) !== null) {
             alert("Phone number must be 10 digits long!")
             return
         }
