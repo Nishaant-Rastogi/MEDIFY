@@ -89,7 +89,7 @@ const ConsultationCard = () => {
                     <div className='PROFILECONTAINER'>
                         <div className='PROFILEHEADER'>
                             <div className="USER_DETAILS">
-                                <div>CONSULTATION</div>
+                                <h1>CONSULTATION</h1>
                             </div>
                             <hr style={{ width: '600px' }} />
                             <form onSubmit={handleConsultation}>

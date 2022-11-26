@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
-
+import Loading from './Loading';
 const rnd = (() => {
   const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -36,6 +36,7 @@ const PharmacyBuyMedicine = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const pharmacy = { id: location.state.pharmacy_id, name: location.state.pharmacy_name }
+  const [loading, setLoading] = useState(false);
 
   let handleBuyMedicine = (e) => {
     e.preventDefault()
@@ -65,6 +66,7 @@ const PharmacyBuyMedicine = () => {
       });
   }
   let addBlock = (data) => {
+    setLoading(true)
     const requiredOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -76,7 +78,7 @@ const PharmacyBuyMedicine = () => {
     }
     fetch('/api/add-block/', requiredOptions)
       .then(response => response.json())
-      .then(data => { navigate(-1) })
+      .then(data => { navigate(-1); setLoading(false) })
   }
   let handleUser = () => {
     const requestOptions = {
@@ -133,53 +135,56 @@ const PharmacyBuyMedicine = () => {
       <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
       <div className='UPROFILE'>
         <div className='PROFILECONTAINER'>
-          <div className='PROFILEHEADER'>
-            <div className="USER_DETAILS">
-              <div className="USER_DETAILS_DATA">
-                BUY MEDICINE
+          {loading ? <Loading /> :
+            <div className='PROFILEHEADER'>
+              <div className="USER_DETAILS">
+                <h1 className="USER_DETAILS_DATA">
+                  BUY MEDICINE PAYMENT PORTAL
+                </h1>
               </div>
+              <hr style={{ width: '600px' }} />
+              <form onSubmit={handleBuyMedicine}>
+                <div>Patient's Name:
+                  <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                </div>
+                <div>Patient's ID:
+                  <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
+                </div>
+                <div>Pharmacy's Name:
+                  <input defaultValue={pharmacy.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
+                </div>
+                <div>Pharmacy's ID:
+                  <input defaultValue={pharmacy.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
+                </div>
+                <div>Select Prescription
+                  <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setPrescription({ id: e.target.value, name: e.target.value }) }} required>
+                    <option value={"DEFAULT"} disabled>Select Prescriptions</option>
+                    {
+                      prescriptions.map((prescription, index) => <option key={index} value={prescription.id}>{prescription.id}</option>)
+                    }
+                  </select>
+                </div>
+                {prescription ? <div>Medicine
+                  <input defaultValue={prescription.medicine} type="text" className="form-control" name="medicine" aria-describedby="idHelp" disabled />
+                </div> : null}
+                <div>Amount:
+                  <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
+                </div>
+                <div>Insurance Companies:
+                  <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }} required>
+                    <option value={"DEFAULT"} disabled>Select Insurance</option>
+                    {
+                      insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)
+                    }
+                  </select>
+                </div>
+
+                <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">BUY MEDICINES</button>
+
+              </form>
             </div>
-            <hr style={{ width: '600px' }} />
-            <form onSubmit={handleBuyMedicine}>
-              <div>Patient's Name:
-                <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
-              </div>
-              <div>Patient's ID:
-                <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
-              </div>
-              <div>Pharmacy's Name:
-                <input defaultValue={pharmacy.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
-              </div>
-              <div>Pharmacy's ID:
-                <input defaultValue={pharmacy.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
-              </div>
-              <div>Select Prescription
-                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setPrescription({ id: e.target.value, name: e.target.value }) }} required>
-                  <option value={"DEFAULT"} disabled>Select Prescriptions</option>
-                  {
-                    prescriptions.map((prescription, index) => <option key={index} value={prescription.id}>{prescription.id}</option>)
-                  }
-                </select>
-              </div>
-              {prescription ? <div>Medicine
-                <input defaultValue={prescription.medicine} type="text" className="form-control" name="medicine" aria-describedby="idHelp" disabled />
-              </div> : null}
-              <div>Amount:
-                <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
-              </div>
-              <div>Insurance Companies:
-                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }} required>
-                  <option value={"DEFAULT"} disabled>Select Insurance</option>
-                  {
-                    insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)
-                  }
-                </select>
-              </div>
+          }
 
-              <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">BUY MEDICINES</button>
-
-            </form>
-          </div>
         </div>
       </div>
     </div >

@@ -1,5 +1,8 @@
+from __future__ import unicode_literals
 from email.policy import default
 from django.db import models
+from django.utils import timezone
+from django.db.transaction import atomic
 import string
 import random
 
@@ -32,6 +35,7 @@ class phoneModel(models.Model):
             return str(self.Mobile)
             
 # Create your models here.
+
 class User(models.Model):
     id = models.CharField(max_length=11, primary_key=True, default=generate_user_id)
     name = models.CharField(max_length=200)

@@ -11,11 +11,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from pymongo import MongoClient
 import urllib
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth import get_user_model
 from datetime import datetime
 from hashchain import records, ethereum
 import base64 
+from knox.models import AuthToken
 from Crypto.Cipher import AES
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
 from Crypto.Util.Padding import pad,unpad
 from Crypto.Random import get_random_bytes
 from django.core.mail import EmailMessage
@@ -139,11 +142,18 @@ class VerifyView(APIView):
             check_org_collection.update_one({'id':id}, {'$set':{'verified':True}})
         return Response("Success",status=status.HTTP_200_OK)
 
-class LoginUserView(APIView):
+class LoginUserView(APIView):   
+    permission_classes = (AllowAny,)
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
+        # authUser = AuthUser.objects.create_user(UserSerializer(user[0]).data['id'], UserSerializer(user[0]).data['email'], UserSerializer(user[0]).data['password'])
+        # authUser = authUser.save()
+        User = get_user_model()
+        users = User.objects.all()      
+        print(users)
+        # print(AuthToken.objects.create(authUser))
         data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password']}
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
@@ -152,11 +162,14 @@ class LoginUserView(APIView):
         return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginOrganizationView(APIView):
+    permission_classes = (AllowAny,)
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         organization = org_collection.find({'id': id})
-        data = {"name": OrganizationSerializer(organization[0]).data['name'], "id": OrganizationSerializer(organization[0]).data['id'], "email": OrganizationSerializer(organization[0]).data['email'], "orgType": OrganizationSerializer(organization[0]).data['orgType'], "password": OrganizationSerializer(organization[0]).data['password']}
+        authUser = AuthUser.objects.create_user(UserSerializer(organization[0]).data['id'], UserSerializer(organization[0]).data['email'], UserSerializer(organization[0]).data['password'])
+        authUser.save()
+        data = {"name": OrganizationSerializer(organization[0]).data['name'], "id": OrganizationSerializer(organization[0]).data['id'], "email": OrganizationSerializer(organization[0]).data['email'], "orgType": OrganizationSerializer(organization[0]).data['orgType'], "password": OrganizationSerializer(organization[0]).data['password'], "token": AuthUser.objects.get(id=OrganizationSerializer(organization[0]).data['id']).auth_token.key}
         if organization:
             return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
@@ -535,7 +548,7 @@ class GetTestResultHospitalView(APIView):
 class CreateConsultationBillView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        consultation = Consultation(decrypted_data['consultation'])
+        consultation = Consultation(patient_id=decrypted_data['consultation']['patient_id'], doctor_id=decrypted_data['consultation']['doctor_id'], patient_name=decrypted_data['consultation']['patient_name'], doctor_name=decrypted_data['consultation']['doctor_name'], patient_gender=decrypted_data['consultation']['patient_gender'], patient_email=decrypted_data['consultation']['patient_email'], problem=decrypted_data['consultation']['problem'])
         consultation_bill = ConsultationBill(consultation_id=decrypted_data['consultation']['id'], patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'])
         patient_balance = user_collection.find_one({'id': decrypted_data['patient_id']})['balance']
         if(int(patient_balance) < int(decrypted_data['amount'])):
@@ -662,6 +675,7 @@ class AddBlockView(APIView):
         print('Adding block ...')
         chain = list(log_collection.find({'blockChainID':'MDFY-FCS'},{"_id":0}).sort([('timestamp', -1)]))
         records.verify(chain)
+        print('Chain verified')
         data = {
             'timestamp': datetime.now().isoformat(),
             'contract_address': contract_interface['address'],

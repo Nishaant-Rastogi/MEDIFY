@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
-
+import Loading from './Loading';
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -30,6 +30,8 @@ function TestBillCard({ hospital, user, prescription }) {
     const [insurance, setInsurance] = useState({});
     const [insurances, setInsurances] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
     let handleInsurance = () => {
         const requestOptions = {
             method: 'GET',
@@ -68,6 +70,7 @@ function TestBillCard({ hospital, user, prescription }) {
             });
     }
     let addBlock1 = (data) => {
+        setLoading(true)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -81,9 +84,10 @@ function TestBillCard({ hospital, user, prescription }) {
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-            }).then(() => { navigate(-1); window.location.reload(); })
+            }).then(() => { setLoading(false); navigate(-1); window.location.reload(); })
     }
     let addBlock2 = (data) => {
+        setLoading(true)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -96,7 +100,7 @@ function TestBillCard({ hospital, user, prescription }) {
         }
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
-            .then(data => { }).then(() => { handleTestResult(); navigate(-1); })
+            .then(data => { }).then(() => { setLoading(false); handleTestResult(); navigate(-1); })
     }
     let handleBill = (e) => {
         e.preventDefault()
@@ -138,45 +142,48 @@ function TestBillCard({ hospital, user, prescription }) {
         <div className='UPROFILE'>
             <div className='BLUR'></div>
             <div className='PROFILECONTAINER'>
-                <div className='PROFILEHEADER'>
-                    <div className="USER_DETAILS">
-                        <div>TEST FEE PAYMENT</div>
-                    </div>
-                    <hr style={{ width: '600px' }} />
-                    <form onSubmit={handleBill}>
-                        <div>Patient's Name:
-                            <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                {loading ? <Loading /> :
+                    <div className='PROFILEHEADER'>
+                        <div className="USER_DETAILS">
+                            <h1>TEST FEE PAYMENT PORTAL</h1>
                         </div>
-                        <div>Patient's ID:
-                            <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
-                        </div>
-                        <div>Hospital's Name:
-                            <input defaultValue={hospital.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
-                        </div>
-                        <div>Hospital's ID:
-                            <input defaultValue={hospital.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
-                        </div>
-                        <div>Prescription ID:
-                            <input defaultValue={prescription.id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" disabled />
-                        </div>
-                        <div>Test
-                            <input defaultValue={prescription.test} type="text" className="form-control" name="test" aria-describedby="idHelp" disabled />
-                        </div>
-                        <div>Amount:
-                            <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
-                        </div>
-                        <div>Insurance Companies:
-                            <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }}>
-                                <option value={"DEFAULT"} disabled>Select Insurance</option>
-                                {
-                                    insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)
-                                }
-                            </select>
-                        </div>
-                        <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">PAY TEST FEE</button>
-                    </form>
+                        <hr style={{ width: '600px' }} />
+                        <form onSubmit={handleBill}>
+                            <div>Patient's Name:
+                                <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                            </div>
+                            <div>Patient's ID:
+                                <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
+                            </div>
+                            <div>Hospital's Name:
+                                <input defaultValue={hospital.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
+                            </div>
+                            <div>Hospital's ID:
+                                <input defaultValue={hospital.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
+                            </div>
+                            <div>Prescription ID:
+                                <input defaultValue={prescription.id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" disabled />
+                            </div>
+                            <div>Test
+                                <input defaultValue={prescription.test} type="text" className="form-control" name="test" aria-describedby="idHelp" disabled />
+                            </div>
+                            <div>Amount:
+                                <input defaultValue={100} type="text" className="form-control" name="amount" aria-describedby="idHelp" disabled />
+                            </div>
+                            <div>Insurance Companies:
+                                <select defaultValue={"DEFAULT"} className="form-control" aria-label="Default select example" onChange={(e) => { setInsurance({ id: e.target.value, name: e.target.value }) }}>
+                                    <option value={"DEFAULT"} disabled>Select Insurance</option>
+                                    {
+                                        insurances.map((insurance, index) => <option key={index} value={insurance.id}>{insurance.name}</option>)
+                                    }
+                                </select>
+                            </div>
+                            <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">PAY TEST FEE</button>
+                        </form>
 
-                </div>
+                    </div>
+                }
+
             </div>
         </div>
     )

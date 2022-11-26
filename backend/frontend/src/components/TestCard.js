@@ -83,7 +83,7 @@ const TestCard = () => {
                     <div className='PROFILECONTAINER'>
                         <div className='PROFILEHEADER'>
                             <div className="USER_DETAILS">
-                                <div>TESTS</div>
+                                <h1>TESTS</h1>
                             </div>
                             <hr style={{ width: '600px' }} />
                             <form onSubmit={handleTest}>

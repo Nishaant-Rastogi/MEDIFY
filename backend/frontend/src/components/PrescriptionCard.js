@@ -5,7 +5,7 @@ import '../styles/navbar.css'
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
-
+import Loading from './Loading'
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -33,7 +33,7 @@ const PrescriptionCard = () => {
     const [doctor, setDoctor] = useState([])
     const navigate = useNavigate()
     const user = { id: location.state.patient_id, name: location.state.patient_name, consultation_id: location.state.consultation_id }
-
+    const [loading, setLoading] = useState(false)
     const handlePrescription = (e) => {
         e.preventDefault()
         const requiredOptions = {
@@ -62,6 +62,7 @@ const PrescriptionCard = () => {
             })
     }
     let addBlock = (data) => {
+        setLoading(true)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -74,7 +75,7 @@ const PrescriptionCard = () => {
         }
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
-            .then(data => { navigate(-1) })
+            .then(data => { setLoading(false); navigate(-1) })
     }
     let handleUser = () => {
         const requestOptions = {
@@ -102,56 +103,59 @@ const PrescriptionCard = () => {
             <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
             <div className='UPROFILE'>
                 <div className='PROFILECONTAINER'>
-                    <div className='PROFILEHEADER'>
-                        <div className="USER_DETAILS">
-                            <div>PRESCRIPTION</div>
-                        </div>
-                        <hr style={{ width: '600px' }} />
-                        <form onSubmit={handlePrescription}>
-                            <div>Patient's Name:
-                                <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                    {loading ? <Loading /> :
+                        <div className='PROFILEHEADER'>
+                            <div className="USER_DETAILS">
+                                <h1>PRESCRIPTION</h1>
                             </div>
-                            <div>Patient's ID:
-                                <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
-                            </div>
-                            <div>Consultation ID:
-                                <input defaultValue={user.consultation_id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" placeholder="Enter Email" disabled />
-                            </div>
-                            <div>Medicine Prescribed:
-                                <select defaultValue={'DEFAULT'} className="form-control" name='medicine'>
-                                    <option value="DEFAULT" disabled>Select Medicines</option>
-                                    <option value="1">Paracetamol</option>
-                                    <option value="2">Pain Killer</option>
-                                    <option value="3">Crocin</option>
-                                </select>
-                            </div>
-                            <div>
-                                Dosage:
-                                <input type="text" className="form-control" name="dosage" aria-describedby="idHelp" placeholder="Enter Dosage" required />
-                            </div>
-                            <div>
-                                Medicine Duration:
-                                <input type="text" className="form-control" name="duration" aria-describedby="idHelp" placeholder="Enter Duration" required />
-                            </div>
-                            <div>
-                                Tests
-                                <select defaultValue={'DEFAULT'} className="form-control" name='test' required>
-                                    <option value="DEFAULT" disabled>Select Tests</option>
-                                    <option value="1">Test 1</option>
-                                    <option value="2">Test 2</option>
-                                    <option value="3">Test 3</option>
-                                </select>
-                            </div>
-                            <div>Doctor's Name:
-                                <input defaultValue={doctor.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
-                            </div>
-                            <div>Doctor's ID:
-                                <input defaultValue={doctor.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
-                            </div>
-                            <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">SEND PRESCRIPTION</button>
-                        </form>
+                            <hr style={{ width: '600px' }} />
+                            <form onSubmit={handlePrescription}>
+                                <div>Patient's Name:
+                                    <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
+                                </div>
+                                <div>Patient's ID:
+                                    <input defaultValue={user.id} type="text" className="form-control" name="p_id" aria-describedby="idHelp" placeholder="Enter ID" disabled />
+                                </div>
+                                <div>Consultation ID:
+                                    <input defaultValue={user.consultation_id} type="text" className="form-control" name="c_id" aria-describedby="idHelp" placeholder="Enter Email" disabled />
+                                </div>
+                                <div>Medicine Prescribed:
+                                    <select defaultValue={'DEFAULT'} className="form-control" name='medicine'>
+                                        <option value="DEFAULT" disabled>Select Medicines</option>
+                                        <option value="1">Paracetamol</option>
+                                        <option value="2">Pain Killer</option>
+                                        <option value="3">Crocin</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    Dosage:
+                                    <input type="text" className="form-control" name="dosage" aria-describedby="idHelp" placeholder="Enter Dosage" required />
+                                </div>
+                                <div>
+                                    Medicine Duration:
+                                    <input type="text" className="form-control" name="duration" aria-describedby="idHelp" placeholder="Enter Duration" required />
+                                </div>
+                                <div>
+                                    Tests
+                                    <select defaultValue={'DEFAULT'} className="form-control" name='test' required>
+                                        <option value="DEFAULT" disabled>Select Tests</option>
+                                        <option value="1">Test 1</option>
+                                        <option value="2">Test 2</option>
+                                        <option value="3">Test 3</option>
+                                    </select>
+                                </div>
+                                <div>Doctor's Name:
+                                    <input defaultValue={doctor.name} type="text" className="form-control" name="d_name" aria-describedby="idHelp" disabled />
+                                </div>
+                                <div>Doctor's ID:
+                                    <input defaultValue={doctor.id} type="text" className="form-control" name="d_id" aria-describedby="idHelp" disabled />
+                                </div>
+                                <button style={{ marginTop: '20px', marginRight: '20px' }} type="submit" className="btn btn-outline-dark">SEND PRESCRIPTION</button>
+                            </form>
 
-                    </div>
+                        </div>
+                    }
+
                 </div>
             </div>
 
