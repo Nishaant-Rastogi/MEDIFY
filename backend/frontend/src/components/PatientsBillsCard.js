@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
 var CryptoJS = require("crypto-js");
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -32,7 +48,7 @@ function customcard({ bills }) {
         e.preventDefault();
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(bills[e.target.id]), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
         fetch('/api/update-bill-view/', requestOptions)

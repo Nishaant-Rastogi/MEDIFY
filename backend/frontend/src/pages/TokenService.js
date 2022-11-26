@@ -1,69 +1,26 @@
-import jwt from 'jsonwebtoken';
+import React from 'react';
 
-const TokenService = (function tokenService() {
-    let service;
-    function getServiceFunc() {
-        if (!service) {
-            service = this;
-            return service;
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
-        return service;
     }
+    return cookieValue;
+}
 
-    const setToken = (tokenObj) => {
-        if (tokenObj.access) {
-            localStorage.setItem('accessToken', tokenObj.access);
-        }
-        if (tokenObj.refresh) {
-            localStorage.setItem('refreshToken', tokenObj.refresh);
-        }
-    };
-
-    const getAccessToken = () => localStorage.getItem('accessToken');
-
-    const getRefreshToken = () => localStorage.getItem('refreshToken');
-
-    const getTokenValidity = (tokenObj) => {
-        const decodedToken = jwt.decode(tokenObj, { complete: true });
-        const dateNow = new Date();
-        const timeStamp = dateNow.getTime() / 1000;
-
-        if (decodedToken.payload.exp < timeStamp) {
-            return false;
-        }
-        return true;
-    };
-
-    const getAccessTokenValidity = () => {
-        const accessToken = getAccessToken();
-        if (accessToken) {
-            return getTokenValidity(accessToken);
-        }
-        return null;
-    };
-
-    const getRefreshTokenValidity = () => {
-        const refreshToken = getRefreshToken();
-        if (refreshToken) {
-            return getTokenValidity(refreshToken);
-        }
-        return null;
-    };
-
-    const clearToken = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-    };
-
-    return {
-        getService: getServiceFunc,
-        setToken,
-        getAccessToken,
-        getRefreshToken,
-        getAccessTokenValidity,
-        getRefreshTokenValidity,
-        clearToken,
-    };
-})();
+const csrftoken = getCookie('csrftoken');
+const TokenService = () => {
+    return (
+        <input name="csrfmiddlewaretoken" value={csrftoken} type="hidden" />
+    );
+};
 
 export default TokenService;

@@ -22,6 +22,7 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_MET
 from Crypto.Util.Padding import pad,unpad
 from Crypto.Random import get_random_bytes
 from django.core.mail import EmailMessage
+from django_csrf_protect_form import csrf_protect_form
 
 client = MongoClient("mongodb+srv://fcs_admin:"+urllib.parse.quote("blackthureja@1234")+"@fcs-project.6ejl1sd.mongodb.net/test")
 db = client['FCS_Project']
@@ -51,6 +52,7 @@ class UserView(generics.CreateAPIView):
     serializer_class = UserSerializer  
 
 class CreateUserView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         name = decrypted_data['name']
@@ -79,6 +81,7 @@ class CreateUserView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 class CreateOrganizationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         name = decrypted_data['name']
@@ -96,6 +99,7 @@ class CreateOrganizationView(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 class GetAadharView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         aadharNo = decrypted_data['aadhar']
@@ -107,6 +111,7 @@ class GetAadharView(APIView):
         return Response({"data": response}, status=status.HTTP_200_OK)
 
 class GetLicenseView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         licenseNo = decrypted_data['license']
@@ -118,6 +123,7 @@ class GetLicenseView(APIView):
         return Response({"data": response}, status=status.HTTP_200_OK)
 
 class GetEmailView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         email = decrypted_data['email']
@@ -133,6 +139,7 @@ class GetEmailView(APIView):
         return Response({"data":response}, status=status.HTTP_200_OK)
 
 class VerifyView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -143,17 +150,11 @@ class VerifyView(APIView):
         return Response("Success",status=status.HTTP_200_OK)
 
 class LoginUserView(APIView):   
-    permission_classes = (AllowAny,)
+
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
-        # authUser = AuthUser.objects.create_user(UserSerializer(user[0]).data['id'], UserSerializer(user[0]).data['email'], UserSerializer(user[0]).data['password'])
-        # authUser = authUser.save()
-        User = get_user_model()
-        users = User.objects.all()      
-        print(users)
-        # print(AuthToken.objects.create(authUser))
         data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password']}
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
@@ -162,14 +163,14 @@ class LoginUserView(APIView):
         return Response({'Bad Request': 'Invalid credentials...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginOrganizationView(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
         organization = org_collection.find({'id': id})
-        authUser = AuthUser.objects.create_user(UserSerializer(organization[0]).data['id'], UserSerializer(organization[0]).data['email'], UserSerializer(organization[0]).data['password'])
-        authUser.save()
-        data = {"name": OrganizationSerializer(organization[0]).data['name'], "id": OrganizationSerializer(organization[0]).data['id'], "email": OrganizationSerializer(organization[0]).data['email'], "orgType": OrganizationSerializer(organization[0]).data['orgType'], "password": OrganizationSerializer(organization[0]).data['password'], "token": AuthUser.objects.get(id=OrganizationSerializer(organization[0]).data['id']).auth_token.key}
+        # authUser = AuthUser.objects.create_user(UserSerializer(organization[0]).data['id'], UserSerializer(organization[0]).data['email'], UserSerializer(organization[0]).data['password'])
+        # authUser.save()
+        data = {"name": OrganizationSerializer(organization[0]).data['name'], "id": OrganizationSerializer(organization[0]).data['id'], "email": OrganizationSerializer(organization[0]).data['email'], "orgType": OrganizationSerializer(organization[0]).data['orgType'], "password": OrganizationSerializer(organization[0]).data['password']}
         if organization:
             return Response(data, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
@@ -188,7 +189,6 @@ class LoginAdminView(APIView):
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetCheckUsersView(APIView):
-    serializer_class = UserSerializer
     def get(self, request, format=None):
         users = check_user_collection.find({})
         check_users = []
@@ -203,7 +203,6 @@ class GetCheckUsersView(APIView):
         return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
-    serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = check_org_collection.find({})
         check_orgs = []
@@ -213,7 +212,6 @@ class GetCheckOrganizationsView(APIView):
         return Response(check_orgs, status=status.HTTP_200_OK)
 
 class GetUsersView(APIView):
-    serializer_class = UserSerializer
     def get(self, request, format=None):
         users = user_collection.find({})
         all_users = []
@@ -225,6 +223,7 @@ class GetUsersView(APIView):
         return Response(all_users, status=status.HTTP_200_OK)
 
 class GetUserView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         print(decrypted_data)
@@ -238,7 +237,7 @@ class GetUserView(APIView):
         return Response({'Bad Request': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateUserView(APIView):
-    serializer_class = CreateUserSerializer
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         dob = decrypted_data['dob']
@@ -252,7 +251,7 @@ class UpdateUserView(APIView):
         return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
 
 class UpdateOrganizationView(APIView):
-    serializer_class = CreateOrganizationSerializer
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         address = decrypted_data['address']
@@ -264,7 +263,7 @@ class UpdateOrganizationView(APIView):
         return Response(OrganizationSerializer(org[0]).data, status=status.HTTP_200_OK)
 
 class GetOrganizationView(APIView):
-    serializer_class = OrganizationSerializer
+    ##@csrf_protect_form
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -273,13 +272,11 @@ class GetOrganizationView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class GetOrganizationsView(APIView):
-    serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({})
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class GetHospitalsView(APIView):
-    serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'H'})
         data = []
@@ -288,19 +285,16 @@ class GetHospitalsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class GetDoctorsView(APIView):
-    serializer_class = UserSerializer
     def get(self, request, format=None):
         users = user_collection.find({'userType': 'D'})
         return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
 
 class GetPatientsView(APIView):
-    serializer_class = UserSerializer
     def get(self, request, format=None):
         users = user_collection.find({'userType': 'P'})
         return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
 
 class GetPharmaciesView(APIView):
-    serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'P'})
         data = []
@@ -309,7 +303,6 @@ class GetPharmaciesView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class GetInsuranceView(APIView):
-    serializer_class = OrganizationSerializer
     def get(self, request, format=None):
         orgs = org_collection.find({'orgType': 'I'})
         data = []
@@ -318,6 +311,7 @@ class GetInsuranceView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class ApproveUserView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         userType = decrypted_data['userType']
@@ -336,6 +330,7 @@ class ApproveUserView(APIView):
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class ApproveOrganizationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         org = Organization(id=decrypted_data['id'],name=decrypted_data['name'], orgType=decrypted_data['orgType'], licenseNo=decrypted_data['licenseNo'], address=decrypted_data['address'], phoneNo=decrypted_data['phoneNo'], email=decrypted_data['email'], password=decrypted_data['password'], license_proof=decrypted_data['license_proof'], org_images=decrypted_data['org_images'], verified=decrypted_data['verified'])
@@ -345,38 +340,42 @@ class ApproveOrganizationView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class RejectUserView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         check_user_collection.delete_one({'id': decrypted_data['id']})
         return Response("User Rejected", status=status.HTTP_200_OK)
 
 class RejectOrganizationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         check_org_collection.delete_one({'id': decrypted_data['id']})
         return Response("User Rejected", status=status.HTTP_200_OK)
 
 class DeleteUserView(APIView):
-    serializer_class = CreateUserSerializer
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         user_collection.delete_one({'id': decrypted_data['id']})
         return Response("Deleted User", status=status.HTTP_200_OK)
 
 class DeleteOrganizationView(APIView):
-    serializer_class = CreateOrganizationSerializer
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         org_collection.delete_one({'id': decrypted_data['id']})
         return Response("Deleted Organisation", status=status.HTTP_200_OK)
 
 class CreateConsultationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         consultation = Consultation(patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], patient_gender = decrypted_data['patient_gender'], patient_email = decrypted_data['patient_email'], problem=decrypted_data['problem'])
         return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
 
 class CreatePrescriptionView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         prescription = Prescription(consultation_id=decrypted_data['consultation_id'] ,patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], medicine=decrypted_data['medicine'], dosage=decrypted_data['dosage'], duration=decrypted_data['duration'], test=decrypted_data['test'])
@@ -386,6 +385,7 @@ class CreatePrescriptionView(APIView):
         return Response(PrescriptionSerializer(prescription).data, status=status.HTTP_200_OK)
 
 class UpdateConsultationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -394,6 +394,7 @@ class UpdateConsultationView(APIView):
         return Response(ConsultationSerializer(consultation).data, status=status.HTTP_200_OK)
 
 class UpdatePrescriptionView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -402,6 +403,7 @@ class UpdatePrescriptionView(APIView):
         return Response(PrescriptionSerializer(prescription).data, status=status.HTTP_200_OK)
 
 class UpdateTestResultView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -410,6 +412,7 @@ class UpdateTestResultView(APIView):
         return Response(TestResultSerializer(testResult).data, status=status.HTTP_200_OK)
 
 class UpdateBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -417,6 +420,7 @@ class UpdateBillView(APIView):
         return Response("Successfully Deleted", status=status.HTTP_200_OK)
 
 class GetBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -435,6 +439,7 @@ class GetBillView(APIView):
         return Response(all_bills, status=status.HTTP_200_OK)
 
 class GetUnClaimBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -451,17 +456,19 @@ class GetUnClaimBillView(APIView):
         return Response(all_bills, status=status.HTTP_200_OK)
 
 class GetDoctorBillView(APIView):
- def post(self, request, format=None):
-        decrypted_data = decrypt(request.data['data'])
-        id = decrypted_data['id']
-        bills = document_collection.find({'docType': 'BC', 'visible': True})
-        all_bills = []
-        for bill in bills:
-            if bill['doctor_id'] == id:
-                all_bills.append(ConsultationBillSerializer(bill).data)
-        return Response(all_bills, status=status.HTTP_200_OK)
+    ##@csrf_protect_form 
+    def post(self, request, format=None):
+            decrypted_data = decrypt(request.data['data'])
+            id = decrypted_data['id']
+            bills = document_collection.find({'docType': 'BC', 'visible': True})
+            all_bills = []
+            for bill in bills:
+                if bill['doctor_id'] == id:
+                    all_bills.append(ConsultationBillSerializer(bill).data)
+            return Response(all_bills, status=status.HTTP_200_OK)
 
 class GetHospitalBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -473,6 +480,7 @@ class GetHospitalBillView(APIView):
         return Response(all_bills, status=status.HTTP_200_OK)
 
 class GetPharmacyBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         id = decrypted_data['id']
@@ -485,7 +493,9 @@ class GetPharmacyBillView(APIView):
         return Response(all_bills, status=status.HTTP_200_OK)
 
 # Document Types Discussion
+
 class GetConsultationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         patient_id = decrypted_data['id']
@@ -493,6 +503,7 @@ class GetConsultationView(APIView):
         return Response(ConsultationSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class GetPrescriptionView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         patient_id = decrypted_data['id']
@@ -500,6 +511,7 @@ class GetPrescriptionView(APIView):
         return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class GetPrescriptionBuyMedicineView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         patient_id = decrypted_data['id']
@@ -507,6 +519,7 @@ class GetPrescriptionBuyMedicineView(APIView):
         return Response(PrescriptionSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class GetDoctorPrescriptionView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         doctor_id = decrypted_data['id']
@@ -518,6 +531,7 @@ class GetDoctorPrescriptionView(APIView):
         return Response(all_documents, status=status.HTTP_200_OK)
 
 class GetDoctorConsultationView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         doctor_id = decrypted_data['id']
@@ -525,6 +539,7 @@ class GetDoctorConsultationView(APIView):
         return Response(ConsultationSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class CreateTestResultView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         test_result = TestResult(prescription_id=decrypted_data['prescription_id'], patient_id=decrypted_data['patient_id'], hospital_name=decrypted_data['hospital_name'], patient_name=decrypted_data['patient_name'],  test=decrypted_data['test'], test_result=decrypted_data['test_result'], hospital_id=decrypted_data['hospital_id'])
@@ -532,6 +547,7 @@ class CreateTestResultView(APIView):
         return Response(TestResultSerializer(test_result).data, status=status.HTTP_200_OK)
 
 class GetTestResultView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         patient_id = decrypted_data['id']
@@ -539,6 +555,7 @@ class GetTestResultView(APIView):
         return Response(TestResultSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class GetTestResultHospitalView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         hospital_id = decrypted_data['id']
@@ -546,6 +563,7 @@ class GetTestResultHospitalView(APIView):
         return Response(TestResultSerializer(documents, many=True).data, status=status.HTTP_200_OK)
 
 class CreateConsultationBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         consultation = Consultation(patient_id=decrypted_data['consultation']['patient_id'], doctor_id=decrypted_data['consultation']['doctor_id'], patient_name=decrypted_data['consultation']['patient_name'], doctor_name=decrypted_data['consultation']['doctor_name'], patient_gender=decrypted_data['consultation']['patient_gender'], patient_email=decrypted_data['consultation']['patient_email'], problem=decrypted_data['consultation']['problem'])
@@ -562,6 +580,7 @@ class CreateConsultationBillView(APIView):
         return Response(ConsultationBillSerializer(consultation_bill).data, status=status.HTTP_200_OK)
 
 class CreateTestResultBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         test_result_bill = TestResultBill(prescription_id=decrypted_data['prescription_id'], patient_id=decrypted_data['patient_id'], hospital_id=decrypted_data['hospital_id'], patient_name=decrypted_data['patient_name'], hospital_name=decrypted_data['hospital_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'], test=decrypted_data['test'])
@@ -575,6 +594,7 @@ class CreateTestResultBillView(APIView):
         return Response(TestResultBillSerializer(test_result_bill).data, status=status.HTTP_200_OK)
 
 class CreatePharmacyBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):            
         decrypted_data = decrypt(request.data['data'])
         pharmacy_bill = PharmacyBill(prescription_id=decrypted_data['prescription_id'], patient_id=decrypted_data['patient_id'], pharmacy_id=decrypted_data['pharmacy_id'], patient_name=decrypted_data['patient_name'], pharmacy_name=decrypted_data['pharmacy_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'], medicine=decrypted_data['medicine'])
@@ -589,6 +609,7 @@ class CreatePharmacyBillView(APIView):
         return Response(PharmacyBillSerializer(pharmacy_bill).data, status=status.HTTP_200_OK)
 
 class GetPharmacyOrderView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         pharmacy_order = document_collection.find({'docType':'BP'})
         orders = []
@@ -597,6 +618,7 @@ class GetPharmacyOrderView(APIView):
         return Response(orders, status=status.HTTP_200_OK)
 
 class GetUserPharmacyOrderView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         pharmacy_order = document_collection.find({'docType':'BP'})
@@ -608,6 +630,7 @@ class GetUserPharmacyOrderView(APIView):
         return Response(orders, status=status.HTTP_200_OK)
 
 class ClaimRefundView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         patient_id = decrypted_data['patient_id']
@@ -627,6 +650,7 @@ class ClaimRefundView(APIView):
         return Response(InsuranceBillSerializer(insurance_bill).data, status=status.HTTP_200_OK)
 
 class GetInsuranceBillView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         insurance_bill = document_collection.find({'docType':'BI'})
@@ -637,12 +661,14 @@ class GetInsuranceBillView(APIView):
         return Response(bills, status=status.HTTP_200_OK)
 
 class GetClaimView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         claim = document_collection.find({'patient_id': decrypted_data['id'], 'docType': {'$regex':"B"},'claimed':True})
         return Response(claim, status=status.HTTP_200_OK)
 
 class GetHospitalDoctorsView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         hospital_id = decrypted_data['id']
@@ -653,6 +679,7 @@ class GetHospitalDoctorsView(APIView):
         return Response(DoctorSerializer(doctors, many=True).data, status=status.HTTP_200_OK)
 
 class AddBlockView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         if contract_collection.find_one({}) is None:
@@ -705,6 +732,7 @@ class GetBlocksView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class SendMailView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         status = False
@@ -717,6 +745,7 @@ class SendMailView(APIView):
         return Response({'Mail sent Successfully!'}, status=status.HTTP_200_OK)
 
 class SendMailIdView(APIView):
+    ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         status = False

@@ -5,6 +5,25 @@ var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
 import Loading from './Loading';
+import TokenService from '../pages/TokenService';
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 const rnd = (() => {
   const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -42,7 +61,7 @@ const PharmacyBuyMedicine = () => {
     e.preventDefault()
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
       body: JSON.stringify({
         data: CryptoJS.AES.encrypt(JSON.stringify({
           prescription_id: prescription.id,
@@ -69,7 +88,7 @@ const PharmacyBuyMedicine = () => {
     setLoading(true)
     const requiredOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
       body: JSON.stringify({
         data: CryptoJS.AES.encrypt(JSON.stringify({
           document: bcrypt.hashSync(JSON.stringify(data), salt),
@@ -83,7 +102,7 @@ const PharmacyBuyMedicine = () => {
   let handleUser = () => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
       body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
     };
 
@@ -97,7 +116,7 @@ const PharmacyBuyMedicine = () => {
   let handlePrescriptions = () => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
       body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
 
     }
@@ -144,6 +163,7 @@ const PharmacyBuyMedicine = () => {
               </div>
               <hr style={{ width: '600px' }} />
               <form onSubmit={handleBuyMedicine}>
+                <TokenService />
                 <div>Patient's Name:
                   <input defaultValue={user.name} type="text" className="form-control" name="p_name" aria-describedby="idHelp" placeholder="Enter Patient's Name" disabled />
                 </div>

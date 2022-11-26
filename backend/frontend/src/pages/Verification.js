@@ -1,8 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/verification.css';
+import TokenService from './TokenService';
 var CryptoJS = require("crypto-js");
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
@@ -65,7 +82,8 @@ const Verification = () => {
         let requiredOptions = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ name: name, email: email, otp: otp }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
@@ -80,7 +98,7 @@ const Verification = () => {
         e.preventDefault();
         const requiredOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ id: id }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         }
         fetch("/api/verify/", requiredOptions)
@@ -213,6 +231,7 @@ const Verification = () => {
                                 </div>
 
                                 <form onSubmit={handleOTP} action="" className="mt-5">
+                                    <TokenService />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input1} name='one' id='1' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input2} name='two' id='2' type="text" maxLength={1} disabled />
                                     <input className="otp" style={{ marginRight: '3px' }} value={input3} name='three' id='3' type="text" maxLength={1} disabled />

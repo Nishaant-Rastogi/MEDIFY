@@ -4,7 +4,24 @@ import '../styles/home.css'
 import emailjs from '@emailjs/browser'
 var sanitize = require('mongo-sanitize');
 var CryptoJS = require("crypto-js");
+import TokenService from "./TokenService";
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -36,7 +53,7 @@ const Login = () => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
                     id: sanitize(e.target.id.value),
@@ -61,7 +78,7 @@ const Login = () => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
                     id: sanitize(e.target.id.value),
@@ -98,7 +115,7 @@ const Login = () => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
                     id: sanitize(e.target.id.value),
@@ -148,6 +165,7 @@ const Login = () => {
                 <div className='FORMCONTAINER'>
                     {loginAs === 1 ?
                         <form onSubmit={handleLoginUser}>
+                            <TokenService />
                             <div className="form-group">
                                 <label htmlhtml="exampleInputid1">User ID</label>
                                 <input type="id" className="form-control" id="id" aria-describedby="idHelp" placeholder="Enter id" />
@@ -160,6 +178,7 @@ const Login = () => {
                             <button type="submit" className="btn COLOR LOGINB">Login as User</button>
                         </form> : loginAs === 3 ?
                             <form onSubmit={handleLoginOrganisation}>
+                                <TokenService />
                                 <div className="form-group">
                                     <label htmlhtml="exampleInputid1">Organisation ID</label>
                                     <input type="id" className="form-control" id="id" aria-describedby="idHelp" placeholder="Enter id" />
@@ -172,6 +191,7 @@ const Login = () => {
                                 <button type="submit" className="btn COLOR LOGINB">Login as Organisation</button>
                             </form> :
                             <form onSubmit={handleLoginAdmin}>
+                                <TokenService />
                                 <div className="form-group">
                                     <label html="exampleInputid1">Admin ID</label>
                                     <input type="text" className="form-control" id="id" aria-describedby="idHelp" placeholder="Enter id" />

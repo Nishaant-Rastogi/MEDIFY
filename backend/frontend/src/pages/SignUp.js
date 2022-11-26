@@ -4,7 +4,25 @@ import '../styles/signup.css'
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
+import TokenService from "./TokenService";
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -85,7 +103,7 @@ const SignUp = () => {
         }
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(Object.fromEntries(userFormData)), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
         fetch('/api/create-user/', requestOptions)
@@ -130,6 +148,7 @@ const SignUp = () => {
 
         const requestOptions = {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify(Object.fromEntries(orgFormData)), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
         fetch('/api/create-organization/', requestOptions)
@@ -156,7 +175,7 @@ const SignUp = () => {
     let handleAadhar = async (e, aadharNo) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ aadhar: aadharNo }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
@@ -167,7 +186,7 @@ const SignUp = () => {
     let handleLicense = async (e, licenseNo) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ license: licenseNo }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
@@ -181,7 +200,7 @@ const SignUp = () => {
     let handleEmail = async (e, emailId) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(JSON.stringify({ email: emailId }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
         };
 
@@ -231,6 +250,7 @@ const SignUp = () => {
                 <div className='FORMCONTAINER'>
                     {signUpAsUser ?
                         <form onSubmit={handleSignUpAsUser}>
+                            <TokenService />
                             <div className="form-group">
                                 <label html="exampleInputid1">Name</label>
                                 <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" required />
@@ -337,6 +357,7 @@ const SignUp = () => {
                             <button type="submit" className="btn COLOR SIGNUPB">Sign Up User</button>
                         </form> :
                         <form onSubmit={handleSignUpAsOrganization}>
+                            <TokenService />
                             <div className="form-group">
                                 <label html="exampleInputid1">Name</label>
                                 <input type="id" className="form-control" name="name" aria-describedby="idHelp" placeholder="Enter Name" required />

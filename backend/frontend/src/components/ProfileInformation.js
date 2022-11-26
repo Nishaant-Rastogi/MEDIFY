@@ -4,7 +4,23 @@ import Navbar from './Navbar';
 import '../styles/navbar.css'
 import { Link } from 'react-router-dom';
 var CryptoJS = require("crypto-js");
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -43,7 +59,7 @@ const ProfileInformation = () => {
     let handleUser = (e) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
 
         };
@@ -57,7 +73,7 @@ const ProfileInformation = () => {
     let handleOrganisation = () => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('organisation'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
 
         };
@@ -77,7 +93,7 @@ const ProfileInformation = () => {
         if (UserType === 'user') {
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
                 body: JSON.stringify({
                     data: CryptoJS.AES.encrypt(JSON.stringify({
                         id: UserData.id,
@@ -99,7 +115,7 @@ const ProfileInformation = () => {
         } else {
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
                 body: JSON.stringify({
                     data: CryptoJS.AES.encrypt(JSON.stringify({
                         id: UserData.id,
