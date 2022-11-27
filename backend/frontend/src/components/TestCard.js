@@ -66,8 +66,39 @@ const TestCard = () => {
         fetch('/api/get-prescriptions/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setPrescriptions(data);
+                handleDocumentVerification(data)
             });
+    }
+    let handleDocumentVerification = (documents) => {
+        const length = documents.length;
+        var count = 0;
+        var docs = [];
+        documents.map((d) => {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
+                body: JSON.stringify({
+                    data: CryptoJS.AES.encrypt(JSON.stringify({
+                        id: d.id,
+                        timestamp: d.timestamp,
+                        document: JSON.stringify(d),
+                    }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+                }),
+
+            }
+            fetch('/api/verify-documents/', requestOptions)
+                .then(response => response.json())
+                .then(res => {
+                    if (res.verified) {
+                        if (length === ++count) {
+                            setPrescriptions(docs)
+                        } else {
+                            docs.push(d)
+                        }
+                    }
+                });
+        })
+
     }
     let handleUser = () => {
         const requestOptions = {

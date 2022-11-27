@@ -60,6 +60,9 @@ const InsuranceClaims = () => {
     }
 
     let handleDocumentVerification = (documents) => {
+        const length = documents.length;
+        var count = 0;
+        var docs = [];
         documents.map((d) => {
             const requestOptions = {
                 method: 'POST',
@@ -76,8 +79,13 @@ const InsuranceClaims = () => {
             fetch('/api/verify-documents/', requestOptions)
                 .then(response => response.json())
                 .then(res => {
-                    if (res.verified)
-                        setClaims([...claims, d]);
+                    if (res.verified) {
+                        if (length === ++count) {
+                            setClaims(docs)
+                        } else {
+                            docs.push(d)
+                        }
+                    }
                 });
         })
 

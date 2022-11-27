@@ -60,6 +60,9 @@ const PharmacyBills = () => {
             });
     }
     let handleDocumentVerification = (documents) => {
+        const length = documents.length;
+        var count = 0;
+        var docs = [];
         documents.map((d) => {
             const requestOptions = {
                 method: 'POST',
@@ -76,8 +79,13 @@ const PharmacyBills = () => {
             fetch('/api/verify-documents/', requestOptions)
                 .then(response => response.json())
                 .then(res => {
-                    if (res.verified)
-                        setBills([...bills, d]);
+                    if (res.verified) {
+                        if (length === ++count) {
+                            setBills(docs)
+                        } else {
+                            docs.push(d)
+                        }
+                    }
                 });
         })
 

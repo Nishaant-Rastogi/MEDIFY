@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
+import '../styles/navbar.css';
 var CryptoJS = require("crypto-js");
+import Loading from "./Loading";
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -29,6 +31,7 @@ function customcard({ UserData }) {
     const [loading, setLoading] = useState(false);
     let sendEmail_ID = (e, data) => {
         e.preventDefault();
+        setLoading(true);
         let requiredOptions = {
             method: 'POST',
             headers: {
@@ -38,7 +41,7 @@ function customcard({ UserData }) {
         }
 
         fetch("/api/send-mail-id/", requiredOptions)
-            .then((res) => window.location.reload())
+            .then((res) => { setLoading(false); window.location.reload() })
     }
 
     let handleApprove = (e) => {
@@ -69,78 +72,86 @@ function customcard({ UserData }) {
     }
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {UserData == null ? null : UserData.map((data) => (
-                <div key={id} className="card CARD">
-                    <div className="card-header COL" id="HeadingTwO">
-                        <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
-                            <div className="DATA ACCOUNT">
-                                <div className="HEAD HEAD1">
-                                    Name:
-                                </div>
-                                <div className="VALUE NAME">
-                                    {data.name}
-                                </div>
-                            </div>
-                            <div className="DATA BALANCE">
-                                <div className="HEAD">
-                                    License No:
-                                </div>
-                                <div className="VALUE">
-                                    {data.licenseNo}
-                                </div>
-                            </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Type :
-                                </div>
-                                <div className="VALUE">
-                                    {data.orgType}
-                                </div>
-
-                            </div>
-                            <div className="DATA STATUS">
-                                <div className="HEAD">
-                                    Verified:
-                                </div>
-                                <div className="VALUE">
-                                    {data.verified ? "Yes" : "No"}
-                                </div>
-
-                            </div>
-                        </button>
+            {loading ?
+                <div className='UPROFILE'>
+                    <div className='PROFILECONTAINER'>
+                        <Loading text={"Approving Organisation"} />
                     </div>
-                    <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div className="card-body CBODY">
-                            <div className="DATA FROM">
-                                <div className="HEAD">
-                                    Address:
+                </div> :
+                UserData == null ? null : UserData.map((data) => (
+                    <div key={id} className="card CARD">
+                        <div className="card-header COL" id="HeadingTwO">
+                            <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
+                                <div className="DATA ACCOUNT">
+                                    <div className="HEAD HEAD1">
+                                        Name:
+                                    </div>
+                                    <div className="VALUE NAME">
+                                        {data.name}
+                                    </div>
                                 </div>
-                                <div className="VALUE">
-                                    {data.address}
+                                <div className="DATA BALANCE">
+                                    <div className="HEAD">
+                                        License No:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.licenseNo}
+                                    </div>
                                 </div>
+                                <div className="DATA STATUS">
+                                    <div className="HEAD">
+                                        Type :
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.orgType}
+                                    </div>
+
+                                </div>
+                                <div className="DATA STATUS">
+                                    <div className="HEAD">
+                                        Verified:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.verified ? "Yes" : "No"}
+                                    </div>
+
+                                </div>
+                            </button>
+                        </div>
+                        <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div className="card-body CBODY">
+                                <div className="DATA FROM">
+                                    <div className="HEAD">
+                                        Address:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.address}
+                                    </div>
+                                </div>
+                                <div className="DATA FROM">
+                                    <div className="HEAD">
+                                        Email :
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.email}
+                                    </div>
+                                </div>
+                                <div className="DATA TO">
+                                    <div className="HEAD">
+                                        Contact No:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.phoneNo}
+                                    </div>
+                                </div>
+                                <button className="btn btn-primary btn-sm" id={id} onClick={handleApprove}>Approve</button>
+                                <button className="btn btn-primary btn-sm" id={id++} onClick={handleReject}>Reject</button>
                             </div>
-                            <div className="DATA FROM">
-                                <div className="HEAD">
-                                    Email :
-                                </div>
-                                <div className="VALUE">
-                                    {data.email}
-                                </div>
-                            </div>
-                            <div className="DATA TO">
-                                <div className="HEAD">
-                                    Contact No:
-                                </div>
-                                <div className="VALUE">
-                                    {data.phoneNo}
-                                </div>
-                            </div>
-                            <button className="btn btn-primary btn-sm" id={id} onClick={handleApprove}>Approve</button>
-                            <button className="btn btn-primary btn-sm" id={id++} onClick={handleReject}>Reject</button>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))
+            }
+
         </div>
     )
 }

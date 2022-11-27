@@ -162,7 +162,6 @@ class LoginUserView(APIView):
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
         data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password']}
-        # print(encrypt(data))
         if user:
             if UserSerializer(user[0]).data['userType'] == 'D':
                 return Response(data, status=status.HTTP_200_OK)
@@ -184,9 +183,7 @@ class LoginOrganizationView(APIView):
 
 class LoginAdminView(APIView):
     def post(self, request, format=None):
-        print(request.data['data'])
         decrypted_data = decrypt(request.data['data'])
-        print(decrypted_data)
         id = decrypted_data['id']
         password = decrypted_data['password']
         admin = admin_collection.find({'id': id, 'password': password})
@@ -208,7 +205,6 @@ class GetCheckUsersView(APIView):
                 user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'], verified=user['verified'])
                 UserSerializer(user).data.pop('password')
                 check_users.append(UserSerializer(user).data)
-        print(check_users)
         return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
@@ -238,7 +234,6 @@ class GetUserView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        print(decrypted_data)
         id = decrypted_data['id']
         user = user_collection.find({'id': id})
         data = {"name": UserSerializer(user[0]).data['name'], "id": UserSerializer(user[0]).data['id'], "email": UserSerializer(user[0]).data['email'], "gender": UserSerializer(user[0]).data['gender'], "dob": UserSerializer(user[0]).data['dob'], "address": UserSerializer(user[0]).data['address'], "phoneNo": UserSerializer(user[0]).data['phoneNo'], "aadharNo": UserSerializer(user[0]).data['aadharNo'], "userType": UserSerializer(user[0]).data['userType'], "password": UserSerializer(user[0]).data['password'], "balance": UserSerializer(user[0]).data['balance']}
@@ -502,7 +497,6 @@ class GetPharmacyBillView(APIView):
         for bill in bills:
             if bill['pharmacy_id'] == id:
                 all_bills.append(PharmacyBillSerializer(bill).data)
-        print(all_bills)
         return Response(all_bills, status=status.HTTP_200_OK)
 
 # Document Types Discussion
@@ -589,7 +583,6 @@ class CreateConsultationBillView(APIView):
         user_collection.update_one({'id': decrypted_data['doctor_id']}, {'$set': {'balance': int(doctor_balance) + int(decrypted_data['amount'])}})
         document_collection.insert_one(ConsultationBillSerializer(consultation_bill).data)
         document_collection.insert_one(ConsultationSerializer(consultation).data)
-        print(ConsultationBillSerializer(consultation_bill).data)
         return Response(ConsultationBillSerializer(consultation_bill).data, status=status.HTTP_200_OK)
 
 class CreateTestResultBillView(APIView):
@@ -639,7 +632,6 @@ class GetUserPharmacyOrderView(APIView):
         for order in pharmacy_order:
             if order['patient_id'] == decrypted_data['id']:
                 orders.append(PharmacyBillSerializer(order).data)
-        print(orders)
         return Response(orders, status=status.HTTP_200_OK)
 
 class ClaimRefundView(APIView):
@@ -656,7 +648,6 @@ class ClaimRefundView(APIView):
         insurance_balance = org_collection.find_one({'id': insurance_id})['balance']
         if int(insurance_balance) < int(refund):
             return Response({'Bad Request': 'Insufficient Balance...'}, status=status.HTTP_400_BAD_REQUEST)
-        print(patient_id, insurance_id, refund, bill_id)
         user_collection.update_one({'id': patient_id}, {'$set': {'balance': int(patient_balance) + int(refund)}})
         org_collection.update_one({'id': insurance_id}, {'$set': {'balance': int(insurance_balance) - int(refund)}})
         document_collection.insert_one(InsuranceBillSerializer(insurance_bill).data)
@@ -714,9 +705,6 @@ class AddBlockView(APIView):
             'timestamp': decrypted_data['timestamp'],
             'document': decrypted_data['document'],
         }
-
-        # print("Block:",blockData)
-        print("Hash:",hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
         transaction_hash = connector.record(decrypted_data['id'], hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
 
         connector1 = ethereum.EthConnector(
@@ -732,7 +720,6 @@ class AddBlockView(APIView):
             'document': decrypted_data['document'],
         }
         # blockData1['last_record_hash'] = last_record_hash
-        print(doc_hash == hashlib.sha256(json.dumps(blockData1).encode()).hexdigest())
         blockData['id'] = decrypted_data['id']
         blockData['contract_address'] = contract_interface['address']
         blockData['document'] = doc_hash
@@ -747,7 +734,6 @@ class GetBlocksView(APIView):
         data = []
         for block in chain:
             data.append(LogSerializer(block).data)
-        print(data)
         return Response(data, status=status.HTTP_200_OK)
 
 class VerifyDocumentsView(APIView):
@@ -757,12 +743,6 @@ class VerifyDocumentsView(APIView):
             'timestamp': decrypted_data['timestamp'],
             'document': decrypted_data['document'],
         }
-        # last_record_hash = log_collection.find_one({'id': decrypted_data['id']})['last_record_hash']
-
-        # blockData['last_record_hash'] = last_record_hash
-        # print("Block:",blockData)
-        print("Hash:",hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
-        # print(blockData)
         contract_interface = contract_collection.find_one({})
         connector = ethereum.EthConnector(
             contract_abi=contract_interface['abi'],
@@ -772,8 +752,6 @@ class VerifyDocumentsView(APIView):
             provider_url=ETH_PROVIDER_URL
         )
         doc_hash = connector.get_record(decrypted_data['id'])
-        print('hash:',doc_hash)
-        # print('hash:',hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
         if(doc_hash == hashlib.sha256(json.dumps(blockData).encode()).hexdigest()):
             return Response({"verified":True}, status=status.HTTP_200_OK)
         return Response({"verified":False}, status=status.HTTP_200_OK)
@@ -795,7 +773,6 @@ class SendMailIdView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        print(decrypted_data)
         status = False
         try:
             email = EmailMessage("New message from MEDIFY", "Hello "+decrypted_data['name']+",\nThank You for Signing Up on Medify.\nHere is your ID for login.\n"+decrypted_data['id']+"\nBest wishes,\nMedify Team", to=[decrypted_data['email'],])
