@@ -22,10 +22,10 @@ function customcard({ transactions }) {
                             </div>
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD">
-                                    Document Hash:
+                                    Document ID:
                                 </div>
                                 <div className="VALUE">
-                                    {data.document}
+                                    {data.id}
                                 </div>
                             </div>
                             <div className="DATA ACCOUNT">
@@ -46,7 +46,7 @@ function customcard({ transactions }) {
                                     Block Hash:
                                 </div>
                                 <div className="VALUE">
-                                    {data.hash}
+                                    {data.document}
                                 </div>
                             </div>
                             <div className="DATA FROM">
@@ -54,7 +54,7 @@ function customcard({ transactions }) {
                                     Previous Block Hash:
                                 </div>
                                 <div className="VALUE">
-                                    {data.previous_hash}
+                                    {data.last_record_hash}
                                 </div>
                             </div>
                             <div className="DATA FROM">

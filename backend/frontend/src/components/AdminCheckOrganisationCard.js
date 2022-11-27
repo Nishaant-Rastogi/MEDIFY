@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import '../styles/hospital_card.css';
 var CryptoJS = require("crypto-js");
-
 const rnd = (() => {
     const gen = (min, max) => max++ && [...Array(max - min)].map((s, i) => String.fromCharCode(min + i));
 
@@ -27,8 +26,9 @@ function customcard({ UserData }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
-
+    const [loading, setLoading] = useState(false);
     let sendEmail_ID = (e, data) => {
+        e.preventDefault();
         let requiredOptions = {
             method: 'POST',
             headers: {
@@ -38,10 +38,7 @@ function customcard({ UserData }) {
         }
 
         fetch("/api/send-mail-id/", requiredOptions)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-            })
+            .then((res) => window.location.reload())
     }
 
     let handleApprove = (e) => {

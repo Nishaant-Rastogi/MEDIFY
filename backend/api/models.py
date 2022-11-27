@@ -98,6 +98,7 @@ class Consultation(models.Model):
     patient_email = models.CharField(max_length=200)
     problem = models.CharField(max_length=200)
     docType = models.CharField(default='C', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     amount = models.IntegerField(default=100)
     visible = models.BooleanField(default=True)
     prescribed = models.BooleanField(default=False)
@@ -116,6 +117,7 @@ class Prescription(models.Model):
     duration = models.CharField(max_length=20, default='None')
     test = models.CharField(max_length=20, default='None')
     docType = models.CharField(default='P', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     medicine_bought = models.BooleanField(default=False)
     def __str__(self):
@@ -131,6 +133,7 @@ class TestResult(models.Model):
     test = models.CharField(max_length=200)
     test_result = models.CharField(max_length=200)
     docType = models.CharField(default='T', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     def __str__(self):
         return self.consultation_id
@@ -150,6 +153,7 @@ class ConsultationBill(models.Model):
     insurance_id = models.CharField(max_length=11, default='None')
     insurance_name = models.CharField(max_length=200, default='None')
     docType = models.CharField(default='BC', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
     def __str__(self):
@@ -168,6 +172,7 @@ class TestResultBill(models.Model):
     insurance_id = models.CharField(max_length=11, default='None')
     insurance_name = models.CharField(max_length=200, default='None')
     docType = models.CharField(default='BT', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
     def __str__(self):
@@ -186,6 +191,7 @@ class PharmacyBill(models.Model):
     insurance_id = models.CharField(max_length=11, default='None')
     insurance_name = models.CharField(max_length=200, default='None')
     docType = models.CharField(default='BP', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
     def __str__(self):
@@ -199,6 +205,7 @@ class InsuranceBill(models.Model):
     refund = models.IntegerField(default=10)
     insurance_id = models.CharField(max_length=11, default='None')
     docType = models.CharField(default='BI', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     claimed = models.BooleanField(default=False)
     def __str__(self):
@@ -214,17 +221,18 @@ class PharmacyOrder(models.Model):
     medicine = models.CharField(max_length=20, default='None')
     amount = models.IntegerField(default=100)
     docType = models.CharField(default='O', max_length=1)
+    timestamp = models.DateTimeField(default=timezone.now)
     visible = models.BooleanField(default=True)
     delivered = models.BooleanField(default="Pending")
     def __str__(self):
         return self.consultation_id
 
 class Log(models.Model):
+    id = models.CharField(max_length=11, primary_key=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     document = models.CharField(max_length=64, default='None')
     blockChainID = models.CharField(max_length=64, default='None')
     contract_address = models.CharField(max_length=64, default='None')
-    hash = models.CharField(max_length=64, default='None')
-    previous_hash = models.CharField(max_length=64, default='None')
+    last_record_hash = models.CharField(max_length=64, default='None')
     def __str__(self):
         return self.consultation_id

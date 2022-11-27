@@ -38,10 +38,7 @@ function customcard({ UserData }) {
         }
 
         fetch("/api/send-mail-id/", requiredOptions)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-            })
+            .then((res) => window.location.reload())
     }
 
     let handleApprove = (e) => {

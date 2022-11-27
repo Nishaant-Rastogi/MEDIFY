@@ -96,18 +96,37 @@ function ConsultationBillCard({ doctor, user, consultation }) {
             })
             .then((data) => {
                 console.log(data);
-                addBlock(data)
-                addBlock(consultation)
+                addBlock1(data)
                 // navigate(-1)
             });
     }
-    let addBlock = (data) => {
+    let addBlock1 = async (data) => {
         setLoading(true)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
+                    id: data.id,
+                    timestamp: data.timestamp,
+                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+            }),
+
+        }
+        fetch('/api/add-block/', requiredOptions)
+            .then(response => response.json())
+            .then(data => { (addBlock(consultation)) });
+    }
+    let addBlock = async (data) => {
+        setLoading(true)
+        const requiredOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({
+                data: CryptoJS.AES.encrypt(JSON.stringify({
+                    id: data.id,
+                    timestamp: data.timestamp,
                     document: bcrypt.hashSync(JSON.stringify(data), salt),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),

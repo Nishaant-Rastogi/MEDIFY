@@ -201,11 +201,13 @@ class GetCheckUsersView(APIView):
         for user in users:
             if user['userType'] == 'D':
                 user = Doctor(user['id'], user['name'], user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], specialization=user['specialization'], experience=user['experience'], hospital=user['hospital'], user_proof=user['user_proof'], doctor_proof=user['doctor_proof'], verified=user['verified'])
-                check_users.append(DoctorSerializer(user).data.pop('password'))
+                DoctorSerializer(user).data.pop('password')
+                check_users.append(DoctorSerializer(user).data)
             else:
-                print(user['id'])
                 user = User(id=user['id'], name=user['name'], dob=user['dob'], gender=user['gender'], address=user['address'], phoneNo=user['phoneNo'], aadharNo=user['aadharNo'], userType=user['userType'], email=user['email'], password=user['password'], user_proof=user['user_proof'], verified=user['verified'])
-                check_users.append(UserSerializer(user).data.pop('password'))
+                UserSerializer(user).data.pop('password')
+                check_users.append(UserSerializer(user).data)
+        print(check_users)
         return Response(check_users, status=status.HTTP_200_OK)
 
 class GetCheckOrganizationsView(APIView):
@@ -214,7 +216,8 @@ class GetCheckOrganizationsView(APIView):
         check_orgs = []
         for org in orgs:
             org = Organization(id=org['id'], name=org['name'], orgType=org['orgType'], licenseNo=org['licenseNo'], address=org['address'], phoneNo=org['phoneNo'], email=org['email'], password=org['password'], license_proof=org['license_proof'], org_images=org['org_images'], verified=org['verified'])
-            check_orgs.append(OrganizationSerializer(org).data.pop('password'))
+            OrganizationSerializer(org).data.pop('password')
+            check_orgs.append(OrganizationSerializer(org).data)
         return Response(check_orgs, status=status.HTTP_200_OK)
 
 class GetUsersView(APIView):
@@ -223,9 +226,11 @@ class GetUsersView(APIView):
         all_users = []
         for user in users:
             if user['userType'] == 'D':
-                all_users.append(DoctorSerializer(user).data.pop('password'))
+                DoctorSerializer(user).data.pop('password')
+                all_users.append(DoctorSerializer(user).data)
             else:
-                all_users.append(UserSerializer(user).data.pop('password'))
+                UserSerializer(user).data.pop('password')
+                all_users.append(UserSerializer(user).data)
         return Response(all_users, status=status.HTTP_200_OK)
 
 class GetUserView(APIView):
@@ -689,6 +694,7 @@ class AddBlockView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
+        print(decrypted_data)
         if contract_collection.find_one({}) is None:
             print('Deploying contract ...')
             contract = ethereum.EthContract()
@@ -707,27 +713,39 @@ class AddBlockView(APIView):
             provider_url=ETH_PROVIDER_URL
         )
         print('Adding block ...')
-        chain = list(log_collection.find({'blockChainID':'MDFY-FCS'},{"_id":0}).sort([('timestamp', -1)]))
-        records.verify(chain)
-        print('Chain verified')
-        data = {
-            'timestamp': datetime.now().isoformat(),
-            'contract_address': contract_interface['address'],
-            'blockChainID': 'MDFY-FCS',
+
+        blockData = {
+            'timestamp': decrypted_data['timestamp'],
             'document': decrypted_data['document'],
         }
         try:
-            last_record = log_collection.find({"blockChainID": 'MDFY-FCS'}).sort([("timestamp", -1)])[0]
-            last_record_hash = last_record['hash']
+            last_record = list(log_collection.find({"blockChainID": 'MEDIFY'}).sort([("timestamp", -1)]))[0]
+            last_record_hash = last_record['document']
 
         except:
             last_record_hash = None
 
-        record = records.Record(data, last_record_hash)
-        
-        transaction_hash = connector.record('MDFY-FCS', record.get_hash())
-        record.to_dict()['transaction_hash'] = transaction_hash
-        log_collection.insert_one(record.to_dict())
+        record = records.Record(blockData, last_record_hash)
+        print('Record created')
+        transaction_hash = connector.record(decrypted_data['id'], record.get_hash())
+        print("transaction successful")
+        connector1 = ethereum.EthConnector(
+            contract_abi=contract_interface['abi'],
+            contract_address=contract_interface['address'],
+            sender_public_key=ETH_PUBLIC_KEY,
+            sender_private_key=ETH_PRIVATE_KEY,
+            provider_url=ETH_PROVIDER_URL
+        )
+        print('Getting block ...')
+        doc_hash = connector1.get_record(decrypted_data['id'])
+        print(doc_hash == record.get_hash())
+        blockData['id'] = decrypted_data['id']
+        blockData['contract_address'] = contract_interface['address']
+        blockData['document'] = doc_hash
+        blockData['blockChainID'] = 'MEDIFY'
+        blockData['last_record_hash'] = last_record_hash
+        blockData['transaction_hash'] = transaction_hash
+        log_collection.insert_one(blockData)
         return Response({'Success': 'Block Added...'}, status=status.HTTP_200_OK)
 
 class GetBlocksView(APIView):
@@ -756,6 +774,7 @@ class SendMailIdView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
+        print(decrypted_data)
         status = False
         try:
             email = EmailMessage("New message from MEDIFY", "Hello "+decrypted_data['name']+",\nThank You for Signing Up on Medify.\nHere is your ID for login.\n"+decrypted_data['id']+"\nBest wishes,\nMedify Team", to=[decrypted_data['email'],])
