@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar'
 import '../styles/navbar.css'
 var sanitize = require('mongo-sanitize');
-import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
 import Loading from './Loading'
 import TokenService from '../pages/TokenService';
@@ -46,7 +45,6 @@ const enc = rnd(16)
 const encryption_key = CryptoJS.enc.Utf8.parse(enc)
 const IV = rnd(16)
 const iv = CryptoJS.enc.Utf8.parse(IV)
-const salt = bcrypt.genSaltSync(10);
 const PrescriptionCard = () => {
     const location = useLocation()
     const [doctor, setDoctor] = useState([])
@@ -87,7 +85,9 @@ const PrescriptionCard = () => {
             headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                    id: data.id,
+                    timestamp: data.timestamp,
+                    document: JSON.stringify(data),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 

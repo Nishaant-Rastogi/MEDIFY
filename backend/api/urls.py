@@ -69,4 +69,5 @@ urlpatterns = [
     path('get-insurance-bills/', GetInsuranceBillView.as_view(), name="get-insurance-bills"),
     path('send-mail/', SendMailView.as_view(), name="send-mail"),
     path('send-mail-id/', SendMailIdView.as_view(), name="send-mail-id"),
+    path('verify-documents/', VerifyDocumentsView.as_view(), name="verify-documents"),
 ]

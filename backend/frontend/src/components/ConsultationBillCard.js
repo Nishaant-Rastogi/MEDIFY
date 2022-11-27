@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 var sanitize = require('mongo-sanitize');
-import bcrypt from 'bcryptjs'
 var CryptoJS = require("crypto-js");
 import Loading from './Loading';
 import TokenService from '../pages/TokenService';
@@ -43,7 +42,6 @@ const enc = rnd(16)
 const encryption_key = CryptoJS.enc.Utf8.parse(enc)
 const IV = rnd(16)
 const iv = CryptoJS.enc.Utf8.parse(IV)
-const salt = bcrypt.genSaltSync(10);
 function ConsultationBillCard({ doctor, user, consultation }) {
     const [insurance, setInsurance] = useState({});
     const [insurances, setInsurances] = useState([]);
@@ -109,7 +107,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 data: CryptoJS.AES.encrypt(JSON.stringify({
                     id: data.id,
                     timestamp: data.timestamp,
-                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                    document: JSON.stringify(data)
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
@@ -127,7 +125,7 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 data: CryptoJS.AES.encrypt(JSON.stringify({
                     id: data.id,
                     timestamp: data.timestamp,
-                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                    document: JSON.stringify(data),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 

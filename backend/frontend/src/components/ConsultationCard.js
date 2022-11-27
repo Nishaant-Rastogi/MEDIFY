@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 import '../styles/navbar.css'
 import ConsultationBillCard from './ConsultationBillCard'
 var sanitize = require('mongo-sanitize');
-import bcrypt from 'bcryptjs'
 import TokenService from '../pages/TokenService'
 var CryptoJS = require("crypto-js");
 function getCookie(name) {
@@ -45,7 +44,6 @@ const enc = rnd(16)
 const encryption_key = CryptoJS.enc.Utf8.parse(enc)
 const IV = rnd(16)
 const iv = CryptoJS.enc.Utf8.parse(IV)
-const salt = bcrypt.genSaltSync(10);
 const ConsultationCard = () => {
     const location = useLocation()
     const [user, setUser] = useState([])

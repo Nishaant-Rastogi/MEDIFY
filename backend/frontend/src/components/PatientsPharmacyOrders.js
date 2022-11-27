@@ -54,8 +54,32 @@ const PatientsPharmacyOrders = () => {
         fetch('/api/get-user-pharmacy-orders/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                setOrders(data);
+                handleDocumentVerification(data)
             });
+    }
+    let handleDocumentVerification = (documents) => {
+        documents.map((d) => {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
+                body: JSON.stringify({
+                    data: CryptoJS.AES.encrypt(JSON.stringify({
+                        id: d.id,
+                        timestamp: d.timestamp,
+                        document: JSON.stringify(d),
+                    }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
+                }),
+
+            }
+            fetch('/api/verify-documents/', requestOptions)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(res);
+                    if (res.verified)
+                        setOrders([...orders, d]);
+                });
+        })
+
     }
     useEffect(() => {
         if (localStorage.getItem('user') === null) {

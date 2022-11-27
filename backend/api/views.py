@@ -2,6 +2,7 @@ from ast import Or
 from calendar import c
 from cgi import test
 import json
+import hashlib
 from tabnanny import check
 from django.shortcuts import render
 from rest_framework import generics, status
@@ -14,7 +15,7 @@ import urllib
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth import get_user_model
 from datetime import datetime
-from hashchain import records, ethereum
+from hashchain import ethereum
 import base64 
 from knox.models import AuthToken
 from Crypto.Cipher import AES
@@ -578,7 +579,7 @@ class CreateConsultationBillView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        consultation = Consultation(patient_id=decrypted_data['consultation']['patient_id'], doctor_id=decrypted_data['consultation']['doctor_id'], patient_name=decrypted_data['consultation']['patient_name'], doctor_name=decrypted_data['consultation']['doctor_name'], patient_gender=decrypted_data['consultation']['patient_gender'], patient_email=decrypted_data['consultation']['patient_email'], problem=decrypted_data['consultation']['problem'])
+        consultation = Consultation(id=decrypted_data['consultation']['id'],patient_id=decrypted_data['consultation']['patient_id'], doctor_id=decrypted_data['consultation']['doctor_id'], patient_name=decrypted_data['consultation']['patient_name'], doctor_name=decrypted_data['consultation']['doctor_name'], patient_gender=decrypted_data['consultation']['patient_gender'], patient_email=decrypted_data['consultation']['patient_email'], problem=decrypted_data['consultation']['problem'], timestamp=decrypted_data['consultation']['timestamp'])
         consultation_bill = ConsultationBill(consultation_id=decrypted_data['consultation']['id'], patient_id=decrypted_data['patient_id'], doctor_id=decrypted_data['doctor_id'], patient_name=decrypted_data['patient_name'], doctor_name=decrypted_data['doctor_name'], amount=decrypted_data['amount'], insurance_id=decrypted_data['insurance_id'], insurance_name=decrypted_data['insurance_name'])
         patient_balance = user_collection.find_one({'id': decrypted_data['patient_id']})['balance']
         if(int(patient_balance) < int(decrypted_data['amount'])):
@@ -676,7 +677,7 @@ class GetClaimView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        claim = document_collection.find({'patient_id': decrypted_data['id'], 'docType': {'$regex':"B"},'claimed':True})
+        claim = document_collection.find({'docType': {'$regex':"B"}, 'insurance_id': decrypted_data['id'], 'claimed':True})
         return Response(claim, status=status.HTTP_200_OK)
 
 class GetHospitalDoctorsView(APIView):
@@ -694,16 +695,12 @@ class AddBlockView(APIView):
     ##@csrf_protect_form 
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
-        print(decrypted_data)
         if contract_collection.find_one({}) is None:
-            print('Deploying contract ...')
             contract = ethereum.EthContract()
             contract.deploy(ETH_PUBLIC_KEY, ETH_PRIVATE_KEY, ETH_PROVIDER_URL)
             contract.get_txn_receipt()
-            print('Contract deployed. Address: {}'.format(contract.address))
             contract_interface = dict(address=contract.address, abi=contract.abi)
             contract_collection.insert_one(contract_interface)
-        print("Connecting to contract ...")
         contract_interface = contract_collection.find_one({})
         connector = ethereum.EthConnector(
             contract_abi=contract_interface['abi'],
@@ -712,23 +709,16 @@ class AddBlockView(APIView):
             sender_private_key=ETH_PRIVATE_KEY,
             provider_url=ETH_PROVIDER_URL
         )
-        print('Adding block ...')
 
         blockData = {
             'timestamp': decrypted_data['timestamp'],
             'document': decrypted_data['document'],
         }
-        try:
-            last_record = list(log_collection.find({"blockChainID": 'MEDIFY'}).sort([("timestamp", -1)]))[0]
-            last_record_hash = last_record['document']
 
-        except:
-            last_record_hash = None
+        # print("Block:",blockData)
+        print("Hash:",hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
+        transaction_hash = connector.record(decrypted_data['id'], hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
 
-        record = records.Record(blockData, last_record_hash)
-        print('Record created')
-        transaction_hash = connector.record(decrypted_data['id'], record.get_hash())
-        print("transaction successful")
         connector1 = ethereum.EthConnector(
             contract_abi=contract_interface['abi'],
             contract_address=contract_interface['address'],
@@ -736,14 +726,17 @@ class AddBlockView(APIView):
             sender_private_key=ETH_PRIVATE_KEY,
             provider_url=ETH_PROVIDER_URL
         )
-        print('Getting block ...')
         doc_hash = connector1.get_record(decrypted_data['id'])
-        print(doc_hash == record.get_hash())
+        blockData1 = {
+            'timestamp': decrypted_data['timestamp'],
+            'document': decrypted_data['document'],
+        }
+        # blockData1['last_record_hash'] = last_record_hash
+        print(doc_hash == hashlib.sha256(json.dumps(blockData1).encode()).hexdigest())
         blockData['id'] = decrypted_data['id']
         blockData['contract_address'] = contract_interface['address']
         blockData['document'] = doc_hash
         blockData['blockChainID'] = 'MEDIFY'
-        blockData['last_record_hash'] = last_record_hash
         blockData['transaction_hash'] = transaction_hash
         log_collection.insert_one(blockData)
         return Response({'Success': 'Block Added...'}, status=status.HTTP_200_OK)
@@ -756,6 +749,34 @@ class GetBlocksView(APIView):
             data.append(LogSerializer(block).data)
         print(data)
         return Response(data, status=status.HTTP_200_OK)
+
+class VerifyDocumentsView(APIView):
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        blockData = {
+            'timestamp': decrypted_data['timestamp'],
+            'document': decrypted_data['document'],
+        }
+        # last_record_hash = log_collection.find_one({'id': decrypted_data['id']})['last_record_hash']
+
+        # blockData['last_record_hash'] = last_record_hash
+        # print("Block:",blockData)
+        print("Hash:",hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
+        # print(blockData)
+        contract_interface = contract_collection.find_one({})
+        connector = ethereum.EthConnector(
+            contract_abi=contract_interface['abi'],
+            contract_address=contract_interface['address'],
+            sender_public_key=ETH_PUBLIC_KEY,
+            sender_private_key=ETH_PRIVATE_KEY,
+            provider_url=ETH_PROVIDER_URL
+        )
+        doc_hash = connector.get_record(decrypted_data['id'])
+        print('hash:',doc_hash)
+        # print('hash:',hashlib.sha256(json.dumps(blockData).encode()).hexdigest())
+        if(doc_hash == hashlib.sha256(json.dumps(blockData).encode()).hexdigest()):
+            return Response({"verified":True}, status=status.HTTP_200_OK)
+        return Response({"verified":False}, status=status.HTTP_200_OK)
 
 class SendMailView(APIView):
     ##@csrf_protect_form 

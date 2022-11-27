@@ -233,6 +233,6 @@ class Log(models.Model):
     document = models.CharField(max_length=64, default='None')
     blockChainID = models.CharField(max_length=64, default='None')
     contract_address = models.CharField(max_length=64, default='None')
-    last_record_hash = models.CharField(max_length=64, default='None')
+    # last_record_hash = models.CharField(max_length=64, default='None')
     def __str__(self):
         return self.consultation_id
