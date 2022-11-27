@@ -42,7 +42,7 @@ import PatientsPharmacyBuyMedicine from './components/PatientsPharmacyBuyMedicin
 import PrescriptionCard from './components/PrescriptionCard';
 import TestCard from './components/TestCard';
 import AdminActivityLog from './components/AdminActivityLog';
-
+import AdminTransactionLog from './components/AdminTransationLog';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -67,6 +67,7 @@ function App() {
           <Route path="/admin_user/users_list" element={<AdminUserList />} />
           <Route path="/admin_user/organisations_list" element={<AdminOrganisationList />} />
           <Route path="/admin_user/activity-log" element={<AdminActivityLog />} />
+          <Route path="/admin_user/transaction-log" element={<AdminTransactionLog />} />
 
           <Route path="/user/profile" element={<ProfileInformation />} />
           <Route path="/user/patients/home" element={<PatientsHome />} />

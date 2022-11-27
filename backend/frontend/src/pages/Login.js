@@ -169,7 +169,6 @@ const Login = () => {
                             <div className="form-group">
                                 <label htmlhtml="exampleInputid1">User ID</label>
                                 <input type="id" className="form-control" id="id" aria-describedby="idHelp" placeholder="Enter id" />
-                                <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
                             </div>
                             <div className="form-group">
                                 <label htmlhtml="exampleInputPassword1">Password</label>

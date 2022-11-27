@@ -28,44 +28,60 @@ function customcard({ transactions }) {
                                     {data.id}
                                 </div>
                             </div>
-                            <div className="DATA ACCOUNT">
-                                <div className="HEAD">
-                                    Blockchain ID:
+                            {data.tampered ?
+                                <div className="DATA ACCOUNT">
+                                    <div className="HEAD">
+                                        Verification:
+                                    </div>
+                                    <div className="VALUE">
+                                        FAILED
+                                    </div>
                                 </div>
-                                <div className="VALUE">
-                                    {data.blockChainID}
-                                </div>
-                            </div>
+                                :
+                                <div className="DATA ACCOUNT">
+                                    <div className="HEAD">
+                                        Blockchain ID:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.blockChainID}
+                                    </div>
+                                </div>}
 
                         </button>
                     </div>
                     <div id={heading.concat(id).toString()} className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div className="card-body">
-                            <div className="DATA FROM">
-                                <div className="HEAD">
-                                    Block Hash:
-                                </div>
-                                <div className="VALUE">
-                                    {data.document}
-                                </div>
-                            </div>
-                            <div className="DATA FROM">
-                                <div className="HEAD">
-                                    Previous Block Hash:
-                                </div>
-                                <div className="VALUE">
-                                    {data.last_record_hash}
+                        {data.tampered ?
+                            <div className="card-body">
+                                <div className="DATA FROM">
+                                    <div className="HEAD">
+                                        Action:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.action}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="DATA FROM">
-                                <div className="HEAD">
-                                    Contract Address:
+                            :
+                            <div className="card-body">
+                                <div className="DATA FROM">
+                                    <div className="HEAD">
+                                        Block Hash:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.document}
+                                    </div>
                                 </div>
-                                <div className="VALUE">
-                                    {data.contract_address}
+                                <div className="DATA FROM">
+                                    <div className="HEAD">
+                                        Contract Address:
+                                    </div>
+                                    <div className="VALUE">
+                                        {data.contract_address}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
                     </div>
                 </div>
             ))}

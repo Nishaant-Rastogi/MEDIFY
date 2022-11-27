@@ -67,19 +67,30 @@ function AdminHome({ User }) {
                         </Link>
                     </div>
                 </div>
-                <div className='UHFLEX3'>
-                    <Link to='/admin_user/activity-log' >
-                        <div className='ROW ROW1'>
-                            ACTIVITY LOG
-                        </div>
-                        <div className='ROW ROW2'>
-                            <div className='COL'>
-                                <div className='IMGCONTAINER'>
-                                    <img className='IMG ACIMG' alt="/" src="/static/images/shield.png" />
-                                </div>
+                <div className='UHFLEX2' style={{ flex: '1', marginRight: '300px' }}>
+                    <div className='ROW'>
+                        <Link to='/admin_user/activity-log' className='COL COL1'>
+
+                            <div className='IMGCONTAINER'>
+                                <img className='IMG ACIMG' alt="/" src="/static/images/test.png" />
                             </div>
-                        </div>
-                    </Link>
+                            <div className='DATA'>
+                                <div className='HEADING'>ACTIVITY LOG</div>
+                                <div className='SUBHEADING'>View All Activities On The Portal</div>
+                            </div>
+                        </Link>
+                        <Link to='/admin_user/transaction-log' className='COL COL2'>
+
+                            <div className='IMGCONTAINER'>
+                                <img className='IMG ACIMG' alt="/" src="/static/images/bank-transfer.png" />
+                            </div>
+                            <div className='DATA'>
+                                <div className='HEADING'>TRANSACTION LOG</div>
+                                <div className='SUBHEADING'>View All Transactions On The Portal</div>
+                            </div>
+
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div >

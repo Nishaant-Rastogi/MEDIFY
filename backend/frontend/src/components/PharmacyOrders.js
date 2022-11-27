@@ -59,9 +59,6 @@ const PharmacyOrders = () => {
             });
     }
     let handleDocumentVerification = (documents) => {
-        const length = documents.length;
-        var count = 0;
-        var docs = [];
         documents.map((d) => {
             const requestOptions = {
                 method: 'POST',
@@ -79,11 +76,7 @@ const PharmacyOrders = () => {
                 .then(response => response.json())
                 .then(res => {
                     if (res.verified) {
-                        if (length === ++count) {
-                            setOrders(docs)
-                        } else {
-                            docs.push(d)
-                        }
+                        setOrders(orders => [...orders, d])
                     }
                 });
         })

@@ -60,9 +60,6 @@ const PatientsConsultation = () => {
     }
 
     let handleDocumentVerification = (documents) => {
-        const length = documents.length;
-        var count = 0;
-        var docs = [];
         documents.map((d) => {
             const requestOptions = {
                 method: 'POST',
@@ -80,11 +77,7 @@ const PatientsConsultation = () => {
                 .then(response => response.json())
                 .then(res => {
                     if (res.verified) {
-                        if (length === ++count) {
-                            setConsultations(docs)
-                        } else {
-                            docs.push(d)
-                        }
+                        setConsultations(consultations => [...consultations, d])
                     }
                 });
         })

@@ -1,9 +1,6 @@
-import * as React from 'react';
-import DoctorsPrescriptionCard from './DoctorsPrescriptionCard';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import AdminTransactionLogCard from './AdminTransactionLogCard';
 import Navbar from './Navbar';
-import '../styles/hospitals.css'
 var CryptoJS = require("crypto-js");
 function getCookie(name) {
     let cookieValue = null;
@@ -43,24 +40,22 @@ const enc = rnd(16)
 const encryption_key = CryptoJS.enc.Utf8.parse(enc)
 const IV = rnd(16)
 const iv = CryptoJS.enc.Utf8.parse(IV)
-const DoctorsPrescription = () => {
-    const [prescriptions, setPrescriptions] = useState([]);
+const AdminTransactionLog = () => {
+    const [transactions, setTransactions] = useState([])
 
-    let handlePrescriptions = () => {
+    let handleGetTransactions = () => {
         const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
-            body: JSON.stringify({ data: CryptoJS.AES.encrypt(localStorage.getItem('user'), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV }),
-
-        }
-        fetch('/api/get-doctor-prescriptions/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch('/api/get-transactions/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
                 handleDocumentVerification(data)
             });
     }
     let handleDocumentVerification = (documents) => {
-        documents.map((d) => {
+        documents.map((d, key) => {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
@@ -77,25 +72,25 @@ const DoctorsPrescription = () => {
                 .then(response => response.json())
                 .then(res => {
                     if (res.verified) {
-                        setPrescriptions(prescriptions => [...prescriptions, d])
+                        setTransactions(transactions => [...transactions, d])
                     }
                 });
         })
 
     }
     useEffect(() => {
-        if (localStorage.getItem('user') === null) {
+        if (localStorage.getItem('admin') === null) {
             window.location.href = '/';
         }
-        handlePrescriptions();
+        handleGetTransactions();
     }, []);
     return (
         <div>
-            <Navbar name={localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).name : window.location.href = '/'} />
+            <Navbar name={"Admin"} />
             <div className="SAVINGACCOUNT">
                 <div className="COL COL2">
                     <div className='ROW ROW1'>
-                        <DoctorsPrescriptionCard prescriptions={prescriptions} />
+                        <AdminTransactionLogCard transactions={transactions} />
                     </div>
                 </div>
             </div>
@@ -103,4 +98,4 @@ const DoctorsPrescription = () => {
     )
 }
 
-export default DoctorsPrescription
+export default AdminTransactionLog

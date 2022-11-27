@@ -754,6 +754,8 @@ class VerifyDocumentsView(APIView):
         doc_hash = connector.get_record(decrypted_data['id'])
         if(doc_hash == hashlib.sha256(json.dumps(blockData).encode()).hexdigest()):
             return Response({"verified":True}, status=status.HTTP_200_OK)
+        document_collection.delete_one({'id': decrypted_data['id']})
+        log_collection.insert_one({'timestamp': datetime.now() ,'id': decrypted_data['id'], 'tampered': True, 'action':'Deleted Document From Database'})
         return Response({"verified":False}, status=status.HTTP_200_OK)
 
 class SendMailView(APIView):
@@ -781,3 +783,18 @@ class SendMailIdView(APIView):
         except Exception as e:
             print(e)    
         return Response({'Mail sent Successfully!'}, status=status.HTTP_200_OK)
+
+class GetTransactionView(APIView):
+    def get(self, request, format=None):
+        transactions = document_collection.find({'docType': {'$regex':"B"}})
+        data = []
+        for transaction in transactions:
+            if(transaction['docType'] == 'BT'):
+                data.append(TestResultBillSerializer(transaction).data)
+            elif(transaction['docType'] == 'BP'):
+                data.append(PharmacyBillSerializer(transaction).data)
+            elif(transaction['docType'] == 'BC'):
+                data.append(ConsultationBillSerializer(transaction).data)
+            elif(transaction['docType'] == 'BI'):
+                data.append(InsuranceBillSerializer(transaction).data)
+        return Response(data, status=status.HTTP_200_OK)
