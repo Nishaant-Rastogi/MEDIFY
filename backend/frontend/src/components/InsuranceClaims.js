@@ -76,7 +76,6 @@ const InsuranceClaims = () => {
             fetch('/api/verify-documents/', requestOptions)
                 .then(response => response.json())
                 .then(res => {
-                    console.log(res);
                     if (res.verified)
                         setClaims([...claims, d]);
                 });

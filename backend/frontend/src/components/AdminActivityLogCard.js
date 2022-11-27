@@ -81,7 +81,6 @@ function customcard({ transactions }) {
 function AdminActivityLogCard({ transactions }) {
     return (
         <>
-            {console.log(transactions)}
             {transactions.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">

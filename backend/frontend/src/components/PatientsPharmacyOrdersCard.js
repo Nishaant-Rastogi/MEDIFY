@@ -132,7 +132,6 @@ function PatientsPharmacyOrdersCard({ orders }) {
     let id = 0;
     return (
         <>
-            {console.log(orders)}
             {orders.length < 1 ?
                 <div className="CUSTOMCARD" id="accordion">
                     <div className="card CARD">

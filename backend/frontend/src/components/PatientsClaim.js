@@ -94,7 +94,6 @@ const PatientsClaim = () => {
         fetch('/api/add-block/', requiredOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
             }).then(() => { alert("Insurance Claim Received"); navigate(-1); window.location.reload(); setLoading(false) });
     }
     let handleBills = () => {

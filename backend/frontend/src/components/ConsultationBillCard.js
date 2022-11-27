@@ -93,7 +93,6 @@ function ConsultationBillCard({ doctor, user, consultation }) {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 addBlock1(data)
                 // navigate(-1)
             });

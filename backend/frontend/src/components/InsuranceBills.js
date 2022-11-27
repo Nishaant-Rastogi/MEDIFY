@@ -75,7 +75,6 @@ const InsuranceBills = () => {
             fetch('/api/verify-documents/', requestOptions)
                 .then(response => response.json())
                 .then(res => {
-                    console.log(res);
                     if (res.verified)
                         setInsuranceBills([...insuranceBills, d]);
                 });

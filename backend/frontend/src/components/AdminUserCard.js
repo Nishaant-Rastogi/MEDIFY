@@ -45,7 +45,6 @@ function customcard({ UserData }) {
         <div className="CUSTOMCARDE" id="accordion">
             {UserData == null ? null : UserData.map((data) => (
                 <div key={id} className="card CARD" >
-                    {console.log(data)}
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
