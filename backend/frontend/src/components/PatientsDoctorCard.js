@@ -30,10 +30,10 @@ function customcard({ doctors }) {
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Specialisation :
+                                    Specialization :
                                 </div>
                                 <div className="VALUE">
-                                    Doctor
+                                    {doctor.specialization}
                                 </div>
 
                             </div>
