@@ -282,6 +282,7 @@ class GetOrganizationView(APIView):
 class GetOrganizationsView(APIView):
     def get(self, request, format=None):
         orgs = org_collection.find({})
+        OrganizationSerializer(orgs[0]).data.pop('password')
         return Response(OrganizationSerializer(orgs, many=True).data, status=status.HTTP_200_OK)
 
 class GetHospitalsView(APIView):
@@ -303,6 +304,7 @@ class GetDoctorsView(APIView):
 class GetPatientsView(APIView):
     def get(self, request, format=None):
         users = user_collection.find({'userType': 'P'})
+        UserSerializer(users[0]).data.pop('password')
         return Response(UserSerializer(users, many=True).data, status=status.HTTP_200_OK)
 
 class GetPharmaciesView(APIView):
