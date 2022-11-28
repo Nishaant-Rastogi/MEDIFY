@@ -231,7 +231,7 @@ const ProfileInformation = () => {
                                 <input defaultValue={UserData.aadharNo} type="text" className="form-control" name="aadharNo" aria-describedby="idHelp" placeholder="Enter Aadhar" disabled />
                             </div>
                             <div>Balance:
-                                <input ref={org_balance} defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} /><small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
+                                <input ref={org_balance} defaultValue={UserData.balance} type="text" className="form-control" name="balance" aria-describedby="idHelp" placeholder="Enter Balance" disabled={Edit ? "" : "disabled"} />
                                 <small id="idHelp" className="form-text text-muted">Edit Wallet Balance As You Wish</small>
                             </div>
 

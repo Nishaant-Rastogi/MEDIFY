@@ -8,21 +8,24 @@ function AdCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100 CAROUSELIMG"
-            src="/ad1.png"
+            src="/static/images/Bill_M.png"
+            style={{ height: '400px' }}
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100 CAROUSELIMG"
-            src="/advertise2.png"
+            src="/static/images/John.png"
+            style={{ height: '400px' }}
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100 CAROUSELIMG"
-            src="/advertise3.png"
+            src="/static/images/Samuel.png"
+            style={{ height: '400px' }}
             alt="Third slide"
           />
         </Carousel.Item>

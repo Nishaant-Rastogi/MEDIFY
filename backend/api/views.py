@@ -798,3 +798,15 @@ class GetTransactionView(APIView):
             elif(transaction['docType'] == 'BI'):
                 data.append(InsuranceBillSerializer(transaction).data)
         return Response(data, status=status.HTTP_200_OK)
+
+class GetInsuranceUsersView(APIView):
+    def post(self, request, format=None):
+        decrypted_data = decrypt(request.data['data'])
+        transactions = document_collection.find({'docType': {'$regex':"B"}, 'insurance_id':decrypted_data['id']})
+
+        data = []
+        for transaction in transactions:
+            print(transaction)
+            if transaction['docType'] != 'BI':
+                data.append({"patient_name": transaction['patient_name'], "patient_id": transaction['patient_id'], "amount": transaction['amount'],'claimed': transaction['claimed']})
+        return Response(data, status=status.HTTP_200_OK)

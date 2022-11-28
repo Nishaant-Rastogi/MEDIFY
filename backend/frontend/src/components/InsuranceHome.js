@@ -18,7 +18,7 @@ function InsuranceHome({ User }) {
                 {/*...............................................................................................................*/}
                 <div className='UHFLEX5' style={{ flex: '0.8' }}>
                     <div className='ROW ROW2'>
-                        <Link to='/organisation/insurance/pateints' className='COL'>
+                        <Link to='/organisation/insurance/patients' className='COL'>
                             <div className='IMGCONTAINER'>
                                 <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
                             </div>

@@ -31,7 +31,6 @@ import InsuranceClaims from "./components/InsuranceClaims";
 import PharmacyOrders from "./components/PharmacyOrders";
 import PharmacyBills from "./components/PharmacyBills";
 import PatientsClaim from "./components/PatientsClaim";
-import PharmacyInventory from "./components/PharmacyInventory";
 import SignUp from "./pages/SignUp";
 import Verification from './pages/Verification';
 import AdminUserList from './components/AdminUserList';
@@ -104,7 +103,6 @@ function App() {
           <Route path="/organisation/pharmacy/home" element={<PharmacyHome />} />
           <Route path="/organisation/pharmacy/orders" element={<PharmacyOrders />} />
           <Route path="/organisation/pharmacy/bills" element={<PharmacyBills />} />
-          <Route path="/organisation/pharmacy/inventory" element={<PharmacyInventory />} />
         </Routes>
       </div>
     </Router>

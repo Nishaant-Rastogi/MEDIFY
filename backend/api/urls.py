@@ -71,4 +71,5 @@ urlpatterns = [
     path('send-mail-id/', SendMailIdView.as_view(), name="send-mail-id"),
     path('verify-documents/', VerifyDocumentsView.as_view(), name="verify-documents"),
     path('get-transactions/', GetTransactionView.as_view(), name="get-transactions"),
+    path('get-insurance-users/', GetInsuranceUsersView.as_view(), name="get-insurance-users"),
 ]

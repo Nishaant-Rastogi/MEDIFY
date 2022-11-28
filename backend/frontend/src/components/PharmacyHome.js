@@ -23,15 +23,6 @@ function PharmacyHome({ User }) {
                                 <div className='SUBHEADING'>View All Orders</div>
                             </div>
                         </Link>
-                        <Link to='/organisation/pharmacy/inventory' className='COL'>
-                            <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/drugs.png" />
-                            </div>
-                            <div className='DATA'>
-                                <div className='HEADING'>INVENTORY</div>
-                                <div className='SUBHEADING'>View All Available Medicines</div>
-                            </div>
-                        </Link>
                         <Link to='/organisation/pharmacy/bills' className='COL'>
                             <div className='IMGCONTAINER'>
                                 <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
