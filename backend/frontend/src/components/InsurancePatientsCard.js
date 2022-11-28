@@ -31,12 +31,12 @@ function customcard({ patients }) {
     return (
         <div className="CUSTOMCARDE" id="accordion">
             {patients == null ? null : patients.map((data) => (
-                <div key={id} className="card CARD" >
+                <div div key={id} className="card CARD" >
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name:
+                                    Patient Name:
                                 </div>
                                 <div className="VALUE NAME">
                                     {data.patient_name}
@@ -68,7 +68,7 @@ function customcard({ patients }) {
                                     Claimed :
                                 </div>
                                 <div className="VALUE">
-                                    {data.claimed}
+                                    {data.claimed ? "Yes" : "No"}
                                 </div>
                             </div>
                         </div>

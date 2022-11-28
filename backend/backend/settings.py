@@ -106,7 +106,16 @@ REST_FRAMEWORK = {
          'rest_framework.renderers.JSONRenderer',
      )
 }
-
+CORS_ALLOW_HEADERS = [
+    'X-CSRFTOKEN',
+    'csrftoken',
+    'X-XSRF-TOKEN',
+    'content-type',
+    'x-requested-with',
+    'Authorization',
+    'Set-Cookie'
+]
+CSRF_COOKIE_DOMAIN = 'https://192.168.3.39:443'
 # SIMPLE_JWT = {
 #     'ACCESS_TOKEN_LIFETIME': timedelta(hours=6),
 #     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),

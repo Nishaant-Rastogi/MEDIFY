@@ -55,6 +55,7 @@ const InsuranceClaims = () => {
         fetch('/api/get-claims/', requestOptions)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 handleDocumentVerification(data)
             });
     }
