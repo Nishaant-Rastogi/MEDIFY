@@ -81,12 +81,15 @@ const PatientsClaim = () => {
     }
     let addBlock = (data) => {
         setLoading(true)
+        console.log(data)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
             body: JSON.stringify({
                 data: CryptoJS.AES.encrypt(JSON.stringify({
-                    document: bcrypt.hashSync(JSON.stringify(data), salt),
+                    id: data.id,
+                    timestamp: data.timestamp,
+                    document: JSON.stringify(data),
                 }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
             }),
 
