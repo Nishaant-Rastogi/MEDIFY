@@ -81,7 +81,6 @@ const PatientsClaim = () => {
     }
     let addBlock = (data) => {
         setLoading(true)
-        console.log(data)
         const requiredOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },

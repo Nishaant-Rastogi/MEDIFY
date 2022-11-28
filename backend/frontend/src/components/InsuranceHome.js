@@ -23,28 +23,10 @@ function InsuranceHome({ User }) {
                                 <img className='IMG ACIMG' alt="/" src="/static/images/stretcher.png" />
                             </div>
                             <div className='DATA'>
-                                <div className='HEADING'>PATIENTS</div>
+                                <div className='HEADING'>PATIENTS CLAIM</div>
                                 <div className='SUBHEADING'>View All Your Patients</div>
                             </div>
                         </Link>
-                        <Link to='/organisation/insurance/claims' className='COL'>
-                            <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/policy.png" />
-                            </div>
-                            <div className='DATA'>
-                                <div className='HEADING'>CLAIMS</div>
-                                <div className='SUBHEADING'>View All Claims</div>
-                            </div>
-                        </Link>
-                        {/* <Link to='/organisation/insurance/bills' className='COL'>
-                            <div className='IMGCONTAINER'>
-                                <img className='IMG ACIMG' alt="/" src="/static/images/bill.png" />
-                            </div>
-                            <div className='DATA'>
-                                <div className='HEADING'>BILLS</div>
-                                <div className='SUBHEADING'>View All Insurance Claim Bills</div>
-                            </div>
-                        </Link> */}
                     </div>
                 </div>
             </div>
