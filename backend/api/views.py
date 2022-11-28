@@ -298,7 +298,7 @@ class GetDoctorsView(APIView):
         users = user_collection.find({'userType': 'D'})
         data = []
         for user in users:
-            data.append({"name": DoctorSerializer(user).data['name'], "aadharNo": DoctorSerializer(user).data['aadharNo'], "specialization":DoctorSerializer(user).data['specialization'], "phoneNo":DoctorSerializer(user).data["phoneNo"], "address": DoctorSerializer(user).data['address']})
+            data.append({"name": DoctorSerializer(user).data['name'], "id":DoctorSerializer(user).data['id'],"aadharNo": DoctorSerializer(user).data['aadharNo'], "specialization":DoctorSerializer(user).data['specialization'], "phoneNo":DoctorSerializer(user).data["phoneNo"], "address": DoctorSerializer(user).data['address']})
         return Response(data, status=status.HTTP_200_OK)
 
 class GetPatientsView(APIView):
