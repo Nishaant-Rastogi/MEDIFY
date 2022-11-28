@@ -163,7 +163,7 @@ const Verification = () => {
             } else if (orgType && orgType === 'P') {
                 navigate('/organisation/pharmacy/home');
             } else if (orgType && orgType === 'H') {
-                navigate('/organisation/hospital/home');
+                navigate('/organisation/hospitals/home');
             } else if (orgType && orgType === 'I') {
                 navigate('/organisation/insurance/home');
             }
