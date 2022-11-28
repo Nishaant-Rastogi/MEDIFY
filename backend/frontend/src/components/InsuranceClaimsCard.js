@@ -1,37 +1,37 @@
 import React, { useState } from "react";
 
-function customcard({ EmpData }) {
+function customcard({ claims }) {
     const hashtag = "#H";
     const heading = "H";
     let id = 0;
     return (
         <div className="CUSTOMCARDE" id="accordion">
-            {EmpData.emp == null ? null : EmpData.emp.map((accoundata) => (
+            {claims.emp == null ? null : claims.emp.map((claim) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
-                                    Name:
+                                    Patient Name:
                                 </div>
                                 <div className="VALUE NAME">
-                                    {accoundata.Name}
+                                    {claim.patient_name}
                                 </div>
                             </div>
                             <div className="DATA BALANCE">
                                 <div className="HEAD">
-                                    License No:
+                                    Bill Type:
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Employee_ID}
+                                    {claim.docType}
                                 </div>
                             </div>
                             <div className="DATA STATUS">
                                 <div className="HEAD">
-                                    Specialisation :
+                                    Bill ID :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Designation}
+                                    {claim.id}
                                 </div>
 
                             </div>
@@ -41,26 +41,20 @@ function customcard({ EmpData }) {
                         <div className="card-body CBODY">
                             <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Experience :
+                                    Bill Amount :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.PAN}
+                                    {claim.amount}
                                 </div>
                             </div>
-                            <div className="DATA TO">
+                        </div>
+                        <div className="card-body CBODY">
+                            <div className="DATA FROM">
                                 <div className="HEAD">
-                                    Consultation Fees:
+                                    Refund :
                                 </div>
                                 <div className="VALUE">
-                                    {accoundata.Salary}
-                                </div>
-                            </div>
-                            <div className="DATA DATE">
-                                <div className="HEAD">
-                                    Schedule:
-                                </div>
-                                <div className="VALUE">
-                                    {accoundata.Joining_Date}
+                                    10
                                 </div>
                             </div>
                         </div>
@@ -73,17 +67,17 @@ function customcard({ EmpData }) {
 
 
 
-function InsuranceClaimsCard({ EmpData }) {
+function InsuranceClaimsCard({ claims }) {
     return (
         <>
-            {EmpData == null ?
+            {claims == null ?
                 <div className="CUSTOMCARDE" id="accordion">
                     <div className="card CARD">
                         <div className="card-header COL" id="headingOne">No Insurance Claims</div>
                     </div>
                 </div>
                 :
-                <div>{customcard({ EmpData })}</div>
+                <div>{customcard({ claims })}</div>
             }
         </>
     );

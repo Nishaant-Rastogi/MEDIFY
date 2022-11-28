@@ -674,7 +674,15 @@ class GetClaimView(APIView):
     def post(self, request, format=None):
         decrypted_data = decrypt(request.data['data'])
         claim = document_collection.find({'docType': {'$regex':"B"}, 'insurance_id': decrypted_data['id'], 'claimed':True})
-        return Response(claim, status=status.HTTP_200_OK)
+        claims = []
+        for c in claim:
+            if c['docType'] == 'BT':
+                claims.append(TestResultBillSerializer(c).data)
+            if c['docType'] == 'BP':
+                claims.append(PharmacyBillSerializer(c).data)
+            if c['docType'] == 'BC':
+                claims.append(ConsultationBillSerializer(c).data)
+        return Response(claims, status=status.HTTP_200_OK)
 
 class GetHospitalDoctorsView(APIView):
     ##@csrf_protect_form 
