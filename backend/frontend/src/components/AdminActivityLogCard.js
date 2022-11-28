@@ -9,8 +9,8 @@ function customcard({ transactions }) {
     return (
         <div className="CUSTOMCARDE" id="accordion">
             {transactions == null ? null : transactions.map((data) => (
-                <div key={id} className="card CARD">
-                    <div className="card-header COL" id="HeadingTwO">
+                <div key={id} className="card CARD" style={data.tampered ? { backgroundColor: "#8b0000" } : null}>
+                    <div className="card-header COL" id="HeadingTwO" style={data.tampered ? { backgroundColor: 'red', } : null}>
                         <button className="btn btn-link" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="false" aria-controls={id.toString()}>
                             <div className="DATA ACCOUNT">
                                 <div className="HEAD HEAD1">
