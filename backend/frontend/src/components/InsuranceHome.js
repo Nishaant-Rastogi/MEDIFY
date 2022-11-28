@@ -27,7 +27,7 @@ function InsuranceHome({ User }) {
                                 <div className='SUBHEADING'>View All Your Patients</div>
                             </div>
                         </Link>
-                        {/* <Link to='/organisation/insurance/claims' className='COL'>
+                        <Link to='/organisation/insurance/claims' className='COL'>
                             <div className='IMGCONTAINER'>
                                 <img className='IMG ACIMG' alt="/" src="/static/images/policy.png" />
                             </div>
@@ -35,7 +35,7 @@ function InsuranceHome({ User }) {
                                 <div className='HEADING'>CLAIMS</div>
                                 <div className='SUBHEADING'>View All Claims</div>
                             </div>
-                        </Link> */}
+                        </Link>
                     </div>
                 </div>
             </div>
