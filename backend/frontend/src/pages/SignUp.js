@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import '../styles/signup.css'
 var sanitize = require('mongo-sanitize');
 import bcrypt from 'bcryptjs'
@@ -49,6 +49,7 @@ const salt = bcrypt.genSaltSync(10);
 const SignUp = () => {
     const [signUpAsUser, setSignUpAsUser] = useState(true)
     let navigate = useNavigate()
+    let location = useLocation()
     const [userType, setUserType] = useState('P')
     const [hospitals, setHospitals] = useState([])
     const [hospital, setHospital] = useState('')
@@ -60,9 +61,6 @@ const SignUp = () => {
     const [license, setLicense] = useState(true)
     const [email, setEmail] = useState(true)
 
-    function isNumeric(str) {
-        return str.match(/^[0-9]+$/);
-    }
     let handleSignUpAsUser = async (e) => {
         e.preventDefault()
         handleAadhar(e, sanitize(e.target.aadharNo.value))
@@ -75,12 +73,12 @@ const SignUp = () => {
             alert("Password must be atleast 8 characters long!")
             return
         }
-        if (e.target.aadharNo.value.length !== 12 && isNumeric(e.target.aadharNo.value) !== null) {
-            alert("Aadhar number must be 12 digits long!")
+        if (e.target.aadharNo.value.length !== 12 || isNaN(e.target.aadharNo.value)) {
+            alert("Aadhar number must be 12 numeric digits!")
             return
         }
-        if (e.target.phoneNo.value.length !== 10 && isNumeric(e.target.phoneNo.value) !== null) {
-            alert("Phone number must be 10 digits long!")
+        if (e.target.phoneNo.value.length !== 10 || isNaN(e.target.phoneNo.value)) {
+            alert("Phone number must be 10 numeric digits!")
             return
         }
         const userFormData = new FormData();
@@ -101,7 +99,7 @@ const SignUp = () => {
             userFormData.append('hospital', hospital.id)
             userFormData.append('userType', 'D')
             userFormData.append('specialization', e.target.specialization.value)
-            userFormData.append('experience', e.target.experience.value)
+            userFormData.append('experience', sanitize(e.target.experience.value))
             userFormData.append('doctor_proof', doctor_proof)
         }
         const requestOptions = {
@@ -128,12 +126,12 @@ const SignUp = () => {
             alert("Password must be atleast 8 characters long!")
             return
         }
-        if (e.target.licenseNo.value.length !== 12 && isNumeric(e.target.licenseNo.value) !== null) {
-            alert("License number must be 12 digits long!")
+        if (e.target.licenseNo.value.length !== 12 || isNaN(e.target.licenseNo.value)) {
+            alert("License number must be 12 numeric digits!")
             return
         }
-        if (e.target.phoneNo.value.length !== 10 && isNumeric(e.target.phoneNo.value) !== null) {
-            alert("Phone number must be 10 digits long!")
+        if (e.target.phoneNo.value.length !== 10 || isNaN(e.target.phoneNo.value)) {
+            alert("Phone number must be 10 numeric digits!")
             return
         }
         const orgFormData = new FormData();
@@ -184,7 +182,7 @@ const SignUp = () => {
 
         fetch('/api/get-aadhar/', requestOptions)
             .then((response) => response.json())
-            .then((data) => { console.log(data); setAadhar(data.data) });
+            .then((data) => { setAadhar(data.data) });
     }
     let handleLicense = async (e, licenseNo) => {
         const requestOptions = {
@@ -196,7 +194,6 @@ const SignUp = () => {
         fetch('/api/get-license/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setLicense(data.data)
             });
     }
@@ -210,11 +207,11 @@ const SignUp = () => {
         fetch('/api/get-email/', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setEmail(data.data);
             })
     }
     useEffect(() => {
+        location.state = null;
         handleHospitals()
     }, [])
     useEffect(() => {
@@ -262,7 +259,7 @@ const SignUp = () => {
                             <div style={{ display: 'flex' }}>
                                 <div className="form-group" style={{ marginRight: '20px' }}>
                                     <label html="exampleInputid1">Date of Birth</label>
-                                    <input type="date" className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" required />
+                                    <input type="date" max={new Date()} className="form-control" name="dob" aria-describedby="idHelp" placeholder="Enter DOB" required />
                                     {/* <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small> */}
                                 </div>
                                 <div className="form-group" aria-label="Default select example">
@@ -312,14 +309,18 @@ const SignUp = () => {
                                             <label html="exampleInputid1">Specialization</label><br></br>
                                             <select defaultValue={"DEFAULT"} className="form-control" name="specialization" required>
                                                 <option value="DEFAULT" disabled>Select Specialization</option>
-                                                <option value="O">Ortho</option>
-                                                <option value="N">Neuro</option>
-                                                <option value="C">Cardio</option>
+                                                <option value="O">Orthopedics</option>
+                                                <option value="N">Neurology</option>
+                                                <option value="C">Cardiology</option>
+                                                <option value="G">Gynecology</option>
+                                                <option value="P">Pediatrics</option>
+                                                <option value="D">Dermatology</option>
+                                                <option value="E">ENT</option>
                                             </select>
                                         </div>
                                         <div className="form-group">
                                             <label html="exampleInputid1">Experience</label>
-                                            <input type="text" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" required />
+                                            <input type="number" max="70" className="form-control" name="experience" aria-describedby="idHelp" placeholder="Enter Experience" required />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex' }}>

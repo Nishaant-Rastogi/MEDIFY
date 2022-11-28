@@ -2,7 +2,8 @@ import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import '../styles/navbar.css'
-import { Link } from 'react-router-dom';
+var sanitize = require('mongo-sanitize');
+
 var CryptoJS = require("crypto-js");
 function getCookie(name) {
     let cookieValue = null;
@@ -91,17 +92,21 @@ const ProfileInformation = () => {
     let handleSaveData = (e) => {
         e.preventDefault();
         if (UserType === 'user') {
+            if (isNaN(sanitize(user_balance.current.value)) || isNaN(sanitize(user_phoneNo.current.value))) {
+                alert("Incorrect Inputs, Make sure balance and phone number are numbers");
+                return;
+            }
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
                 body: JSON.stringify({
                     data: CryptoJS.AES.encrypt(JSON.stringify({
-                        id: UserData.id,
-                        dob: user_dob.current.value,
+                        id: sanitize(UserData.id),
+                        dob: sanitize(user_dob.current.value),
                         gender: user_gender.current.value,
-                        address: user_address.current.value,
-                        phoneNo: user_phoneNo.current.value,
-                        balance: user_balance.current.value
+                        address: sanitize(user_address.current.value),
+                        phoneNo: sanitize(user_phoneNo.current.value),
+                        balance: sanitize(user_balance.current.value)
                     }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
                 }),
 
@@ -113,15 +118,19 @@ const ProfileInformation = () => {
                     handleUser();
                 });
         } else {
+            if (isNaN(sanitize(org_balance.current.value)) || isNaN(sanitize(org_phoneNo.current.value))) {
+                alert("Incorrect Inputs, Make sure balance and phone number are numbers");
+                return;
+            }
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
                 body: JSON.stringify({
                     data: CryptoJS.AES.encrypt(JSON.stringify({
-                        id: UserData.id,
-                        address: org_address.current.value,
-                        phoneNo: org_phoneNo.current.value,
-                        balance: org_balance.current.value
+                        id: sanitize(UserData.id),
+                        address: sanitize(org_address.current.value),
+                        phoneNo: sanitize(org_phoneNo.current.value),
+                        balance: sanitize(org_balance.current.value)
                     }), encryption_key, { iv: iv, mode: CryptoJS.mode.CBC }).toString() + enc + IV
                 }),
             };

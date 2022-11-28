@@ -91,7 +91,6 @@ const Verification = () => {
         fetch("/api/send-mail/", requiredOptions)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
             })
     }
     let handleVerification = (e, path) => {
@@ -179,7 +178,7 @@ const Verification = () => {
     }
 
     useEffect(() => {
-        if (!location.state) {
+        if (location.state === null) {
             navigate('/');
         } else {
             window.onpopstate = () => {
