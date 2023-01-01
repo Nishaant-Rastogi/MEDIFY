@@ -53,6 +53,7 @@ Once you select a hopsital and wish to book a test you can simply click on the r
 ![](https://github.com/Nishaant-Rastogi/MEDIFY/blob/main/backend/frontend/static/images/Aspose.Words.2c3d2a51-24d2-4bd2-b7bf-edb90987a587.009.jpeg)
 
 In the test portal you can select a prescription from your existing prescriptions and request a test for the same. This would lead you to a payment portal as below
+
 ![](https://github.com/Nishaant-Rastogi/MEDIFY/blob/main/backend/frontend/static/images/Aspose.Words.2c3d2a51-24d2-4bd2-b7bf-edb90987a587.010.jpeg)
 
 In this portal you can just click on the pay button and automatically the amount would be deducted from your wallet . 
