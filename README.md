@@ -31,10 +31,12 @@ Note:
 - Phone Number: 10 digits 
 - Add 2 Images 
 
-3. Once you press the sign up button, you’d be redirected to the following verification page - ![](https://github.com/Nishaant-Rastogi/MEDIFY/blob/main/backend/frontend/static/images/Aspose.Words.2c3d2a51-24d2-4bd2-b7bf-edb90987a587.006.jpeg)
-4. On the OTP page, you’d click on the SEND OTP button to get an OTP on the mail you’ve entered. 
-4. Enter the OTP using the digital pad you’re given. 
-4. After signing up, a request will be sent to the admin for verification. They can either reject or approve your request. Once approved you’ll have access to logging in your account. 
+3. Once you press the sign up button, you’d be redirected to the following verification page - 
+4. 
+5. ![](https://github.com/Nishaant-Rastogi/MEDIFY/blob/main/backend/frontend/static/images/Aspose.Words.2c3d2a51-24d2-4bd2-b7bf-edb90987a587.006.jpeg)
+6. On the OTP page, you’d click on the SEND OTP button to get an OTP on the mail you’ve entered. 
+7. Enter the OTP using the digital pad you’re given. 
+8. After signing up, a request will be sent to the admin for verification. They can either reject or approve your request. Once approved you’ll have access to logging in your account. 
 
 ## Patient Signed In: 
 
